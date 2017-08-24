@@ -1,6 +1,8 @@
 # Control Namer and Painter
 import inspect
-import maya.cmds as mc
+import sys
+import json
+# import maya.cmds as mc
 import os
 try:
 	from PySide2 import QtCore, QtNetwork
@@ -20,7 +22,16 @@ class ControlNamerPainter(QtGui.QDialog):
 	def __init__(self, parent=None):
 		super(ControlNamerPainter, self).__init__(parent=parent)
 
+		# if not os.path.isfile(os.environ.get('MAYA_APP_DIR') + '/2017/prefs/controlNamePrefs.json'):
+		# 	messageBox = QtGui.QMessageBox()
+		# 	messageBox.setText('This program is runnning for the first time. Have fun!')
+		# 	self.nameWidgets = None
+
+		# else:
+		# 	self.buildWidgets()
+		
 		mainLayout = QtGui.QVBoxLayout()
+		
 
 		self.setLayout(mainLayout)
 
@@ -30,45 +41,61 @@ class ControlNamerPainter(QtGui.QDialog):
 		namingLayout = QtGui.QHBoxLayout()
 		mainLayout.addLayout(namingLayout)
 
-		self.addNameWidgets()
-		# self.blankWidget = QtGui.QWidget()
-		# namingLayout.addWidget(self.blankWidget)
+		# self.addNameWidgets()
 
-		self.addButton = QtGui.QPushButton('+')
-		nameButtonsLayout.addWidget(self.addButton)
-		self.addButton.clicked.connect(self.addNameWidget)
+		leftNameButtonsLayout = QtGui.QVBoxLayout()
+		namingLayout.addLayout(leftNameButtonsLayout)
 
-		self.removeButton = QtGui.QPushButton('-')
-		nameButtonsLayout.addWidget(self.removeButton)
-		self.removeButton.clicked.connect(self.removeNameWidget)
+		self.leftAddButton = QtGui.QPushButton('+')
+		leftNameButtonsLayout.addWidget(self.leftAddButton)
+		self.leftAddButton.clicked.connect(self.addNameWidget)
 
-		self.saveLayoutButton = QtGui.QPushButton('-')
-		nameButtonsLayout.addWidget(self.saveLayoutButton)
-		self.saveLayoutButton.clicked.connect(self.saveLayoutWidget)
+		self.leftRemoveButton = QtGui.QPushButton('-')
+		leftNameButtonsLayout.addWidget(self.leftRemoveButton)
+		self.leftRemoveButton.clicked.connect(self.removeNameWidget)
 
-		nameButtonsLayout = QtGui.QVBoxLayout()
-		namingLayout.addLayout(nameButtonsLayout)
+		rightNameButtonsLayout = QtGui.QVBoxLayout()
+		namingLayout.addLayout(rightNameButtonsLayout)
+
+		self.rightAddButton = QtGui.QPushButton('+')
+		rightNameButtonsLayout.addWidget(self.rightAddButton)
+		self.rightAddButton.clicked.connect(self.addNameWidget)
+
+		self.rightRemoveButton = QtGui.QPushButton('-')
+		rightNameButtonsLayout.addWidget(self.rightRemoveButton)
+		self.rightRemoveButton.clicked.connect(self.removeNameWidget)
 
 		finalNameLayout = QtGui.QHBoxLayout()
 		mainLayout.addLayout(finalNameLayout)
 
+		self.saveLayoutButton = QtGui.QPushButton('Save Layout')
+		finalNameLayout.addWidget(self.saveLayoutButton)
+		self.saveLayoutButton.clicked.connect(self.saveNameLayout)
+
 		self.finalNameText = QtGui.QLineEdit('_')
 		finalNameLayout.addWidget(self.finalNameText)
 
-		self.setNamesButton = QtGui.QPushButton()
+		self.setNamesButton = QtGui.QPushButton('Set Names')
 		finalNameLayout.addWidget(self.setNamesButton)
 
 		self.show()
 
-	def addNameWidgets(self):
+	def buildWidgets(self):
+		pass
+		# with open('C:/Tools/trashTest/controlNamePrefs.json', 'r+') as f:
+		# 	dictionary = json.load(f)
+
+		# for option in dictionary['AllOptions']:
+		# 	pass
+
+
 		# add blank widget if self.nameWidgets in empty
 		# get dictionaries from json file and add widgets
-		pass
 
 
 	def addNameWidget(self):
-		# if len of self.nameWidgets == 0
-			# delete blank widget
+		if len(self.nameWidgets) == 0:
+			pass
 
 		# add nameWidget to the right of current widget
 		# and make a dictionary item containing values
@@ -92,4 +119,7 @@ class ControlNamerPainter(QtGui.QDialog):
 		pass 
 
 
-test = ControlNamerPainter()
+if __name__ == '__main__':
+    app = QtGui.QApplication(sys.argv)
+    main_window = ControlNamerPainter()
+    sys.exit(app.exec_())
