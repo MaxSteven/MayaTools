@@ -38,31 +38,35 @@ class ControlNamerPainter(QtGui.QDialog):
 		self.nameWidgets = []
 		# read from json list and populate self.nameWidgets
 
-		namingLayout = QtGui.QHBoxLayout()
-		mainLayout.addLayout(namingLayout)
+		self.namingLayout = QtGui.QHBoxLayout()
+		mainLayout.addLayout(self.namingLayout)
 
 		# self.addNameWidgets()
 
 		leftNameButtonsLayout = QtGui.QVBoxLayout()
-		namingLayout.addLayout(leftNameButtonsLayout)
+		self.namingLayout.addLayout(leftNameButtonsLayout)
 
 		self.leftAddButton = QtGui.QPushButton('+')
 		leftNameButtonsLayout.addWidget(self.leftAddButton)
+		self.leftAddButton.setObjectName('left')
 		self.leftAddButton.clicked.connect(self.addNameWidget)
 
 		self.leftRemoveButton = QtGui.QPushButton('-')
 		leftNameButtonsLayout.addWidget(self.leftRemoveButton)
+		self.leftRemoveButton.setObjectName('left')
 		self.leftRemoveButton.clicked.connect(self.removeNameWidget)
 
 		rightNameButtonsLayout = QtGui.QVBoxLayout()
-		namingLayout.addLayout(rightNameButtonsLayout)
+		self.namingLayout.addLayout(rightNameButtonsLayout)
 
 		self.rightAddButton = QtGui.QPushButton('+')
+		self.rightAddButton.setObjectName('right')
 		rightNameButtonsLayout.addWidget(self.rightAddButton)
 		self.rightAddButton.clicked.connect(self.addNameWidget)
 
 		self.rightRemoveButton = QtGui.QPushButton('-')
 		rightNameButtonsLayout.addWidget(self.rightRemoveButton)
+		self.rightRemoveButton.setObjectName('right')
 		self.rightRemoveButton.clicked.connect(self.removeNameWidget)
 
 		finalNameLayout = QtGui.QHBoxLayout()
@@ -80,31 +84,33 @@ class ControlNamerPainter(QtGui.QDialog):
 
 		self.show()
 
-	def buildWidgets(self):
-		pass
-		# with open('C:/Tools/trashTest/controlNamePrefs.json', 'r+') as f:
-		# 	dictionary = json.load(f)
+	# def buildWidgets(self):
+	# 	pass
+	# 	# with open('C:/Tools/trashTest/controlNamePrefs.json', 'r+') as f:
+	# 	# 	dictionary = json.load(f)
 
-		# for option in dictionary['AllOptions']:
-		# 	pass
+	# 	# for option in dictionary['AllOptions']:
+	# 	# 	pass		self.leftAddButton.setObjectName('left')
 
 
-		# add blank widget if self.nameWidgets in empty
-		# get dictionaries from json file and add widgets
+	# 	# add blank widget if self.nameWidgets in empty
+	# 	# get dictionaries from json file and add widgets
 
 
 	def addNameWidget(self):
 		if len(self.nameWidgets) == 0:
 			pass
 
-		# add nameWidget to the right of current widget
+
+
+		# add nameWidget to the right or left of current widget
 		# and make a dictionary item containing values
 		# connect dictionary item to final name text field
 		# append dictionary to self.nameWidgets
 		pass
 
 	def removeNameWidget(self):
-		# delete widget from current layout
+		# delete widget from current layout from the right or left
 		# pop from the dictionary list
 		# if len(current list) == 0:
 			# add blank widget

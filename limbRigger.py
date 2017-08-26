@@ -53,11 +53,17 @@ class IkFkBlender(QtGui.QDialog):
 
 			mainLayout.addLayout(jointLayout)
 
-
-		self.controlSizeSlider = QtGui.Q
+		controlLayout = QtGui.QHBoxLayout()
+		mainLayout.addLayout(controlLayout)
+		controlLabel = QtGui.QLabel('Control Size')
+		controlLayout.addWidget(controlLabel)
+		self.controlSizeSlider = QtGui.QSlider()
+		self.controlSizeSlider.setOrientation(QtCore.Qt.Horizontal)
+		controlLayout.addWidget(self.controlSizeSlider)
 
 		self.rigButton = QtGui.QPushButton('Rig')
 		self.rigButton.clicked.connect(self.rigLimb)
+		mainLayout.addWidget(self.rigButton)
 
 		self.show()
 
@@ -65,6 +71,11 @@ class IkFkBlender(QtGui.QDialog):
 		buttonClicked = int(self.sender().objectName())
 		objectSelected = mc.ls(sl=True)[0]
 		self.jointText[buttonClicked].setText(objectSelected)
+
+	def rigLimb(self):
+		self.jointNames = [text.text() for text in self.jointText]
+		print self.jointNames
+
 
 
 tool = IkFkBlender()
