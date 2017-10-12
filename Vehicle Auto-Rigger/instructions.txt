@@ -1,0 +1,3 @@
+INSTRUCTIONS to use this tool:
+1. Copy the .ma files in C:\autoRig
+2. Copy the cript in script editor and run it.

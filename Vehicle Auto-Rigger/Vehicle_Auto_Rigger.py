@@ -16,11 +16,6 @@ import maya.cmds as mc
 
 import re
 
-import os
-mayaDir = os.environ.get('MAYA_APP_DIR')
-
-installLocation = mayaDir + '/vehicleAutoRigger/' 
-
 class Main_UI(qg.QDialog):
 	def __init__(self):
 		qg.QDialog.__init__(self)
@@ -928,7 +923,7 @@ class WheelAxle():
 	def __init__(self, wheelAxleName):
 		print "WheelAxle Object created Successfully"
 		try:
-			mc.file(installLocation + "/WheelAxle.ma", ignoreVersion = True, i = True, rpr = wheelAxleName, mergeNamespacesOnClash = True, options = "v=0", type = "mayaAscii", pr = True, ra = True)
+			mc.file("C:/autoRig/WheelAxle.ma", ignoreVersion = True, i = True, rpr = wheelAxleName, mergeNamespacesOnClash = True, options = "v=0", type = "mayaAscii", pr = True, ra = True)
 		except RuntimeError:
 			print "Runtime Error! Aborting!"
 
@@ -1600,7 +1595,7 @@ class WheelAxle():
 class Frame():
 	def __init__(self, frameName, frontWheelAxle, backWheelAxle):
 		try:
-			mc.file(installLocation + "/Frame.ma", ignoreVersion = True, i = True, rpr = frameName, mergeNamespacesOnClash = True, options = "v=0", type = "mayaAscii", pr = True, ra = True)
+			mc.file("C:/autoRig/Frame.ma", ignoreVersion = True, i = True, rpr = frameName, mergeNamespacesOnClash = True, options = "v=0", type = "mayaAscii", pr = True, ra = True)
 		except RuntimeError:
 			print "Runtime Error! Aborting!"
 
