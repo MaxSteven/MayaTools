@@ -4,9 +4,9 @@
 ## Date: 08/08/2016
 
 #################################################################################################
-## Store WheelAxle.ma and Frame.ma in your D drive before you run this program
+## Store WheelAxle.ma and Frame.ma in your C:\autoRig drive before you run this program
 ## run directly or add to shelf.
-
+## only compatible with Maya2015
 
 
 import PySide.QtCore as qc
@@ -104,7 +104,7 @@ class Main_UI(qg.QDialog):
 		self.WheelWidthSlider.setRange(1, 50)
 		self.WheelWidthSlider.setValue(10)
 		self.WheelWidthSlider.sliderPressed.connect(self.openUndoChunk)
-		self.WheelWidthSlider.sliderMoved.connect(self.changeWheelWidth)
+		self.WheelWidthSlider.sliderMoved.connect(self.changeWheelWidthCallback)
 		self.WheelWidthSlider.sliderReleased.connect(self.closeUndoChunk)
 		WheelWidthSliderLayout.addWidget(self.WheelWidthSlider)
 		WheelWidthSliderLayout.addWidget(qg.QLabel("Wheel Width"))
@@ -113,11 +113,11 @@ class Main_UI(qg.QDialog):
 		TireTypeSliderLayout = qg.QHBoxLayout()
 		self.TireTypeSlider = qg.QSlider()
 		self.TireTypeSlider.setOrientation(qc.Qt.Horizontal)
-		self.TireTypeSlider.setRange(0,3)
+		self.TireTypeSlider.setRange(0,1)
 		self.TireTypeSlider.setValue(0)
 		self.TireTypeSlider.sliderPressed.connect(self.openUndoChunk)
 		self.TireTypeSlider.sliderReleased.connect(self.closeUndoChunk)
-		self.TireTypeSlider.sliderMoved.connect(self.changeTireType)
+		self.TireTypeSlider.sliderMoved.connect(self.changeTireTypeCallback)
 		TireTypeSliderLayout.addWidget(self.TireTypeSlider)
 		TireTypeSliderLayout.addWidget(qg.QLabel("Tire Type"))
 		WheelSliderLayout.addLayout(TireTypeSliderLayout)
@@ -129,7 +129,7 @@ class Main_UI(qg.QDialog):
 		self.WheelSizeSlider.setValue(10)
 		self.WheelSizeSlider.sliderPressed.connect(self.openUndoChunk)
 		self.WheelSizeSlider.sliderReleased.connect(self.closeUndoChunk)
-		self.WheelSizeSlider.sliderMoved.connect(self.changeWheelSize)
+		self.WheelSizeSlider.sliderMoved.connect(self.changeWheelSizeCallback)
 		WheelSizeSliderLayout.addWidget(self.WheelSizeSlider)
 		WheelSizeSliderLayout.addWidget(qg.QLabel("Wheel Size"))
 		WheelSliderLayout.addLayout(WheelSizeSliderLayout)
@@ -143,7 +143,7 @@ class Main_UI(qg.QDialog):
 		self.WheelOutShapeSlider.setValue(10)
 		self.WheelOutShapeSlider.sliderPressed.connect(self.openUndoChunk)
 		self.WheelOutShapeSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.WheelOutShapeSlider.sliderMoved.connect(self.changeWheelOutShape)
+		self.WheelOutShapeSlider.sliderMoved.connect(self.changeWheelOutShapeCallback)
 		WheelOutShapeSliderLayout.addWidget(self.WheelOutShapeSlider)
 		WheelShapeSliderLayout.addLayout(WheelOutShapeSliderLayout)
 
@@ -153,8 +153,8 @@ class Main_UI(qg.QDialog):
 		self.WheelMidShapeSlider.setRange(1,10)
 		self.WheelMidShapeSlider.setValue(10)
 		self.WheelMidShapeSlider.sliderPressed.connect(self.openUndoChunk)
-		self.WheelMidShapeSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.WheelMidShapeSlider.sliderMoved.connect(self.changeWheelMidShape)
+		self.WheelMidShapeSlider.sliderReleased.connect(self.closeUndoChunk)	
+		self.WheelMidShapeSlider.sliderMoved.connect(self.changeWheelMidShapeCallback)
 		WheelMidShapeSliderLayout.addWidget(self.WheelMidShapeSlider)
 		WheelShapeSliderLayout.addLayout(WheelMidShapeSliderLayout)
 
@@ -165,7 +165,7 @@ class Main_UI(qg.QDialog):
 		self.WheelInShapeSlider.setValue(10)
 		self.WheelInShapeSlider.sliderPressed.connect(self.openUndoChunk)
 		self.WheelInShapeSlider.sliderReleased.connect(self.closeUndoChunk)	
-		self.WheelInShapeSlider.sliderMoved.connect(self.changeWheelInShape)
+		self.WheelInShapeSlider.sliderMoved.connect(self.changeWheelInShapeCallback)
 		WheelInShapeSliderLayout.addWidget(self.WheelInShapeSlider)
 		WheelShapeSliderLayout.addLayout(WheelInShapeSliderLayout)
 
@@ -175,8 +175,8 @@ class Main_UI(qg.QDialog):
 		self.WheelCenterShapeSlider.setRange(1,10)
 		self.WheelCenterShapeSlider.setValue(10)
 		self.WheelCenterShapeSlider.sliderPressed.connect(self.openUndoChunk)
-		self.WheelCenterShapeSlider.sliderReleased.connect(self.closeUndoChunk)			
-		self.WheelCenterShapeSlider.sliderMoved.connect(self.changeWheelCenterShape)
+		self.WheelCenterShapeSlider.sliderReleased.connect(self.closeUndoChunk)		
+		self.WheelCenterShapeSlider.sliderMoved.connect(self.changeWheelCenterShapeCallback)
 		WheelCenterShapeSliderLayout.addWidget(self.WheelCenterShapeSlider)
 
 		WheelShapeSliderLayout.addLayout(WheelCenterShapeSliderLayout)
@@ -188,13 +188,27 @@ class Main_UI(qg.QDialog):
 
 		AxleSliderLayout.addWidget(qg.QLabel("Axle"))
 
+		AxleTypeSliderLayout = qg.QHBoxLayout()
+		self.AxleTypeSlider = qg.QSlider()
+		self.AxleTypeSlider.setOrientation(qc.Qt.Horizontal)
+		self.AxleTypeSlider.setRange(0, 1)
+		self.AxleTypeSlider.setValue(0)
+		self.AxleTypeSlider.sliderPressed.connect(self.openUndoChunk)
+		self.AxleTypeSlider.sliderReleased.connect(self.closeUndoChunk)
+		self.AxleTypeSlider.sliderMoved.connect(self.changeAxleTypeCallback)
+		self.AxleTypeSlider.setOrientation(qc.Qt.Horizontal)
+		AxleTypeSliderLayout.addWidget(self.AxleTypeSlider)
+		AxleTypeSliderLayout.addWidget(qg.QLabel("Axle Type"))
+		AxleSliderLayout.addLayout(AxleTypeSliderLayout)
+
+
 		AxleHeightSliderLayout = qg.QHBoxLayout()
 		self.AxleHeightSlider = qg.QSlider()
 		self.AxleHeightSlider.setOrientation(qc.Qt.Horizontal)
 		self.AxleHeightSlider.setRange(-50,50)
 		self.AxleHeightSlider.setValue(0)
 		self.AxleHeightSlider.sliderPressed.connect(self.openUndoChunk)
-		self.AxleHeightSlider.sliderMoved.connect(self.changeAxleHeight)
+		self.AxleHeightSlider.sliderMoved.connect(self.changeAxleHeightCallback)
 		self.AxleHeightSlider.sliderReleased.connect(self.closeUndoChunk)
 		AxleHeightSliderLayout.addWidget(self.AxleHeightSlider)
 		AxleHeightSliderLayout.addWidget(qg.QLabel("Axle Height"))
@@ -206,8 +220,8 @@ class Main_UI(qg.QDialog):
 		self.AxleThicknessSlider.setRange(1,20)
 		self.AxleThicknessSlider.setValue(10)
 		self.AxleThicknessSlider.sliderPressed.connect(self.openUndoChunk)
-		self.AxleThicknessSlider.sliderReleased.connect(self.closeUndoChunk)	
-		self.AxleThicknessSlider.sliderMoved.connect(self.changeAxleThickness)
+		self.AxleThicknessSlider.sliderReleased.connect(self.closeUndoChunk)
+		self.AxleThicknessSlider.sliderMoved.connect(self.changeAxleThicknessCallback)
 		AxleThicknessSliderLayout.addWidget(self.AxleThicknessSlider)
 		AxleThicknessSliderLayout.addWidget(qg.QLabel("Axle Thickness"))
 		AxleSliderLayout.addLayout(AxleThicknessSliderLayout)
@@ -218,8 +232,8 @@ class Main_UI(qg.QDialog):
 		self.AxleWidthSlider.setRange(-20,80)
 		self.AxleWidthSlider.setValue(10)
 		self.AxleWidthSlider.sliderPressed.connect(self.openUndoChunk)
-		self.AxleWidthSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.AxleWidthSlider.sliderMoved.connect(self.changeAxleWidth)
+		self.AxleWidthSlider.sliderReleased.connect(self.closeUndoChunk)
+		self.AxleWidthSlider.sliderMoved.connect(self.changeAxleWidthCallback)
 		self.AxleWidthSlider.setOrientation(qc.Qt.Horizontal)
 		AxleWidthSliderLayout.addWidget(self.AxleWidthSlider)
 		AxleWidthSliderLayout.addWidget(qg.QLabel("Axle Width"))
@@ -257,7 +271,7 @@ class Main_UI(qg.QDialog):
 		self.ShockDistanceSlider.setValue(0)
 		self.ShockDistanceSlider.sliderPressed.connect(self.openUndoChunk)
 		self.ShockDistanceSlider.sliderReleased.connect(self.closeUndoChunk)
-		self.ShockDistanceSlider.sliderMoved.connect(self.changeShockDistance)
+		self.ShockDistanceSlider.sliderMoved.connect(self.changeShockDistanceCallback)
 		ShockDistanceSliderLayout.addWidget(self.ShockDistanceSlider)
 		ShockDistanceSliderLayout.addWidget(qg.QLabel("Shock Distance"))
 		ShockLayout.addLayout(ShockDistanceSliderLayout)
@@ -269,7 +283,7 @@ class Main_UI(qg.QDialog):
 		self.SpringWidthSlider.setValue(6)
 		self.SpringWidthSlider.sliderPressed.connect(self.openUndoChunk)
 		self.SpringWidthSlider.sliderReleased.connect(self.closeUndoChunk)
-		self.SpringWidthSlider.sliderMoved.connect(self.changeSpringWidth)
+		self.SpringWidthSlider.sliderMoved.connect(self.changeSpringWidthCallback)
 		SpringWidthSliderLayout.addWidget(self.SpringWidthSlider)
 		SpringWidthSliderLayout.addWidget(qg.QLabel("Spring Width"))
 		ShockLayout.addLayout(SpringWidthSliderLayout)
@@ -279,7 +293,7 @@ class Main_UI(qg.QDialog):
 		self.CoilRadiusSlider.setOrientation(qc.Qt.Horizontal)
 		self.CoilRadiusSlider.setRange(0,20)
 		self.CoilRadiusSlider.setValue(3)
-		self.CoilRadiusSlider.sliderMoved.connect(self.changeCoilRadius)
+		self.CoilRadiusSlider.sliderMoved.connect(self.changeCoilRadiusCallback)
 		CoilRadiusSliderLayout.addWidget(self.CoilRadiusSlider)
 		CoilRadiusSliderLayout.addWidget(qg.QLabel("Coil Radius"))
 		ShockLayout.addLayout(CoilRadiusSliderLayout)
@@ -291,7 +305,7 @@ class Main_UI(qg.QDialog):
 		self.CoilsSlider.setValue(51)
 		self.CoilsSlider.sliderPressed.connect(self.openUndoChunk)
 		self.CoilsSlider.sliderReleased.connect(self.closeUndoChunk)
-		self.CoilsSlider.sliderMoved.connect(self.changeCoils)
+		self.CoilsSlider.sliderMoved.connect(self.changeCoilsCallback)
 		CoilsSliderLayout.addWidget(self.CoilsSlider)
 		CoilsSliderLayout.addWidget(qg.QLabel("Coils"))
 		ShockLayout.addLayout(CoilsSliderLayout)
@@ -303,7 +317,7 @@ class Main_UI(qg.QDialog):
 		self.PistonWidthSlider.setValue(10)
 		self.PistonWidthSlider.sliderPressed.connect(self.openUndoChunk)
 		self.CoilsSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.PistonWidthSlider.sliderMoved.connect(self.changePistonWidth)
+		self.PistonWidthSlider.sliderMoved.connect(self.changePistonWidthCallback)
 		PistonWidthSliderLayout.addWidget(self.PistonWidthSlider)
 		PistonWidthSliderLayout.addWidget(qg.QLabel("Piston Width"))
 		ShockLayout.addLayout(PistonWidthSliderLayout)
@@ -329,7 +343,7 @@ class Main_UI(qg.QDialog):
 		self.FrameFrontShockHeightSlider.setValue(0)
 		self.FrameFrontShockHeightSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameFrontShockHeightSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.FrameFrontShockHeightSlider.sliderMoved.connect(self.changeFrameFrontShockHeight)
+		self.FrameFrontShockHeightSlider.sliderMoved.connect(self.changeFrameFrontShockHeightCallback)
 		FrameFrontShockHeightLayout.addWidget(self.FrameFrontShockHeightSlider)
 		FrameFrontSliderLayout.addLayout(FrameFrontShockHeightLayout)
 
@@ -341,7 +355,7 @@ class Main_UI(qg.QDialog):
 		self.FrameFrontShockTZSlider.setValue(0)
 		self.FrameFrontShockTZSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameFrontShockTZSlider.sliderReleased.connect(self.closeUndoChunk)
-		self.FrameFrontShockTZSlider.sliderMoved.connect(self.changeFrameFrontShockTZ)
+		self.FrameFrontShockTZSlider.sliderMoved.connect(self.changeFrameFrontShockTZCallback)
 		FrameFrontShockTZLayout.addWidget(self.FrameFrontShockTZSlider)
 		FrameFrontSliderLayout.addLayout(FrameFrontShockTZLayout)
 
@@ -353,7 +367,7 @@ class Main_UI(qg.QDialog):
 		self.FrameFrontShockNWSlider.setValue(0)
 		self.FrameFrontShockNWSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameFrontShockNWSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.FrameFrontShockNWSlider.sliderMoved.connect(self.changeFrameFrontShockNW)
+		self.FrameFrontShockNWSlider.sliderMoved.connect(self.changeFrameFrontShockNWCallback)
 		FrameFrontShockNWLayout.addWidget(self.FrameFrontShockNWSlider)
 		FrameFrontSliderLayout.addLayout(FrameFrontShockNWLayout)
 
@@ -371,7 +385,7 @@ class Main_UI(qg.QDialog):
 		self.FrameBackShockHeightSlider.setValue(0)
 		self.FrameBackShockHeightSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameBackShockHeightSlider.sliderReleased.connect(self.closeUndoChunk)
-		self.FrameBackShockHeightSlider.sliderMoved.connect(self.changeFrameBackShockHeight)		
+		self.FrameBackShockHeightSlider.sliderMoved.connect(self.changeFrameBackShockHeightCallback)		
 		FrameBackShockHeightLayout.addWidget(self.FrameBackShockHeightSlider)
 		FrameBackSliderLayout.addLayout(FrameBackShockHeightLayout)
 
@@ -382,7 +396,7 @@ class Main_UI(qg.QDialog):
 		self.FrameBackShockTZSlider.setValue(0)
 		self.FrameBackShockTZSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameBackShockTZSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.FrameBackShockTZSlider.sliderMoved.connect(self.changeFrameBackShockTZ)
+		self.FrameBackShockTZSlider.sliderMoved.connect(self.changeFrameBackShockTZCallback)
 		self.FrameBackShockTZSlider.setOrientation(qc.Qt.Horizontal)
 		FrameBackShockTZLayout.addWidget(self.FrameBackShockTZSlider)
 		FrameBackSliderLayout.addLayout(FrameBackShockTZLayout)
@@ -395,7 +409,7 @@ class Main_UI(qg.QDialog):
 		self.FrameBackShockNWSlider.setValue(0)
 		self.FrameBackShockNWSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameBackShockNWSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.FrameBackShockNWSlider.sliderMoved.connect(self.changeFrameBackShockNW)
+		self.FrameBackShockNWSlider.sliderMoved.connect(self.changeFrameBackShockNWCallback)
 		FrameBackShockNWLayout.addWidget(self.FrameBackShockNWSlider)
 		FrameBackSliderLayout.addLayout(FrameBackShockNWLayout)
 
@@ -411,7 +425,7 @@ class Main_UI(qg.QDialog):
 		self.FrameAngleSlider.setValue(0)
 		self.FrameAngleSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameAngleSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.FrameAngleSlider.sliderMoved.connect(self.changeFrameAngle)
+		self.FrameAngleSlider.sliderMoved.connect(self.changeFrameAngleCallback)
 		FrameAngleLayout.addWidget(self.FrameAngleSlider)
 		FrameAngleHeightTypeSliderLayout.addLayout(FrameAngleLayout)
 
@@ -423,7 +437,7 @@ class Main_UI(qg.QDialog):
 		self.FrameHeightSlider.setValue(0)
 		self.FrameHeightSlider.sliderPressed.connect(self.openUndoChunk)
 		self.FrameHeightSlider.sliderReleased.connect(self.closeUndoChunk)		
-		self.FrameHeightSlider.sliderMoved.connect(self.changeFrameHeight)
+		self.FrameHeightSlider.sliderMoved.connect(self.changeFrameHeightCallback)
 		FrameHeightLayout.addWidget(self.FrameHeightSlider)
 		FrameAngleHeightTypeSliderLayout.addLayout(FrameHeightLayout)
 
@@ -545,9 +559,7 @@ class Main_UI(qg.QDialog):
 		WheelAxleObject2 = self.getWheelAxleObject(self.WheelAxleListWidget.selectedItems()[1].text())
 
 		WheelAxleObject1Position = mc.xform(str(WheelAxleObject1)+"_WheelAxle_CTL", ws = True, query = True, translation = True)[2]
-		print WheelAxleObject1Position
 		WheelAxleObject2Position = mc.xform(str(WheelAxleObject2)+"_WheelAxle_CTL", ws = True, query = True, translation = True)[2]
-		print WheelAxleObject2Position
 
 		if WheelAxleObject1.WheelAxleAttributes["Frame_Connect"] == 1 or WheelAxleObject2.WheelAxleAttributes["Frame_Connect"] == 1:
 			print "Frame already connected to the selected Axles! Aborting!"
@@ -665,171 +677,279 @@ class Main_UI(qg.QDialog):
 			print "Frame Object not found"
 
 
-	def changeWheelWidth(self, value):
-		WheelAxleObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeWheelWidthCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		WheelAxleObject = self.getWheelAxleObject(selected.text())
 		if WheelAxleObject != None:
 			WheelAxleObject.changeWheelWidth(value)
 		else:
 			print "Wheel object not found"
 
 
-	def changeWheelSize(self, value):
-		WheelObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeWheelSizeCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		WheelObject = self.getWheelAxleObject(selected.text())
 		if WheelObject != None:
 			WheelObject.changeWheelSize(value)
 		else:
 			print "Wheel object not found"
 
-	def changeTireType(self, value):
-		WheelObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeTireTypeCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		WheelObject = self.getWheelAxleObject(selected.text())
 		if WheelObject != None:
 			WheelObject.changeTireType(value)
 		else:
 			print "Wheel object not found"
 
-	def changeWheelOutShape(self, value):
-		WheelObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeWheelOutShapeCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		WheelObject = self.getWheelAxleObject(selected.text())
 		if WheelObject != None:
 			WheelObject.changeWheelOutShape(value)
 		else:
 			print "Wheel object not found"
 
-	def changeWheelMidShape(self, value):
-		WheelObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeWheelMidShapeCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		WheelObject = self.getWheelAxleObject(selected.text())
 		if WheelObject != None:
 			WheelObject.changeWheelMidShape(value)
 		else:
 			print "Wheel object not found"
 
-	def changeWheelInShape(self, value):
-		WheelObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeWheelInShapeCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		WheelObject = self.getWheelAxleObject(selected.text())
 		if WheelObject != None:
 			WheelObject.changeWheelInShape(value)
 		else:
 			print "Wheel object not found"
 
-	def changeWheelCenterShape(self, value):
-		WheelObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeWheelCenterShapeCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		WheelObject = self.getWheelAxleObject(selected.text())
 		if WheelObject != None:
 			WheelObject.changeWheelCenterShape(value)
 		else:
 			print "Wheel object not found"
 
-	def changeAxleHeight(self, value):
-		AxleObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeAxleTypeCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		AxleObject = self.getWheelAxleObject(selected.text())
+		if AxleObject != None:
+			AxleObject.changeAxleType(value)
+		else:
+			print "Wheel object not found"
+
+	def changeAxleHeightCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		AxleObject = self.getWheelAxleObject(selected.text())
 		if AxleObject != None:
 			AxleObject.changeAxleHeight(value)
 		else:
 			print "Wheel object not found"
 
-	def changeAxleThickness(self, value):
-		AxleObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeAxleThicknessCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		AxleObject = self.getWheelAxleObject(selected.text())
 		if AxleObject != None:
 			AxleObject.changeAxleThickness(value)
 		else:
 			print "Wheel object not found"
 
-	def changeAxleWidth(self, value):
-		AxleObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeAxleWidthCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		AxleObject = self.getWheelAxleObject(selected.text())
 		if AxleObject != None:
 			AxleObject.changeAxleWidth(value)
 		else:
 			print "Wheel object not found"
 
-	def changeSpringWidth(self, value):
-		ShockObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeSpringWidthCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		ShockObject = self.getWheelAxleObject(selected.text())
 		if ShockObject != None:
 			ShockObject.changeSpringWidth(value)
 		else:
 			print "Wheel object not found"
 
-	def changeCoilRadius(self, value):
-		ShockObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeCoilRadiusCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		ShockObject = self.getWheelAxleObject(selected.text())
 		if ShockObject != None:
 			ShockObject.changeCoilRadius(value)
 		else:
 			print "Wheel object not found"
 
-	def changeCoils(self, value):
-		ShockObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeCoilsCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		ShockObject = self.getWheelAxleObject(selected.text())
 		if ShockObject != None:
 			ShockObject.changeCoils(value)
 		else:
 			print "Wheel object not found"
 
-	def changePistonWidth(self, value):
-		ShockObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changePistonWidthCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		ShockObject = self.getWheelAxleObject(selected.text())
 		if ShockObject != None:
 			ShockObject.changePistonWidth(value)
 		else:
 			print "Wheel object not found"
 
-	def changeShockDistance(self, value):
-		ShockObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+	def changeShockDistanceCallback(self, value):
+		selected = self.WheelAxleListWidget.currentItem()
+		if not selected:
+			print "No Axle selected!"
+			return
+		ShockObject = self.getWheelAxleObject(selected.text())
 		
 		if ShockObject != None:
 			ShockObject.changeShockDistance(value)
 		else:
 			print "Wheel Object not found"
 
-	def changeFrameFrontShockHeight(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameFrontShockHeightCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameFrontShockHeight(value)
 		else:
 			print "Wheel object not found"
 
-	def changeFrameFrontShockTZ(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameFrontShockTZCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameFrontShockTZ(value)
 		else:
 			print "Frame object not found"
 
-	def changeFrameFrontShockNW(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameFrontShockNWCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameFrontShockNW(value)
 		else:
 			print "Frame object not found"
 
-	def changeFrameBackShockHeight(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameBackShockHeightCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameBackShockHeight(value)
 		else:
 			print "Frame object not found"
 
-	def changeFrameBackShockTZ(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameBackShockTZCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameBackShockTZ(value)
 		else:
 			print "Frame object not found"
 
-	def changeFrameBackShockNW(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameBackShockNWCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameBackShockNW(value)
 		else:
 			print "Frame object not found"
 
-	def changeFrameAngle(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameAngleCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+			
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameAngle(value)
 		else:
 			print "Frame object not found"
 
-	def changeFrameHeight(self, value):
-		FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameHeightCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		FrameObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameHeight(value)
 		else:
 			print "Frame object not found"
 
-	def changeFrameType(self, value):
-		AxleObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
+	def changeFrameTypeCallback(self, value):
+		selected = self.FrameListWidget.currentItem()
+		if not selected:
+			print "No Frame selected"
+			return
+		AxleObject = self.getFrameObject(selected.text())
 		if FrameObject != None:
 			FrameObject.changeFrameType(value)
 		else:
@@ -838,13 +958,13 @@ class Main_UI(qg.QDialog):
 	#GENERAL FUNCTIONS
 	def renameComponent(self):
 		if self.WheelAxleListWidget.currentRow() != -1:
-			WheelAxleObject = self.getWheelAxleObject(self.WheelAxleListWidget.currentItem().text())
+			selected = self.WheelAxleListWidget.currentItem()
+			WheelAxleObject = self.getWheelAxleObject(selected.text())
 			self.WheelAxleNameList.remove(str(WheelAxleObject))
 			newWheelName = self.generateWheelAxleName(self.RenameTextBox.text())
 			WheelAxleObject.rename(newWheelName)
 			self.WheelAxleNameList.append(newWheelName)
-			self.WheelAxleListWidget.currentItem().setText(str(WheelAxleObject))
-			print "I SHOULD NOT BE HERE!"
+			selected.setText(str(WheelAxleObject))
 
 		if self.FrameListWidget.currentRow() != -1:
 			FrameObject = self.getFrameObject(self.FrameListWidget.currentItem().text())
@@ -853,16 +973,12 @@ class Main_UI(qg.QDialog):
 			FrameObject.rename(newFrameName)
 			self.FrameNameList.append(newFrameName)
 			self.FrameListWidget.currentItem().setText(str(FrameObject))
-			print "I SHOULD BE HERE!"
 
 		self.WheelAxleListWidget.setCurrentRow(-1)
 		self.FrameAxleList.setCurrentRow(-1)
 
 	def clearModel(self):
-		print self.WheelAxleNameList
-		print self.WheelAxleListWidget.count()
 		count = self.WheelAxleListWidget.count()
-		print count
 		while self.WheelAxleListWidget.count()>0:
 			wheelAxle = self.getWheelAxleObject(self.WheelAxleListWidget.item(0).text())
 			self.WheelAxleListWidget.takeItem(0)
@@ -901,9 +1017,7 @@ class Main_UI(qg.QDialog):
 		mc.setAttr(self.worldControl+".overrideEnabled", 1)
 		mc.setAttr(self.worldControl+".overrideColor", 17)
 		rigGroup = mc.group(self.worldControl, n = rigName+"_World_GRP")
-		print self.worldControl
 		for i in range(self.WheelAxleListWidget.count()):
-			print i
 			wheelRigName = rigName+"_"+str(i)
 			wheelAxle = self.getWheelAxleObject(self.WheelAxleListWidget.item(i).text())
 			wheelAxle.rigWheelAxle(self.worldControl, wheelRigName)
@@ -946,26 +1060,21 @@ class WheelAxle():
 		self.WheelAxleAttributes["Shock_Distance"] = 0
 		self.WheelAxleAttributes["Frame_Connect"] = 0
 		
-		self.LeftWheelTypes = mc.listRelatives(wheelAxleName+"_WheelAxle_l_tireGeos_GRP", children = True)
-		self.RightWheelTypes = mc.listRelatives(wheelAxleName+"_WheelAxle_r_tireGeos_GRP", children = True)
-		print self.WheelAxleAttributes
-
-		print self.LeftWheelTypes
-		print self.RightWheelTypes
+		self.LeftWheelTypes = mc.listRelatives(wheelAxleName+"_WheelAxle_l_wheelGeos_GRP", children = True)
+		self.RightWheelTypes = mc.listRelatives(wheelAxleName+"_WheelAxle_r_wheelGeos_GRP", children = True)
+		self.AxleTypes = mc.listRelatives(wheelAxleName+"_WheelAxle_AxleGeos_GRP", children = True)
 
 	def __str__(self):
 		return self.WheelAxleAttributes["Name"]
 
 	def rename(self, newName):
 		oldName = self.WheelAxleAttributes["Name"]
-		print oldName
 		mc.select(oldName+"*")
 		mc.select("*.vtx[*]", d = True)
 		mc.select("*Shape*", d = True)
 		mc.select("*Group*", d = True)
 		mc.select("*group*", d = True)
 		selectedObjects = mc.ls(sl = True)
-		print selectedObjects
 		for obj in selectedObjects:
 			mc.lockNode(obj, lock = False)
 		 	newNameSuffix = obj.rpartition(oldName)[2]
@@ -1018,20 +1127,16 @@ class WheelAxle():
 #BAKE MODEL	
 	def bakeWheelAxle(self, bakeName, worldGroup):
 		TireType = self.WheelAxleAttributes["Tire_Type"]
-		print TireType
 
 	#	Code to delete meshes not in use
-		LeftTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_l_tireGeos_GRP", children = True)
-		print LeftTyreGeos
+		LeftTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_l_wheelGeos_GRP", children = True)
 		for i in range(len(LeftTyreGeos)):
 			if i != TireType:
-				print "come Left!"
 				mc.delete(LeftTyreGeos[i])
 		
-		RightTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_r_tireGeos_GRP", children = True)
+		RightTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_r_wheelGeos_GRP", children = True)
 		for i in range(len(RightTyreGeos)):
 			if i != TireType:
-				print "come Right!"
 				mc.delete(RightTyreGeos[i])
 	
 		AxleGeo = mc.listRelatives(str(self)+"_WheelAxle_AxleGeos_GRP", children = True)[0]
@@ -1120,21 +1225,17 @@ class WheelAxle():
 #AUTO-RIGGING WHEEL AXLE!!!!!
 	def rigWheelAxle(self, worldControl, rigName = "Test"):
 		TireType = self.WheelAxleAttributes["Tire_Type"]
-		print TireType
 		worldGroup = mc.listRelatives(worldControl, parent = True)
 
 	#	Code to delete meshes not in use
-		LeftTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_l_tireGeos_GRP", children = True)
-		print LeftTyreGeos
+		LeftTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_l_wheelGeos_GRP", children = True)
 		for i in range(len(LeftTyreGeos)):
 			if i != TireType:
-				print "come Left!"
 				mc.delete(LeftTyreGeos[i])
 		
-		RightTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_r_tireGeos_GRP", children = True)
+		RightTyreGeos = mc.listRelatives(str(self)+"_WheelAxle_r_wheelGeos_GRP", children = True)
 		for i in range(len(RightTyreGeos)):
 			if i != TireType:
-				print "come Right!"
 				mc.delete(RightTyreGeos[i])
 	
 		axleGeo = mc.listRelatives(str(self)+"_WheelAxle_AxleGeos_GRP", children = True)[0]
@@ -1228,7 +1329,6 @@ class WheelAxle():
 		#Renaming WheelAxle Connection Rigs
 		leftWheelAxleConnectParts = mc.listRelatives(str(self)+"_l_WheelAxleConnect_GRP", allDescendents = True)
 		for part in leftWheelAxleConnectParts:
-			print part
 			mc.rename(part, rigName+part.partition(str(self))[2])
 		leftWheelAxleConnectGroup = mc.rename(str(self)+"_l_WheelAxleConnect_GRP", rigName+"_l_WheelAxleConnect_GRP")
 		mc.setAttr(leftWheelAxleConnectGroup+".visibility", 0)
@@ -1236,7 +1336,6 @@ class WheelAxle():
 
 		rightWheelAxleConnectParts = mc.listRelatives(str(self)+"_r_WheelAxleConnect_GRP", allDescendents = True)
 		for part in rightWheelAxleConnectParts:
-			print part
 			mc.rename(part, rigName+part.partition(str(self))[2])
 		rightWheelAxleConnectGroup = mc.rename(str(self)+"_r_WheelAxleConnect_GRP", rigName+"_r_WheelAxleConnect_GRP")
 		mc.setAttr(rightWheelAxleConnectGroup+".visibility", 0)
@@ -1543,6 +1642,14 @@ class WheelAxle():
 
 		self.WheelAxleAttributes["Tire_Type"] = value
 
+	def changeAxleType(self, value):
+		for obj in self.AxleTypes:
+			mc.setAttr(obj+".visibility", 0)
+
+		mc.setAttr(self.AxleTypes[value]+".visibility", 1)
+
+		self.WheelAxleAttributes["Tire_Type"] = value
+
 	def changeWheelOutShape(self, value):
 		self.WheelAxleAttributes["Shape_Values"][0] = value/10.0
 		mc.setAttr(self.WheelAxleAttributes["Name"]+"_WheelAxle_ATR.WheelShapeOut", value/10.0)
@@ -1623,21 +1730,18 @@ class Frame():
 		backWheelAxle.WheelAxleAttributes["Frame_Connect"] = 1
 
 		self.FrameTypes = mc.listRelatives(frameName+"_FrameGeos_GRP", children = True)
-		print self.FrameTypes
 
 	def __str__(self):
 		return self.FrameAttributes["Name"]
 
 	def rename(self, newName):
 		oldName = self.FrameAttributes["Name"]
-		print oldName
 		mc.select(oldName+"*")
 		mc.select("*.vtx[*]", d = True)
 		mc.select("*Shape*", d = True)
 		mc.select("*Group*", d = True)
 		mc.select("*group*", d = True)
 		selectedObjects = mc.ls(sl = True)
-		print selectedObjects
 		for obj in selectedObjects:
 			mc.lockNode(obj, lock = False)
 		 	newNameSuffix = obj.rpartition(oldName)[2]
@@ -1684,7 +1788,6 @@ class Frame():
 		FrameGeos = mc.listRelatives(str(self)+"_FrameGeos_GRP", children = True)
 		for i in range(len(FrameGeos)):
 			if i != FrameType:
-				print "come Frame"
 				mc.delete(FrameGeos[i])
 
 		frameGeo = mc.rename(FrameGeos[FrameType], bakeName+"_Frame_GEO")
@@ -1703,7 +1806,6 @@ class Frame():
 		FrameGeos = mc.listRelatives(str(self)+"_FrameGeos_GRP", children = True)
 		for i in range(len(FrameGeos)):
 			if i != FrameType:
-				print "come Frame!"
 				mc.delete(FrameGeos[i])
 
 		mc.delete(FrameGeos[FrameType], ch = True)
