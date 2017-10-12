@@ -1,0 +1,73 @@
+steps for IK feet rigging:
+	1. Have a leg with ball, toe, heel, in pivot and out pivot joints
+	2. Have them all properly oriented.
+	3. Add RP IKHandle between Up leg and ankle, 
+		SC IKHandle between ankle and ball and 
+		SC IKHandle between ball and toe
+	4. Place proxy joint from Heel to Toe and Toe to Ankle and orient with Z as primary axis
+	5. Place proxy joint from Left Pivot to Right Pivot and Right Pivot to Left Pivot and orient wih Z as Primary Axis
+	6. Create groups, parent them to each proxy joint. Name each group according to the joint parent under
+	7. 0 out each group
+	8. Add a locator as child to each group and 0 those out so that they have the same orientation and location as the groups
+	9. Unparent groups from their joints, discard or stash the joints
+	10. order should be right now
+			- Heel_GRP
+				- Heel_LOC
+			- Toe_GRP
+				- Toe_LOC
+			- Ball_GRP
+				- Ball_LOC
+			- inPivot_GRP
+				- inPivot_LOC
+			- outPivot_GRP
+				- outPivot_LOC
+
+			-Ankle_IKH
+			-Toe_IKH
+			-Ball_IKH
+
+	11: set order to this:
+			-Heel_GRP
+				-Heel_LOC
+					-Toe_GRP
+						-Toe_LOC
+							-Ball_IKH		
+							-Ball_GRP
+								-Ball-LOC
+									-Ankle_IKH
+									-Toe_IKH
+			- inPivot_GRP
+				- inPivot_LOC
+			- outPivot_GRP
+				- outPivot_LOC
+
+	12. Parent Constraint Heel_GRP to both inPivot and outPivot locators but set both values 0
+
+	13. Create Foot Control at the same place as ankle but y = 0
+
+	14. Add Attributes: HeelRoll, HeelPivot, BallRoll, BallPivot, ToeRoll, ToePivot, SideInPivot, SideOutPivot
+				addAttr -ln "_____________"  -at double  -dv 0 |curve3;
+				setAttr -e-channelBox true |curve3._____________;
+				setAttr -lock true "curve3._____________";
+				addAttr -ln "HeelRoll"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.HeelRoll;
+				addAttr -ln "HeelPivot"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.HeelPivot;
+				addAttr -ln "BallRoll"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.BallRoll;
+				addAttr -ln "BallPivot"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.BallPivot;
+				addAttr -ln "ToeRoll"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.ToeRoll;
+				addAttr -ln "ToePivot"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.ToePivot;
+				addAttr -ln "SideInPivot"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.SideInPivot;
+				addAttr -ln "SideOutPivot"  -at double  -min 0 -dv 0 |curve3;
+				setAttr -e-keyable true |curve3.SideOutPivot;
+
+
+	15. 
+
+
+
