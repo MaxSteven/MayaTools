@@ -1,8 +1,8 @@
 steps for IK feet rigging:
 	1. Have a leg with ball, toe, heel, in pivot and out pivot joints
 	2. Have them all properly oriented.
-	3. Add RP IKHandle between Up leg and ankle, 
-		SC IKHandle between ankle and ball and 
+	3. Add RP IKHandle between Up leg and ankle,
+		SC IKHandle between ankle and ball and
 		SC IKHandle between ball and toe
 	4. Place proxy joint from Heel to Toe and Toe to Ankle and orient with Z as primary axis
 	5. Place proxy joint from Left Pivot to Right Pivot and Right Pivot to Left Pivot and orient wih Z as Primary Axis
@@ -31,7 +31,7 @@ steps for IK feet rigging:
 				-Heel_LOC
 					-Toe_GRP
 						-Toe_LOC
-							-Ball_IKH		
+							-Ball_IKH
 							-Ball_GRP
 								-Ball-LOC
 									-Ankle_IKH
@@ -67,7 +67,6 @@ steps for IK feet rigging:
 				setAttr -e-keyable true |curve3.SideOutPivot;
 
 
-	15. 
-
+	15. connect rotations of locators to these attributes
 
 
