@@ -1,7 +1,7 @@
 import maya.cmds as mc
 from maya import OpenMaya
 
-class armIkFkBlending():
+class IkFkBlending():
 	def __init__(self):
 		self.blendedJoints = []
 		self.fkJoints = []
@@ -11,20 +11,21 @@ class armIkFkBlending():
 		self.fkControls = []
 		self.fkControlGroups = []
 
-		joint1= mc.ls(sl = True)[0]
-		joint2 = mc.listRelatives(joint1, children = True)[0]
-		joint3 = mc.listRelatives(joint2, children = True)[0]
+		joints = mc.ls(sl = True)
+		joints.extend(mc.listRelatives(joints[0], allDescendents = True))
 
-		for joint in [joint1, joint2, joint3]:
+		for joint in joints:
 			self.blendedJoints.append(joint)
 
-		self.jointNames.append(joint1.rpartition("_")[0])
-		self.jointNames.append(joint2.rpartition("_")[0])
-		self.jointNames.append(joint3.rpartition("_")[0])
+		for joint in joints:
+			self.jointNames.append(joint1.rpartition("_")[0])
 
-		ikJoint1 = mc.duplicate(joint1, n = self.jointNames[0]+"_IK_JNT", renameChildren = True)[0]
-		ikJoint2 = mc.rename(mc.listRelatives(ikJoint1, children = True)[0], self.jointNames[1]+"_IK_JNT")
-		ikJoint3 = mc.rename(mc.listRelatives(ikJoint2, children = True)[0], self.jointNames[2]+"_IK_JNT")
+		ikJointRoot = mc.duplicate(joints[0], n = self.jointNames[0]+"_IK_JNT", renameChildren = True)[0]
+		ikJointDecendants = mc.listRelatives(ikJointRoot, allDescendents = True)
+		for joint in ikJointDecendants:
+			jointNameParts = joint.split('_')
+
+			mc.rename(joint, self.jointNames[1]+"_IK_JNT")
 
 		for joint in [ikJoint1, ikJoint2, ikJoint3]:
 			self.ikJoints.append(joint)
@@ -55,6 +56,7 @@ class armIkFkBlending():
 			mc.parent(FKControlObject, world = True)
 			for shape in FKControlObjectShapes:
 				mc.parent(shape, joint, relative = True, shape = True)
+
 
 	def generateFKControl(self):
 		circle1 = mc.listRelatives(mc.circle( nr=(1, 0, 0), c=(0, 0, 0), r =5)[0], children = True)[0]
@@ -103,7 +105,7 @@ class armIkFkBlending():
 		mc.xform(poleVectorControl , ws =1 , t= (finalV.x , finalV.y ,finalV.z))
 		mc.makeIdentity(poleVectorControl, apply=True, t=1, r=1, s=1, n=0)
 
-		ikHandle = mc.ikHandle(sj = self.ikJoints[0], ee = self.ikJoints[2], sol = "ikRPsolver")[0]
+		kneeIkHandle = mc.ikHandle(sj = self.ikJoints[0], ee = self.ikJoints[2], sol = "ikRPsolver")[0]
 
 		self.ikControlObject = mc.circle(nr = (0, 0, 1), c = (0,0,0), r = 10, name = self.jointNames[2]+"_IK_CTL")[0]
 
@@ -111,12 +113,14 @@ class armIkFkBlending():
 
 		mc.makeIdentity(self.ikControlObject, apply=True, t=1, r=1, s=1, n=0)
 
-		mc.parent(ikHandle, self.ikControlObject)
+		mc.parent(kneeIkHandle, self.ikControlObject)
 
-		poleVector = mc.poleVectorConstraint(poleVectorControl, ikHandle)
+		poleVector = mc.poleVectorConstraint(poleVectorControl, kneeIkHandle)
 
 		self.ikControls.append(self.ikControlObject)
 		self.ikControls.append(poleVectorControl)
+
+
 
 	def blend(self):
 		self.blendColor1 = mc.shadingNode("blendColors", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_BLC")
@@ -158,15 +162,14 @@ class armIkFkBlending():
 
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.reverseNode1+".input.inputX")
 
-		mc.connectAttr(self.reverseNode1+".outputX", self.fkJoints[0]+".visibility")
-		# mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[1]+".visibility")
-		# mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[2]+".visibility")
+		mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[0]+".visibility")
+		mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[1]+".visibility")
+		mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[2]+".visibility")
 
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.ikControls[0]+".visibility")
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.ikControls[1]+".visibility")
 		ikControlPos = mc.xform(self.ikControlObject, query = True, worldSpace = True, rp = True)
 		self.mainControlPos = [pos + 10 for pos in ikControlPos]
-		mc.xform(self.mainControl, worldSpace=True, translation = self.mainControlPos)
+		mc.xform(self.mainControl, worldSpace=True, translation=self.mainControlPos)
 
-
-object = armIkFkBlending()
+object = IkFkBlending()
