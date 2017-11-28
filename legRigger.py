@@ -14,46 +14,52 @@ class IkFkBlending():
 		joints = mc.ls(sl = True)
 		joints.extend(mc.listRelatives(joints[0], allDescendents = True))
 
+		for joint in joints:
+			if 'Heel' in joint:
+				joints.remove(joint)
+				mc.parent(joint, worldSpace = True)
+				break
 
 		for joint in joints:
 			self.blendedJoints.append(joint)
 
 		for joint in joints:
-			self.jointNames.append(joint1.rpartition("_")[0])
+			self.jointNames.append(joint.rpartition("_")[0])
 
-		ikJointRoot = mc.duplicate(joints[0], n = self.jointNames[0]+"_IK_JNT", renameChildren = True)[0]
+		ikJointRoot = mc.duplicate(joints[0], n = jointNames[0]+"_IK_JNT", renameChildren = True)[0]
 		ikJointDecendants = mc.listRelatives(ikJointRoot, allDescendents = True)
 		self.ikJoints.append(ikJointRoot)
 		for joint in ikJointDecendants:
-			mc.rename(joint, joint.rpartition('_')[0]+"_IK_JNT")
-			self.ikJoints.append(joint)
+			ikJoint = mc.rename(joint, joint.rpartition('_')[0] +"_IK_JNT")
+			self.ikJoints.append(ikJoint)
 
-		fkJointRoot = mc.duplicate(joint1, n = self.jointNames[0]+"_FK_JNT", renameChildren = True)[0]
-		fkJointDecendants = mc.listRelatives(ikJointRoot, allDescendents = True)
+		fkJointRoot = mc.duplicate(joints[0], n = jointNames[0]+"_FK_JNT", renameChildren = True)[0]
+		fkJointDecendants = mc.listRelatives(fkJointRoot, allDescendents = True)
 		self.fkJoints.append(fkJointRoot)
 		for joint in fkJointDecendants:
-			mc.rename(joint, joint.rpartition('_')[0]+"_FK_JNT")
-			self.ikJoints.append(joint)
+			fkJoint = mc.rename(joint, joint.rpartition('_')[0] +"_FK_JNT")
+			self.fkJoints.append(fkJoint)
 
 		self.createFKControl()
-		self.createIKControl()
+		# self.createIKControl()
 
-		self.blend()
+		# self.blend()
 
-		self.mainGroup = mc.group(self.fkJoints[0], self.ikJoints[0], self.blendedJoints[0], n = joint1+"_GRP")
+		# self.mainGroup = mc.group(self.fkJoints[0], self.ikJoints[0], self.blendedJoints[0], n = joint1+"_GRP")
 
 	def createFKControl(self):
 		for joint in self.fkJoints:
-			control = self.generateFKControl()
-			controlName = joint.rpartition("_")[0] + "_CTL"
-			FKControlObject = mc.rename(control, controlName)
-			self.fkControls.append(FKControlObject)
-			FKControlObjectShapes = mc.listRelatives(FKControlObject, children = True)
-			mc.parent(FKControlObject, joint, relative = True)
-			mc.makeIdentity(FKControlObject)
-			mc.parent(FKControlObject, world = True)
-			for shape in FKControlObjectShapes:
-				mc.parent(shape, joint, relative = True, shape = True)
+			if 'Heel' not in joint and 'Toe' not in joint:
+				control = self.generateFKControl()
+				controlName = joint.rpartition("_")[0] + "_CTL"
+				FKControlObject = mc.rename(control, controlName)
+				self.fkControls.append(FKControlObject)
+				FKControlObjectShapes = mc.listRelatives(FKControlObject, children = True)
+				mc.parent(FKControlObject, joint, relative = True)
+				mc.makeIdentity(FKControlObject)
+				mc.parent(FKControlObject, world = True)
+				for shape in FKControlObjectShapes:
+					mc.parent(shape, joint, relative = True, shape = True)
 
 
 	def generateFKControl(self):
@@ -105,20 +111,23 @@ class IkFkBlending():
 
 		kneeIkHandle = mc.ikHandle(sj = self.ikJoints[0], ee = self.ikJoints[2], sol = "ikRPsolver")[0]
 
-		self.ikControlObject = mc.circle(nr = (0, 0, 1), c = (0,0,0), r = 10, name = self.jointNames[2]+"_IK_CTL")[0]
+		ikControlObject = mc.circle(nr = (0, 0, 1), c = (0,0,0), r = 10, name = self.jointNames[2]+"_IK_CTL")[0]
 
-		mc.xform(self.ikControlObject, worldSpace=True, translation=mc.xform(self.ikJoints[2], query = True, worldSpace = True, translation = True))
+		mc.xform(ikControlObject, worldSpace=True, translation=mc.xform(self.ikJoints[2], query = True, worldSpace = True, translation = True))
 
-		mc.makeIdentity(self.ikControlObject, apply=True, t=1, r=1, s=1, n=0)
+		mc.makeIdentity(ikControlObject, apply=True, t=1, r=1, s=1, n=0)
 
-		mc.parent(kneeIkHandle, self.ikControlObject)
+		mc.parent(kneeIkHandle, ikControlObject)
 
 		poleVector = mc.poleVectorConstraint(poleVectorControl, kneeIkHandle)
 
-		self.ikControls.append(self.ikControlObject)
+		self.ikControls.append(ikControlObject)
 		self.ikControls.append(poleVectorControl)
 
+		ballIkHandle = mc.ikHandle(sj = self.ikJoints[2], ee = self.ikJoints[3], sol = "ikSCsolver")[0]
+		toeIkHandle = mc.ikHandle(sj = self.ikJoints[3], ee = self.ikJoints[4], sol = "ikSCsolver")[0]
 
+		
 
 	def blend(self):
 		self.blendColor1 = mc.shadingNode("blendColors", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_BLC")
@@ -166,7 +175,7 @@ class IkFkBlending():
 
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.ikControls[0]+".visibility")
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.ikControls[1]+".visibility")
-		ikControlPos = mc.xform(self.ikControlObject, query = True, worldSpace = True, rp = True)
+		ikControlPos = mc.xform(self.ikControls[0], query = True, worldSpace = True, rp = True)
 		self.mainControlPos = [pos + 10 for pos in ikControlPos]
 		mc.xform(self.mainControl, worldSpace=True, translation=self.mainControlPos)
 
