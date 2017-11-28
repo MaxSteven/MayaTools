@@ -14,6 +14,7 @@ class IkFkBlending():
 		joints = mc.ls(sl = True)
 		joints.extend(mc.listRelatives(joints[0], allDescendents = True))
 
+
 		for joint in joints:
 			self.blendedJoints.append(joint)
 
@@ -22,20 +23,17 @@ class IkFkBlending():
 
 		ikJointRoot = mc.duplicate(joints[0], n = self.jointNames[0]+"_IK_JNT", renameChildren = True)[0]
 		ikJointDecendants = mc.listRelatives(ikJointRoot, allDescendents = True)
+		self.ikJoints.append(ikJointRoot)
 		for joint in ikJointDecendants:
-			jointNameParts = joint.split('_')
-
-			mc.rename(joint, self.jointNames[1]+"_IK_JNT")
-
-		for joint in [ikJoint1, ikJoint2, ikJoint3]:
+			mc.rename(joint, joint.rpartition('_')[0]+"_IK_JNT")
 			self.ikJoints.append(joint)
 
-		fkJoint1 = mc.duplicate(joint1, n = self.jointNames[0]+"_FK_JNT", renameChildren = True)[0]
-		fkJoint2 = mc.rename(mc.listRelatives(fkJoint1, children = True)[0], self.jointNames[1]+"_FK_JNT")
-		fkJoint3 = mc.rename(mc.listRelatives(fkJoint2, children = True)[0], self.jointNames[2]+"_FK_JNT")
-
-		for joint in [fkJoint1, fkJoint2, fkJoint3]:
-			self.fkJoints.append(joint)
+		fkJointRoot = mc.duplicate(joint1, n = self.jointNames[0]+"_FK_JNT", renameChildren = True)[0]
+		fkJointDecendants = mc.listRelatives(ikJointRoot, allDescendents = True)
+		self.fkJoints.append(fkJointRoot)
+		for joint in fkJointDecendants:
+			mc.rename(joint, joint.rpartition('_')[0]+"_FK_JNT")
+			self.ikJoints.append(joint)
 
 		self.createFKControl()
 		self.createIKControl()
