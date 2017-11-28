@@ -44,31 +44,36 @@ class IkFkBlending():
 		self.mainGroup = mc.group(self.fkJoints[0], self.ikJoints[0], self.blendedJoints[0], n = joint1+"_GRP")
 
 	def createFKControl(self):
-		for joint in self.fkJoints:
-			control = self.generateFKControl()
-			controlName = joint.rpartition("_")[0] + "_CTL"
-			FKControlObject = mc.rename(control, controlName)
-			self.fkControls.append(FKControlObject)
-			FKControlObjectShapes = mc.listRelatives(FKControlObject, children = True)
-			mc.parent(FKControlObject, joint, relative = True)
-			mc.makeIdentity(FKControlObject)
-			mc.parent(FKControlObject, world = True)
-			for shape in FKControlObjectShapes:
-				mc.parent(shape, joint, relative = True, shape = True)
-
+		# FOR PARENTED FK CONTROLS
 		# for joint in self.fkJoints:
-		#     controlObject = self.generateFKControl()
-		#     mc.xform(FKControlObject, worldSpace=True, translation=mc.xform(joint, query = True, worldSpace = True, translation = True))
-		#     groupName = mc.group(FKControlObject, n = joint.rpartition("_")[0] + "_GRP")
-		#     mc.parent(groupName, joint)
-		#     mc.makeIdentity(groupName, apply=True, t=1, r=1, s=1, n=0)
-		#     mc.parent(groupName, world = True)
-		#     controlParent = mc.listRelatives(FKControlObject, parent = True)[0]
-		#     mc.parent(joint, FKControlObject, r = True, s = True)
-		#     self.fkControlGroups.append(groupName)
-		#     #if controlParent != None:
-		# mc.parent(self.fkControlGroups[2], self.fkControls[1])
-		# mc.parent(self.fkControlGroups[1], self.fkControls[0])
+		# 	control = self.generateFKControl()
+		# 	controlName = joint.rpartition("_")[0] + "_CTL"
+		# 	FKControlObject = mc.rename(control, controlName)
+		# 	self.fkControls.append(FKControlObject)
+		# 	FKControlObjectShapes = mc.listRelatives(FKControlObject, children = True)
+		# 	mc.parent(FKControlObject, joint, relative = True)
+		# 	mc.makeIdentity(FKControlObject)
+		# 	mc.parent(FKControlObject, world = True)
+		# 	for shape in FKControlObjectShapes:
+		# 		mc.parent(shape, joint, relative = True, shape = True)
+
+		# FOR ORIENT CONSTRAINED CONTROLS
+		for joint in self.fkJoints:
+			controlObject = self.generateFKControl()
+			controlName = joint.rpartition("_")[0] + "_CTL"
+			FKControlObject = mc.rename(controlObject, controlName)
+			self.fkControls.append(FKControlObject)
+			mc.xform(FKControlObject, worldSpace=True, translation=mc.xform(joint, query = True, worldSpace = True, translation = True))
+			FKControlObjectShape = mc.listRelatives(FKControlObject, children = True)
+			groupName = mc.group(FKControlObject, n = joint.rpartition("_")[0] + "_GRP")
+			mc.parent(groupName, joint)
+			mc.makeIdentity(groupName, apply=True, t=1, r=1, s=1, n=0)
+			mc.parent(groupName, world = True)
+			controlParent = mc.listRelatives(FKControlObject, parent = True)[0]
+			mc.orientConstraint(FKControlObject, joint)
+			self.fkControlGroups.append(groupName)
+		mc.parent(self.fkControlGroups[2], self.fkControls[1])
+		mc.parent(self.fkControlGroups[1], self.fkControls[0])
 
 
 	def generateFKControl(self):
