@@ -127,6 +127,8 @@ class IkFkBlending():
 		ballIkHandle = mc.ikHandle(sj = self.ikJoints[2], ee = self.ikJoints[3], sol = "ikSCsolver")[0]
 		toeIkHandle = mc.ikHandle(sj = self.ikJoints[3], ee = self.ikJoints[4], sol = "ikSCsolver")[0]
 
+		proxyHeelJoint = mc.joint()
+
 		
 
 	def blend(self):

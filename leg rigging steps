@@ -1,4 +1,4 @@
-steps for IK feet rigging:
+ steps for IK feet rigging:
 	1. Have a leg with ball, toe, heel, in pivot and out pivot joints
 	2. Have them all properly oriented.
 	3. Add RP IKHandle between Up leg and ankle,
@@ -17,10 +17,10 @@ steps for IK feet rigging:
 				- Toe_LOC
 			- Ball_GRP
 				- Ball_LOC
-			- inPivot_GRP
-				- inPivot_LOC
-			- outPivot_GRP
-				- outPivot_LOC
+		//	- inPivot_GRP
+		//		- inPivot_LOC
+		//	- outPivot_GRP
+		//		- outPivot_LOC
 
 			-Ankle_IKH
 			-Toe_IKH
@@ -36,12 +36,12 @@ steps for IK feet rigging:
 								-Ball-LOC
 									-Ankle_IKH
 									-Toe_IKH
-			- inPivot_GRP
-				- inPivot_LOC
-			- outPivot_GRP
-				- outPivot_LOC
+			// - inPivot_GRP
+			//	- inPivot_LOC
+			// - outPivot_GRP
+			//	- outPivot_LOC
 
-	12. Parent Constraint Heel_GRP to both inPivot and outPivot locators but set both values 0
+	// 12. Parent Constraint Heel_GRP to both inPivot and outPivot locators but set both values 0
 
 	13. Create Foot Control at the same place as ankle but y = 0
 
