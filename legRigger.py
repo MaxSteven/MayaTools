@@ -87,6 +87,17 @@ class IkFkBlending():
 		midV = OpenMaya.MVector(joint2Pos[0] ,joint2Pos[1],joint2Pos[2])
 		endV = OpenMaya.MVector(joint3Pos[0] ,joint3Pos[1],joint3Pos[2])
 
+		for joint in self.ikJoints:
+			if 'Heel' in joint:
+				heelJoint = joint
+				self.ikJoints.remove(joint)
+			if 'Ankle' in joint:
+				ankleJoint = joint
+			if 'Toe' in joint:
+				toeJoint = joint
+			if 'Ball' in joint:
+				ballJoint = joint
+
 		startEnd = endV - startV
 		startMid = midV - startV
 
@@ -104,9 +115,8 @@ class IkFkBlending():
 
 		finalV = arrowV + midV
 
-		poleVectorControl = mc.spaceLocator(n = self.jointNames[1] + "_PV_CTL")[0]
+		poleVectorControl = mc.spaceLocator(n = self.jointNames[1] + "_PV_CTL", p = (finalV.x , finalV.y ,finalV.z))[0]
 
-		mc.xform(poleVectorControl , ws =1 , t= (finalV.x , finalV.y ,finalV.z))
 		mc.makeIdentity(poleVectorControl, apply=True, t=1, r=1, s=1, n=0)
 
 		kneeIkHandle = mc.ikHandle(sj = self.ikJoints[0], ee = self.ikJoints[2], sol = "ikRPsolver")[0]
@@ -124,10 +134,25 @@ class IkFkBlending():
 		self.ikControls.append(ikControlObject)
 		self.ikControls.append(poleVectorControl)
 
-		ballIkHandle = mc.ikHandle(sj = self.ikJoints[2], ee = self.ikJoints[3], sol = "ikSCsolver")[0]
-		toeIkHandle = mc.ikHandle(sj = self.ikJoints[3], ee = self.ikJoints[4], sol = "ikSCsolver")[0]
+		ballIkHandle = mc.ikHandle(sj = ankleJoint, ee = ballJoint, sol = "ikSCsolver")[0]
+		toeIkHandle = mc.ikHandle(sj = ballJoint, ee = Toe, sol = "ikSCsolver")[0]
 
-		proxyHeelJoint = mc.joint()
+		proxyHeel1Joint = mc.joint(p=mc.xform(heelJoint, query=True, worldSpace=True, translation=True))
+		proxyHeel2Joint = mc.joint(p=mc.xform(heelJoint, query=True, worldSpace=True, translation=True))
+		proxyBallJoint = mc.joint(p=mc.xform(ballJoint, query=True, worldSpace=True, translation=True))
+		proxyToeJoint = mc.joint(p=mc.xform(toeJoint, query=True, worldSpace=True, translation=True))
+		proxyAnkle1Joint = mc.joint(p=mc.xform(ankleJoint, query=True, worldSpace=True, translation=True))
+		proxyAnkle2Joint = mc.joint(p=mc.xform(ankleJoint, query=True, worldSpace=True, translation=True))
+
+		mc.parent(proxyToeJoint, proxyHeel1Joint)
+		mc.parent(proxyBallJoint, proxyHeel2Joint)
+		mc.parent(proxyAnkle1Joint, proxyToeJoint)
+		mc.parent(proxyAnkle2Joint, proxyBallJoint)
+
+		mc.joint
+
+		heelLoc = mc.spaceLocator()
+		
 
 		
 
