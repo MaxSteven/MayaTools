@@ -59,3 +59,15 @@ mc.xform(BallOffsetGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
 mc.parent(BallGroup, BallOffsetGroup)
 mc.xform(BallGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
 mc.parent(BallOffsetGroup, world=True)
+
+mc.parent(ToeOffsetGroup, HeelGroup)
+mc.parent(BallOffsetGroup, ToeGroup)
+
+ToeTapOffsetGroup = mc.duplicate(BallOffsetGroup, n = side + '_ToeTapOffset_GRP', renameChildren = True)[0]
+ToeTapGroup = mc.rename(mc.listRelatives(ToeTapOffsetGroup, children=True)[0], side + '_ToeTap_GRP')
+
+mc.parent(ToeTapOffsetGroup, world=True)
+mc.xform(ToeTapOffsetGroup, rotation=[0,0,0], a=True)
+mc.parent(ToeTapOffsetGroup, HeelGroup)
+
+# parent ik handle

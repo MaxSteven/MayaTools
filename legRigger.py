@@ -12,70 +12,88 @@ class IkFkBlending():
 		self.fkControlGroups = []
 
 		joints = mc.ls(sl = True)
+		self.side = joints[0].split('_')[0]
 		joints.extend(mc.listRelatives(joints[0], allDescendents = True))
 
 		for joint in joints:
 			if 'Heel' in joint:
 				joints.remove(joint)
-				mc.parent(joint, worldSpace = True)
+				# mc.parent(joint, worldSpace = True)
 				break
 
 		for joint in joints:
-			self.blendedJoints.append(joint)
+			if 'Heel' not in joint and 'Toe' not in joint:
+				self.blendedJoints.append(joint)
 
 		for joint in joints:
 			self.jointNames.append(joint.rpartition("_")[0])
 
-		ikJointRoot = mc.duplicate(joints[0], n = jointNames[0]+"_IK_JNT", renameChildren = True)[0]
-		ikJointDecendants = mc.listRelatives(ikJointRoot, allDescendents = True)
+		ikJointRoot = mc.duplicate(joints[0], n = self.jointNames[0]+"_IK_JNT", renameChildren = True)[0]
 		self.ikJoints.append(ikJointRoot)
+		ikJointDecendants = mc.listRelatives(ikJointRoot, allDescendents = True)
 		for joint in ikJointDecendants:
 			ikJoint = mc.rename(joint, joint.rpartition('_')[0] +"_IK_JNT")
 			self.ikJoints.append(ikJoint)
 
-		fkJointRoot = mc.duplicate(joints[0], n = jointNames[0]+"_FK_JNT", renameChildren = True)[0]
+		fkJointRoot = mc.duplicate(joints[0], n = self.jointNames[0]+"_FK_JNT", renameChildren = True)[0]
 		fkJointDecendants = mc.listRelatives(fkJointRoot, allDescendents = True)
 		self.fkJoints.append(fkJointRoot)
 		for joint in fkJointDecendants:
 			fkJoint = mc.rename(joint, joint.rpartition('_')[0] +"_FK_JNT")
-			self.fkJoints.append(fkJoint)
+			if 'Heel' not in fkJoint and 'Toe' not in fkJoint:
+				print fkJoint
+				self.fkJoints.append(fkJoint)
+
+			else:
+				print fkJoint
 
 		self.createFKControl()
-		# self.createIKControl()
+		self.createIKControl()
 
-		# self.blend()
+		self.blend()
 
-		# self.mainGroup = mc.group(self.fkJoints[0], self.ikJoints[0], self.blendedJoints[0], n = joint1+"_GRP")
+		self.mainGroup = mc.group(self.fkJoints[0], self.ikJoints[0], self.blendedJoints[0], n = self.jointNames[0] + "_GRP")
 
 	def createFKControl(self):
 		for joint in self.fkJoints:
-			if 'Heel' not in joint and 'Toe' not in joint:
-				control = self.generateFKControl()
-				controlName = joint.rpartition("_")[0] + "_CTL"
-				FKControlObject = mc.rename(control, controlName)
-				self.fkControls.append(FKControlObject)
-				FKControlObjectShapes = mc.listRelatives(FKControlObject, children = True)
-				mc.parent(FKControlObject, joint, relative = True)
-				mc.makeIdentity(FKControlObject)
-				mc.parent(FKControlObject, world = True)
-				for shape in FKControlObjectShapes:
-					mc.parent(shape, joint, relative = True, shape = True)
+			control = self.generateFKControl()
+			controlName = joint.rpartition("_")[0] + "_CTL"
+			FKControlObject = mc.rename(control, controlName)
+			self.fkControls.append(FKControlObject)
+			FKControlObjectShapes = mc.listRelatives(FKControlObject, children = True)
+			mc.parent(FKControlObject, joint, relative = True)
+			mc.makeIdentity(FKControlObject)
+			mc.parent(FKControlObject, world = True)
+			for shape in FKControlObjectShapes:
+				mc.parent(shape, joint, relative = True, shape = True)
 
+			mc.delete(FKControlObject)
+
+		# for joint in self.fkJoints:
+		# 	controlObject = self.generateFKControl()
+		# 	controlName = joint.rpartition("_")[0] + "_CTL"
+		# 	FKControlObject = mc.rename(controlObject, controlName)
+		# 	self.fkControls.append(FKControlObject)
+		# 	mc.xform(FKControlObject, worldSpace=True, translation=mc.xform(joint, query = True, worldSpace = True, translation = True))
+		# 	groupName = mc.group(FKControlObject, n = joint.rpartition("_")[0] + "_GRP")
+		# 	mc.parent(groupName, joint)
+		# 	mc.makeIdentity(groupName, apply=True, t=1, r=1, s=1, n=0)
+		# 	mc.parent(groupName, world = True)
+		# 	mc.orientConstraint(FKControlObject, joint)
+		# 	self.fkControlGroups.append(groupName)
+		# mc.parent(self.fkControlGroups[2], self.fkControls[1])
+		# mc.parent(self.fkControlGroups[1], self.fkControls[0])
 
 	def generateFKControl(self):
-		circle1 = mc.listRelatives(mc.circle( nr=(1, 0, 0), c=(0, 0, 0), r =5)[0], children = True)[0]
-		mc.setAttr(circle1+".overrideEnabled", 1)
-		mc.setAttr(circle1+".overrideColor", 13)
-		circle2 = mc.listRelatives(mc.circle( nr=(0, 1, 0), c=(0, 0, 0), r = 5)[0], children = True)[0]
-		mc.setAttr(circle2+".overrideEnabled", 1)
-		mc.setAttr(circle2+".overrideColor", 13)
-		circle3 = mc.listRelatives(mc.circle( nr=(0, 0, 1), c=(0, 0, 0), r = 5)[0], children = True)[0]
-		mc.setAttr(circle3+".overrideEnabled", 1)
-		mc.setAttr(circle3+".overrideColor", 13)
 		groupName = mc.group(empty = True, n = "fkControl")
-		mc.parent(circle1, groupName, relative = True, shape = True)
-		mc.parent(circle2, groupName, relative = True, shape = True)
-		mc.parent(circle3, groupName, relative = True, shape = True)
+		normalAxes = [(1,0,0), (0,1,0), (0,0,1)]
+		for normalAxis in normalAxes:
+			circleTransform = mc.circle(nr = normalAxis, c=(0, 0, 0), r = 5)[0]
+			circle = mc.listRelatives(circleTransform, children = True)[0]
+			mc.setAttr(circle+".overrideEnabled", 1)
+			mc.setAttr(circle+".overrideColor", 13)
+			mc.parent(circle, groupName, relative = True, shape = True)
+			mc.delete(circleTransform)
 		return groupName
 
 	def createIKControl(self):
@@ -91,12 +109,16 @@ class IkFkBlending():
 			if 'Heel' in joint:
 				heelJoint = joint
 				self.ikJoints.remove(joint)
+				break
+
+		for joint in self.ikJoints:
 			if 'Ankle' in joint:
 				ankleJoint = joint
-			if 'Toe' in joint:
+			elif 'Toe' in joint:
 				toeJoint = joint
-			if 'Ball' in joint:
+			elif 'Ball' in joint:
 				ballJoint = joint
+
 
 		startEnd = endV - startV
 		startMid = midV - startV
@@ -115,95 +137,129 @@ class IkFkBlending():
 
 		finalV = arrowV + midV
 
-		poleVectorControl = mc.spaceLocator(n = self.jointNames[1] + "_PV_CTL", p = (finalV.x , finalV.y ,finalV.z))[0]
+		self.poleVectorControl = mc.spaceLocator(n = self.jointNames[1] + "_PV_CTL", p = (finalV.x , finalV.y ,finalV.z))[0]
 
-		mc.makeIdentity(poleVectorControl, apply=True, t=1, r=1, s=1, n=0)
+		mc.makeIdentity(self.poleVectorControl, apply=True, t=1, r=1, s=1, n=0)
 
-		kneeIkHandle = mc.ikHandle(sj = self.ikJoints[0], ee = self.ikJoints[2], sol = "ikRPsolver")[0]
+		kneeIkHandle = mc.ikHandle(sj = self.ikJoints[0], ee = ankleJoint, sol = "ikRPsolver")[0]
 
-		ikControlObject = mc.circle(nr = (0, 0, 1), c = (0,0,0), r = 10, name = self.jointNames[2]+"_IK_CTL")[0]
+		self.ikControlObject = mc.circle(nr = (0, 0, 1), c = (0,0,0), r = 10, name = self.jointNames[2]+"_IK_CTL")[0]
 
-		mc.xform(ikControlObject, worldSpace=True, translation=mc.xform(self.ikJoints[2], query = True, worldSpace = True, translation = True))
+		mc.xform(self.ikControlObject, worldSpace=True, translation=mc.xform(self.ikJoints[2], query = True, worldSpace = True, translation = True))
 
-		mc.makeIdentity(ikControlObject, apply=True, t=1, r=1, s=1, n=0)
+		mc.makeIdentity(self.ikControlObject, apply=True, t=1, r=1, s=1, n=0)
 
-		mc.parent(kneeIkHandle, ikControlObject)
+		mc.parent(kneeIkHandle, self.ikControlObject)
 
-		poleVector = mc.poleVectorConstraint(poleVectorControl, kneeIkHandle)
+		mc.poleVectorConstraint(self.poleVectorControl, kneeIkHandle)
 
-		self.ikControls.append(ikControlObject)
-		self.ikControls.append(poleVectorControl)
+		mc.xform(self.poleVectorControl, centerPivots=True)
 
 		ballIkHandle = mc.ikHandle(sj = ankleJoint, ee = ballJoint, sol = "ikSCsolver")[0]
-		toeIkHandle = mc.ikHandle(sj = ballJoint, ee = Toe, sol = "ikSCsolver")[0]
+		toeIkHandle = mc.ikHandle(sj = ballJoint, ee = toeJoint, sol = "ikSCsolver")[0]
 
 		proxyHeel1Joint = mc.joint(p=mc.xform(heelJoint, query=True, worldSpace=True, translation=True))
+		mc.select(clear=True)
 		proxyHeel2Joint = mc.joint(p=mc.xform(heelJoint, query=True, worldSpace=True, translation=True))
+		mc.select(clear=True)
 		proxyBallJoint = mc.joint(p=mc.xform(ballJoint, query=True, worldSpace=True, translation=True))
+		mc.select(clear=True)
 		proxyToeJoint = mc.joint(p=mc.xform(toeJoint, query=True, worldSpace=True, translation=True))
+		mc.select(clear=True)
 		proxyAnkle1Joint = mc.joint(p=mc.xform(ankleJoint, query=True, worldSpace=True, translation=True))
+		mc.select(clear=True)
 		proxyAnkle2Joint = mc.joint(p=mc.xform(ankleJoint, query=True, worldSpace=True, translation=True))
-
+		mc.select(clear=True)
 		mc.parent(proxyToeJoint, proxyHeel1Joint)
 		mc.parent(proxyBallJoint, proxyHeel2Joint)
 		mc.parent(proxyAnkle1Joint, proxyToeJoint)
 		mc.parent(proxyAnkle2Joint, proxyBallJoint)
 
-		mc.joint
+		# orient proxy joint chains
+		mc.joint(proxyHeel1Joint, edit = True, orientJoint='zyx', sao='yup', children=True)
+		mc.joint(proxyHeel2Joint, edit = True, orientJoint='zyx', sao='yup', children=True)
 
-		heelLoc = mc.spaceLocator()
-		
+		# placing groups
+		HeelOffsetGroup = mc.group(empty=True, n = self.side + '_HeelOffset_GRP')
+		HeelGroup = mc.group(empty=True, n = self.side + '_Heel_GRP')
+		mc.parent(HeelOffsetGroup, proxyHeel1Joint)
+		mc.xform(HeelOffsetGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
+		mc.parent(HeelGroup, HeelOffsetGroup)
+		mc.xform(HeelGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
+		mc.parent(HeelOffsetGroup, world=True)
 
-		
+		ToeOffsetGroup = mc.group(empty=True, n = self.side + '_ToeOffset_GRP')
+		ToeGroup = mc.group(empty=True, n = self.side + '_Toe_GRP')
+		mc.parent(ToeOffsetGroup, proxyToeJoint)
+		mc.xform(ToeOffsetGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
+		mc.parent(ToeGroup, ToeOffsetGroup)
+		mc.xform(ToeGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
+		mc.parent(ToeOffsetGroup, world=True)
+
+		BallOffsetGroup = mc.group(empty=True, n = self.side + '_BallOffset_GRP')
+		BallGroup = mc.group(empty=True, n = self.side + '_Ball_GRP')
+		mc.parent(BallOffsetGroup, proxyBallJoint)
+		mc.xform(BallOffsetGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
+		mc.parent(BallGroup, BallOffsetGroup)
+		mc.xform(BallGroup, rotation = [0,0,0], translation = [0,0,0], a = True)
+		mc.parent(BallOffsetGroup, world=True)
+
+		mc.parent(ToeOffsetGroup, HeelGroup)
+		mc.parent(BallOffsetGroup, ToeGroup)
+
+		ToeTapOffsetGroup = mc.duplicate(BallOffsetGroup, n = self.side + '_ToeTapOffset_GRP', renameChildren = True)[0]
+		ToeTapGroup = mc.rename(mc.listRelatives(ToeTapOffsetGroup, children=True)[0], self.side + '_ToeTap_GRP')
+
+		mc.parent(ToeTapOffsetGroup, world=True)
+		mc.xform(ToeTapOffsetGroup, rotation=[0,0,0], a=True)
+		mc.parent(ToeTapOffsetGroup, HeelGroup)
+
+		mc.delete(proxyHeel1Joint)
+		mc.delete(proxyHeel2Joint)
+
+		mc.parent(kneeIkHandle, BallGroup)
+		mc.parent(ballIkHandle, BallGroup)
+		mc.parent(toeIkHandle, ToeTapGroup)
+
+		mc.addAttr(self.ikControlObject, longName='HeelRoll', attributeType='float', defaultValue=0, keyable=True)
+		mc.connectAttr(self.ikControlObject + '.HeelRoll', HeelGroup + '.rotateX')
+		mc.addAttr(self.ikControlObject, longName='BallRoll', attributeType='float', defaultValue=0, keyable=True)
+		mc.connectAttr(self.ikControlObject + '.BallRoll', BallGroup + '.rotateX')
+		mc.addAttr(self.ikControlObject, longName='ToeRoll', attributeType='float', defaultValue=0, keyable=True)
+		mc.connectAttr(self.ikControlObject + '.ToeRoll', ToeGroup + '.rotateX')
+		mc.addAttr(self.ikControlObject, longName='HeelPivot', attributeType='float', defaultValue=0, keyable=True)
+		mc.connectAttr(self.ikControlObject + '.HeelPivot', HeelGroup + '.rotateY')
+		mc.addAttr(self.ikControlObject, longName='BallPivot', attributeType='float', defaultValue=0, keyable=True)
+		mc.connectAttr(self.ikControlObject + '.BallPivot', BallGroup + '.rotateY')
+		mc.addAttr(self.ikControlObject, longName='ToePivot', attributeType='float', defaultValue=0, keyable=True)
+		mc.connectAttr(self.ikControlObject + '.ToePivot', ToeGroup + '.rotateY' )
+		mc.addAttr(self.ikControlObject, longName='ToeTap', attributeType='float', defaultValue=0, keyable=True)
+		mc.connectAttr(self.ikControlObject + '.ToeTap', ToeTapGroup + '.rotateX')
+
+		mc.parent(HeelOffsetGroup, self.ikControlObject)
 
 	def blend(self):
-		self.blendColor1 = mc.shadingNode("blendColors", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_BLC")
-		self.blendColor2 = mc.shadingNode("blendColors", asUtility = True, n = self.blendedJoints[1].rpartition("_")[0]+"_BLC")
+		mainControl = mc.circle(nr = (0, 1, 0), c = (0,0,0), r = 3, n = self.jointNames[0] + "_CTL")[0]
+		mc.addAttr(mainControl, ln = "ik_fk_blend", attributeType = "float", minValue = 0.00, maxValue = 1.00, keyable = True)
+		reverseNode = mc.shadingNode("reverse", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_REV")
+		mc.connectAttr(mainControl+".ik_fk_blend", reverseNode+".input.inputX")
+		for joint in self.blendedJoints:
+			blendColor = mc.shadingNode("blendColors", asUtility = True, n = joint.rpartition("_")[0]+"_BLC")
 
-		self.mainControl = mc.circle(nr = (0, 1, 0), c = (0,0,0), r = 3)[0]
+			mc.connectAttr(joint.replace('_JNT', '_IK_JNT')+'.rotate', blendColor + '.color1' )
+			mc.connectAttr(joint.replace('_JNT', '_FK_JNT')+'.rotate', blendColor + '.color2' )
+			mc.connectAttr(mainControl + '.ik_fk_blend', blendColor + '.blender')
 
-		mc.addAttr(self.mainControl, ln = "ik_fk_blend", attributeType = "float", minValue = 0.00, maxValue = 1.00, keyable = True)
+			mc.connectAttr(blendColor + '.output', joint + '.rotate')
 
-		mc.connectAttr(self.ikJoints[0]+".rotateX", self.blendColor1+".color1.color1R")
-		mc.connectAttr(self.ikJoints[0]+".rotateY", self.blendColor1+".color1.color1G")
-		mc.connectAttr(self.ikJoints[0]+".rotateZ", self.blendColor1+".color1.color1B")
+		for joint in self.fkJoints:
+			mc.connectAttr(reverseNode + '.outputX', joint + '.visibility')
 
-		mc.connectAttr(self.fkJoints[0]+".rotateX", self.blendColor1+".color2.color2R")
-		mc.connectAttr(self.fkJoints[0]+".rotateY", self.blendColor1+".color2.color2G")
-		mc.connectAttr(self.fkJoints[0]+".rotateZ", self.blendColor1+".color2.color2B")
+		mc.connectAttr(mainControl + '.ik_fk_blend', self.ikControlObject + '.visibility')
+		mc.connectAttr(mainControl + '.ik_fk_blend', self.poleVectorControl + '.visibility')
 
-		mc.connectAttr(self.mainControl+".ik_fk_blend", self.blendColor1+".blender")
-
-		mc.connectAttr(self.ikJoints[1]+".rotateX", self.blendColor2+".color1.color1R")
-		mc.connectAttr(self.ikJoints[1]+".rotateY", self.blendColor2+".color1.color1G")
-		mc.connectAttr(self.ikJoints[1]+".rotateZ", self.blendColor2+".color1.color1B")
-
-		mc.connectAttr(self.fkJoints[1]+".rotateX", self.blendColor2+".color2.color2R")
-		mc.connectAttr(self.fkJoints[1]+".rotateY", self.blendColor2+".color2.color2G")
-		mc.connectAttr(self.fkJoints[1]+".rotateZ", self.blendColor2+".color2.color2B")
-
-		mc.connectAttr(self.mainControl+".ik_fk_blend", self.blendColor2+".blender")
-
-		mc.connectAttr(self.blendColor1+".outputR", self.blendedJoints[0]+".rotateX")
-		mc.connectAttr(self.blendColor1+".outputG", self.blendedJoints[0]+".rotateY")
-		mc.connectAttr(self.blendColor1+".outputB", self.blendedJoints[0]+".rotateZ")
-
-		mc.connectAttr(self.blendColor2+".outputR", self.blendedJoints[1]+".rotateX")
-		mc.connectAttr(self.blendColor2+".outputG", self.blendedJoints[1]+".rotateY")
-		mc.connectAttr(self.blendColor2+".outputB", self.blendedJoints[1]+".rotateZ")
-
-		self.reverseNode1 = mc.shadingNode("reverse", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_REV")
-
-		mc.connectAttr(self.mainControl+".ik_fk_blend", self.reverseNode1+".input.inputX")
-
-		mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[0]+".visibility")
-		mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[1]+".visibility")
-		mc.connectAttr(self.reverseNode1+".outputX", self.fkControls[2]+".visibility")
-
-		mc.connectAttr(self.mainControl+".ik_fk_blend", self.ikControls[0]+".visibility")
-		mc.connectAttr(self.mainControl+".ik_fk_blend", self.ikControls[1]+".visibility")
-		ikControlPos = mc.xform(self.ikControls[0], query = True, worldSpace = True, rp = True)
+		ikControlPos = mc.xform(self.ikControlObject, query = True, worldSpace = True, rp = True)
 		self.mainControlPos = [pos + 10 for pos in ikControlPos]
-		mc.xform(self.mainControl, worldSpace=True, translation=self.mainControlPos)
+		mc.xform(mainControl, worldSpace=True, translation=self.mainControlPos)
 
 object = IkFkBlending()

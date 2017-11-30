@@ -64,12 +64,10 @@ class IkFkBlending():
 			FKControlObject = mc.rename(controlObject, controlName)
 			self.fkControls.append(FKControlObject)
 			mc.xform(FKControlObject, worldSpace=True, translation=mc.xform(joint, query = True, worldSpace = True, translation = True))
-			FKControlObjectShape = mc.listRelatives(FKControlObject, children = True)
 			groupName = mc.group(FKControlObject, n = joint.rpartition("_")[0] + "_GRP")
 			mc.parent(groupName, joint)
 			mc.makeIdentity(groupName, apply=True, t=1, r=1, s=1, n=0)
 			mc.parent(groupName, world = True)
-			controlParent = mc.listRelatives(FKControlObject, parent = True)[0]
 			mc.orientConstraint(FKControlObject, joint)
 			self.fkControlGroups.append(groupName)
 		mc.parent(self.fkControlGroups[2], self.fkControls[1])
