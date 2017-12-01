@@ -118,7 +118,8 @@ class IkFkBlending():
 				toeJoint = joint
 			elif 'Ball' in joint:
 				ballJoint = joint
-
+			elif 'Knee' in joint or 'Shin' in joint:
+				shinJoint = joint
 
 		startEnd = endV - startV
 		startMid = midV - startV
@@ -137,7 +138,7 @@ class IkFkBlending():
 
 		finalV = arrowV + midV
 
-		self.poleVectorControl = mc.spaceLocator(n = self.jointNames[1] + "_PV_CTL", p = (finalV.x , finalV.y ,finalV.z))[0]
+		self.poleVectorControl = mc.spaceLocator(n = shinJoint.rpartition('_')[0] + "_PV_CTL", p = (finalV.x , finalV.y ,finalV.z))[0]
 
 		mc.makeIdentity(self.poleVectorControl, apply=True, t=1, r=1, s=1, n=0)
 
