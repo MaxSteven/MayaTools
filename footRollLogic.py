@@ -70,4 +70,7 @@ mc.parent(ToeTapOffsetGroup, world=True)
 mc.xform(ToeTapOffsetGroup, rotation=[0,0,0], a=True)
 mc.parent(ToeTapOffsetGroup, HeelGroup)
 
+mc.delete(proxyHeel1Joint)
+mc.delete(proxyHeel2Joint)
+
 # parent ik handle
