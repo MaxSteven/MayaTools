@@ -97,20 +97,6 @@ class IkFkBlending():
 		return groupName
 
 	def createIKControl(self):
-		joint1Pos = mc.xform(self.ikJoints[0], q = True, ws = True, t = True)
-		joint2Pos = mc.xform(self.ikJoints[1], q = True, ws = True, t = True)
-		joint3Pos = mc.xform(self.ikJoints[2], q = True, ws = True, t = True)
-
-		startV = OpenMaya.MVector(joint1Pos[0] ,joint1Pos[1],joint1Pos[2])
-		midV = OpenMaya.MVector(joint2Pos[0] ,joint2Pos[1],joint2Pos[2])
-		endV = OpenMaya.MVector(joint3Pos[0] ,joint3Pos[1],joint3Pos[2])
-
-		for joint in self.ikJoints:
-			if 'Heel' in joint:
-				heelJoint = joint
-				self.ikJoints.remove(joint)
-				break
-
 		for joint in self.ikJoints:
 			if 'Ankle' in joint:
 				ankleJoint = joint
@@ -120,6 +106,23 @@ class IkFkBlending():
 				ballJoint = joint
 			elif 'Knee' in joint or 'Shin' in joint:
 				shinJoint = joint
+			elif 'Thigh' in joint or 'upLeg' in joint:
+				upLegJoint = joint
+
+		upLegJointPos = mc.xform(upLegJoint, q = True, ws = True, t = True)
+		kneeJointPos = mc.xform(shinJoint, q = True, ws = True, t = True)
+		ankleJointPos = mc.xform(ankleJoint, q = True, ws = True, t = True)
+
+		startV = OpenMaya.MVector(upLegJointPos[0] ,upLegJointPos[1],upLegJointPos[2])
+		midV = OpenMaya.MVector(kneeJointPos[0] ,kneeJointPos[1],kneeJointPos[2])
+		endV = OpenMaya.MVector(ankleJointPos[0] ,ankleJointPos[1],ankleJointPos[2])
+
+		for joint in self.ikJoints:
+			if 'Heel' in joint:
+				heelJoint = joint
+				self.ikJoints.remove(joint)
+				break
+
 
 		startEnd = endV - startV
 		startMid = midV - startV
@@ -139,6 +142,7 @@ class IkFkBlending():
 		finalV = arrowV + midV
 
 		self.poleVectorControl = mc.spaceLocator(n = shinJoint.rpartition('_')[0] + "_PV_CTL", p = (finalV.x , finalV.y ,finalV.z))[0]
+		mc.group(self.poleVectorControl, n = self.poleVectorControl.replace("_CTL", "_GRP"))
 
 		mc.makeIdentity(self.poleVectorControl, apply=True, t=1, r=1, s=1, n=0)
 
@@ -236,6 +240,8 @@ class IkFkBlending():
 		mc.connectAttr(self.ikControlObject + '.ToePivot', ToeGroup + '.rotateY' )
 		mc.addAttr(self.ikControlObject, longName='ToeTap', attributeType='float', defaultValue=0, keyable=True)
 		mc.connectAttr(self.ikControlObject + '.ToeTap', ToeTapGroup + '.rotateX')
+
+		mc.connectAttr(self.ikControlObject + '.BallPivot', ToeTapGroup + '.rotateY')
 
 		mc.parent(HeelOffsetGroup, self.ikControlObject)
 
