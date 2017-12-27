@@ -8,13 +8,14 @@ skinCluster = "testing"
 # get vertex list
 vertices = mc.filterExpand(expand=True, selectionMask=31)
 
-skinJsonInfo = {
-	"components": [],
-	"joints" : []
-}
-
 if len(vertices) < 1:
 	print "No Vertices selected."
+
+skinJsonInfo = {
+				'components': {},
+				'joints': []
+				}
+
 
 f = open(filePath, "w")
 # f.write("\t\t \\Output\n\n")
@@ -33,10 +34,11 @@ for vertex in vertices:
 	localPosition = mc.pointPosition(vertex, local=True)
 
 	vertexInfo = {
-		'vertex': vertex,
-		'positionW': worldPosition,
-		'positionL': localPosition,
-		'influences': {} 
+					vertex: {
+							'positionW': worldPosition,
+							'positionL': localPosition,
+							'influences': {}
+				}
 	}
 
 	influenceInfo = {}
@@ -45,12 +47,12 @@ for vertex in vertices:
 		influenceInfo.update({joint: weights[i]})
 		i += 1
 
-	vertexInfo['influences'] = influenceInfo
-	skinJsonInfo['components'].append(vertexInfo)
-
+	vertexInfo[vertex]['influences'] = influenceInfo
+	skinJsonInfo['components'].update(vertexInfo)
 
 skinJsonInfo['joints'] = joints
 
 json.dump(skinJsonInfo, f, indent=2)
 f.close()
 
+mc.setAttr(skinCluster + '.envelope', 1.0)
