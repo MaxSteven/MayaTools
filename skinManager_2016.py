@@ -1,25 +1,18 @@
 # Skin Manager
 # currently only works if vertex order is same
 
-import maya.cmds as mc
+import shiboken
 import json
 
-from PySide2 import QtCore, QtNetwork
-from PySide2 import QtWidgets
-from PySide2 import QtGui
+from PySide import QtGui
+from PySide import QtCore
 
-for name in dir(QtWidgets):
-	obj = getattr(QtWidgets, name)
-	if inspect.isclass(obj):
-		setattr(QtGui, name, obj)
+import maya.cmds as mc
+import maya.OpenMayaUI as mui
 
-from PySide2.QtCore import Signal as QtSignal
-from PySide2.QtCore import Slot as QtSlot
-from PySide2.QtCore import QEvent
-
-class skinManager(QtGui.QDialog):
+class SkinManager(QtGui.QDialog):
 	def __init__(self, parent=None):
-		super(skinManager, self).__init__(parent)
+		super(SkinManager, self).__init__(parent)
 
 		self.setWindowTitle("Skin Manager")
 		self.setLayout(QtGui.QVBoxLayout())
@@ -58,7 +51,6 @@ class skinManager(QtGui.QDialog):
 		self.loadButton.clicked.connect(self.loadSkin)
 		buttonLayout.addWidget(self.loadButton)
 		
-
 		self.layout().addLayout(buttonLayout)
 
 	def getSkinCluster(self):
@@ -172,12 +164,14 @@ class skinManager(QtGui.QDialog):
 		errorMessage = QtGui.QErrorMessage(self)
 		errorMessage.showMessage(message)
 
-
-skinDialog = skinManager()
-skinDialog.show()
-
-
-
+def getMainWindow():
+	ptr = mui.MQtUtil.mainWindow()
+	mainWin = shiboken.wrapInstance(long(ptr), QtGui.QWidget)
+	return mainWin
 
 
-
+def show():
+	win = SkinManager(parent = getMainWindow())
+	win.show()
+	win.raise_()
+	return win
