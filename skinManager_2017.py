@@ -178,9 +178,8 @@ def getMainWindow():
 	mainWin = shiboken2.wrapInstance(long(ptr), QtGui.QWidget)
 	return mainWin
 
-
 def show():
 	win = SkinManager(parent = getMainWindow())
 	win.show()
 	win.raise_()
-	return 1win
+	return win
