@@ -5,7 +5,6 @@ import shiboken
 import json
 
 from PySide import QtGui
-from PySide import QtCore
 
 import maya.cmds as mc
 import maya.OpenMayaUI as mui
@@ -50,7 +49,7 @@ class SkinManager(QtGui.QDialog):
 		self.loadButton = QtGui.QPushButton("Load from")
 		self.loadButton.clicked.connect(self.loadSkin)
 		buttonLayout.addWidget(self.loadButton)
-		
+
 		self.layout().addLayout(buttonLayout)
 
 	def getSkinCluster(self):
@@ -60,8 +59,18 @@ class SkinManager(QtGui.QDialog):
 			return
 
 		selectedObject = self.vertices[0].split('.')[0]
-		skinCluster = mc.connectionInfo(selectedObject + '.inMesh', sourceFromDestination=True).split('.')[0]
-		self.skinCLusterName.setText(skinCluster)
+		# skinCluster = mc.connectionInfo(selectedObject + '.inMesh', sourceFromDestination=True).split('.')[0]
+		deformerNodes = mc.listHistory(selectedObject, allConnections=True)
+		skinCluster = None
+		for node in deformerNodes:
+			if mc.objectType(node)=='skinCluster':
+				skinCluster = node
+				break
+		if skinCluster:
+			self.skinCLusterName.setText(skinCluster)
+
+		else:
+			self.showError('Mesh not connected to skinCluster')
 
 	def getFilepath(self):
 		self.fileDialog = QtGui.QFileDialog(self)
@@ -78,7 +87,7 @@ class SkinManager(QtGui.QDialog):
 		if not vertices or len(vertices) < 1:
 			self.showError('No Vertices selected')
 			return
-		
+
 		skinJsonInfo = {
 						'components': {},
 						'joints': []
@@ -132,7 +141,7 @@ class SkinManager(QtGui.QDialog):
 		if not vertices or len(vertices) < 1:
 			self.showError('No Vertices selected')
 			return
-		
+
 		f = open(filepath, "r")
 		mc.setAttr(skinCluster + '.envelope', 0.0)
 

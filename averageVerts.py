@@ -6,10 +6,10 @@ positionX = 0
 positionY = 0
 positionZ = 0
 for obj in selection:
-    position = mc.xform(obj, q=True, worldSpace=True, translation=True)
-    positionX += position[0]
-    positionY += position[1]
-    positionZ += position[2]
+	position = mc.xform(obj, q=True, worldSpace=True, translation=True)
+	positionX += position[0]
+	positionY += position[1]
+	positionZ += position[2]
 
 averageX = positionX/len(selection)
 averageY = positionY/len(selection)
