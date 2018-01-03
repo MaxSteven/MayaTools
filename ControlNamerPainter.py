@@ -15,8 +15,8 @@ try:
 			setattr(QtGui, name, obj)
 
 except:
-	from PySide import QtGui
-	from PySide import QtCore
+	from PyQt4 import QtGui
+	from PyQt4 import QtCore
 
 class ControlNamerPainter(QtGui.QDialog):
 	def __init__(self, parent=None):
@@ -82,8 +82,6 @@ class ControlNamerPainter(QtGui.QDialog):
 		self.setNamesButton = QtGui.QPushButton('Set Names')
 		finalNameLayout.addWidget(self.setNamesButton)
 
-		self.show()
-
 	# def buildWidgets(self):
 	# 	pass
 	# 	# with open('C:/Tools/trashTest/controlNamePrefs.json', 'r+') as f:
@@ -122,10 +120,12 @@ class ControlNamerPainter(QtGui.QDialog):
 		pass
 
 	def nameSelected(self):
+		
 		pass 
 
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     main_window = ControlNamerPainter()
+    main_window.show()
     sys.exit(app.exec_())

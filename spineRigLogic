@@ -1,0 +1,30 @@
+Spine rig logic:
+
+Cartoon Spine:
+	Place spine curve(minus the chest curve)
+	duplicate the curve 2 times.
+	rebuild all 3 curves
+		rebuildType:uniform
+		paramRange:0-1
+		keep:ends
+		numberOfSpans: 4
+	do a loft between 2 duplicated curves
+	apply hair follicles on the curve
+		fol = mc.createNode('follicle', n = 'test')
+		folParent = mc.listRelatives(fol, parent=True)
+
+		mc.connectAttr(srf + '.worldMatrix[0]', fol + '.inputWorldMatrix')
+		mc.connectAttr(srf + '.local', fol + '.inputSurface')
+
+		mc.connectAttr(fol + '.outTranslate', folParent + '.translate')
+		mc.connectAttr(fol + '.outRotate', folParent + '.rotate')
+
+	
+	divide 
+	Place specified number of joints on a curve
+	Make it a joint chain
+	 
+
+
+
+Realistic Spine
