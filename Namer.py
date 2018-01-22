@@ -97,6 +97,10 @@ class Namer(QtGui.QDialog):
 		self.setNamesButton = QtGui.QPushButton('Set Names')
 		self.setNamesButton.clicked.connect(self.nameSelected)
 		finalNameLayout.addWidget(self.setNamesButton)
+		i = 0
+		for i in range(3):
+			self.addNameWidget()
+			i+=1
 
 	def keyPressEvent(self, event):
 		if event.key() in [QtCore.Qt.Key_Return, QtCore.Qt.Key_Enter]:
@@ -130,7 +134,7 @@ class Namer(QtGui.QDialog):
 			pass
 
 		widget = self.buildWidget()
-		if self.sender().objectName() == 'leftAdd':
+		if self.sender() and self.sender().objectName() == 'leftAdd':
 			self.nameWidgets.appendleft(widget)
 			self.nameWidgetsLayout.insertWidget(0, widget)
 
