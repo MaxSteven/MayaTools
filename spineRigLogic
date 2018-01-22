@@ -10,14 +10,26 @@ Cartoon Spine:
 		numberOfSpans: 4
 	do a loft between 2 duplicated curves
 	apply hair follicles on the curve
-		fol = mc.createNode('follicle', n = 'test')
-		folParent = mc.listRelatives(fol, parent=True)
+		import maya.cmds as mc
 
-		mc.connectAttr(srf + '.worldMatrix[0]', fol + '.inputWorldMatrix')
-		mc.connectAttr(srf + '.local', fol + '.inputSurface')
+		srf = 'loftedSurface1'
 
-		mc.connectAttr(fol + '.outTranslate', folParent + '.translate')
-		mc.connectAttr(fol + '.outRotate', folParent + '.rotate')
+		increment = 0
+		for i in range(5):
+			
+			fol = mc.createNode('follicle', n = 'test')
+			folParent = mc.listRelatives(fol, parent=True)[0]
+
+			mc.connectAttr(srf + '.worldMatrix[0]', fol + '.inputWorldMatrix')
+			mc.connectAttr(srf + '.local', fol + '.inputSurface')
+
+			mc.connectAttr(fol + '.outTranslate', folParent + '.translate')
+			mc.connectAttr(fol + '.outRotate', folParent + '.rotate')
+
+			mc.setAttr(fol + ".parameterV", 0.5)
+			mc.setAttr(fol + ".parameterU", increment)
+			
+			increment += 0.25
 
 	
 	divide 
