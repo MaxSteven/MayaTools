@@ -1,7 +1,5 @@
 # Control Namer and Painter
 import inspect
-import sys
-import re
 
 import json
 import maya.cmds as mc
@@ -9,14 +7,18 @@ import os
 
 import collections
 
-from qtpy import QtCore
-from qtpy import QtGui
-from qtpy import QtWidgets
+from PySide import QtCore
+from PySide import QtGui
+try:
+	from qtpy import QtWidgets
 
-for name in dir(QtWidgets):
-	obj = getattr(QtWidgets, name)
-	if inspect.isclass(obj):
-		setattr(QtGui, name, obj)
+	for name in dir(QtWidgets):
+		obj = getattr(QtWidgets, name)
+		if inspect.isclass(obj):
+			setattr(QtGui, name, obj)
+
+except:
+	pass
 
 class Namer(QtGui.QDialog):
 
@@ -34,9 +36,9 @@ class Namer(QtGui.QDialog):
 
 		# else:
 		# 	self.buildWidgets()
-		
+
 		mainLayout = QtGui.QVBoxLayout()
-		
+
 		self.setLayout(mainLayout)
 
 		self.nameWidgets = collections.deque()
@@ -108,7 +110,6 @@ class Namer(QtGui.QDialog):
 		errorMessage.showMessage(message)
 
 	def buildWidget(self):
-		pass
 		# with open('C:/Tools/trashTest/controlNamePrefs.json', 'r+') as f:
 		# 	dictionary = json.load(f)
 
@@ -129,14 +130,14 @@ class Namer(QtGui.QDialog):
 			pass
 
 		widget = self.buildWidget()
-		if self.sender().objectName == 'leftAdd':
-			self.nameWidgets.appendLeft(widget)
+		if self.sender().objectName() == 'leftAdd':
+			self.nameWidgets.appendleft(widget)
 			self.nameWidgetsLayout.insertWidget(0, widget)
 
 		else:
 			self.nameWidgets.append(widget)
 			self.nameWidgetsLayout.insertWidget(-1, widget)
-				
+
 
 		# add nameWidget to the right or left of current widget
 		# and make a dictionary item containing values
@@ -144,31 +145,30 @@ class Namer(QtGui.QDialog):
 		# append dictionary to self.nameWidgets
 
 	def removeNameWidget(self):
-		self.sender().setFocus(False)
-		if self.sender().objectName == 'leftRemove':
+		if self.sender().objectName() == 'leftRemove':
 			try:
-				obj = self.nameWidgets.popLeft()
+				obj = self.nameWidgets.popleft()
+				print obj.getValue()
 			except IndexError:
 				pass
-			
+
 		else:
 			try:
 				obj = self.nameWidgets.pop()
 			except IndexError:
 				pass
-			
-		
+
+
 		obj.deleteLater()
 		# delete widget from current layout from the right or left
 		# pop from the dictionary list
 		# if len(current list) == 0:
 			# add blank widget
-		pass
 
-	def saveNameLayout(self):
-		# write current layout to json file in a listed dictionary format 
-		# stored in Maya dirs
-		pass
+	# def saveNameLayout(self):
+	# 	# write current layout to json file in a listed dictionary format
+	# 	# stored in Maya dirs
+	# 	pass
 
 	def nameSelected(self):
 		selection = mc.ls(sl=True)
@@ -186,7 +186,7 @@ class Namer(QtGui.QDialog):
 		for obj in selection:
 			finalName = ''
 			i = 0
-			for name in nameList: 
+			for name in nameList:
 				finalName += name
 				if i == incrementPartition:
 					finalName += str(counter)
@@ -203,7 +203,7 @@ class NameOptionsWidget(QtGui.QWidget):
 		super(NameOptionsWidget, self).__init__()
 
 		self.value = None
-		
+
 		widgetLayout = QtGui.QVBoxLayout()
 		self.setLayout(widgetLayout)
 
@@ -211,7 +211,7 @@ class NameOptionsWidget(QtGui.QWidget):
 		nameLayout.addWidget(QtGui.QLabel('Name'))
 		self.nameText = QtGui.QLineEdit()
 		nameLayout.addWidget(self.nameText)
-		
+
 		widgetLayout.addLayout(nameLayout)
 
 		optionsLayout = QtGui.QVBoxLayout()
@@ -246,7 +246,7 @@ class NameOptionsWidget(QtGui.QWidget):
 # if __name__ == '__main__':
 #     app = QtGui.QApplication(sys.argv)
 #     main_window = Namer()
-#     main_window.show() 
+#     main_window.show()
 #     sys.exit(app.exec_())
 
 test = Namer()
