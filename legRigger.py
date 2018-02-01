@@ -16,13 +16,13 @@ class IkFkBlending():
 		joints.extend(mc.listRelatives(joints[0], allDescendents = True))
 
 		for joint in joints:
-			if 'Heel' in joint:
+			if 'heel' in joint.lower():
 				joints.remove(joint)
 				# mc.parent(joint, worldSpace = True)
 				break
 
 		for joint in joints:
-			if 'Heel' not in joint and 'Toe' not in joint:
+			if 'heel' not in joint.lower() and 'toe' not in joint.lower():
 				self.blendedJoints.append(joint)
 
 		for joint in joints:
@@ -40,7 +40,7 @@ class IkFkBlending():
 		self.fkJoints.append(fkJointRoot)
 		for joint in fkJointDecendants:
 			fkJoint = mc.rename(joint, joint.rpartition('_')[0] +"_FK_JNT")
-			if 'Heel' not in fkJoint and 'Toe' not in fkJoint:
+			if 'heel' not in fkJoint.lower() and 'toe' not in fkJoint.lower():
 				print fkJoint
 				self.fkJoints.append(fkJoint)
 
@@ -88,7 +88,7 @@ class IkFkBlending():
 		groupName = mc.group(empty = True, n = "fkControl")
 		normalAxes = [(1,0,0), (0,1,0), (0,0,1)]
 		for normalAxis in normalAxes:
-			circleTransform = mc.circle(nr = normalAxis, c=(0, 0, 0), r = 5)[0]
+			circleTransform = mc.circle(nr = normalAxis, c=(0, 0, 0), r = 2)[0]
 			circle = mc.listRelatives(circleTransform, children = True)[0]
 			mc.setAttr(circle+".overrideEnabled", 1)
 			mc.setAttr(circle+".overrideColor", 13)
@@ -98,15 +98,15 @@ class IkFkBlending():
 
 	def createIKControl(self):
 		for joint in self.ikJoints:
-			if 'Ankle' in joint:
+			if 'ankle' in joint.lower():
 				ankleJoint = joint
-			elif 'Toe' in joint:
+			elif 'toe' in joint.lower():
 				toeJoint = joint
-			elif 'Ball' in joint:
+			elif 'ball' in joint.lower():
 				ballJoint = joint
-			elif 'Knee' in joint or 'Shin' in joint:
+			elif 'knee' in joint.lower() or 'shin' in joint.lower():
 				shinJoint = joint
-			elif 'Thigh' in joint or 'upLeg' in joint:
+			elif 'thigh' in joint.lower() or 'upleg' in joint.lower():
 				upLegJoint = joint
 
 		upLegJointPos = mc.xform(upLegJoint, q = True, ws = True, t = True)
@@ -118,7 +118,7 @@ class IkFkBlending():
 		endV = OpenMaya.MVector(ankleJointPos[0] ,ankleJointPos[1],ankleJointPos[2])
 
 		for joint in self.ikJoints:
-			if 'Heel' in joint:
+			if 'heel' in joint.lower():
 				heelJoint = joint
 				self.ikJoints.remove(joint)
 				break
@@ -266,7 +266,7 @@ class IkFkBlending():
 		mc.connectAttr(mainControl + '.ik_fk_blend', self.poleVectorControl + '.visibility')
 
 		ikControlPos = mc.xform(self.ikControlObject, query = True, worldSpace = True, rp = True)
-		self.mainControlPos = [pos + 10 for pos in ikControlPos]
+		self.mainControlPos = [pos + 1 for pos in ikControlPos]
 		mc.xform(mainControl, worldSpace=True, translation=self.mainControlPos)
 
 object = IkFkBlending()

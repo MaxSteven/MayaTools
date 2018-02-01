@@ -7,8 +7,10 @@ import os
 
 import collections
 
-from PySide import QtCore
-from PySide import QtGui
+import shiboken2
+
+from qtpy import QtCore
+from  qtpy import QtGui
 try:
 	from qtpy import QtWidgets
 
@@ -19,6 +21,8 @@ try:
 
 except:
 	pass
+
+import maya.OpenMayaUI as mui
 
 class Namer(QtGui.QDialog):
 
@@ -187,6 +191,16 @@ class Namer(QtGui.QDialog):
 			nameList.append(widget.getValue())
 
 		counter = 1
+		if len(selection) == 1:
+			finalName = ''
+			for i in range(len(nameList)):
+				finalName += nameList[i]
+				if i < len(nameList) - 1:
+					finalName += separator
+			print finalName
+			mc.rename(selection[0], finalName)
+			return
+
 		for obj in selection:
 			finalName = ''
 			i = 0
@@ -253,5 +267,16 @@ class NameOptionsWidget(QtGui.QWidget):
 #     main_window.show()
 #     sys.exit(app.exec_())
 
-test = Namer()
-test.show()
+def getMainWindow():
+	ptr = mui.MQtUtil.mainWindow()
+	mainWin = shiboken.wrapInstance(long(ptr), QtGui.QWidget)
+	return mainWin
+
+
+def show():
+	win = Namer(parent = getMainWindow())
+	win.show()
+	win.raise_()
+	return win
+
+show()

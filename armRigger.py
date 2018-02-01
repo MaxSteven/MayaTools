@@ -57,13 +57,13 @@ class armIkFkBlending():
 				mc.parent(shape, joint, relative = True, shape = True)
 
 	def generateFKControl(self):
-		circle1 = mc.listRelatives(mc.circle( nr=(1, 0, 0), c=(0, 0, 0), r =5)[0], children = True)[0]
+		circle1 = mc.listRelatives(mc.circle( nr=(1, 0, 0), c=(0, 0, 0), r = 2)[0], children = True)[0]
 		mc.setAttr(circle1+".overrideEnabled", 1)
 		mc.setAttr(circle1+".overrideColor", 13)
-		circle2 = mc.listRelatives(mc.circle( nr=(0, 1, 0), c=(0, 0, 0), r = 5)[0], children = True)[0]
+		circle2 = mc.listRelatives(mc.circle( nr=(0, 1, 0), c=(0, 0, 0), r = 2)[0], children = True)[0]
 		mc.setAttr(circle2+".overrideEnabled", 1)
 		mc.setAttr(circle2+".overrideColor", 13)
-		circle3 = mc.listRelatives(mc.circle( nr=(0, 0, 1), c=(0, 0, 0), r = 5)[0], children = True)[0]
+		circle3 = mc.listRelatives(mc.circle( nr=(0, 0, 1), c=(0, 0, 0), r = 2)[0], children = True)[0]
 		mc.setAttr(circle3+".overrideEnabled", 1)
 		mc.setAttr(circle3+".overrideColor", 13)
 		groupName = mc.group(empty = True, n = "fkControl")
@@ -126,33 +126,21 @@ class armIkFkBlending():
 
 		mc.addAttr(self.mainControl, ln = "ik_fk_blend", attributeType = "float", minValue = 0.00, maxValue = 1.00, keyable = True)
 
-		mc.connectAttr(self.ikJoints[0]+".rotateX", self.blendColor1+".color1.color1R")
-		mc.connectAttr(self.ikJoints[0]+".rotateY", self.blendColor1+".color1.color1G")
-		mc.connectAttr(self.ikJoints[0]+".rotateZ", self.blendColor1+".color1.color1B")
-
-		mc.connectAttr(self.fkJoints[0]+".rotateX", self.blendColor1+".color2.color2R")
-		mc.connectAttr(self.fkJoints[0]+".rotateY", self.blendColor1+".color2.color2G")
-		mc.connectAttr(self.fkJoints[0]+".rotateZ", self.blendColor1+".color2.color2B")
-
+		mc.connectAttr(self.ikJoints[0]+".rotate", self.blendColor1+".color1")
+		
+		mc.connectAttr(self.fkJoints[0]+".rotate", self.blendColor1+".color2")
+		
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.blendColor1+".blender")
 
-		mc.connectAttr(self.ikJoints[1]+".rotateX", self.blendColor2+".color1.color1R")
-		mc.connectAttr(self.ikJoints[1]+".rotateY", self.blendColor2+".color1.color1G")
-		mc.connectAttr(self.ikJoints[1]+".rotateZ", self.blendColor2+".color1.color1B")
-
-		mc.connectAttr(self.fkJoints[1]+".rotateX", self.blendColor2+".color2.color2R")
-		mc.connectAttr(self.fkJoints[1]+".rotateY", self.blendColor2+".color2.color2G")
-		mc.connectAttr(self.fkJoints[1]+".rotateZ", self.blendColor2+".color2.color2B")
-
+		mc.connectAttr(self.ikJoints[1]+".rotate", self.blendColor2+".color1")
+		
+		mc.connectAttr(self.fkJoints[1]+".rotate", self.blendColor2+".color2")
+		
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.blendColor2+".blender")
 
-		mc.connectAttr(self.blendColor1+".outputR", self.blendedJoints[0]+".rotateX")
-		mc.connectAttr(self.blendColor1+".outputG", self.blendedJoints[0]+".rotateY")
-		mc.connectAttr(self.blendColor1+".outputB", self.blendedJoints[0]+".rotateZ")
+		mc.connectAttr(self.blendColor1+".output", self.blendedJoints[0]+".rotate")
 
-		mc.connectAttr(self.blendColor2+".outputR", self.blendedJoints[1]+".rotateX")
-		mc.connectAttr(self.blendColor2+".outputG", self.blendedJoints[1]+".rotateY")
-		mc.connectAttr(self.blendColor2+".outputB", self.blendedJoints[1]+".rotateZ")
+		mc.connectAttr(self.blendColor2+".output", self.blendedJoints[1]+".rotate")
 
 		self.reverseNode1 = mc.shadingNode("reverse", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_REV")
 
@@ -167,6 +155,7 @@ class armIkFkBlending():
 		ikControlPos = mc.xform(self.ikControlObject, query = True, worldSpace = True, rp = True)
 		self.mainControlPos = [pos + 10 for pos in ikControlPos]
 		mc.xform(self.mainControl, worldSpace=True, translation = self.mainControlPos)
+		mc.rename(self.mainControl, self.ikControls[0].replace('_CTL', 'Switch_CTL'))
 
 
 object = armIkFkBlending()
