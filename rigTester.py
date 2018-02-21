@@ -115,8 +115,24 @@ class ScreenCapture():
 class AddView():
 	def __init__(self, parent = None):
 		super(AddView, self).__init__(parent=parent)
-
+		self.setLayout(QtWidgets.QVBoxLayout())
 		self.viewDictionary = []
+		self.layout().setContentsMargins(5,5,5,5)
+		self.layout().setSpacing(5)
+		
+		nameLayout = QtWidgets.QHBoxLayout()
+		self.layout().addLayout(nameLayout)
+
+		nameLayout.addWidget(QtWidgets.QLabel('Name:'))
+		self.nameText = QtWidgets.QLineEdit()
+		nameLayout.addWidget(self.nameText)
+		
+
+
+		self.testTable = QtWidgets.QTableWidget(3, 3)
+
+		self.
+
 
 		
 
