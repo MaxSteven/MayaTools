@@ -1,11 +1,74 @@
-import sys
-from PyQt5 import QtWidgets, QtCore, QtGui
-from PIL import ImageGrab
+import maya.cmds as mc
+from PySide2 import QtGui, QtCore, QtWidgets
 
+import inspect
+import os
 
-class SetScreencapAreaWidget(QtWidgets.QWidget):
-	def __init__(self):
-		super(SetScreencapAreaWidget, self).__init__()
+class RigTester(QtWidgets.QDialog):
+	def __init__(self, parent = None):
+		super(RigTester, self).__init__(parent=parent)
+		screenCap = ScreenCapture()
+		self.screenCapArea = screenCap.getScreenCapDimensions()
+
+		super(RigTester, self).__init__(parent=parent)
+
+		self.setLayout(QtWidgets.QHBoxLayout())
+		self.rigTestList = QtWidgets.QListWidget()
+		self.layout().setContentsMargins(5,5,5,5)
+		self.layout().setSpacing(5)
+		self.layout().addWidget(self.rigTestList)
+
+		buttonsLayout = QtWidgets.QVBoxLayout()
+		self.layout().addLayout(buttonsLayout)
+
+		self.addRigTestButton = QtWidgets.QPushButton('Add new view')
+		self.addRigTestButton.clicked.connect(self.addRigTest)
+		buttonsLayout.addWidget(self.addRigTestButton)
+
+		self.setRigTestPathText = QtWidgets.QLineEdit():
+		self.layout().addWidget(self.setRigTestPathText)
+
+		self.setRigTestPathButton = QtWidgets.QPushButton('Set path')
+		self.setRigTestPathButton.clicked.connect(self.setRigTestPath)
+		buttonsLayout.addWidget(self.setRigTestPathButton)
+
+		self.removeRigTestButton = QtWidgets.QPushButton('Remove view')
+		self.removeRigTestButton.clicked.connect(self.removeRigTest)
+		buttonsLayout.addWidget(self.removeRigTestButton)
+
+		self.generateTestButton = QtWidgets.QPushButton('Generate Test')
+		self.generateTestButton.clicked.connect(self.generateTest)
+		buttonsLayout.addWidget(self.generateTestButton)
+
+		self.saveTestButton = QtWidgets.QPushButton('Remove view')
+		self.saveTestButton.clicked.connect(self.saveTest)
+		buttonsLayout.addWidget(self.saveTestButton)
+
+		self.loadTestButton = QtWidgets.QPushButton('Remove view')
+		self.loadTestButton.clicked.connect(self.loadTest)
+		buttonsLayout.addWidget(self.loadTestButton)
+
+	def addView(self):
+		pass
+
+	def removeView(self):
+		pass
+
+	def setPath(self):
+		pass
+
+	def generateTest(self):
+		pass
+
+	def loadTest(self):
+		pass
+
+	def saveTest(self):
+		pass
+
+class ScreenCapture():
+	def __init__(self, parent = None):
+		super(ScreenCapture, self).__init__(parent=parent)
 		img = ImageGrab.grab
 		size = img().size
 		screen_width = size[0]
@@ -44,90 +107,41 @@ class SetScreencapAreaWidget(QtWidgets.QWidget):
 		y1 = min(self.begin.y(), self.end.y())
 		x2 = max(self.begin.x(), self.end.x())
 		y2 = max(self.begin.y(), self.end.y())
+		self.screenDimensions = {'A': [x1, y1], 'B': [x2, y2]}
 
-		# img = ImageGrab.grab(bbox=(x1, y1, x2, y2))
-		# img.save('capture.png')
-		# img.show()
-		# img = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2RGB)
+	def getScreenCapDimensions(self):
+		return self.screenDimensions
 
-		# cv2.imshow('Captured Image', img)
-		# cv2.waitKey(0)
-		# cv2.destroyAllWindows()
-
-
-class RigTester(QtWidgets.QDialog):
+class AddView():
 	def __init__(self, parent = None):
-		super(RigTester, self).__init__(parent=parent)
-
-		self.setLayout(QtWidgets.QHBoxLayout())
-		self.rigTestList = QtWidgets.QListWidget()
-		self.layout().setContentsMargins(5,5,5,5)
-		self.layout().setSpacing(5)
-		self.layout().addWidget(self.rigTestList)
-
-		buttonsLayout = QtWidgets.QVBoxLayout()
-		self.layout().addLayout(buttonsLayout)
-
-		self.addRigTestButton = QtWidgets.QPushButton('Add new view')
-		self.addRigTestButton.clicked.connect(self.addRigTest)
-		buttonsLayout.addWidget(self.addRigTestButton)
-
-		self.setRigTestPathText = QtWidgets.QLineEdit():
-		self.layout().addWidget(self.setRigTestPathText)
-
-		self.setRigTestPathButton = QtWidgets.QPushButton('Set path')
-		self.setRigTestPathButton.clicked.connect(self.setRigTestPath)
-		buttonsLayout.addWidget(self.setRigTestPathButton)
-
-		self.removeRigTestButton = QtWidgets.QPushButton('Remove view')
-		self.removeRigTestButton.clicked.connect(self.removeRigTest)
-		buttonsLayout.addWidget(self.removeRigTestButton)
-
-		self.generateTestButton = QtWidgets.QPushButton('Generate Test')
-		self.generateTestButton.clicked.connect(self.generateTest)
-		buttonsLayout.addWidget(self.generateTestButton)
-
-
-	def addRigTestButton(self):
-		pass
-
-	def setRigTestPathButton(self):
-		pass
-
-	def removeRigTest(self):
-		pass
-
-	def generateTest(self):
-		pass
-
-class AddView(QtWidgets.QDialog):
-	def __init__(self, parent = parent):
 		super(AddView, self).__init__(parent=parent)
 
-		self.setLayout(QtWidgets.QGridLayout())
+		self.viewDictionary = []
 
-		self.layout().addWidget(QtWidget.QLabel('Name'), 0, 0)
-		self.nameText = QtWidgets.QLineEdit()
-		self.layout().addWidget(self.nameText, 0, 1)
-
-		self.layout().addWidget(QtWidget.QLabel('Object'), 1, 0)
-		self.objectText = QtWidgets.QLineEdit()
-		self.layout().addWidget(self.objectText, 1, 1)
-
-		self.layout().addWidget(QtWidget.QLabel('Attribute'), 2, 0)
-		self.attributeText = QtWidgets.QLineEdit()
-		self.layout().addWidget(self.attributeText, 2, 1)
-
-		self.layout().addWidget(QtWidget.QLabel('Value'), 1, 0)
-		self.valueText = QtWidgets.QLineEdit()
-		self.layout().addWidget(self.valueText, 0, 1)
+		
 
 
+	def setName(self, name):
+		pass
 
+	def getView(self):
+		pass
 
-# if __name__ == '__main__':
-# 	app = QtWidgets.QApplication(sys.argv)
-# 	window = SetScreencapAreaWidget()
-# 	window.show()
-# 	app.aboutToQuit.connect(app.deleteLater)
-# 	sys.exit(app.exec_())
+	def getObjectFromSelection(self):
+		pass
+
+	def getKeyableAttributesFromObject(self, object):
+		pass
+
+	def setValueForAttribute(self, attribute, value):
+		pass
+
+class SetPath():
+	def __init__(self, parent = None):
+		super(SetPath, self).__init__(parent=parent)
+
+	def getPath(self):
+		return self.path
+
+	def setPath(self, path):
+		self.path = path
