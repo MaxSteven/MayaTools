@@ -112,11 +112,12 @@ class ScreenCapture():
 	def getScreenCapDimensions(self):
 		return self.screenDimensions
 
-class AddView():
+class ManageView():
 	def __init__(self, parent = None):
-		super(AddView, self).__init__(parent=parent)
+		super(manageView, self).__init__(parent=parent)
 		self.setLayout(QtWidgets.QVBoxLayout())
 		self.viewDictionary = []
+		self.setWindowTitle('Manage View')
 		self.layout().setContentsMargins(5,5,5,5)
 		self.layout().setSpacing(5)
 		
@@ -127,20 +128,61 @@ class AddView():
 		self.nameText = QtWidgets.QLineEdit()
 		nameLayout.addWidget(self.nameText)
 		
+		testLayout = QtWidgets.QHBoxLayout()
+		self.layout().addLayout(testLayout)
 
+		objectNameLayout = QtWidgets.QHBoxLayout()
+		objectNameLayout.addWidget(QtWidgets.QLabel('Object:'))
+		self.objectNameText = QtWidgets.QLineEdit()
+		self.objectNameText.returnPressed().connect(self.getKeyableAttributesFromObject)
+		objectNameLayout.addWidget(self.objectNameText)
+		self.getObjectButton = QtWidgets.QPushButton('<<')
+		self.getObjectButton.clicked.connect(self.getObjectFromSelection)
+		objectNameLayout.addWidget(self.getObjectButton)
+		testLayout.addLayout(objectNameLayout)
+
+		attributeNameLayout = QtWidgets.QHBoxLayout()
+		attributeNameLayout.addWidget(QtWidgets.QLabel('Attribute:'))
+		self.attributeName = QtWidgets.QComboBox()
+		attributeNameLayout.addWidget(self.attributeName)
+		testLayout.addLayout(attributeNameLayout)
+
+		valueLayout = QtWidgets.QHBoxLayout()
+		valueLayout.addWidget(QtWidgets.QLabel('Value:'))
+		self.valueText = QtWidgets.QLineEdit()
+		valueLayout.addWidget(self.valueText)
+		testLayout.addLayout(valueLayout)
+
+		addRemoveButtonsLayout = QtWidgets.QHBoxLayout()
+		self.layout().addLayout(addRemoveButtonsLayout)
+
+		self.addViewButton = QtWidgets.QPushButton('+')
+		addRemoveButtonsLayout.addWidget(self.addViewButton)
+		self.addViewButton.clicked.connect(self.addView)
+
+		self.removeViewButton = QtWidgets.QPushButton('+')
+		addRemoveButtonsLayout.addWidget(self.removeViewButton)
+		self.removeViewButton.clicked.connect(self.removeView)
 
 		self.testTable = QtWidgets.QTableWidget(3, 3)
-
-		self.
-
-
+		self.layout().addWidget(self.testTable)
 		
+		self.addTestButton = QtWidgets.QPushButton('Add/Modify')
+		self.addTestButton.clicked.connect(self.addTest)
+		self.layout().addWidget(self.addTestButton)
 
+		self.show()
 
 	def setName(self, name):
 		pass
 
 	def getView(self):
+		pass
+
+	def addTest(self):
+		pass
+
+	def removeTest(self):
 		pass
 
 	def getObjectFromSelection(self):
@@ -152,12 +194,38 @@ class AddView():
 	def setValueForAttribute(self, attribute, value):
 		pass
 
+
 class SetPath():
 	def __init__(self, parent = None):
 		super(SetPath, self).__init__(parent=parent)
 
+		self.setLayout(QtWidgets.QVBoxLayout())
+		self.setWindowTitle('Set Path')
+		self.layout().setContentsMargins(5,5,5,5)
+		self.layout().setSpacing(5)
+
+		pathLayout = QtWidgets.QHBoxLayout()
+		self.layout().addLayout(pathLayout)
+
+		pathLayout.addWidget(QtWidgets.QLabel('Directory:'))
+		self.pathText = QtWidgets.QLineEdit()
+		pathLayout.addWidget(self.pathText)
+		self.getDirButton = QtWidgets.QPushButton('...')
+		self.getDirButton.clicked.connect(self.openDirectory)
+		pathLayout.addWidget(self.getDirButton)
+
+		self.setPathButton = QtWidgets.QPushButton('Set Path')
+		self.setPathButton.clicked.connect(self.setPath)
+		self.layout().addWidget(self.setPathButton)
+
+		self.show()
+
+	def openDirectory(self):
+		pass
+
 	def getPath(self):
 		return self.path
 
-	def setPath(self, path):
+	def setPath(self):
+		pass
 		self.path = path
