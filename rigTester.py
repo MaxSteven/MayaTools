@@ -112,14 +112,18 @@ class ScreenCapture():
 	def getScreenCapDimensions(self):
 		return self.screenDimensions
 
-class ManageView():
+class ViewManager():
 	def __init__(self, parent = None):
-		super(manageView, self).__init__(parent=parent)
+		super(ViewManager, self).__init__(parent=parent)
 		self.setLayout(QtWidgets.QVBoxLayout())
 		self.viewDictionary = []
-		self.setWindowTitle('Manage View')
+		self.setWindowTitle('View Manager')
 		self.layout().setContentsMargins(5,5,5,5)
 		self.layout().setSpacing(5)
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHeightForWidth(True)
+		self.setSizePolicy(sizePolicy)
+		
 		
 		nameLayout = QtWidgets.QHBoxLayout()
 		self.layout().addLayout(nameLayout)
@@ -165,6 +169,7 @@ class ManageView():
 		self.removeViewButton.clicked.connect(self.removeView)
 
 		self.testTable = QtWidgets.QTableWidget(3, 3)
+		self.testTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 		self.layout().addWidget(self.testTable)
 		
 		self.addTestButton = QtWidgets.QPushButton('Add/Modify')
