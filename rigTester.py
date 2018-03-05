@@ -9,110 +9,6 @@ import shiboken2
 import inspect
 import os
 
-class RigTester(QtWidgets.QDialog):
-	def __init__(self, parent = None, screenDimensions = None):
-		super(RigTester, self).__init__(parent = getMainWindow())
-		self.screenDimensions = screenDimensions
-		self.setWindowTitle('Rig Tester')
-		self.setLayout(QtWidgets.QHBoxLayout())
-		self.rigTestList = QtWidgets.QListWidget()
-		self.layout().setContentsMargins(5,5,5,5)
-		self.layout().setSpacing(5)
-		self.layout().addWidget(self.rigTestList)
-
-		buttonsLayout = QtWidgets.QVBoxLayout()
-		self.layout().addLayout(buttonsLayout)
-
-		self.addRigTestButton = QtWidgets.QPushButton('Add new view')
-		self.addRigTestButton.clicked.connect(self.addView)
-		buttonsLayout.addWidget(self.addRigTestButton)
-
-		self.setRigTestPathButton = QtWidgets.QPushButton('Set path')
-		self.setRigTestPathButton.clicked.connect(self.setPath)
-		buttonsLayout.addWidget(self.setRigTestPathButton)
-
-		self.removeRigTestButton = QtWidgets.QPushButton('Remove view')
-		self.removeRigTestButton.clicked.connect(self.removeView)
-		buttonsLayout.addWidget(self.removeRigTestButton)
-
-		self.generateTestButton = QtWidgets.QPushButton('Generate Test')
-		self.generateTestButton.clicked.connect(self.generateTest)
-		buttonsLayout.addWidget(self.generateTestButton)
-
-		self.saveTestButton = QtWidgets.QPushButton('Save Test')
-		self.saveTestButton.clicked.connect(self.saveTest)
-		buttonsLayout.addWidget(self.saveTestButton)
-
-		self.loadTestButton = QtWidgets.QPushButton('Load Test')
-		self.loadTestButton.clicked.connect(self.loadTest)
-		buttonsLayout.addWidget(self.loadTestButton)
-
-		self.show()
-		
-	def addView(self):
-		view = ViewManager(parent = self)
-
-	def removeView(self):
-		pass
-
-	def setPath(self):
-		pathUI = SetPath(parent = self)
-		self.path = pathUI.getPath()
-
-	def generateTest(self):
-		view = OpenMayaUI.M3dView.active3dView()
-		cam = OpenMaya.MDagPath()
-		view.getCamera(cam)
-		camName = cam.partialPathName()
-		cam = mc.listRelatives(camName, parent=True)[0]
-
-		filepath = "C:\\trash\\test.json"
-		f = open(filepath, 'r')
-
-		viewList = json.load(viewList, f, indent = 4)
-		f.close()
-
-		currentViewPosition = mc.xform(cam, query = True, worldSpace = True, translation=True)
-		currentViewOrientation = mc.xfomr(cam, query = True, worldSpace = True, rotation = True)
-
-		for view in viewList:
-			mc.xform(cam, worldSpace = True, translation = view['viewPosition'])
-			mc.xform(cam, worldSpace = True, rotation = view['viewOrientation'])
-			previousValues = []
-			for test in view['data']:
-				obj = test['obj']
-				attr = test['attr']
-				val = mc.getAttr(obj + '.' + attr)
-				valDict = {
-							'obj': obj,
-							'attr':attr,
-							'val':val
-						}
-				previousValues.append(valDict)
-
-			for test in view['data']:
-				obj = test['obj']
-				attr = test['attr']
-				val = test['val']
-				mc.setAttr(obj + '.' + attr, val)
-				print 'screencap captured!'
-
-			for val in previousValues:
-				obj = val['obj']
-				attr = val['attr']
-				val = val['val']
-				mc.setAttr(obj + '.' + attr, val)
-				print 'value restored'
-
-		mc.xform(cam, worldSpace = True, translation = currentViewPosition)
-		mc.xform(cam, worldSpace = True, rotation = currentViewOrientation)
-
-	def loadTest(self):
-		pass
-
-	def saveTest(self):
-		pass
-
 class ScreenCapture(QtWidgets.QWidget):
 	def __init__(self):
 		super(ScreenCapture, self).__init__()
@@ -163,9 +59,137 @@ class ScreenCapture(QtWidgets.QWidget):
 	def getScreenCapDimensions(self):
 		return self.screenDimensions
 
+class RigTester(QtWidgets.QDialog):
+	def __init__(self, parent = None, screenDimensions = None):
+		super(RigTester, self).__init__(parent = getMainWindow())
+		self.screenDimensions = screenDimensions
+		self.testList = []
+		self.setWindowTitle('Rig Tester')
+		self.setLayout(QtWidgets.QHBoxLayout())
+		self.rigTestList = QtWidgets.QListWidget()
+		self.layout().setContentsMargins(5,5,5,5)
+		self.layout().setSpacing(5)
+		self.layout().addWidget(self.rigTestList)
+
+		buttonsLayout = QtWidgets.QVBoxLayout()
+		self.layout().addLayout(buttonsLayout)
+
+		self.addRigTestButton = QtWidgets.QPushButton('Add new view')
+		self.addRigTestButton.clicked.connect(self.addView)
+		buttonsLayout.addWidget(self.addRigTestButton)
+
+		self.setRigTestPathButton = QtWidgets.QPushButton('Set path')
+		self.setRigTestPathButton.clicked.connect(self.setPath)
+		buttonsLayout.addWidget(self.setRigTestPathButton)
+
+		self.removeRigTestButton = QtWidgets.QPushButton('Remove view')
+		self.removeRigTestButton.clicked.connect(self.removeView)
+		buttonsLayout.addWidget(self.removeRigTestButton)
+
+		self.generateTestButton = QtWidgets.QPushButton('Generate Test')
+		self.generateTestButton.clicked.connect(self.generateTest)
+		buttonsLayout.addWidget(self.generateTestButton)
+
+		self.saveTestButton = QtWidgets.QPushButton('Save Test')
+		self.saveTestButton.clicked.connect(self.saveTest)
+		buttonsLayout.addWidget(self.saveTestButton)
+
+		self.loadTestButton = QtWidgets.QPushButton('Load Test')
+		self.loadTestButton.clicked.connect(self.loadTest)
+		buttonsLayout.addWidget(self.loadTestButton)
+
+		self.show()
+		
+	def addView(self):
+		view = ViewManager(parent = self)
+		testDict = view.addTest()
+		self.testList.append(testDict)
+		self.rigTestList.addItem(testDict['name'])
+
+	def removeView(self):
+		selectedTest = self.rigTestList.selectedItems()
+		for item in selectedItems:
+			for test in self.testList:
+				if item == test['name']:
+					self.testList.remove(test)
+					self.rigTestList.takeItem(self.rigTestList.row(item))
+
+	def setPath(self):
+		pathUI = SetPath(parent = self)
+		self.path = pathUI.getPath()
+
+	def generateTest(self):
+		view = OpenMayaUI.M3dView.active3dView()
+		cam = OpenMaya.MDagPath()
+		view.getCamera(cam)
+		camName = cam.partialPathName()
+		cam = mc.listRelatives(camName, parent=True)[0]
+
+		currentViewPosition = mc.xform(cam, query = True, worldSpace = True, translation=True)
+		currentViewOrientation = mc.xfomr(cam, query = True, worldSpace = True, rotation = True)
+
+		for view in self.testList:
+			mc.xform(cam, worldSpace = True, translation = view['viewPosition'])
+			mc.xform(cam, worldSpace = True, rotation = view['viewOrientation'])
+			previousValues = []
+			for test in view['data']:
+				obj = test['obj']
+				attr = test['attr']
+				val = mc.getAttr(obj + '.' + attr)
+				valDict = {
+							'obj': obj,
+							'attr':attr,
+							'val':val
+						}
+				previousValues.append(valDict)
+
+			for test in view['data']:
+				obj = test['obj']
+				attr = test['attr']
+				val = test['val']
+				mc.setAttr(obj + '.' + attr, val)
+
+			self.takeScreenshot(view['name'])
+			for val in previousValues:
+				obj = val['obj']
+				attr = val['attr']
+				val = val['val']
+				mc.setAttr(obj + '.' + attr, val)
+				print 'value restored'
+
+		mc.xform(cam, worldSpace = True, translation = currentViewPosition)
+		mc.xform(cam, worldSpace = True, rotation = currentViewOrientation)
+
+	def loadTest(self):
+		filepath = QtWidgets.QFileDialog.getOpenFileName(parent = self)
+		f = open(filepath, 'r')
+
+		self.viewList = json.load(f)
+		f.close()
+
+	def saveTest(self):
+		filepath = QtWidgets.QFileDialog.getSaveFileName(parent = self)
+		f = open(filepath, 'w')
+
+		json.dump(self.testList, f, indent = 4)
+		f.close()
+
+	def takeScreenshot(self, name):
+		point1 = self.screenDimensions['A']
+		point2 = self.screenDimensions['B']
+		img = ImageGrab.grab(bbox=(point1[0], point1[1], point2[0], point2[1]))
+		img.save(self.path + name + '.png')
+
+
 class ViewManager(QtWidgets.QDialog):
 	def __init__(self, parent = None):
 		super(ViewManager, self).__init__(parent=parent)
+		self.viewJson = {
+			'name':'',
+			'viewPostition': [],
+			'viewOrientation': [],
+			'data':[]
+		}
 		self.setLayout(QtWidgets.QVBoxLayout())
 		self.viewDictionaryList = []
 		self.setWindowTitle('View Manager')
@@ -217,12 +241,13 @@ class ViewManager(QtWidgets.QDialog):
 		addRemoveButtonsLayout.addWidget(self.addViewButton)
 		self.addViewButton.clicked.connect(self.addView)
 
-		self.removeViewButton = QtWidgets.QPushButton('+')
+		self.removeViewButton = QtWidgets.QPushButton('-')
 		addRemoveButtonsLayout.addWidget(self.removeViewButton)
 		self.removeViewButton.clicked.connect(self.removeTest)
 
 		self.testTable = QtWidgets.QTableWidget(3, 3)
 		self.testTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+		self.testTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
 		self.layout().addWidget(self.testTable)
 		
 		self.addTestButton = QtWidgets.QPushButton('Add/Modify')
@@ -231,39 +256,12 @@ class ViewManager(QtWidgets.QDialog):
 
 		self.show()
 
-	def setName(self, name):
-		pass
-
-	def getView(self):
-		pass
-
 	def addView(self):
-		pass
-
-	def addTest(self):
-		viewJson = {
-			'name':'',
-			'viewPostition': [],
-			'viewOrientation': [],
-			'data':[]
-		}
 		objJson = {
 			'obj': '',
 			'attr': '',
 			'value': ''
 		}
-		view = OpenMayaUI.M3dView.active3dView()
-		cam = OpenMaya.MDagPath()
-		view.getCamera(cam)
-		camName = cam.partialPathName()
-		cam = mc.listRelatives(camName, parent=True)[0]
-
-		cameraPos = mc.xform(cam, query = True, translation = True, worldSpace = True)
-		cameraOrient = mc.xform(cam, query = True, rotation = True, worldSpace = True)
-
-		viewJson['viewPosition'] = cameraPos
-		viewJson['viewOrientation'] = cameraOrient
-
 		obj = mc.ls(sl=True)[0]
 		attr = 'translateX'
 		value = 0
@@ -272,18 +270,35 @@ class ViewManager(QtWidgets.QDialog):
 		objJson['attr'] = attr
 		objJson['value'] = value
 
-		viewJson['data'].append(objJson)
+		self.viewJson['data'].append(objJson)
+		self.testTable.
 
-		viewList.append(viewJson)
+	def addTest(self):
+		view = OpenMayaUI.M3dView.active3dView()
+		cam = OpenMaya.MDagPath()
+		view.getCamera(cam)
+		camName = cam.partialPathName()
+		cam = mc.listRelatives(camName, parent=True)[0]
+		name = self.nameText.getText()
 
-		filepath = "C:\\trash\\test.json"
-		f = open(filepath, 'w')
+		cameraPos = mc.xform(cam, query = True, translation = True, worldSpace = True)
+		cameraOrient = mc.xform(cam, query = True, rotation = True, worldSpace = True)
 
-		json.dump(viewList, f, indent = 4)
-		f.close()
+		self.viewJson['name'] = name
+		self.viewJson['viewPosition'] = cameraPos
+		self.viewJson['viewOrientation'] = cameraOrient
+		return self.viewJson
 
-	def removeTest(self):
-		pass
+	def removeView(self):
+		selectedDataJson = {
+			'obj': self.widget.selectedItems[0],
+			'attr': self.widget.selectedItems[1],
+			'value': self.widget.selectedItems[2]
+		}
+		for test in self.viewJson['data']:
+			if selectedDataJson == test:
+				self.viewJson['data'].remove(test)
+				self.
 
 	def getObjectFromSelection(self):
 		self.obj = mc.ls(sl=True)[0]
