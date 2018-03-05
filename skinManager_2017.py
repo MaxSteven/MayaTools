@@ -18,6 +18,7 @@ from PySide2.QtCore import Slot as QtSlot
 from PySide2.QtCore import QEvent
 
 import shiboken2
+import maya.OpenMayaUI as mui
 
 class SkinManager(QtGui.QDialog):
 	def __init__(self, parent=None):

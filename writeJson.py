@@ -28,7 +28,7 @@ cameraPos = mc.xform(cam, query = True, translation = True, worldSpace = True)
 cameraOrient = mc.xform(cam, query = True, rotation = True, worldSpace = True)
 
 viewJson['viewPosition'] = cameraPos
-viewOrientation = cameraOrient
+viewJson['viewOrientation'] = cameraOrient
 
 obj = mc.ls(sl=True)[0]
 attr = 'translateX'
