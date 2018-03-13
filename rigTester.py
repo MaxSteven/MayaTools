@@ -59,9 +59,11 @@ class ScreenCapture(QtWidgets.QWidget):
 	def getScreenCapDimensions(self):
 		return self.screenDimensions
 
+# class RigTester(QtWidgets.QMainWindow):
 class RigTester(QtWidgets.QDialog):
 
 	viewAdded = QtCore.Signal()
+	pathUpdated = QtCore.Signal()
 
 	def __init__(self, parent = None, screenDimensions = None):
 		super(RigTester, self).__init__(parent = getMainWindow())
@@ -74,6 +76,34 @@ class RigTester(QtWidgets.QDialog):
 		self.layout().setSpacing(5)
 		self.layout().addWidget(self.rigTestList)
 
+		# self.statusBar()
+
+		# saveAction = QtWidgets.QAction('Save', self)
+		# saveAction.setShortcut("Ctrl+S")
+		# saveAction.setStatusTip('&Save the test')
+		# saveAction.triggered.connect(self.saveTest)
+
+		# self.mainMenu = self.menuBar()
+		# fileMenu = self.mainMenu.addMenu('&File')
+
+		# saveAction = QtWidgets.QAction('Save', self)
+		# saveAction.setShortcut("Ctrl+S")
+		# saveAction.setStatusTip('Save the test')
+		# saveAction.triggered.connect(self.saveTest)
+		# fileMenu.addAction(saveAction)
+
+		# loadAction = QtWidgets.QAction('Load', self)
+		# loadAction.setShortcut("Ctrl+O")
+		# loadAction.setStatusTip('load the test')
+		# loadAction.triggered.connect(self.loadTest)
+		# fileMenu.addAction(loadAction)
+
+		# quitAction = QtWidgets.QAction('Quit', self)
+		# quitAction.setShortcut("Ctrl+Q")
+		# quitAction.setStatusTip('Quit')
+		# quitAction.triggered.connect(self.quit)
+		# fileMenu.addAction(quitAction)
+
 		buttonsLayout = QtWidgets.QVBoxLayout()
 		self.layout().addLayout(buttonsLayout)
 
@@ -82,7 +112,7 @@ class RigTester(QtWidgets.QDialog):
 		buttonsLayout.addWidget(self.addRigTestButton)
 
 		self.setRigTestPathButton = QtWidgets.QPushButton('Set path')
-		self.setRigTestPathButton.clicked.connect(self.setPath)
+		self.setRigTestPathButton.clicked.connect(self.setPathUI)
 		buttonsLayout.addWidget(self.setRigTestPathButton)
 
 		self.removeRigTestButton = QtWidgets.QPushButton('Remove view')
@@ -100,7 +130,9 @@ class RigTester(QtWidgets.QDialog):
 		self.loadTestButton = QtWidgets.QPushButton('Load Test')
 		self.loadTestButton.clicked.connect(self.loadTest)
 		buttonsLayout.addWidget(self.loadTestButton)
+
 		self.viewAdded.connect(self.addViewToList)
+		self.pathUpdated.connect(self.setPath)
 
 		self.show()
 	
@@ -108,6 +140,7 @@ class RigTester(QtWidgets.QDialog):
 		testDict = self.view.getTest()
 		self.testList.append(testDict)
 		self.rigTestList.addItem(testDict['name'])
+		self.view.close()
 	
 	def addView(self):
 		self.view = ViewManager(parent = self)
@@ -120,10 +153,12 @@ class RigTester(QtWidgets.QDialog):
 					self.testList.remove(test)
 					self.rigTestList.takeItem(self.rigTestList.row(item))
 
+	def setPathUI(self):
+		self.pathUI = SetPath(parent = self)
+
 	def setPath(self):
-		pathUI = SetPath(parent = self)
-		self.path = pathUI.getPath()
-		print self.path
+		self.path = self.pathUI.getPath()
+		self.pathUI.close()
 
 	def generateTest(self):
 		view = mui.M3dView.active3dView()
@@ -186,6 +221,9 @@ class RigTester(QtWidgets.QDialog):
 		point2 = self.screenDimensions['B']
 		img = ImageGrab.grab(bbox=(point1[0], point1[1], point2[0], point2[1]))
 		img.save(self.path + name + '.png')
+
+	def quit(self):
+		self.close()
 
 
 class ViewManager(QtWidgets.QDialog):
@@ -334,10 +372,11 @@ class ViewManager(QtWidgets.QDialog):
 		value = mc.getAttr(self.obj + '.' + attr)
 		self.valueText.setText(value)
 
-
 class SetPath(QtWidgets.QDialog):
 	def __init__(self, parent = None):
 		super(SetPath, self).__init__(parent=parent)
+
+		self.parent = parent
 
 		self.setLayout(QtWidgets.QVBoxLayout())
 		self.setWindowTitle('Set Path')
@@ -361,15 +400,16 @@ class SetPath(QtWidgets.QDialog):
 		self.show()
 
 	def openDirectory(self):
-		dirpath = QtGui.QFileDialog.getExistingDirectory(self, 'Save Directory') 
+		dirpath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Save Directory') 
 		self.pathText.setText(dirpath)
 
 	def getPath(self):
-		self.path = self.pathText.getText()
 		return self.path
 
-	def setPath(self, path):
-		self.path = path
+	def setPath(self):
+		self.path = self.pathText.text()
+		self.parent.pathUpdated.emit()
+
 
 # class Viewer(QtGui.QDialog):
 def getMainWindow():
