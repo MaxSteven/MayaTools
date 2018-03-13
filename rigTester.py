@@ -60,6 +60,9 @@ class ScreenCapture(QtWidgets.QWidget):
 		return self.screenDimensions
 
 class RigTester(QtWidgets.QDialog):
+
+	viewAdded = QtCore.Signal()
+
 	def __init__(self, parent = None, screenDimensions = None):
 		super(RigTester, self).__init__(parent = getMainWindow())
 		self.screenDimensions = screenDimensions
@@ -97,14 +100,17 @@ class RigTester(QtWidgets.QDialog):
 		self.loadTestButton = QtWidgets.QPushButton('Load Test')
 		self.loadTestButton.clicked.connect(self.loadTest)
 		buttonsLayout.addWidget(self.loadTestButton)
+		self.viewAdded.connect(self.addViewToList)
 
 		self.show()
-		
-	def addView(self):
-		view = ViewManager(parent = self)
-		testDict = view.addTest()
+	
+	def addViewToList(self):	
+		testDict = self.view.getTest()
 		self.testList.append(testDict)
 		self.rigTestList.addItem(testDict['name'])
+	
+	def addView(self):
+		self.view = ViewManager(parent = self)
 
 	def removeView(self):
 		selectedTest = self.rigTestList.selectedItems()
@@ -117,9 +123,10 @@ class RigTester(QtWidgets.QDialog):
 	def setPath(self):
 		pathUI = SetPath(parent = self)
 		self.path = pathUI.getPath()
+		print self.path
 
 	def generateTest(self):
-		view = OpenMayaUI.M3dView.active3dView()
+		view = mui.M3dView.active3dView()
 		cam = OpenMaya.MDagPath()
 		view.getCamera(cam)
 		camName = cam.partialPathName()
@@ -190,6 +197,7 @@ class ViewManager(QtWidgets.QDialog):
 			'viewOrientation': [],
 			'data':[]
 		}
+		self.parent = parent
 		self.setLayout(QtWidgets.QVBoxLayout())
 		self.viewDictionaryList = []
 		self.setWindowTitle('View Manager')
@@ -243,16 +251,16 @@ class ViewManager(QtWidgets.QDialog):
 
 		self.removeViewButton = QtWidgets.QPushButton('-')
 		addRemoveButtonsLayout.addWidget(self.removeViewButton)
-		self.removeViewButton.clicked.connect(self.removeTest)
+		self.removeViewButton.clicked.connect(self.removeView)
 
 		self.testTable = QtWidgets.QTableWidget(3, 3)
 		self.testTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 		self.testTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
 		self.layout().addWidget(self.testTable)
 		
-		self.addTestButton = QtWidgets.QPushButton('Add/Modify')
-		self.addTestButton.clicked.connect(self.addTest)
-		self.layout().addWidget(self.addTestButton)
+		self.setTestButton = QtWidgets.QPushButton('Add/Modify')
+		self.setTestButton.clicked.connect(self.setTest)
+		self.layout().addWidget(self.setTestButton)
 
 		self.show()
 
@@ -262,24 +270,27 @@ class ViewManager(QtWidgets.QDialog):
 			'attr': '',
 			'value': ''
 		}
-		obj = mc.ls(sl=True)[0]
-		attr = 'translateX'
-		value = 0
-
-		objJson['obj'] = obj
-		objJson['attr'] = attr
-		objJson['value'] = value
+		objJson['obj'] = self.objectNameText.text()
+		objJson['attr'] = self.attributeList.currentText()
+		objJson['value'] = self.valueText.text()
 
 		self.viewJson['data'].append(objJson)
-		self.testTable.
+		# add to table
+		self.testTable.setRowCount(len(self.viewJson['data']))
+		row = len(self.viewJson['data']) - 1
+		columnIndex = 0
+		for key in ['obj', 'attr', 'value']:
+			item = QtWidgets.QTableWidgetItem(str(objJson[key]))
+			self.testTable.setItem(row, columnIndex, item)
+			columnIndex += 1
 
-	def addTest(self):
-		view = OpenMayaUI.M3dView.active3dView()
+	def setTest(self):
+		view = mui.M3dView.active3dView()
 		cam = OpenMaya.MDagPath()
 		view.getCamera(cam)
 		camName = cam.partialPathName()
 		cam = mc.listRelatives(camName, parent=True)[0]
-		name = self.nameText.getText()
+		name = self.nameText.text()
 
 		cameraPos = mc.xform(cam, query = True, translation = True, worldSpace = True)
 		cameraOrient = mc.xform(cam, query = True, rotation = True, worldSpace = True)
@@ -287,18 +298,26 @@ class ViewManager(QtWidgets.QDialog):
 		self.viewJson['name'] = name
 		self.viewJson['viewPosition'] = cameraPos
 		self.viewJson['viewOrientation'] = cameraOrient
+		if self.parent:
+			self.parent.viewAdded.emit()
+
+	def getTest(self):
 		return self.viewJson
 
 	def removeView(self):
-		selectedDataJson = {
-			'obj': self.widget.selectedItems[0],
-			'attr': self.widget.selectedItems[1],
-			'value': self.widget.selectedItems[2]
-		}
-		for test in self.viewJson['data']:
-			if selectedDataJson == test:
-				self.viewJson['data'].remove(test)
-				self.
+		row = self.testTable.currentRow()
+		columnIndex = 0
+		selectedDataJson = {}
+		for key in ['obj', 'attr','value']:
+			if self.testTable.item(row, columnIndex).text() == '':
+				continue
+
+			selectedDataJson.update({key: self.testTable.item(row, columnIndex).text()})
+			columnIndex += 1
+
+		if selectedDataJson in self.viewJson['data']:
+			self.viewJson['data'].remove(selectedDataJson)
+		self.testTable.removeRow(row)
 
 	def getObjectFromSelection(self):
 		self.obj = mc.ls(sl=True)[0]
@@ -306,6 +325,7 @@ class ViewManager(QtWidgets.QDialog):
 		self.getKeyableAttributesFromObject()
 
 	def getKeyableAttributesFromObject(self):
+		obj = self.objectNameText.text()
 		attributes = mc.listAttr(obj, keyable = True, unlocked = True)
 		self.attributeList.addItems(attributes)
 

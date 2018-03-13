@@ -272,7 +272,6 @@ def getMainWindow():
 	mainWin = shiboken.wrapInstance(long(ptr), QtGui.QWidget)
 	return mainWin
 
-
 def show():
 	win = Namer(parent = getMainWindow())
 	win.show()
