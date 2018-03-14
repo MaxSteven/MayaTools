@@ -10,6 +10,8 @@ import shiboken
 import inspect
 import os
 
+# look at this: https://github.com/cgarjun/utilities/blob/master/screenshot.py
+
 class ScreenCapture(QtGui.QWidget):
 	def __init__(self):
 		super(ScreenCapture, self).__init__()
@@ -20,7 +22,7 @@ class ScreenCapture(QtGui.QWidget):
 		screen_height = size[1]
 		self.setGeometry(0, 0, screen_width, screen_height)
 		self.setWindowTitle(' ')
-		self.begin = QtCore.QPoint()	
+		self.begin = QtCore.QPoint()
 		self.end = QtCore.QPoint()
 		self.setWindowOpacity(0.3)
 		QtGui.QApplication.setOverrideCursor(
@@ -52,7 +54,7 @@ class ScreenCapture(QtGui.QWidget):
 		y1 = min(self.begin.y(), self.end.y())
 		x2 = max(self.begin.x(), self.end.x())
 		y2 = max(self.begin.y(), self.end.y())
-		
+
 		self.screenDimensions = {'A': [x1, y1], 'B': [x2, y2]}
 		print 'screenCaptured', self.screenDimensions
 		rigTester = RigTester(screenDimensions = self.screenDimensions)
@@ -137,13 +139,13 @@ class RigTester(QtGui.QDialog):
 		self.pathUpdated.connect(self.setPath)
 
 		self.show()
-	
-	def addViewToList(self):	
+
+	def addViewToList(self):
 		testDict = self.view.getTest()
 		self.testList.append(testDict)
 		self.rigTestList.addItem(testDict['name'])
 		self.view.close()
-	
+
 	def addView(self):
 		self.view = ViewManager(parent = self)
 
@@ -257,14 +259,14 @@ class ViewManager(QtGui.QDialog):
 		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
 		sizePolicy.setHeightForWidth(True)
 		self.setSizePolicy(sizePolicy)
-		
+
 		nameLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(nameLayout)
 
 		nameLayout.addWidget(QtGui.QLabel('Name:'))
 		self.nameText = QtGui.QLineEdit()
 		nameLayout.addWidget(self.nameText)
-		
+
 		testLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(testLayout)
 
@@ -308,7 +310,7 @@ class ViewManager(QtGui.QDialog):
 		self.testTable.horizontalHeader().setSectionResizeMode(QtGui.QHeaderView.Stretch)
 		self.testTable.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
 		self.layout().addWidget(self.testTable)
-		
+
 		self.setTestButton = QtGui.QPushButton('Add/Modify')
 		self.setTestButton.clicked.connect(self.setTest)
 		self.layout().addWidget(self.setTestButton)
@@ -418,7 +420,7 @@ class SetPath(QtGui.QDialog):
 		self.show()
 
 	def openDirectory(self):
-		dirpath = QtGui.QFileDialog.getExistingDirectory(self, 'Save Directory') 
+		dirpath = QtGui.QFileDialog.getExistingDirectory(self, 'Save Directory')
 		self.pathText.setText(dirpath)
 
 	def getPath(self):
