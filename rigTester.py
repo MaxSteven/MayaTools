@@ -201,6 +201,7 @@ class RigTester(QtWidgets.QDialog):
 
 			time.sleep(1)
 			self.takeScreenshot(view['name'])
+			time.sleep(1)
 			for val in previousValues:
 				obj = val['obj']
 				attr = val['attr']
