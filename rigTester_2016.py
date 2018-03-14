@@ -1,17 +1,16 @@
-import maya.cmds as mc
-from PySide2 import QtGui, QtCore, QtWidgets
+from PySide import QtGui, QtCore
 import maya.OpenMaya as OpenMaya
 import maya.OpenMayaUI as mui
 from PIL import ImageGrab
 
 import time
 
-import shiboken2
+import shiboken
 
 import inspect
 import os
 
-class ScreenCapture(QtWidgets.QWidget):
+class ScreenCapture(QtGui.QWidget):
 	def __init__(self):
 		super(ScreenCapture, self).__init__()
 		img = ImageGrab.grab
@@ -24,7 +23,7 @@ class ScreenCapture(QtWidgets.QWidget):
 		self.begin = QtCore.QPoint()	
 		self.end = QtCore.QPoint()
 		self.setWindowOpacity(0.3)
-		QtWidgets.QApplication.setOverrideCursor(
+		QtGui.QApplication.setOverrideCursor(
 			QtGui.QCursor(QtCore.Qt.CrossCursor)
 		)
 		self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -61,8 +60,8 @@ class ScreenCapture(QtWidgets.QWidget):
 	def getScreenCapDimensions(self):
 		return self.screenDimensions
 
-# class RigTester(QtWidgets.QMainWindow):
-class RigTester(QtWidgets.QDialog):
+# class RigTester(QtGui.QMainWindow):
+class RigTester(QtGui.QDialog):
 
 	viewAdded = QtCore.Signal()
 	pathUpdated = QtCore.Signal()
@@ -72,8 +71,8 @@ class RigTester(QtWidgets.QDialog):
 		self.screenDimensions = screenDimensions
 		self.testList = []
 		self.setWindowTitle('Rig Tester')
-		self.setLayout(QtWidgets.QHBoxLayout())
-		self.rigTestList = QtWidgets.QListWidget()
+		self.setLayout(QtGui.QHBoxLayout())
+		self.rigTestList = QtGui.QListWidget()
 		self.layout().setContentsMargins(5,5,5,5)
 		self.layout().setSpacing(5)
 		self.layout().addWidget(self.rigTestList)
@@ -81,7 +80,7 @@ class RigTester(QtWidgets.QDialog):
 
 		# self.statusBar()
 
-		# saveAction = QtWidgets.QAction('Save', self)
+		# saveAction = QtGui.QAction('Save', self)
 		# saveAction.setShortcut("Ctrl+S")
 		# saveAction.setStatusTip('&Save the test')
 		# saveAction.triggered.connect(self.saveTest)
@@ -89,48 +88,48 @@ class RigTester(QtWidgets.QDialog):
 		# self.mainMenu = self.menuBar()
 		# fileMenu = self.mainMenu.addMenu('&File')
 
-		# saveAction = QtWidgets.QAction('Save', self)
+		# saveAction = QtGui.QAction('Save', self)
 		# saveAction.setShortcut("Ctrl+S")
 		# saveAction.setStatusTip('Save the test')
 		# saveAction.triggered.connect(self.saveTest)
 		# fileMenu.addAction(saveAction)
 
-		# loadAction = QtWidgets.QAction('Load', self)
+		# loadAction = QtGui.QAction('Load', self)
 		# loadAction.setShortcut("Ctrl+O")
 		# loadAction.setStatusTip('load the test')
 		# loadAction.triggered.connect(self.loadTest)
 		# fileMenu.addAction(loadAction)
 
-		# quitAction = QtWidgets.QAction('Quit', self)
+		# quitAction = QtGui.QAction('Quit', self)
 		# quitAction.setShortcut("Ctrl+Q")
 		# quitAction.setStatusTip('Quit')
 		# quitAction.triggered.connect(self.quit)
 		# fileMenu.addAction(quitAction)
 
-		buttonsLayout = QtWidgets.QVBoxLayout()
+		buttonsLayout = QtGui.QVBoxLayout()
 		self.layout().addLayout(buttonsLayout)
 
-		self.addRigTestButton = QtWidgets.QPushButton('Add new view')
+		self.addRigTestButton = QtGui.QPushButton('Add new view')
 		self.addRigTestButton.clicked.connect(self.addView)
 		buttonsLayout.addWidget(self.addRigTestButton)
 
-		self.setRigTestPathButton = QtWidgets.QPushButton('Set path')
+		self.setRigTestPathButton = QtGui.QPushButton('Set path')
 		self.setRigTestPathButton.clicked.connect(self.setPathUI)
 		buttonsLayout.addWidget(self.setRigTestPathButton)
 
-		self.removeRigTestButton = QtWidgets.QPushButton('Remove view')
+		self.removeRigTestButton = QtGui.QPushButton('Remove view')
 		self.removeRigTestButton.clicked.connect(self.removeView)
 		buttonsLayout.addWidget(self.removeRigTestButton)
 
-		self.generateTestButton = QtWidgets.QPushButton('Generate Test')
+		self.generateTestButton = QtGui.QPushButton('Generate Test')
 		self.generateTestButton.clicked.connect(self.generateTest)
 		buttonsLayout.addWidget(self.generateTestButton)
 
-		self.saveTestButton = QtWidgets.QPushButton('Save Test')
+		self.saveTestButton = QtGui.QPushButton('Save Test')
 		self.saveTestButton.clicked.connect(self.saveTest)
 		buttonsLayout.addWidget(self.saveTestButton)
 
-		self.loadTestButton = QtWidgets.QPushButton('Load Test')
+		self.loadTestButton = QtGui.QPushButton('Load Test')
 		self.loadTestButton.clicked.connect(self.loadTest)
 		buttonsLayout.addWidget(self.loadTestButton)
 
@@ -172,7 +171,7 @@ class RigTester(QtWidgets.QDialog):
 
 		self.hide()
 
-		time.sleep(5)
+		time.sleep(2)
 
 		currentViewPosition = mc.xform(cam, query = True, worldSpace = True, translation=True)
 		currentViewOrientation = mc.xform(cam, query = True, worldSpace = True, rotation = True)
@@ -212,14 +211,14 @@ class RigTester(QtWidgets.QDialog):
 		mc.xform(cam, worldSpace = True, rotation = currentViewOrientation)
 
 	def loadTest(self):
-		filepath = QtWidgets.QFileDialog.getOpenFileName(parent = self)
+		filepath = QtGui.QFileDialog.getOpenFileName(parent = self)
 		f = open(filepath, 'r')
 
 		self.viewList = json.load(f)
 		f.close()
 
 	def saveTest(self):
-		filepath = QtWidgets.QFileDialog.getSaveFileName(parent = self)
+		filepath = QtGui.QFileDialog.getSaveFileName(parent = self)
 		f = open(filepath, 'w')
 
 		json.dump(self.testList, f, indent = 4)
@@ -239,7 +238,7 @@ class RigTester(QtWidgets.QDialog):
 		self.close()
 
 
-class ViewManager(QtWidgets.QDialog):
+class ViewManager(QtGui.QDialog):
 	def __init__(self, parent = None):
 		super(ViewManager, self).__init__(parent=parent)
 		self.viewJson = {
@@ -249,67 +248,67 @@ class ViewManager(QtWidgets.QDialog):
 			'data':[]
 		}
 		self.parent = parent
-		self.setLayout(QtWidgets.QVBoxLayout())
+		self.setLayout(QtGui.QVBoxLayout())
 		self.viewDictionaryList = []
 		self.setWindowTitle('View Manager')
 		self.layout().setContentsMargins(5,5,5,5)
 		self.layout().setSpacing(5)
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
 		sizePolicy.setHeightForWidth(True)
 		self.setSizePolicy(sizePolicy)
 		
-		nameLayout = QtWidgets.QHBoxLayout()
+		nameLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(nameLayout)
 
-		nameLayout.addWidget(QtWidgets.QLabel('Name:'))
-		self.nameText = QtWidgets.QLineEdit()
+		nameLayout.addWidget(QtGui.QLabel('Name:'))
+		self.nameText = QtGui.QLineEdit()
 		nameLayout.addWidget(self.nameText)
 		
-		testLayout = QtWidgets.QHBoxLayout()
+		testLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(testLayout)
 
-		objectNameLayout = QtWidgets.QHBoxLayout()
-		objectNameLayout.addWidget(QtWidgets.QLabel('Object:'))
-		self.objectNameText = QtWidgets.QLineEdit()
+		objectNameLayout = QtGui.QHBoxLayout()
+		objectNameLayout.addWidget(QtGui.QLabel('Object:'))
+		self.objectNameText = QtGui.QLineEdit()
 		self.objectNameText.returnPressed.connect(self.getKeyableAttributesFromObject)
 		objectNameLayout.addWidget(self.objectNameText)
-		self.getObjectButton = QtWidgets.QPushButton('<<')
+		self.getObjectButton = QtGui.QPushButton('<<')
 		self.getObjectButton.clicked.connect(self.getObjectFromSelection)
 		objectNameLayout.addWidget(self.getObjectButton)
 		testLayout.addLayout(objectNameLayout)
 
-		attributeListLayout = QtWidgets.QHBoxLayout()
-		attributeListLayout.addWidget(QtWidgets.QLabel('Attribute:'))
-		self.attributeList = QtWidgets.QComboBox()
+		attributeListLayout = QtGui.QHBoxLayout()
+		attributeListLayout.addWidget(QtGui.QLabel('Attribute:'))
+		self.attributeList = QtGui.QComboBox()
 		attributeListLayout.addWidget(self.attributeList)
 		testLayout.addLayout(attributeListLayout)
 
-		valueLayout = QtWidgets.QHBoxLayout()
-		valueLayout.addWidget(QtWidgets.QLabel('Object:'))
-		self.valueText = QtWidgets.QLineEdit()
+		valueLayout = QtGui.QHBoxLayout()
+		valueLayout.addWidget(QtGui.QLabel('Object:'))
+		self.valueText = QtGui.QLineEdit()
 		valueLayout.addWidget(self.valueText)
-		self.getObjectButton = QtWidgets.QPushButton('<<')
+		self.getObjectButton = QtGui.QPushButton('<<')
 		self.getObjectButton.clicked.connect(self.getValueFromAttribute)
 		valueLayout.addWidget(self.getObjectButton)
 		testLayout.addLayout(valueLayout)
 
-		addRemoveButtonsLayout = QtWidgets.QHBoxLayout()
+		addRemoveButtonsLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(addRemoveButtonsLayout)
 
-		self.addViewButton = QtWidgets.QPushButton('+')
+		self.addViewButton = QtGui.QPushButton('+')
 		addRemoveButtonsLayout.addWidget(self.addViewButton)
 		self.addViewButton.clicked.connect(self.addView)
 
-		self.removeViewButton = QtWidgets.QPushButton('-')
+		self.removeViewButton = QtGui.QPushButton('-')
 		addRemoveButtonsLayout.addWidget(self.removeViewButton)
 		self.removeViewButton.clicked.connect(self.removeView)
 
-		self.testTable = QtWidgets.QTableWidget(3, 3)
-		self.testTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-		self.testTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+		self.testTable = QtGui.QTableWidget(3, 3)
+		self.testTable.horizontalHeader().setSectionResizeMode(QtGui.QHeaderView.Stretch)
+		self.testTable.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
 		self.layout().addWidget(self.testTable)
 		
-		self.setTestButton = QtWidgets.QPushButton('Add/Modify')
+		self.setTestButton = QtGui.QPushButton('Add/Modify')
 		self.setTestButton.clicked.connect(self.setTest)
 		self.layout().addWidget(self.setTestButton)
 
@@ -336,7 +335,7 @@ class ViewManager(QtWidgets.QDialog):
 		row = len(self.viewJson['data']) - 1
 		columnIndex = 0
 		for key in ['obj', 'attr', 'value']:
-			item = QtWidgets.QTableWidgetItem(str(objJson[key]))
+			item = QtGui.QTableWidgetItem(str(objJson[key]))
 			self.testTable.setItem(row, columnIndex, item)
 			columnIndex += 1
 
@@ -390,35 +389,35 @@ class ViewManager(QtWidgets.QDialog):
 		value = mc.getAttr(self.obj + '.' + attr)
 		self.valueText.setText(value)
 
-class SetPath(QtWidgets.QDialog):
+class SetPath(QtGui.QDialog):
 	def __init__(self, parent = None):
 		super(SetPath, self).__init__(parent=parent)
 
 		self.parent = parent
 
-		self.setLayout(QtWidgets.QVBoxLayout())
+		self.setLayout(QtGui.QVBoxLayout())
 		self.setWindowTitle('Set Path')
 		self.layout().setContentsMargins(5,5,5,5)
 		self.layout().setSpacing(5)
 
-		pathLayout = QtWidgets.QHBoxLayout()
+		pathLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(pathLayout)
 
-		pathLayout.addWidget(QtWidgets.QLabel('Directory:'))
-		self.pathText = QtWidgets.QLineEdit()
+		pathLayout.addWidget(QtGui.QLabel('Directory:'))
+		self.pathText = QtGui.QLineEdit()
 		pathLayout.addWidget(self.pathText)
-		self.getDirButton = QtWidgets.QPushButton('...')
+		self.getDirButton = QtGui.QPushButton('...')
 		self.getDirButton.clicked.connect(self.openDirectory)
 		pathLayout.addWidget(self.getDirButton)
 
-		self.setPathButton = QtWidgets.QPushButton('Set Path')
+		self.setPathButton = QtGui.QPushButton('Set Path')
 		self.setPathButton.clicked.connect(self.setPath)
 		self.layout().addWidget(self.setPathButton)
 
 		self.show()
 
 	def openDirectory(self):
-		dirpath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Save Directory') 
+		dirpath = QtGui.QFileDialog.getExistingDirectory(self, 'Save Directory') 
 		self.pathText.setText(dirpath)
 
 	def getPath(self):
@@ -432,7 +431,7 @@ class SetPath(QtWidgets.QDialog):
 # class Viewer(QtGui.QDialog):
 def getMainWindow():
 	ptr = mui.MQtUtil.mainWindow()
-	mainWin = shiboken2.wrapInstance(long(ptr), QtWidgets.QWidget)
+	mainWin = shiboken.wrapInstance(long(ptr), QtGui.QWidget)
 	return mainWin
 
 screenCap = ScreenCapture()
