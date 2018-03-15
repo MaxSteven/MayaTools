@@ -4,6 +4,8 @@ import maya.OpenMaya as OpenMaya
 import maya.OpenMayaUI as mui
 from PIL import ImageGrab
 
+import json
+
 import time
 
 import shiboken2
@@ -53,7 +55,7 @@ class ScreenCapture(QtWidgets.QWidget):
 		y1 = min(self.begin.y(), self.end.y())
 		x2 = max(self.begin.x(), self.end.x())
 		y2 = max(self.begin.y(), self.end.y())
-		
+		QtWidgets.QApplication.restoreOverrideCursor()
 		self.screenDimensions = {'A': [x1, y1], 'B': [x2, y2]}
 		print 'screenCaptured', self.screenDimensions
 		rigTester = RigTester(screenDimensions = self.screenDimensions)
@@ -73,10 +75,10 @@ class RigTester(QtWidgets.QDialog):
 		self.testList = []
 		self.setWindowTitle('Rig Tester')
 		self.setLayout(QtWidgets.QHBoxLayout())
-		self.rigTestList = QtWidgets.QListWidget()
+		self.rigTestListWidget = QtWidgets.QListWidget()
 		self.layout().setContentsMargins(5,5,5,5)
 		self.layout().setSpacing(5)
-		self.layout().addWidget(self.rigTestList)
+		self.layout().addWidget(self.rigTestListWidget)
 		self.path = None
 
 		# self.statusBar()
@@ -142,19 +144,19 @@ class RigTester(QtWidgets.QDialog):
 	def addViewToList(self):	
 		testDict = self.view.getTest()
 		self.testList.append(testDict)
-		self.rigTestList.addItem(testDict['name'])
+		self.rigTestListWidget.addItem(testDict['name'])
 		self.view.close()
 	
 	def addView(self):
 		self.view = ViewManager(parent = self)
 
 	def removeView(self):
-		selectedTest = self.rigTestList.selectedItems()
+		selectedTest = self.rigTestListWidget.selectedItems()
 		for item in selectedItems:
 			for test in self.testList:
 				if item == test['name']:
 					self.testList.remove(test)
-					self.rigTestList.takeItem(self.rigTestList.row(item))
+					self.rigTestListWidget.takeItem(self.rigTestListWidget.row(item))
 
 	def setPathUI(self):
 		self.pathUI = SetPath(parent = self)
@@ -172,7 +174,7 @@ class RigTester(QtWidgets.QDialog):
 
 		self.hide()
 
-		time.sleep(5)
+		time.sleep(2)
 
 		currentViewPosition = mc.xform(cam, query = True, worldSpace = True, translation=True)
 		currentViewOrientation = mc.xform(cam, query = True, worldSpace = True, rotation = True)
@@ -197,11 +199,11 @@ class RigTester(QtWidgets.QDialog):
 				attr = test['attr']
 				val = test['value']
 				mc.setAttr(obj + '.' + attr, float(val))
-				print mc.getAttr(obj + '.' + attr)
-
-			time.sleep(1)
+				mc.refresh()
+				
+			# time.sleep(1)
 			self.takeScreenshot(view['name'])
-			time.sleep(1)
+			# time.sleep(1)
 			for val in previousValues:
 				obj = val['obj']
 				attr = val['attr']
@@ -213,14 +215,15 @@ class RigTester(QtWidgets.QDialog):
 		mc.xform(cam, worldSpace = True, rotation = currentViewOrientation)
 
 	def loadTest(self):
-		filepath = QtWidgets.QFileDialog.getOpenFileName(parent = self)
-		f = open(filepath, 'r')
+		filepath, garbage = QtWidgets.QFileDialog.getOpenFileName(parent = self)
+		# f = open(filepath, 'r')
 
-		self.viewList = json.load(f)
+		self.testList = json.loads(filepath)
 		f.close()
 
 	def saveTest(self):
-		filepath = QtWidgets.QFileDialog.getSaveFileName(parent = self)
+		filepath, garbage = QtWidgets.QFileDialog.getSaveFileName(parent = self)
+		# print type(filepath)
 		f = open(filepath, 'w')
 
 		json.dump(self.testList, f, indent = 4)
