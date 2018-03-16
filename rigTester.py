@@ -216,9 +216,9 @@ class RigTester(QtWidgets.QDialog):
 
 	def loadTest(self):
 		filepath, garbage = QtWidgets.QFileDialog.getOpenFileName(parent = self)
-		# f = open(filepath, 'r')
+		f = open(filepath, 'r')
 
-		self.testList = json.loads(filepath)
+		self.testList = json.load(f)
 		f.close()
 
 	def saveTest(self):
