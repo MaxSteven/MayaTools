@@ -72,13 +72,13 @@ class RigTester(QtWidgets.QDialog):
 	def __init__(self, parent = None, screenDimensions = None):
 		super(RigTester, self).__init__(parent = getMainWindow())
 		self.screenDimensions = screenDimensions
-		self.testList = []
+		self.viewList = []
 		self.setWindowTitle('Rig Tester')
 		self.setLayout(QtWidgets.QHBoxLayout())
-		self.rigTestListWidget = QtWidgets.QListWidget()
+		self.rigViewListWidget = QtWidgets.QListWidget()
 		self.layout().setContentsMargins(5,5,5,5)
 		self.layout().setSpacing(5)
-		self.layout().addWidget(self.rigTestListWidget)
+		self.layout().addWidget(self.rigViewListWidget)
 		self.path = None
 
 		# self.statusBar()
@@ -112,51 +112,56 @@ class RigTester(QtWidgets.QDialog):
 		buttonsLayout = QtWidgets.QVBoxLayout()
 		self.layout().addLayout(buttonsLayout)
 
-		self.addRigTestButton = QtWidgets.QPushButton('Add new view')
-		self.addRigTestButton.clicked.connect(self.addView)
-		buttonsLayout.addWidget(self.addRigTestButton)
+		self.addRigViewButton = QtWidgets.QPushButton('Add new view')
+		self.addRigViewButton.clicked.connect(self.addView)
+		buttonsLayout.addWidget(self.addRigViewButton)
 
-		self.setRigTestPathButton = QtWidgets.QPushButton('Set path')
-		self.setRigTestPathButton.clicked.connect(self.setPathUI)
-		buttonsLayout.addWidget(self.setRigTestPathButton)
+		self.setRigViewPathButton = QtWidgets.QPushButton('Set path')
+		self.setRigViewPathButton.clicked.connect(self.setPathUI)
+		buttonsLayout.addWidget(self.setRigViewPathButton)
 
-		self.removeRigTestButton = QtWidgets.QPushButton('Remove view')
-		self.removeRigTestButton.clicked.connect(self.removeView)
-		buttonsLayout.addWidget(self.removeRigTestButton)
+		self.removeRigViewButton = QtWidgets.QPushButton('Remove view')
+		self.removeRigViewButton.clicked.connect(self.removeView)
+		buttonsLayout.addWidget(self.removeRigViewButton)
 
-		self.generateTestButton = QtWidgets.QPushButton('Generate Test')
-		self.generateTestButton.clicked.connect(self.generateTest)
-		buttonsLayout.addWidget(self.generateTestButton)
+		self.generateViewButton = QtWidgets.QPushButton('Generate View')
+		self.generateViewButton.clicked.connect(self.generateView)
+		buttonsLayout.addWidget(self.generateViewButton)
 
-		self.saveTestButton = QtWidgets.QPushButton('Save Test')
-		self.saveTestButton.clicked.connect(self.saveTest)
-		buttonsLayout.addWidget(self.saveTestButton)
+		self.saveViewButton = QtWidgets.QPushButton('Save View')
+		self.saveViewButton.clicked.connect(self.saveView)
+		buttonsLayout.addWidget(self.saveViewButton)
 
-		self.loadTestButton = QtWidgets.QPushButton('Load Test')
-		self.loadTestButton.clicked.connect(self.loadTest)
-		buttonsLayout.addWidget(self.loadTestButton)
+		self.loadViewButton = QtWidgets.QPushButton('Load View')
+		self.loadViewButton.clicked.connect(self.loadView)
+		buttonsLayout.addWidget(self.loadViewButton)
 
 		self.viewAdded.connect(self.addViewToList)
 		self.pathUpdated.connect(self.setPath)
 
 		self.show()
-	
-	def addViewToList(self):	
-		testDict = self.view.getTest()
-		self.testList.append(testDict)
-		self.rigTestListWidget.addItem(testDict['name'])
+
+	def addViewToList(self):
+		self.rigViewListWidget.clear()
+		for view in self.viewList:
+			self.rigViewListWidget.addItem(view['name'])
+
+	def getViewToList(self):	
+		viewDict = self.view.getView()
+		self.viewList.append(viewDict)
+		self.addViewToList()
 		self.view.close()
 	
 	def addView(self):
 		self.view = ViewManager(parent = self)
 
 	def removeView(self):
-		selectedTest = self.rigTestListWidget.selectedItems()
-		for item in selectedItems:
-			for test in self.testList:
-				if item == test['name']:
-					self.testList.remove(test)
-					self.rigTestListWidget.takeItem(self.rigTestListWidget.row(item))
+		selectedViews = self.rigViewListWidget.selectedItems()
+		for item in selectedViews:
+			for View in self.viewList:
+				if item == View['name']:
+					self.viewList.remove(View)
+					self.rigViewListWidget.takeItem(self.rigViewListWidget.row(item))
 
 	def setPathUI(self):
 		self.pathUI = SetPath(parent = self)
@@ -165,7 +170,7 @@ class RigTester(QtWidgets.QDialog):
 		self.path = self.pathUI.getPath()
 		self.pathUI.close()
 
-	def generateTest(self):
+	def generateView(self):
 		view = mui.M3dView.active3dView()
 		cam = OpenMaya.MDagPath()
 		view.getCamera(cam)
@@ -179,13 +184,13 @@ class RigTester(QtWidgets.QDialog):
 		currentViewPosition = mc.xform(cam, query = True, worldSpace = True, translation=True)
 		currentViewOrientation = mc.xform(cam, query = True, worldSpace = True, rotation = True)
 
-		for view in self.testList:
+		for view in self.viewList:
 			mc.xform(cam, worldSpace = True, translation = view['viewPosition'])
 			mc.xform(cam, worldSpace = True, rotation = view['viewOrientation'])
 			previousValues = []
-			for test in view['data']:
-				obj = test['obj']
-				attr = test['attr']
+			for View in view['data']:
+				obj = View['obj']
+				attr = View['attr']
 				val = mc.getAttr(obj + '.' + attr)
 				valDict = {
 							'obj': obj,
@@ -194,10 +199,10 @@ class RigTester(QtWidgets.QDialog):
 						}
 				previousValues.append(valDict)
 
-			for test in view['data']:
-				obj = test['obj']
-				attr = test['attr']
-				val = test['value']
+			for View in view['data']:
+				obj = View['obj']
+				attr = View['attr']
+				val = View['value']
 				mc.setAttr(obj + '.' + attr, float(val))
 				mc.refresh()
 				
@@ -214,19 +219,20 @@ class RigTester(QtWidgets.QDialog):
 		mc.xform(cam, worldSpace = True, translation = currentViewPosition)
 		mc.xform(cam, worldSpace = True, rotation = currentViewOrientation)
 
-	def loadTest(self):
+	def loadView(self):
 		filepath, garbage = QtWidgets.QFileDialog.getOpenFileName(parent = self)
 		f = open(filepath, 'r')
 
-		self.testList = json.load(f)
+		self.viewList = json.load(f)
+		self.addViewToList()
 		f.close()
 
-	def saveTest(self):
+	def saveView(self):
 		filepath, garbage = QtWidgets.QFileDialog.getSaveFileName(parent = self)
 		# print type(filepath)
 		f = open(filepath, 'w')
 
-		json.dump(self.testList, f, indent = 4)
+		json.dump(self.viewList, f, indent = 4)
 		f.close()
 
 	def takeScreenshot(self, name):
@@ -269,7 +275,7 @@ class ViewManager(QtWidgets.QDialog):
 		self.nameText = QtWidgets.QLineEdit()
 		nameLayout.addWidget(self.nameText)
 		
-		testLayout = QtWidgets.QHBoxLayout()
+		ViewLayout = QtWidgets.QHBoxLayout()
 		self.layout().addLayout(testLayout)
 
 		objectNameLayout = QtWidgets.QHBoxLayout()
@@ -300,18 +306,18 @@ class ViewManager(QtWidgets.QDialog):
 		addRemoveButtonsLayout = QtWidgets.QHBoxLayout()
 		self.layout().addLayout(addRemoveButtonsLayout)
 
-		self.addViewButton = QtWidgets.QPushButton('+')
-		addRemoveButtonsLayout.addWidget(self.addViewButton)
-		self.addViewButton.clicked.connect(self.addView)
+		self.addAttrTestButton = QtWidgets.QPushButton('+')
+		addRemoveButtonsLayout.addWidget(self.addAttrTestButton)
+		self.addAttrTestButton.clicked.connect(self.addAttrTest)
 
-		self.removeViewButton = QtWidgets.QPushButton('-')
-		addRemoveButtonsLayout.addWidget(self.removeViewButton)
-		self.removeViewButton.clicked.connect(self.removeView)
+		self.removeAttrTestButton = QtWidgets.QPushButton('-')
+		addRemoveButtonsLayout.addWidget(self.removeAttrTestButton)
+		self.removeAttrTestButton.clicked.connect(self.removeAttrTest)
 
-		self.testTable = QtWidgets.QTableWidget(3, 3)
-		self.testTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-		self.testTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-		self.layout().addWidget(self.testTable)
+		self.attrTestTable = QtWidgets.QTableWidget(3, 3)
+		self.attrTestTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+		self.attrTestTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+		self.layout().addWidget(self.attrTestTable)
 		
 		self.setTestButton = QtWidgets.QPushButton('Add/Modify')
 		self.setTestButton.clicked.connect(self.setTest)
