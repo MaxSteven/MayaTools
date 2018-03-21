@@ -27,7 +27,8 @@ def exportAnimation(options=None):
 	objectsToDelete = mc.ls(sl=True)
 	mc.select([obj for obj in mc.ls(type='joint') if 'Bind' in obj])
 	joints = mc.ls(sl=True)
-	mc.bakeResults(joints, simulation=True, t = frameRangeTuple,
+	if frameRangeTuple[0] != frameRangeTuple[1]:
+		mc.bakeResults(joints, simulation=True, t = frameRangeTuple,
 				sampleBy = 1, disableImplicitControl=True,
 				preserveOutsideKeys=True, sparseAnimCurveBake=False,
 				removeBakedAttributeFromLayer=False, removeBakedAnimFromLayer=False,
@@ -37,20 +38,23 @@ def exportAnimation(options=None):
 	mc.select(joints, d=True)
 	mc.select([obj for obj in mc.ls(type='transform') if 'lowPoly' in obj])
 	lowPolyParent = mc.ls(sl=True)[0]
+	print lowPolyParent
 	rootJointParent = next(joint for joint in joints if 'Ground' in joint)
+	print rootJointParent
 	selectionChildren = mc.listRelatives(selection, children=True)
 	for child in selectionChildren:
 		if child not in ['Deformation', 'GEO']:
 			mc.delete(child)
 	mc.select(rootJointParent, hi=True)
 	siblings = [child for child in mc.listRelatives('Deformation', children=True) if 'Ground' not in child]
+	print siblings
 	mc.delete(siblings)
 	allJoints = mc.ls(sl=True)
 	uselessJoints = [joint for joint in allJoints if 'End' in joint]
 	for joint in uselessJoints:
 		allJoints.remove(joint)
 		mc.delete(joint)
-
+	print allJoints
 	for joint in allJoints:
 		for attr in ['scaleX', 'scaleY', 'scaleZ', 'visibility']:
 			object = mc.listConnections(joint + '.' + attr, source=True)
@@ -58,14 +62,11 @@ def exportAnimation(options=None):
 			mc.delete(object)
 
 	mc.xform('Deformation', scale = (.01, .01, .01))
-	mc.refresh()
+	try:
 
+		mel.eval('file -force -options "v=0;" -typ "FBX export" -pr -es "' + path + '";')
+		print 'FBX export successful'
+	except:
+		print "Export failed!"
 
-
-	# try:
-	#	mel.eval('file -force -options "groups=1;ptgroups=1;materials=1;smoothing=1;normals=1" -typ "FBX export" -pr -es "' + path + '"')
-	#	print 'FBX export successful'
-	# except:
-	#	print "Export failed!"
-
-exportAnimation(options = {'AnimDir': 'c:/Shobhit_Stuff/', 'AnimName': 'test', 'FrameRange':'1-40'})
+exportAnimation(options = {'AnimDir': 'Q:/Assets/models_v003/humans/crowd_anim/Publish/', 'AnimName': 'crowd_female_tPose_v0002_1001-1001', 'FrameRange':'1001-1001'})
