@@ -136,7 +136,7 @@ class RigTester(QtWidgets.QDialog):
 		self.loadViewButton.clicked.connect(self.loadView)
 		buttonsLayout.addWidget(self.loadViewButton)
 
-		self.viewAdded.connect(self.addViewToList)
+		self.viewAdded.connect(self.getViewFromVM)
 		self.pathUpdated.connect(self.setPath)
 
 		self.show()
@@ -146,7 +146,7 @@ class RigTester(QtWidgets.QDialog):
 		for view in self.viewList:
 			self.rigViewListWidget.addItem(view['name'])
 
-	def getViewToList(self):	
+	def getViewFromVM(self):	
 		viewDict = self.view.getView()
 		self.viewList.append(viewDict)
 		self.addViewToList()
@@ -159,7 +159,7 @@ class RigTester(QtWidgets.QDialog):
 		selectedViews = self.rigViewListWidget.selectedItems()
 		for item in selectedViews:
 			for View in self.viewList:
-				if item == View['name']:
+				if item.text() == View['name']:
 					self.viewList.remove(View)
 					self.rigViewListWidget.takeItem(self.rigViewListWidget.row(item))
 
@@ -276,7 +276,7 @@ class ViewManager(QtWidgets.QDialog):
 		nameLayout.addWidget(self.nameText)
 		
 		ViewLayout = QtWidgets.QHBoxLayout()
-		self.layout().addLayout(testLayout)
+		self.layout().addLayout(ViewLayout)
 
 		objectNameLayout = QtWidgets.QHBoxLayout()
 		objectNameLayout.addWidget(QtWidgets.QLabel('Object:'))
@@ -286,13 +286,13 @@ class ViewManager(QtWidgets.QDialog):
 		self.getObjectButton = QtWidgets.QPushButton('<<')
 		self.getObjectButton.clicked.connect(self.getObjectFromSelection)
 		objectNameLayout.addWidget(self.getObjectButton)
-		testLayout.addLayout(objectNameLayout)
+		ViewLayout.addLayout(objectNameLayout)
 
 		attributeListLayout = QtWidgets.QHBoxLayout()
 		attributeListLayout.addWidget(QtWidgets.QLabel('Attribute:'))
 		self.attributeList = QtWidgets.QComboBox()
 		attributeListLayout.addWidget(self.attributeList)
-		testLayout.addLayout(attributeListLayout)
+		ViewLayout.addLayout(attributeListLayout)
 
 		valueLayout = QtWidgets.QHBoxLayout()
 		valueLayout.addWidget(QtWidgets.QLabel('Object:'))
@@ -301,7 +301,7 @@ class ViewManager(QtWidgets.QDialog):
 		self.getObjectButton = QtWidgets.QPushButton('<<')
 		self.getObjectButton.clicked.connect(self.getValueFromAttribute)
 		valueLayout.addWidget(self.getObjectButton)
-		testLayout.addLayout(valueLayout)
+		ViewLayout.addLayout(valueLayout)
 
 		addRemoveButtonsLayout = QtWidgets.QHBoxLayout()
 		self.layout().addLayout(addRemoveButtonsLayout)
@@ -325,7 +325,7 @@ class ViewManager(QtWidgets.QDialog):
 
 		self.show()
 
-	def addView(self):
+	def addAttrTest(self):
 		objJson = {
 			'obj': '',
 			'attr': '',
@@ -342,12 +342,12 @@ class ViewManager(QtWidgets.QDialog):
 
 		self.viewJson['data'].append(objJson)
 		# add to table
-		self.testTable.setRowCount(len(self.viewJson['data']))
+		self.attrTestTable.setRowCount(len(self.viewJson['data']))
 		row = len(self.viewJson['data']) - 1
 		columnIndex = 0
 		for key in ['obj', 'attr', 'value']:
 			item = QtWidgets.QTableWidgetItem(str(objJson[key]))
-			self.testTable.setItem(row, columnIndex, item)
+			self.attrTestTable.setItem(row, columnIndex, item)
 			columnIndex += 1
 
 	def setTest(self):
@@ -367,23 +367,23 @@ class ViewManager(QtWidgets.QDialog):
 		if self.parent:
 			self.parent.viewAdded.emit()
 
-	def getTest(self):
+	def getView(self):
 		return self.viewJson
 
-	def removeView(self):
-		row = self.testTable.currentRow()
+	def removeAttrTest(self):
+		row = self.attrTestTable.currentRow()
 		columnIndex = 0
 		selectedDataJson = {}
 		for key in ['obj', 'attr','value']:
-			if self.testTable.item(row, columnIndex).text() == '':
+			if self.attrTestTable.item(row, columnIndex).text() == '':
 				continue
 
-			selectedDataJson.update({key: self.testTable.item(row, columnIndex).text()})
+			selectedDataJson.update({key: self.attrTestTable.item(row, columnIndex).text()})
 			columnIndex += 1
 
 		if selectedDataJson in self.viewJson['data']:
 			self.viewJson['data'].remove(selectedDataJson)
-		self.testTable.removeRow(row)
+		self.attrTestTable.removeRow(row)
 
 	def getObjectFromSelection(self):
 		self.obj = mc.ls(sl=True)[0]
