@@ -2,7 +2,6 @@ import maya.cmds as mc
 from PySide2 import QtGui, QtCore, QtWidgets
 import maya.OpenMaya as OpenMaya
 import maya.OpenMayaUI as mui
-from PIL import ImageGrab
 
 import json
 
@@ -16,14 +15,12 @@ import os
 class ScreenCapture(QtWidgets.QWidget):
 	def __init__(self):
 		super(ScreenCapture, self).__init__()
-		img = ImageGrab.grab
-		self.screenDimensions = None
-		size = img().size
-		screen_width = size[0]
-		screen_height = size[1]
+		self.screen = QtWidgets.QDesktopWidget()
+		screen_width = self.screen.screenGeometry().width()
+		screen_height = self.screen.screenGeometry().height()
 		self.setGeometry(0, 0, screen_width, screen_height)
 		self.setWindowTitle(' ')
-		self.begin = QtCore.QPoint()	
+		self.begin = QtCore.QPoint()
 		self.end = QtCore.QPoint()
 		self.setWindowOpacity(0.3)
 		QtWidgets.QApplication.setOverrideCursor(
@@ -53,8 +50,8 @@ class ScreenCapture(QtWidgets.QWidget):
 
 		x1 = min(self.begin.x(), self.end.x())
 		y1 = min(self.begin.y(), self.end.y())
-		x2 = max(self.begin.x(), self.end.x())
-		y2 = max(self.begin.y(), self.end.y())
+		x2 = max(self.begin.x(), self.end.x()) - x1
+		y2 = max(self.begin.x(), self.end.x()) - y1
 		QtWidgets.QApplication.restoreOverrideCursor()
 		self.screenDimensions = {'A': [x1, y1], 'B': [x2, y2]}
 		print 'screenCaptured', self.screenDimensions
@@ -242,7 +239,9 @@ class RigTester(QtWidgets.QDialog):
 
 		point1 = self.screenDimensions['A']
 		point2 = self.screenDimensions['B']
-		img = ImageGrab.grab(bbox=(point1[0], point1[1], point2[0], point2[1]))
+		screenShotPixmap = QtGui.QPixmap()
+		img = screenShotPixmap.grabWindow(QtWidgets.QApplication.desktop().winId(), x = point1[0], y = point1[1], width = point2[0], height = point2[0])
+		# img = ImageGrab.grab(bbox=(point1[0], point1[1], point2[0], point2[1]))
 		img.save(self.path + '/ ' + name + '.png')
 
 	def quit(self):

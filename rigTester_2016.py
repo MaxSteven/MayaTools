@@ -18,7 +18,6 @@ class ScreenCapture(QtGui.QWidget):
 		self.screen = QtGui.QDesktopWidget()
 		screen_width = self.screen.screenGeometry().width()
 		screen_height = self.screen.screenGeometry().height()
-		self.pixmap = QtGui.QPixmap()
 		self.setGeometry(0, 0, screen_width, screen_height)
 		self.setWindowTitle(' ')
 		self.begin = QtCore.QPoint()	
