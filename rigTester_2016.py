@@ -20,7 +20,7 @@ class ScreenCapture(QtGui.QWidget):
 		screen_height = self.screen.screenGeometry().height()
 		self.setGeometry(0, 0, screen_width, screen_height)
 		self.setWindowTitle(' ')
-		self.begin = QtCore.QPoint()	
+		self.begin = QtCore.QPoint()
 		self.end = QtCore.QPoint()
 		self.setWindowOpacity(0.3)
 		QtGui.QApplication.setOverrideCursor(
@@ -50,10 +50,10 @@ class ScreenCapture(QtGui.QWidget):
 
 		x1 = min(self.begin.x(), self.end.x())
 		y1 = min(self.begin.y(), self.end.y())
-		x2 = min(self.begin.x(), self.end.x()) - x1
-		y2 = min(self.begin.x(), self.end.x()) - y1
+		x2 = max(self.begin.x(), self.end.x()) - x1
+		y2 = max(self.begin.y(), self.end.y()) - y1
 		QtGui.QApplication.restoreOverrideCursor()
-		self.screenDimensions = {'A': [x1, y1], 'B': [x2, y2]}
+		self.screenDimensions = {'point': [x1, y1], 'size': [x2, y2]}
 		print 'screenCaptured', self.screenDimensions
 		rigTester = RigTester(screenDimensions = self.screenDimensions)
 
@@ -143,12 +143,12 @@ class RigTester(QtGui.QDialog):
 		for view in self.viewList:
 			self.rigViewListWidget.addItem(view['name'])
 
-	def getViewFromVM(self):	
+	def getViewFromVM(self):
 		viewDict = self.view.getView()
 		self.viewList.append(viewDict)
 		self.addViewToList()
 		self.view.close()
-	
+
 	def addView(self):
 		self.view = ViewManager(parent = self)
 
@@ -202,10 +202,10 @@ class RigTester(QtGui.QDialog):
 				val = View['value']
 				mc.setAttr(obj + '.' + attr, float(val))
 				mc.refresh()
-				
-			# time.sleep(1)
+
+			time.sleep(1)
 			self.takeScreenshot(view['name'])
-			# time.sleep(1)
+			time.sleep(1)
 			for val in previousValues:
 				obj = val['obj']
 				attr = val['attr']
@@ -237,14 +237,9 @@ class RigTester(QtGui.QDialog):
 			print "Path not set"
 			return
 
-		point1 = self.screenDimensions['A']
-		point2 = self.screenDimensions['B']
-
 		screenShotPixmap = QtGui.QPixmap()
-		img = screenShotPixmap.grabWindow(QtGui.QApplication.desktop().winId(), x = point1[0], y = point1[1], width = point2[0], height = point2[0])
+		img = screenShotPixmap.grabWindow(QtGui.QApplication.desktop().winId(), x = self.screenDimensions['point'][0], y = self.screenDimensions['point'][1], w = self.screenDimensions['size'][0], h = self.screenDimensions['size'][1])
 		img.save(self.path + '/ ' + name + '.png')
-		# img = ImageGrab.grab(bbox=(point1[0], point1[1], point2[0], point2[1]))
-		# img.save(self.path + '/ ' + name + '.png')
 
 	def quit(self):
 		self.close()
@@ -268,14 +263,14 @@ class ViewManager(QtGui.QDialog):
 		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
 		sizePolicy.setHeightForWidth(True)
 		self.setSizePolicy(sizePolicy)
-		
+
 		nameLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(nameLayout)
 
 		nameLayout.addWidget(QtGui.QLabel('Name:'))
 		self.nameText = QtGui.QLineEdit()
 		nameLayout.addWidget(self.nameText)
-		
+
 		ViewLayout = QtGui.QHBoxLayout()
 		self.layout().addLayout(ViewLayout)
 
@@ -319,7 +314,7 @@ class ViewManager(QtGui.QDialog):
 		self.attrTestTable.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
 		self.attrTestTable.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
 		self.layout().addWidget(self.attrTestTable)
-		
+
 		self.setTestButton = QtGui.QPushButton('Add/Modify')
 		self.setTestButton.clicked.connect(self.setTest)
 		self.layout().addWidget(self.setTestButton)
@@ -430,7 +425,7 @@ class SetPath(QtGui.QDialog):
 		self.show()
 
 	def openDirectory(self):
-		dirpath = QtGui.QFileDialog.getExistingDirectory(self, 'Save Directory') 
+		dirpath = QtGui.QFileDialog.getExistingDirectory(self, 'Save Directory')
 		self.pathText.setText(dirpath)
 
 	def getPath(self):

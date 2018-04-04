@@ -1,11 +1,78 @@
+# Name: Animation Publisher
+# Author: Shobhit Khinvasara
+
 import maya.cmds as mc
+import maya
 import pymel.core as pymel
+
+import arkInit
+arkInit.init()
+
+import translators
+translator = translators.getCurrent()
+
+import baseWidget
+
+class AnimationPublisher(baseWidget.BaseWidget):
+	defaultOptions = {
+		'title': 'Animation Publisher',
+
+		'knobs': [
+			{
+				'name':'Animation directory',
+				'dataType': 'directory'
+			},
+			{
+				'name': 'Animation Sequence Name',
+				'dataType': 'text'
+			},
+			{
+				'name': 'Frame Range',
+				'dataType': 'FrameRange'
+			},
+			{
+				'name': 'Export FBX',
+				'dataType': 'checkbox',
+				'value': True
+			},
+			{
+				'name': 'Publish Animation',
+				'dataType': 'PythonButton',
+				'callback': 'publishAnimation'
+			}
+		]
+	}
+
+	def init(self):
+		pass
+
+	def postShow(self):
+		pass
+
+	def publishAnimation(self):
+		animationOptions = {
+			'AnimDir': self.getKnob('Animation directory').getValue(),
+			'AnimName': self.getKnob('Animation Sequence Name').getValue(),
+			'FrameRange': self.getKnob('Frame Range').getValue(),
+			'Export': self.getKnob('Export FBX').getValue()
+		}
+		# get/set animation publishing options
+		exportAnimation(options=animationOptions)
+
+
+def gui():
+	return AnimationPublisher()
+
+def launch(docked=False):
+	translator.launch(AnimationPublisher, docked=docked)
 
 def exportAnimation(options=None):
 	if not options:
 		return
-	path = options['AnimDir'] + '/' + options['AnimName'] + '.fbx'
+
 	frameRangeText = options['FrameRange']
+	animName = options['AnimName'] + '_' + frameRangeText
+	path = options['AnimDir'] + '/' + animName + '.fbx'
 	frameRange = [int(frame) for frame in frameRangeText.split('-')]
 	frameRangeTuple = (frameRange[0], frameRange[1])
 	if not len(mc.ls(sl=True)):
@@ -18,11 +85,13 @@ def exportAnimation(options=None):
 
 	mc.select(selection, hi=True)
 	objectsToDelete = mc.ls(sl=True)
-	for obj in objectsToDelete:
-		try:
-			mc.rename(obj, obj.replace(namespace + ':', ''))
-		except:
-			pass
+	mc.namespace(removeNamespace=namespace, mergeNamespaceWithRoot=True)
+
+	# for obj in objectsToDelete:
+	# 	try:
+	# 		mc.rename(obj, obj.replace(namespace + ':', ''))
+	# 	except:
+	# 		pass
 	selection = selection.replace(namespace + ':', '')
 	mc.select([obj for obj in mc.ls(type='joint') if 'Bind' in obj])
 	joints = mc.ls(sl=True)
@@ -33,6 +102,10 @@ def exportAnimation(options=None):
 				bakeOnOverrideLayer=False, minimizeRotation=True, controlPoints=False,
 				shape=True
 				)
+
+	for attr in mc.listAttr('bsh_all', keyable=True):
+		mc.setKeyframe('bsh_all', attribute = attr, time = frameRangeTuple[0])
+
 	mc.select(joints, d=True)
 	mc.select([obj for obj in mc.ls(type='transform') if 'lowPoly' in obj])
 	lowPolyParent = mc.ls(sl=True)[0]
@@ -60,10 +133,12 @@ def exportAnimation(options=None):
 	mc.select(selection)
 	mc.refresh()
 
-	try:
-		mel.eval('file -force -options "groups=1;ptgroups=1;materials=1;smoothing=1;normals=1" -typ "FBX export" -pr -es "' + path + '"')
-		print 'FBX export successful', path
-	except:
-		print "Export failed!"
+	if options['Export']:
+		try:
+			mel.eval('file -force -options "groups=1;ptgroups=1;materials=1;smoothing=1;normals=1" -typ "FBX export" -pr -es "' + path + '"')
+			print 'FBX export successful', path
+		except:
+			print "Export failed!"
 
-exportAnimation(options = {'AnimDir': 'c:/Shobhit_Stuff/', 'AnimName': 'testingAgain', 'FrameRange':'1-30'})
+# exportAnimation(options = {'AnimDir': 'c:/Shobhit_Stuff/', 'AnimName': 'testingAgain_2', 'FrameRange':'1-30'})
+launch()
