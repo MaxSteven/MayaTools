@@ -237,10 +237,13 @@ class RigTester(QtWidgets.QDialog):
 			print "Path not set"
 			return
 
-		point1 = self.screenDimensions['A']
-		point2 = self.screenDimensions['B']
+		print self.screenDimensions
 		screenShotPixmap = QtGui.QPixmap()
-		img = screenShotPixmap.grabWindow(QtWidgets.QApplication.desktop().winId(), x = point1[0], y = point1[1], width = point2[0], height = point2[0])
+		img = screenShotPixmap.grabWindow(QtWidgets.QApplication.desktop().winId(), 
+											x=self.screenDimensions['A'][0], 
+											y=self.screenDimensions['A'][1], 
+											width=self.screenDimensions['B'][0], 
+											height=self.screenDimensions['B'][1])
 		# img = ImageGrab.grab(bbox=(point1[0], point1[1], point2[0], point2[1]))
 		img.save(self.path + '/ ' + name + '.png')
 
