@@ -1,26 +1,23 @@
 import sys
-from PyQt5 import QtWidgets, QtCore, QtGui
-from PIL import ImageGrab
+from PyQt4 import QtGui, QtCore
 
-
-class MyWidget(QtWidgets.QWidget):
+class MyWidget(QtGui.QWidget):
 	def __init__(self):
 		super(MyWidget, self).__init__()
-		img = ImageGrab.grab
-		size = img().size
-		screen_width = size[0]
-		screen_height = size[1]
+		self.screen = QtGui.QDesktopWidget()
+		screen_width = self.screen.screenGeometry().width()
+		screen_height = self.screen.screenGeometry().height()
+		self.pixmap = QtGui.QPixmap()
 		self.setGeometry(0, 0, screen_width, screen_height)
 		self.setWindowTitle(' ')
 		self.begin = QtCore.QPoint()
 		self.end = QtCore.QPoint()
 		self.setWindowOpacity(0.3)
-		QtWidgets.QApplication.setOverrideCursor(
+		QtGui.QApplication.setOverrideCursor(
 			QtGui.QCursor(QtCore.Qt.CrossCursor)
 		)
 		self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 		print('Capture the screen...')
-		self.show()
 
 	def paintEvent(self, event):
 		qp = QtGui.QPainter(self)
@@ -42,16 +39,21 @@ class MyWidget(QtWidgets.QWidget):
 
 		x1 = min(self.begin.x(), self.end.x())
 		y1 = min(self.begin.y(), self.end.y())
-		x2 = max(self.begin.x(), self.end.x())
-		y2 = max(self.begin.y(), self.end.y())
+		x2 = max(self.begin.x(), self.end.x()) - x1
+		y2 = max(self.begin.y(), self.end.y()) - y1
 		
 
-		img = ImageGrab.grab(bbox=(x1, y1, x2, y2))
-		img.save('capture.png')
-		img.show()
+		screenShotPixmap = QtGui.QPixmap()
+		img = screenShotPixmap.grabWindow(QtGui.QApplication.desktop().winId(), x = x1, y = y1, width = x2, height = y2)
+		img.save('C:/rigTestFolder/testing.png')
+		self.close()
 		# img = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2RGB)
 
 		# cv2.imshow('Captured Image', img)
 		# cv2.waitKey(0)
 		# cv2.destroyAllWindows()
-test = MyWidget()
+if __name__ == '__main__':
+	app = QtGui.QApplication(sys.argv)
+	window = MyWidget()
+	window.show()
+	sys.exit(app.exec_())

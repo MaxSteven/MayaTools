@@ -393,6 +393,7 @@ class ViewManager(QtWidgets.QDialog):
 	def getKeyableAttributesFromObject(self):
 		obj = self.objectNameText.text()
 		attributes = mc.listAttr(obj, keyable = True, unlocked = True)
+		self.attributeList.clear()
 		self.attributeList.addItems(attributes)
 
 	def getValueFromAttribute(self):
