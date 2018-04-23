@@ -107,9 +107,17 @@ class armIkFkBlending():
 
 		self.ikControlObject = mc.circle(nr = (0, 0, 1), c = (0,0,0), r = 10, name = self.jointNames[2]+"_IK_CTL")[0]
 
-		mc.xform(self.ikControlObject, worldSpace=True, translation=mc.xform(self.ikJoints[2], query = True, worldSpace = True, translation = True))
+		# mc.xform(self.ikControlObject, worldSpace=True, translation=mc.xform(self.ikJoints[2], query = True, worldSpace = True, translation = True))
 
 		mc.makeIdentity(self.ikControlObject, apply=True, t=1, r=1, s=1, n=0)
+
+		ikControlOffsetGroup = mc.group(self.ikControlObject, n = self.ikControlObject.replace('_CTL', 'Offset_GRP'))
+		ikControlGroup = mc.group(ikControlOffsetGroup, n = self.ikControlObject.replace('_CTL', '_GRP'))
+
+		mc.parent(ikControlGroup, self.ikJoints[2])
+		mc.makeIdentity(ikControlGroup, t = 1, r = 1, s = 1)
+		mc.parent(ikControlGroup, world=True)
+		mc.orientConstraint(self.ikControlObject, self.ikJoints[2], mo=False)
 
 		mc.parent(ikHandle, self.ikControlObject)
 
@@ -121,6 +129,7 @@ class armIkFkBlending():
 	def blend(self):
 		self.blendColor1 = mc.shadingNode("blendColors", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_BLC")
 		self.blendColor2 = mc.shadingNode("blendColors", asUtility = True, n = self.blendedJoints[1].rpartition("_")[0]+"_BLC")
+		self.blendColor3 = mc.shadingNode("blendColors", asUtility = True, n = self.blendedJoints[2].rpartition("_")[0]+"_BLC")
 
 		self.mainControl = mc.circle(nr = (0, 1, 0), c = (0,0,0), r = 3)[0]
 
@@ -132,15 +141,23 @@ class armIkFkBlending():
 		
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.blendColor1+".blender")
 
+		mc.connectAttr(self.blendColor1+".output", self.blendedJoints[0]+".rotate")
+		
 		mc.connectAttr(self.ikJoints[1]+".rotate", self.blendColor2+".color1")
 		
 		mc.connectAttr(self.fkJoints[1]+".rotate", self.blendColor2+".color2")
 		
 		mc.connectAttr(self.mainControl+".ik_fk_blend", self.blendColor2+".blender")
 
-		mc.connectAttr(self.blendColor1+".output", self.blendedJoints[0]+".rotate")
-
 		mc.connectAttr(self.blendColor2+".output", self.blendedJoints[1]+".rotate")
+
+		mc.connectAttr(self.ikJoints[2]+".rotate", self.blendColor3+".color1")
+		
+		mc.connectAttr(self.fkJoints[2]+".rotate", self.blendColor3+".color2")
+		
+		mc.connectAttr(self.mainControl+".ik_fk_blend", self.blendColor3+".blender")
+
+		mc.connectAttr(self.blendColor3+".output", self.blendedJoints[2]+".rotate")
 
 		self.reverseNode1 = mc.shadingNode("reverse", asUtility = True, n = self.blendedJoints[0].rpartition("_")[0]+"_REV")
 

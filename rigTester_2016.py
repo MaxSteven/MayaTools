@@ -78,34 +78,6 @@ class RigTester(QtGui.QDialog):
 		self.layout().addWidget(self.rigViewListWidget)
 		self.path = None
 
-		# self.statusBar()
-
-		# saveAction = QtGui.QAction('Save', self)
-		# saveAction.setShortcut("Ctrl+S")
-		# saveAction.setStatusTip('&Save the test')
-		# saveAction.triggered.connect(self.saveTest)
-
-		# self.mainMenu = self.menuBar()
-		# fileMenu = self.mainMenu.addMenu('&File')
-
-		# saveAction = QtGui.QAction('Save', self)
-		# saveAction.setShortcut("Ctrl+S")
-		# saveAction.setStatusTip('Save the test')
-		# saveAction.triggered.connect(self.saveTest)
-		# fileMenu.addAction(saveAction)
-
-		# loadAction = QtGui.QAction('Load', self)
-		# loadAction.setShortcut("Ctrl+O")
-		# loadAction.setStatusTip('load the test')
-		# loadAction.triggered.connect(self.loadTest)
-		# fileMenu.addAction(loadAction)
-
-		# quitAction = QtGui.QAction('Quit', self)
-		# quitAction.setShortcut("Ctrl+Q")
-		# quitAction.setStatusTip('Quit')
-		# quitAction.triggered.connect(self.quit)
-		# fileMenu.addAction(quitAction)
-
 		buttonsLayout = QtGui.QVBoxLayout()
 		self.layout().addLayout(buttonsLayout)
 
@@ -238,7 +210,11 @@ class RigTester(QtGui.QDialog):
 			return
 
 		screenShotPixmap = QtGui.QPixmap()
-		img = screenShotPixmap.grabWindow(QtGui.QApplication.desktop().winId(), x = self.screenDimensions['point'][0], y = self.screenDimensions['point'][1], w = self.screenDimensions['size'][0], h = self.screenDimensions['size'][1])
+		img = screenShotPixmap.grabWindow(QtGui.QApplication.desktop().winId(), 
+										x=self.screenDimensions['point'][0], 
+										y=self.screenDimensions['point'][1], 
+										w=self.screenDimensions['size'][0], 
+										h=self.screenDimensions['size'][1])
 		img.save(self.path + '/ ' + name + '.png')
 
 	def quit(self):
@@ -337,6 +313,7 @@ class ViewManager(QtGui.QDialog):
 		objJson['value'] = self.valueText.text()
 
 		self.viewJson['data'].append(objJson)
+		
 		# add to table
 		self.attrTestTable.setRowCount(len(self.viewJson['data']))
 		row = len(self.viewJson['data']) - 1

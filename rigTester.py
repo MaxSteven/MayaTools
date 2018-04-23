@@ -53,7 +53,7 @@ class ScreenCapture(QtWidgets.QWidget):
 		x2 = max(self.begin.x(), self.end.x()) - x1
 		y2 = max(self.begin.x(), self.end.x()) - y1
 		QtWidgets.QApplication.restoreOverrideCursor()
-		self.screenDimensions = {'A': [x1, y1], 'B': [x2, y2]}
+		self.screenDimensions = {'point': [x1, y1], 'size': [x2, y2]}
 		print 'screenCaptured', self.screenDimensions
 		rigTester = RigTester(screenDimensions = self.screenDimensions)
 
@@ -78,40 +78,23 @@ class RigTester(QtWidgets.QDialog):
 		self.layout().addWidget(self.rigViewListWidget)
 		self.path = None
 
-		# self.statusBar()
-
-		# saveAction = QtWidgets.QAction('Save', self)
-		# saveAction.setShortcut("Ctrl+S")
-		# saveAction.setStatusTip('&Save the test')
-		# saveAction.triggered.connect(self.saveTest)
-
-		# self.mainMenu = self.menuBar()
-		# fileMenu = self.mainMenu.addMenu('&File')
-
-		# saveAction = QtWidgets.QAction('Save', self)
-		# saveAction.setShortcut("Ctrl+S")
-		# saveAction.setStatusTip('Save the test')
-		# saveAction.triggered.connect(self.saveTest)
-		# fileMenu.addAction(saveAction)
-
-		# loadAction = QtWidgets.QAction('Load', self)
-		# loadAction.setShortcut("Ctrl+O")
-		# loadAction.setStatusTip('load the test')
-		# loadAction.triggered.connect(self.loadTest)
-		# fileMenu.addAction(loadAction)
-
-		# quitAction = QtWidgets.QAction('Quit', self)
-		# quitAction.setShortcut("Ctrl+Q")
-		# quitAction.setStatusTip('Quit')
-		# quitAction.triggered.connect(self.quit)
-		# fileMenu.addAction(quitAction)
-
 		buttonsLayout = QtWidgets.QVBoxLayout()
 		self.layout().addLayout(buttonsLayout)
 
 		self.addRigViewButton = QtWidgets.QPushButton('Add new view')
 		self.addRigViewButton.clicked.connect(self.addView)
 		buttonsLayout.addWidget(self.addRigViewButton)
+
+		pathLayout.addWidget(QtWidgets.QLabel('Directory:'))
+		self.pathText = QtWidgets.QLineEdit()
+		pathLayout.addWidget(self.pathText)
+		self.getDirButton = QtWidgets.QPushButton('...')
+		self.getDirButton.clicked.connect(self.openDirectory)
+		pathLayout.addWidget(self.getDirButton)
+
+		self.setPathButton = QtWidgets.QPushButton('Set Path')
+		self.setPathButton.clicked.connect(self.setPath)
+		self.layout().addWidget(self.setPathButton)
 
 		self.setRigViewPathButton = QtWidgets.QPushButton('Set path')
 		self.setRigViewPathButton.clicked.connect(self.setPathUI)
@@ -137,6 +120,17 @@ class RigTester(QtWidgets.QDialog):
 		self.pathUpdated.connect(self.setPath)
 
 		self.show()
+
+	def openDirectory(self):
+		dirpath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Save Directory') 
+		self.pathText.setText(dirpath)
+
+	def getPath(self):
+		return self.path
+
+	def setPath(self):
+		self.path = self.pathText.text()
+		self.parent.pathUpdated.emit()
 
 	def addViewToList(self):
 		self.rigViewListWidget.clear()
@@ -203,9 +197,9 @@ class RigTester(QtWidgets.QDialog):
 				mc.setAttr(obj + '.' + attr, float(val))
 				mc.refresh()
 				
-			# time.sleep(1)
+			time.sleep(.3)
 			self.takeScreenshot(view['name'])
-			# time.sleep(1)
+			time.sleep(.3)
 			for val in previousValues:
 				obj = val['obj']
 				attr = val['attr']
@@ -240,10 +234,10 @@ class RigTester(QtWidgets.QDialog):
 		print self.screenDimensions
 		screenShotPixmap = QtGui.QPixmap()
 		img = screenShotPixmap.grabWindow(QtWidgets.QApplication.desktop().winId(), 
-											x=self.screenDimensions['A'][0], 
-											y=self.screenDimensions['A'][1], 
-											width=self.screenDimensions['B'][0], 
-											height=self.screenDimensions['B'][1])
+											x=self.screenDimensions['point'][0], 
+											y=self.screenDimensions['point'][1], 
+											width=self.screenDimensions['size'][0], 
+											height=self.screenDimensions['size'][1])
 		# img = ImageGrab.grab(bbox=(point1[0], point1[1], point2[0], point2[1]))
 		img.save(self.path + '/ ' + name + '.png')
 
@@ -297,7 +291,7 @@ class ViewManager(QtWidgets.QDialog):
 		ViewLayout.addLayout(attributeListLayout)
 
 		valueLayout = QtWidgets.QHBoxLayout()
-		valueLayout.addWidget(QtWidgets.QLabel('Object:'))
+		valueLayout.addWidget(QtWidgets.QLabel('Value:'))
 		self.valueText = QtWidgets.QLineEdit()
 		valueLayout.addWidget(self.valueText)
 		self.getObjectButton = QtWidgets.QPushButton('<<')
@@ -401,7 +395,7 @@ class ViewManager(QtWidgets.QDialog):
 	def getValueFromAttribute(self):
 		attr = self.attributeList.currentText()
 		value = mc.getAttr(self.obj + '.' + attr)
-		self.valueText.setText(value)
+		self.valueText.setText(str(value))
 
 class SetPath(QtWidgets.QDialog):
 	def __init__(self, parent = None):
