@@ -39,7 +39,7 @@ Rig Tasks
 [ ] - Software and scripts/tools for Human System Pipeline
 	[ ] - Maya 2018
 	[ ] - Post rig reverse foot
-	[ ] - Other post rig scripts necessary
+	[ ] - Other post rig scripts as needed
 	[ ] - Blendshape replace script
 	[ ] - Auto-retargeter and bone posing
 	[ ] - Proportion Matcher
