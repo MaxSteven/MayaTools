@@ -1,56 +1,65 @@
 Rig Tasks
 
 [ ] - Revise and adjust current CONTROL rig to work with Mocap rig
-	[ ] - Symmetrical body joints
-	[ ] - Revise Bind pose
-	[ ] - General Scaling
-	[ ] - Blended FK and IK Neck
-	[ ] - Blended FK and IK Spine
-	[ ] - Improved finger orients
-	[ ] - Curl and spread controls on Hand
-	[ ] - Improved carpal controls
-	[ ] - Scaling control set
-	[ ] - Improved toe/ball pivot
-	[ ] - Seamless ik/fk switching/matching
-	[ ] - Non-uniform scaling and finger segment scaling
-	[ ] - Preserved motion capture orientations
-	[ ] - Space switching for IK controls
-	[ ] - Foot Side pivot rotation
+	[ ] - Revise Bind pose - 5 days
+	[ ] - Improved finger orients - 1 day
+	[ ] - Symmetrical body joints - 3 days
+	[ ] - General Scaling - 1 day
+	[ ] - Improved toe/ball pivot - 1 day
+	[ ] - Scaling control set - half a day
+	[ ] - Improved carpal controls - half a day
+	[ ] - Curl and spread controls on Hand - half to 1 day
+	[ ] - Foot Side pivot rotation - 1 day
+				TOTAL = 2 - 4 weeks
+				
+	[ ] - Blended/Matched FK and IK Neck - RnD needed
+	[ ] - Blended/Matched FK and IK Spine - RnD needed
+	[ ] - Seamless  or Blended/Matched FK and IK Limbs - RnD needed
+	[ ] - Space switching for IK controls - 3 days
+	[ ] - Preserved motion capture orientations - RnD needed
+		[ ] - No Flip Shoulder etc.
 
 [ ] - Revise and adjust current DEFORMATION rig to work with all anatomical poses
-	[ ] - Improved Clavicle solve
-	[ ] - Improved Scapula solve
-	[ ] - Separate puppet rig
-	[ ] - Improved Radius Ulna rig
-	[ ] - Ribbon neck
-	[ ] - Ribbon spine
-	[ ] - Revised hyoid
-	[ ] - Preserved motion capture orientations
-	[ ] - Ribbon-based muscle joints(Naughty dog reference) or a BUNCH of helper joints
-	[ ] - Helper roll bones in shoulder and hip and maybe wrist
+	[ ] - Improved Clavicle solve - 3 days
+	[ ] - Improved Scapula solve - 3 days
+	[ ] - Separate puppet rig - 1 day
+	[ ] - Improved Radius Ulna rig - 2 days
+	[ ] - Ribbon neck - 1 day
+	[ ] - Ribbon spine - 1 day
+	[ ] - Revised hyoid - 1 day
+	[ ] - Helper roll bones in shoulder and hip and maybe wrist - 3 days
+			TOTAL = 3 - 6 weeks
+	[ ] - Preserved motion capture orientations - RnD needed
+		[ ] - Researching how Motion Capture data can be applied safely to Body's anatomical limits
+	[ ] - Ribbon-based muscle joints(Naughty dog reference) or a BUNCH of helper joints - RnD needed
 
 [ ] - Facial rig
-	[ ] - Seperate top/bot lip ctrls
-	[ ] - Improved fleshy eye
-	[ ] - Tweaker face rig
-	[ ] - Mouth wipes on facial rig
-	[ ] - Sticky lips
+	[ ] - Seperate top/bot lip ctrls - 3 days
+	[ ] - Improved fleshy eye - 3 days
+	[ ] - Tweaker face rig - 2 days
+	[ ] - Mouth wipes on facial rig - 3 days
+	[ ] - Sticky lips - 3 days
+		TOTAL = 3 - 6 weeks
 
 [ ] - Software and scripts/tools for Human System Pipeline
-	[ ] - Maya 2018
-	[ ] - Post rig reverse foot
-	[ ] - Other post rig scripts as needed
-	[ ] - Blendshape replace script
-	[ ] - Auto-retargeter and bone posing
-	[ ] - Proportion Matcher
-	[ ] - Design ability to change Bind pose(joint position and orientation) if/when needed
+	[ ] - Post rig reverse foot - 3 days
+
+	[ ] - Maya 2018 - Dev task, RnD needed
+	[ ] - Other post rig scripts as needed- RnD needed
+	[ ] - Blendshape replace script - RnD needed
+	[ ] - Auto-retargeter and bone posing - RnD needed
+	[ ] - Proportion Matcher script - RnD needed
 
 [ ] - In the Horizon
+
+	[ ] - Non-uniform scaling and finger segment scaling - Low Priority
+	[ ] - Design ability to change Bind pose(joint position and orientation) if/when needed - Low Priority
+	[ ] - IK fingers
+
 	[ ] - Displacement blending
 	[ ] - Guide rig with muscle sim either in Houdini or Maya
-	[ ] - IK fingers
 	[ ] - SOUP nodes for real sticky lips
-	[ ] - Pose Library
-	[ ] - Anim control UI
+	[ ] - Motion Capture/Joint driven Facial Rig
 	[ ] - Auto-rigger for any creature
 		(For Any Golems and Apes from Plant of the Apes)
+	[ ] - Custom Anim control UI
