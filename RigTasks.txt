@@ -1,65 +1,76 @@
-Rig Tasks
+Human System Rig Tasks
 
 [ ] - Revise and adjust current CONTROL rig to work with Mocap rig
-	[ ] - Revise Bind pose - 5 days
-	[ ] - Improved finger orients - 1 day
-	[ ] - Symmetrical body joints - 3 days
-	[ ] - General Scaling - 1 day
-	[ ] - Improved toe/ball pivot - 1 day
-	[ ] - Scaling control set - half a day
-	[ ] - Improved carpal controls - half a day
-	[ ] - Curl and spread controls on Hand - half to 1 day
-	[ ] - Foot Side pivot rotation - 1 day
-				TOTAL = 2 - 4 weeks
-				
-	[ ] - Blended/Matched FK and IK Neck - RnD needed
-	[ ] - Blended/Matched FK and IK Spine - RnD needed
-	[ ] - Seamless  or Blended/Matched FK and IK Limbs - RnD needed
-	[ ] - Space switching for IK controls - 3 days
-	[ ] - Preserved motion capture orientations - RnD needed
+	[ ] - Revise Bind pose and rig finishing
+		[ ] - Revise bind pose*
+			[ ] - Symmetrical body joints - 3 days **
+			[ ] - Improved finger orients - 1 day *
+			[ ] - Uniform Scaling - 1 day *
+			[ ] - Improved toe/ball pivot and Foot Side pivot rotation - 1 day *
+			[ ] - Scaling control set - half day *
+			[ ] - Curl, Cup and spread controls on Hand - half to 1 day**
+			[ ] - Blended IK/FK Neck - 2 days **
+			[ ] - Blended IK/FK Spine - 2 days**
+			[ ] - Space switching for IK controls(maybe happens via post rig script) - 3 days*
+
+				TOTAL including testing = 2 - 4 weeks
+
+	[ ] - Seamless FK and IK Limbs - RnD needed (not more than 2 days)* link: https://vimeo.com/163055510
+	[ ] - Seamless FK and IK Neck - RnD needed (not more than 2 days)
+	[ ] - Seamless FK and IK Spine - RnD needed (not more than 2 days)
+	[ ] - Preserved motion capture orientations - RnD needed**(not more than 2 days)
 		[ ] - No Flip Shoulder etc.
 
 [ ] - Revise and adjust current DEFORMATION rig to work with all anatomical poses
-	[ ] - Improved Clavicle solve - 3 days
-	[ ] - Improved Scapula solve - 3 days
-	[ ] - Separate puppet rig - 1 day
-	[ ] - Improved Radius Ulna rig - 2 days
-	[ ] - Ribbon neck - 1 day
-	[ ] - Ribbon spine - 1 day
-	[ ] - Revised hyoid - 1 day
-	[ ] - Helper roll bones in shoulder and hip and maybe wrist - 3 days
-			TOTAL = 3 - 6 weeks
-	[ ] - Preserved motion capture orientations - RnD needed
+	[ ] - Improved Clavicle and Scapula rig - 5 days**
+	[ ] - Separate puppet rig - 1 day*
+	[ ] - Improved Radius Ulna rig - 1 days**
+	[ ] - Ribbon neck - half day*
+	[ ] - Ribbon spine - half day* https://vimeo.com/162988494
+	[ ] - Revised hyoid - half day
+	[ ] - Apply Twist Dispersion plugin* https://vimeo.com/188368312
+	[ ] - Helper roll bones in shoulder and hip and maybe wrist - 2 days**
+	[ ] - Revised Skinning - 2 days**
+	[ ] - Replace Body correctives - half day**
+			TOTAL including testing = 2 - 3 weeks
+
+	[ ] - Ribbon-based muscle joints(Naughty dog reference) or a BUNCH of helper/ribbon joints - RnD needed**(not more than 3 days) https://www.youtube.com/watch?v=myZcUvU8YWc 18mins in
+	[ ] - Preserved motion capture orientations - RnD needed**(not more than 2 days)
 		[ ] - Researching how Motion Capture data can be applied safely to Body's anatomical limits
-	[ ] - Ribbon-based muscle joints(Naughty dog reference) or a BUNCH of helper joints - RnD needed
 
 [ ] - Facial rig
-	[ ] - Seperate top/bot lip ctrls - 3 days
-	[ ] - Improved fleshy eye - 3 days
-	[ ] - Tweaker face rig - 2 days
-	[ ] - Mouth wipes on facial rig - 3 days
+	[ ] - Seperate top/bot lip ctrls - 2 days*
+	[ ] - Improved fleshy eye - 2 days**
+	[ ] - Tweaker face rig - 2 days*
+	[ ] - Mouth wipes on facial rig - 1 day*
 	[ ] - Sticky lips - 3 days
-		TOTAL = 3 - 6 weeks
+		TOTAL including testing = 2 weeks
 
 [ ] - Software and scripts/tools for Human System Pipeline
-	[ ] - Post rig reverse foot - 3 days
+	[ ] - Post rig reverse foot - 3 days**
+	[ ] - Auto-retargeter and bone posing - 2 days
+	[ ] - Bake Anim tool - 2 days
+			TOTAL including testing: 1 week
 
-	[ ] - Maya 2018 - Dev task, RnD needed
-	[ ] - Other post rig scripts as needed- RnD needed
+	[~] - Maya 2018 - Dev task, IN PROGRESS
+
+	[ ] - Other post rig scripts as needed- RnD needed*
 	[ ] - Blendshape replace script - RnD needed
-	[ ] - Auto-retargeter and bone posing - RnD needed
 	[ ] - Proportion Matcher script - RnD needed
 
-[ ] - In the Horizon
+
+
+
+[ ] - On the Horizon
 
 	[ ] - Non-uniform scaling and finger segment scaling - Low Priority
 	[ ] - Design ability to change Bind pose(joint position and orientation) if/when needed - Low Priority
-	[ ] - IK fingers
+	[ ] - IK fingers - Low Priority
 
 	[ ] - Displacement blending
-	[ ] - Guide rig with muscle sim either in Houdini or Maya
+	[ ] - Guide rig with muscle sim either in Houdini or Maya (2 months)
 	[ ] - SOUP nodes for real sticky lips
-	[ ] - Motion Capture/Joint driven Facial Rig
+	[ ] - Motion Capture/Joint driven Facial Rig (1 month)
 	[ ] - Auto-rigger for any creature
 		(For Any Golems and Apes from Plant of the Apes)
 	[ ] - Custom Anim control UI
