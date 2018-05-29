@@ -29,10 +29,12 @@ Human System Rig Tasks
 	[ ] - Ribbon spine - half day* https://vimeo.com/162988494
 	[ ] - Revised hyoid - half day
 	[ ] - Apply Twist Dispersion plugin* https://vimeo.com/188368312
+	[ ] - Implement weight driver plugin* http://www.braverabbit.com/weightdriver/
 	[ ] - Helper roll bones in shoulder and hip and maybe wrist - 2 days**
 	[ ] - Revised Skinning - 2 days**
 	[ ] - Replace Body correctives - half day**
 			TOTAL including testing = 2 - 3 weeks
+
 
 	[ ] - Ribbon-based muscle joints(Naughty dog reference) or a BUNCH of helper/ribbon joints - RnD needed**(not more than 3 days) https://www.youtube.com/watch?v=myZcUvU8YWc 18mins in
 	[ ] - Preserved motion capture orientations - RnD needed**(not more than 2 days)
