@@ -1,0 +1,12 @@
+import maya.cmds as mc
+
+control = mc.ls(sl=True)[0]
+joint = mc.ls(sl=True)[1]
+control = mc.rename(control, joint.replace('_JNT', 'CTL'))
+groupName = mc.group(control, n = joint.replace('_JNT', '_GRP'))
+offsetGroupName = mc.group(groupName, n = joint.replace('_JNT', 'Offset_GRP'))
+mc.parent(offsetGroupName, joint)
+mc.makeIdentity(offsetGroupName, t = 1, r = 1, s = 1)
+jointParent = mc.listRelatives(joint, parent=True)[0]
+mc.parent(offsetGroupName, jointParent)
+mc.parent(joint, control)
