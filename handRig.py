@@ -8,7 +8,7 @@ def handRig():
 
 
 def setupFKControl(obj, circleSize = .5):
-	control = mc.circle(n = obj.replace('JNT', 'CTL'), nr=(0, 0, 1), c=(0, 0, 0), r = circleSize)[0]
+	control = mc.circle(n = obj.replace('JNT', 'CTL'), nr=(1, 0, 0), c=(0, 0, 0), r = circleSize)[0]
 	controlGroup = mc.group(control, n = obj.replace('JNT', 'GRP'))
 	mc.parent(controlGroup, obj)
 	mc.makeIdentity(controlGroup, t = 1, r = 1, s = 1)
