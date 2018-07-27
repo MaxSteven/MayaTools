@@ -1,2 +1,0 @@
-xcopy /Y "R:\Assets\Tools\_dev\Max\MaxManaged.ribbon" "%userprofile%\AppData\Local\Autodesk\3dsMax\2011 - 64bit\enu\UI\"
-xcopy /Y "R:\Assets\Tools\_dev\Max\MaxManaged.xaml" "%userprofile%\AppData\Local\Autodesk\3dsMax\2011 - 64bit\enu\UI\"

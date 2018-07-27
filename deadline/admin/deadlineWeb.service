@@ -1,9 +1,0 @@
-[Unit]
-Description=Deadline Web Service
-
-[Service]
-Type=simple
-ExecStart=/opt/Thinkbox/Deadline10/bin/deadlinewebservice
-
-[Install]
-WantedBy=default.target

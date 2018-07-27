@@ -1,6 +1,0 @@
-#LXMacro#
-select.drop vertex
-select.drop edge
-select.drop polygon
-select.drop item
-

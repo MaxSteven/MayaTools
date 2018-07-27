@@ -1,3 +1,0 @@
-#!/bin/bash
-
-python /ie/ark/tools/hub/hub.pyc || python /ie/ark/tools/hub/hub.py

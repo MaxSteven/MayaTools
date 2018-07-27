@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Terminal=true
-Exec=nuke --hiero --nocrashprompt
-Name=Hiero
-Icon=/usr/Nuke10.0v4/plugins/icons/HieroApp64.png

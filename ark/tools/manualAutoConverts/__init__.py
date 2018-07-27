@@ -1,1 +1,0 @@
-from manualAutoConvertsGui import ManualAutoConvertsGui

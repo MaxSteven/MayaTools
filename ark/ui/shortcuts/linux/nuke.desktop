@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Terminal=true
-Exec=nuke --nocrashprompt
-Name=Nuke
-Icon=/usr/Nuke10.0v4/plugins/icons/NukeApp48.png

@@ -1,8 +1,0 @@
-[user]
-	name = Ingenuity Worker
-	email = developer@ingenuitystudios.com
-[merge]
-	tool = p4merge
-	ff = false
-[mergetool "p4merge"]
-	cmd = p4merge $BASE $LOCAL $REMOTE $MERGED

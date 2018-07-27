@@ -1,5 +1,0 @@
-python /ramburglar/Assets/Tools/install/ie/ark/setup/installModulesNoDependencies.pyc --local /var/ie --master /ramburglar/Assets/Tools/install/ie --confirm
-
-python /ie/ark/setup/Setup.py
-
-python /ie/ark/admin/setComputerSettings.pyc

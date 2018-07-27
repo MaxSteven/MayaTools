@@ -1,6 +1,0 @@
-#LXMacro#
-tool.set TransformScale on
-tool.attr xfrm.transform SX 1.0
-tool.attr xfrm.transform SY 1.0
-tool.attr xfrm.transform SZ 0.0
-tool.apply

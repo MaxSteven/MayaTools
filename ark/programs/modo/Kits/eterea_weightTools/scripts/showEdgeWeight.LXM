@@ -1,3 +1,0 @@
-#LXMacro#
-select.vertexMap Subdivision subd replace
-view3d.shadingStyle vmap
