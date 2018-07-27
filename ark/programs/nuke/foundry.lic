@@ -1,0 +1,3 @@
+INCREMENT ocula_ofx_i foundry 2.1 permanent uncounted HOSTID=ANY SIGN="1234"
+INCREMENT ocula_nuke_i foundry 2.1 permanent uncounted HOSTID=ANY SIGN="1234"
+INCREMENT rollingshutter_ofx_i foundry 1.0 permanent uncounted HOSTID=ANY SIGN="1234"

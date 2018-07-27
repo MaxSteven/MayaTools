@@ -1,0 +1,26 @@
+#! C:/Program Files/Nuke9.0v3/nuke-9.0.3.dll -nx
+version 9.0 v3
+Gizmo {
+ label "(frame \[value first_frameNode])"
+ addUserKnob {20 User}
+ addUserKnob {41 first_frameNode l "first frame" T FrameHold1.first_frame}
+ addUserKnob {41 increment T FrameHold1.increment}
+ addUserKnob {22 curFrame l "Use Current Frame" t "Sets the framehold to the current frame" T nuke.thisNode().knob('first_frameNode').setValue(nuke.frame()) +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -308
+  ypos -304
+ }
+ FrameHold {
+  name FrameHold1
+  xpos -308
+  ypos -264
+ }
+ Output {
+  name Output1
+  xpos -308
+  ypos -164
+ }
+end_group

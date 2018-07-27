@@ -1,0 +1,181 @@
+#! C:/Program Files/Nuke7.0v9/Nuke7.0.exe -nx
+version 7.0 v9
+Gizmo {
+ addUserKnob {20 burnIn_tab l "Burn-In Controls"}
+ addUserKnob {7 burnIn_textSize l "Text Size" R 10 100}
+ burnIn_textSize 43.5
+ addUserKnob {18 burnIn_colour l Colour}
+ burnIn_colour {1 1 1}
+ addUserKnob {7 burnIn_opacity l Opacity}
+ burnIn_opacity 1
+ addUserKnob {3 burnIn_padding l Padding}
+ burnIn_padding 40
+ addUserKnob {2 burnIn_font l Font}
+ addUserKnob {26 ""}
+ addUserKnob {1 burnIn_topLeft l "Top Left"}
+ addUserKnob {1 burnIn_topMiddle l "Top Middle"}
+ addUserKnob {1 burnIn_topRight l "Top Right"}
+ addUserKnob {1 burnIn_bottomLeft l "Bottom Left"}
+ addUserKnob {1 burnIn_bottomMiddle l "Bottom Middle"}
+ addUserKnob {1 burnIn_bottomRight l "Bottom Right"}
+ burnIn_bottomRight "\[frame]"
+}
+ Text {
+  inputs 0
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  opacity {{parent.burnIn_opacity}}
+  message "\[value parent.burnIn_topLeft]\n"
+  font "\[python \{nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value() if os.path.exists(nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value()) else nuke.defaultFontPathname()\}]"
+  size {{parent.burnIn_textSize}}
+  yjustify top
+  Transform 1
+  box {{parent.burnIn_padding} {parent.burnIn_padding} {width-parent.burnIn_padding} {"height - parent.burnIn_padding"}}
+  center {960 540}
+  color {{parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour}}
+  name Text_TopLeft
+  xpos -370
+  ypos 111
+ }
+ Text {
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  opacity {{parent.burnIn_opacity}}
+  message "\[value parent.burnIn_topMiddle]"
+  font "\[python \{nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value() if os.path.exists(nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value()) else nuke.defaultFontPathname()\}]"
+  size {{parent.burnIn_textSize}}
+  xjustify center
+  yjustify top
+  Transform 1
+  box {{parent.burnIn_padding} {parent.burnIn_padding} {width-parent.burnIn_padding} {"height - parent.burnIn_padding"}}
+  center {960 540}
+  color {{parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour}}
+  name Text_TopMiddle
+  xpos -370
+  ypos 135
+ }
+ Text {
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  opacity {{parent.burnIn_opacity}}
+  message "\[value parent.burnIn_topRight]\n"
+  font "\[python \{nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value() if os.path.exists(nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value()) else nuke.defaultFontPathname()\}]"
+  size {{parent.burnIn_textSize}}
+  xjustify right
+  yjustify top
+  Transform 1
+  box {{parent.burnIn_padding} {parent.burnIn_padding} {width-parent.burnIn_padding} {"height - parent.burnIn_padding"}}
+  center {960 540}
+  color {{parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour}}
+  name Text_TopRight
+  xpos -370
+  ypos 159
+ }
+ Text {
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  opacity {{parent.burnIn_opacity}}
+  message "\[value parent.burnIn_bottomLeft]"
+  font "\[python \{nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value() if os.path.exists(nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value()) else nuke.defaultFontPathname()\}]"
+  size {{parent.burnIn_textSize}}
+  yjustify bottom
+  Transform 1
+  box {{parent.burnIn_padding} {parent.burnIn_padding} {width-parent.burnIn_padding} {"height - parent.burnIn_padding"}}
+  center {960 540}
+  color {{parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour}}
+  name Text_BottomLeft
+  xpos -370
+  ypos 183
+ }
+ Text {
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  opacity {{parent.burnIn_opacity}}
+  message "\[value parent.burnIn_bottomMiddle]"
+  font "\[python \{nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value() if os.path.exists(nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value()) else nuke.defaultFontPathname()\}]"
+  size {{parent.burnIn_textSize}}
+  xjustify center
+  yjustify bottom
+  Transform 1
+  box {{parent.burnIn_padding} {parent.burnIn_padding} {width-parent.burnIn_padding} {"height - parent.burnIn_padding"}}
+  center {960 540}
+  color {{parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour}}
+  name Text_BottomMiddle
+  xpos -370
+  ypos 207
+ }
+ Text {
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  opacity {{parent.burnIn_opacity}}
+  message "\[value parent.burnIn_bottomRight]"
+  font "\[python \{nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value() if os.path.exists(nuke.toNode(nuke.thisNode().fullName().split('.')\[0])\['burnIn_font'].value()) else nuke.defaultFontPathname()\}]"
+  size {{parent.burnIn_textSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {{parent.burnIn_padding} {parent.burnIn_padding} {width-parent.burnIn_padding} {"height - parent.burnIn_padding"}}
+  center {960 540}
+  color {{parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour} {parent.burnIn_colour}}
+  name Text_BottomRight
+  xpos -370
+  ypos 231
+ }
+set N7bc91460 [stack 0]
+ Dot {
+  name Dot1
+  xpos -336
+  ypos 378
+ }
+push $N7bc91460
+ Transform {
+  translate {2 -2}
+  center {1280 675}
+  name Transform1
+  xpos -260
+  ypos 279
+ }
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha red
+  name Shuffle1
+  label "\[value in]"
+  selected true
+  xpos -260
+  ypos 321
+ }
+set N7bc92590 [stack 0]
+ Input {
+  inputs 0
+  name Input1
+  xpos -150
+  ypos -33
+ }
+ Dot {
+  name Dot2
+  xpos -116
+  ypos 18
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos -150
+  ypos 327
+ }
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos -150
+  ypos 375
+ }
+ Output {
+  name Output1
+  xpos -150
+  ypos 471
+ }
+push $N7bc92590
+ Viewer {
+  frame_increment 8
+  input_process false
+  far 1000000
+  name Viewer1
+  xpos 41
+  ypos 279
+ }
+end_group

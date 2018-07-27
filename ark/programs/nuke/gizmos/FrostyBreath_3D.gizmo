@@ -1,0 +1,301 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+Gizmo {
+ inputs 0
+ tile_color 0x8ebbd4ff
+ addUserKnob {20 User}
+ addUserKnob {12 pos l Global_Pos}
+ addUserKnob {16 Global_Scale}
+ addUserKnob {26 ""}
+ addUserKnob {41 start_frame l "start at" T ParticleEmitter1.start_frame}
+ addUserKnob {7 poofing l Poof}
+ poofing 1
+ addUserKnob {3 amount l Amount -STARTLINE}
+ amount 10
+ addUserKnob {7 Opacity}
+ Opacity 0.3
+ addUserKnob {41 motionblur T Transform3.motionblur}
+ addUserKnob {26 ""}
+ addUserKnob {4 views l Views M {Final "Green - For Motion"}}
+}
+ Camera2 {
+  inputs 0
+  translate {0 0 50}
+  focal 22
+  name Camera1
+  xpos 250
+  ypos 834
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  format "256 256 0 0 256 256 1 square_256"
+  name Constant2
+  xpos -68
+  ypos -561
+ }
+ Noise {
+  size 43
+  zoffset {{t*10 i}}
+  center {960 540}
+  name Noise1
+  xpos -68
+  ypos -477
+ }
+ Radial {
+  invert true
+  area {-0.25 -0.25 256.25 256.25}
+  color 0
+  name Radial2
+  xpos -68
+  ypos -441
+ }
+set N760058a0 [stack 0]
+ Multiply {
+  value {0 1 0 1}
+  name Multiply1
+  xpos -247
+  ypos -303
+ }
+ BlendMat {
+  surfaceblend modulate
+  name BlendMat2
+  xpos -247
+  ypos -225
+ }
+ Sphere {
+  inputs 0
+  uniform_scale 0.1
+  name Sphere1
+  xpos -67
+  ypos -206
+ }
+set N76006230 [stack 0]
+push 0
+ ParticleEmitter {
+  inputs 3
+  rate {{parent.poofing*amount i}}
+  lifetime 25
+  lifetime_variation 0.772
+  velocity 0.1
+  size 0.5
+  mass_variation 0.7
+  input_order "in order"
+  start_frame_animation "in order"
+  frame_advance constant
+  name ParticleEmitter1
+  xpos -247
+  ypos -153
+ }
+set N76006560 [stack 0]
+ Dot {
+  name Dot2
+  xpos -146
+  ypos 786
+ }
+push $N760058a0
+ Multiply {
+  value {0 0 1 1}
+  name Multiply3
+  xpos 240
+  ypos -303
+ }
+ BlendMat {
+  surfaceblend modulate
+  name BlendMat3
+  xpos 240
+  ypos -225
+ }
+push $N76006230
+push 0
+ ParticleEmitter {
+  inputs 3
+  start_frame {{parent.ParticleEmitter1.start_frame i}}
+  rate {{parent.poofing*amount i}}
+  lifetime 25
+  lifetime_variation 0.772
+  velocity 0.1
+  size 0.5
+  mass_variation 0.7
+  input_order "in order"
+  start_frame_animation "in order"
+  frame_advance constant
+  name ParticleEmitter3
+  xpos 240
+  ypos -153
+ }
+ ParticleExpression {
+  channelsexpr id%2
+  name ParticleExpression5
+  xpos 240
+  ypos -51
+ }
+ ParticleExpression {
+  opacityexpr 1
+  name ParticleExpression6
+  xpos 240
+  ypos 21
+ }
+ ParticleTurbulence {
+  strength {0.3 0.1 0.3}
+  probability 0.3
+  max_age 0.2
+  name ParticleTurbulence2
+  xpos 240
+  ypos 69
+ }
+ ParticleGravity {
+  to {0.01 0.01 0.01}
+  name ParticleGravity1
+  xpos 240
+  ypos 129
+ }
+ ParticleDrag {
+  drag 0.2
+  name ParticleDrag1
+  xpos 240
+  ypos 201
+ }
+push $N760058a0
+ Multiply {
+  value {1 0 0 1}
+  name Multiply2
+  xpos 100
+  ypos -303
+ }
+ BlendMat {
+  surfaceblend modulate
+  name BlendMat1
+  xpos 100
+  ypos -225
+ }
+push $N76006230
+push 0
+ ParticleEmitter {
+  inputs 3
+  start_frame {{parent.ParticleEmitter1.start_frame i}}
+  rate {{parent.poofing*amount i}}
+  lifetime 25
+  lifetime_variation 0.772
+  velocity 0.1
+  size 0.5
+  mass_variation 0.7
+  spread 3
+  input_order "in order"
+  start_frame_animation "in order"
+  frame_advance constant
+  seed 25
+  name ParticleEmitter2
+  xpos 100
+  ypos -153
+ }
+push $N76006560
+ ParticleMerge {
+  inputs 2
+  name ParticleMerge1
+  xpos 0
+  ypos -87
+ }
+ ParticleExpression {
+  channelsexpr id%2
+  name ParticleExpression2
+  xpos 0
+  ypos -51
+ }
+ ParticleExpression {
+  opacityexpr 1
+  name ParticleExpression7
+  xpos 0
+  ypos 21
+ }
+ ParticleTurbulence {
+  strength {0.1 0.1 0.1}
+  probability 0.3
+  max_age 0.2
+  name ParticleTurbulence1
+  xpos 0
+  ypos 69
+ }
+ ParticleGravity {
+  to {0 0.01 0}
+  name ParticleGravity2
+  xpos 0
+  ypos 129
+ }
+ ParticleDrag {
+  drag 0.4
+  name ParticleDrag2
+  xpos 0
+  ypos 201
+ }
+ ParticleMerge {
+  inputs 2
+  name ParticleMerge2
+  xpos 0
+  ypos 351
+ }
+ ParticleExpression {
+  temp_name0 ageMultiplier
+  temp_expr0 0.004
+  sizeexpr "size + (age*ageMultiplier)"
+  name ParticleExpression3
+  xpos 0
+  ypos 489
+ }
+ ParticleExpression {
+  opacityexpr "\[value parent.Opacity] * (1 - (age/life))"
+  name ParticleExpression4
+  xpos 0
+  ypos 561
+ }
+ ParticleExpression {
+  temp_name0 randVelMult
+  temp_expr0 .02
+  opacityexpr opacity*0.95
+  sizeexpr size*1.02
+  massexpr 0.5
+  velexpr "vel + ( v(sin(frame)* random/20, abs(sin(frame))* random/20,sin(frame)* random/20) * randVelMult)"
+  channels {b}
+  name ParticleExpression1
+  xpos 0
+  ypos 669
+ }
+ ParticleSettings {
+  steps_per_frame 2
+  name ParticleSettings1
+  xpos 0
+  ypos 717
+ }
+ Switch {
+  inputs 2
+  which {{parent.views i}}
+  name Switch1
+  xpos 0
+  ypos 783
+ }
+push 0
+ ScanlineRender {
+  inputs 3
+  zblend_mode linear
+  output_motion_vectors_type accurate
+  name ScanlineRender1
+  xpos 0
+  ypos 855
+ }
+ Transform {
+  translate {{parent.pos-960 i} {parent.pos-540 i}}
+  scale {{parent.Global_Scale i}}
+  center {960 540}
+  motionblur 1
+  shutteroffset centred
+  name Transform3
+  selected true
+  xpos 0
+  ypos 891
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 1035
+ }
+end_group

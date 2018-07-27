@@ -1,0 +1,63 @@
+#! C:/Program Files/Nuke9.0v1/nuke-9.0.1.dll -nx
+version 9.0 v1
+Gizmo {
+ addUserKnob {20 BlinkControls l "Blink Controls"}
+ addUserKnob {7 offset R -10 10}
+ addUserKnob {7 frequency R 0 10}
+ frequency 17
+ addUserKnob {7 amplitude R 0 10}
+ amplitude 2
+ addUserKnob {7 min R -10 10}
+ addUserKnob {7 max R -10 10}
+ max 1
+ addUserKnob {41 colorOn l "color on" T color_on.color}
+ addUserKnob {41 resultingAnimation l "resulting animation" T Grade1.multiply}
+}
+ Input {
+  inputs 0
+  name mask
+  xpos -590
+  ypos 470
+ }
+ Dot {
+  name Dot248
+  xpos -556
+  ypos 570
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.9 0.05 0.05 0}
+  name color_on
+  xpos -700
+  ypos 327
+ }
+ Reformat {
+  type "to box"
+  box_width {{parent.input.width}}
+  box_height {{parent.input.height}}
+  box_fixed true
+  name Reformat1
+  selected true
+  xpos -700
+  ypos 422
+ }
+ Grade {
+  multiply {{"(cos((parent.frame + parent.offset) * (1 / parent.frequency) * 3.14159265359) * .5 + .5)* parent.amplitude * (parent.max - parent.min) + parent.min"}}
+  name Grade1
+  xpos -700
+  ypos 470
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge45
+  xpos -700
+  ypos 566
+ }
+ Output {
+  name Output1
+  xpos -700
+  ypos 662
+ }
+end_group

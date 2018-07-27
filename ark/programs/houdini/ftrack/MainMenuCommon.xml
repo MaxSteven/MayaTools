@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mainMenu>
+  <menuBar>
+    <subMenu id="ftrack_submenu">
+    <insertBefore>help_menu</insertBefore>
+      <label>ftrack</label>
+      <scriptItem id="h.ImportAsset">
+        <label>Import Assets</label>
+        <scriptCode><![CDATA[__import__('__main__').FtrackDialogs('ftrack_importAsset_panel')]]></scriptCode>
+      </scriptItem>
+      <scriptItem id="h.PublishAsset">
+        <label>Publish Assets</label>
+        <scriptCode><![CDATA[__import__('__main__').FtrackDialogs('ftrack_publish_panel')]]></scriptCode>
+      </scriptItem>
+      <separatorItem />
+      <scriptItem id="h.AssetManager">
+        <label>Asset Manager</label>
+        <scriptCode><![CDATA[__import__('__main__').FtrackDialogs('ftrack_assetManager_panel')]]></scriptCode>
+      </scriptItem>
+      <separatorItem />
+      <scriptItem id="h.Info">
+        <label>Info</label>
+        <scriptCode><![CDATA[__import__('__main__').FtrackDialogs('ftrack_info_panel')]]></scriptCode>
+      </scriptItem>
+      <scriptItem id="h.Tasks">
+        <label>Tasks</label>
+        <scriptCode><![CDATA[__import__('__main__').FtrackDialogs('ftrack_task_panel')]]></scriptCode>
+      </scriptItem>
+    </subMenu>
+  </menuBar>
+</mainMenu>

@@ -1,0 +1,8 @@
+#LXMacro#
+tool.doApply
+#Command Block Begin:  Add Item
+   item.create camera
+#Command Block End:  Add Item
+camera.syncView
+tool.doApply
+view3d.projection cam

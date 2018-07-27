@@ -1,0 +1,14 @@
+#LXMacro#
+tool.set prim.cube on
+tool.attr prim.cube cenX 0.0
+tool.attr prim.cube cenY 0.0
+tool.attr prim.cube cenZ 0.0
+tool.attr prim.cube sizeX 1.0
+tool.attr prim.cube sizeY 1.0
+tool.attr prim.cube sizeZ 1.0
+tool.attr prim.cube segmentsX 2
+tool.attr prim.cube segmentsY 1
+tool.attr prim.cube segmentsZ 1
+tool.attr prim.cube cenY 0.5
+tool.attr prim.cube radius 0.0
+tool.apply

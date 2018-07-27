@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Exec=nuke --player --nocrashprompt
+Name=Hiero Player
+Icon=/usr/Nuke10.0v4/plugins/icons/HieroPlayer64.png

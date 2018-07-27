@@ -1,0 +1,10 @@
+#LXMacro#
+
+item.channel locator$drawShape custom
+item.channel locator$isShape circle
+item.channel locator$isSolid false
+item.channel locator$isAxis y
+item.draw add locator
+item.channel locator$wireOptions user
+select.color "item.channel locator$wireColor ?"
+item.channel locator$wireColor {0.0 1.0 0.0}

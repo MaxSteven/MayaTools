@@ -1,0 +1,100 @@
+New Tools Guy
+[ ] - finish Weaver nodes that Mike didn't get to
+[ ] - Weaver
+	[ ] - cleanup
+	[ ] - functionality improvements
+	[ ] - more presentable, better UI
+[ ] - Publishing Tool (depends on Caretaker 3)
+[ ] - Houdini Digital Asset Publishing
+[ ] - Houdini Digital Asset Browser
+	[ ] - Houdini Engine Digital Asset loader for 3dsMax
+	[ ] - Houdini Engine Digital Asset loader for Maya
+[ ] - Translator for Houdini
+	[ ] - creates entire scene in a single SOP node
+	[ ] - reference parts of the Weaver graph by name as usual
+		[ ] - ex: cougar001, car002, etc
+[ ] - Translator for Nuke
+	[ ] - scene is always connected to an "out" scene node that isn't deleted
+	[ ] - nodes are created in a large Weaver backdrop
+	[ ] - cameras, alembic files, etc are loaded w/ an Asset gizmo
+	[ ] - Asset gizmo has button to Create Reference Asset
+		[ ] - creates a linked-by-name copy of whatever is inside the asset
+[ ] - Material editor
+	[ ] - global material definition w/ all parameters expressed
+	[ ] - editor provides color controls for maps, bakes the result
+			- ex: saturation, contrast, brightness, hue shift, etc
+	[ ] - preview in Fabric / VRay RT / Maxwell Fire
+			- last two will likely require SDK work
+[ ] - Cleaner
+	[ ] - migrate asset versions from fast storage to slow storage to eventual deletion
+	[ ] - query each shot's weaver and get a list of all used assets
+		[ ] - alembic caches, textures used by materials, etc
+	[ ] - mark older, unused versions for deletion
+[ ] - "Deletion" queue
+	[ ] - tries to "delete" files until it succeeds or is cleared
+	[ ] - "delete"s files by moving them from fast storage to slow storage
+	[ ] - files are deleted permanently once the job is archived
+	[ ] - files that won't delete are auto-removed after a week of trying
+	[ ] - tries to delete files it fails on once every 10 min or so
+[ ] - Revert to this version
+	[ ] - provides functionality for going back to old versions
+	[ ] - looks for the files on fast storage, if it doesn't find them there, looks for them on slow storage
+	[ ] - publishes files from wherever they were found as the latest version
+
+
+Weaves
+---------
+- one .weave per shot
+
+Qoros Example:
+- shot generation script
+	- run once plates are exported
+	- creates assets for any plates it finds
+	- creates a weave w/ the plate assets imported if no weave is found
+- open qoros/workspaces/0010/weaver/0010_v001_xxx.weave (auto-created)
+- plates are already in the weave via image sequence node
+- image sequence nodehas a create camera asset button
+	- creates camera asset: cam_0010_main
+	- asset that linked to this plate asset
+	- creates a stub track file in the format of your choosing
+- importAsset: rig_car_qoros
+- use publish tool inside of Weaver to create a new animation asset
+	- creates asset: anim_0010_car
+	- creates a stub file in the format of your choosing (.max, .mb, etc)
+- car animation
+	- open anim_0010_car.mb
+	- translate scene
+	- animate the cars
+	- publish that animation from Maya
+- scene assembly
+	- in weaver, apply animation node
+	- pick published animation
+	- importAsset: env_saltFlats
+	- importAsset: light_sunlight
+	- importAsset: light_saltFlatsDome
+
+
+
+
+Publish Tool
+----------------
+- translator drive
+- app independent
+- also runs standalone for publishing stuff that doesn't allow Python (Photoshop, AE, etc)
+- lists current shot assets, project assets, and global assets by type
+- publish new version from wherever
+	- create in max, modify in maya, modify more in zbrush, publish anywhere
+- variety of publish types
+	- native (essentially save selected)
+	- alembic
+	- openVDB
+	- image
+- database updated on publish to latest version
+- two tabs, create new asset and publish existing asset
+	- create new asset has a rigid form to maintain naming convention
+- likely web-based interface fed by PySide
+	- will need to investigate this further
+- can remote-publish a new version
+	- promote working locally and only publishing once you're finished
+- asset reader in weaver checks locally checks network
+-

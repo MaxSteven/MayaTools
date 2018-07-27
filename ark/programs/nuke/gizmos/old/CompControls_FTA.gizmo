@@ -1,0 +1,2171 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+Gizmo {
+ inputs 2
+ addUserKnob {20 CompControls l "Comp Controls"}
+ addUserKnob {4 view_select l View M {final diffuse direct gi ao rim "combined lighting" spec zdepth "" ""}}
+ addUserKnob {20 Defocus n 1}
+ addUserKnob {41 focal_point l "pick focal distance" T xx_dof.focal_point}
+ addUserKnob {41 radius T xx_dof.radius}
+ addUserKnob {41 gamma T xx_depth_cc.gamma}
+ addUserKnob {41 gain T xx_depth_cc.gain}
+ addUserKnob {41 contrast T xx_depth_cc.contrast}
+ addUserKnob {41 saturation T xx_depth_cc.saturation}
+ addUserKnob {41 disable_1 l "disable depth cc" T xx_depth_cc.disable}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 Rim n 1}
+ addUserKnob {41 facingGain l "facing gain" T xx_IE_RimControl2.facingGain}
+ addUserKnob {41 facingGamma l "facing gamma" T xx_IE_RimControl2.facingGamma}
+ addUserKnob {41 upGain l "up gain" T xx_IE_RimControl2.upGain}
+ addUserKnob {41 upGamma l "up gamma" T xx_IE_RimControl2.upGamma}
+ addUserKnob {41 upMask l "up mask" T xx_IE_RimControl2.upMask}
+ addUserKnob {41 value_4 l "character rim" T xx_character_rim.value}
+ addUserKnob {20 endGroup_4 l endGroup n -1}
+ addUserKnob {20 Direct n 1}
+ addUserKnob {41 value_2 l "overall direct" T xx_overall_direct.value}
+ addUserKnob {41 value_1 l "direct rim" T xx_direct_rim.value}
+ addUserKnob {41 white_2 l "vertical darken direct" T xx_vertical_darken.white}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {20 GI n 1}
+ addUserKnob {41 add l "gi color" T xx_overall_gi.add}
+ addUserKnob {41 value_3 l "gi rim" T xx_rim.value}
+ addUserKnob {41 white l "ao gain" T xx_grade_ao.white}
+ addUserKnob {41 gamma_1 l "ao gamma" T xx_grade_ao.gamma}
+ addUserKnob {41 white_1 l "vertical darken gi" T xx_vertical_dark_gi.white}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 Spec n 1}
+ addUserKnob {41 value_5 l "overall spec" T xx_overall_spec.value}
+ addUserKnob {41 mix l "spec glow" T xx_spec_glow.mix}
+ addUserKnob {20 endGroup_5 l endGroup n -1}
+ addUserKnob {20 FX n 1}
+ addUserKnob {41 gain_1 l "sconce glow" T xx_sconce_glow.gain}
+ addUserKnob {41 distortion1 l "lens distortion" T xx_distortion_radial1.distortion1}
+ addUserKnob {41 offset_1 l "fake sss offset" T xx_fake_sss_offset.offset}
+ addUserKnob {41 value l "character refraction" T xx_character_refraction.value}
+ addUserKnob {41 which l "refraction mix" t "solid color vs gain'd up reflection" T xx_refl_mix.which}
+ addUserKnob {41 offset l "edge offset" T xx_edge_offset.offset}
+ addUserKnob {41 disable_2 l "disable edge offset" T xx_edge_offset.disable}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x8e8e3800
+  label "hallway\n"
+  note_font_size 42
+  xpos -17
+  ypos -672
+  bdwidth 254
+  bdheight 191
+ }
+ Input {
+  inputs 0
+  name cam
+  xpos 730
+  ypos -1066
+  number 1
+ }
+ Dot {
+  name Dot26
+  label " Render Camera\n (Camera from EXR)"
+  note_font_size 40
+  xpos 764
+  ypos -990
+ }
+ Dot {
+  name Dot27
+  xpos 764
+  ypos -846
+ }
+set N1e2c8690 [stack 0]
+ Dot {
+  name Dot28
+  xpos -226
+  ypos -846
+ }
+ Dot {
+  name Dot29
+  label " Camera"
+  note_font_size 40
+  xpos -226
+  ypos 426
+ }
+set N1e2c8cf0 [stack 0]
+ Dot {
+  name Dot30
+  label " Camera"
+  note_font_size 40
+  xpos -226
+  ypos 930
+ }
+ Dot {
+  name Dot31
+  label " Camera"
+  note_font_size 40
+  xpos -226
+  ypos 2706
+ }
+ Dot {
+  name Dot32
+  label " Camera"
+  note_font_size 40
+  xpos -226
+  ypos 3330
+ }
+push $N1e2c8690
+ Input {
+  inputs 0
+  name cg
+  xpos 1280
+  ypos -1330
+ }
+ Reformat {
+  name Reformat6
+  xpos 1280
+  ypos -1210
+ }
+set N1e2c9ce0 [stack 0]
+ IE_CGPrep {
+  name IE_CGPrep2
+  note_font Verdana
+  xpos 1280
+  ypos -1162
+ }
+set N1371a120 [stack 0]
+ Group {
+  name skin
+  tile_color 0xff000000
+  xpos 1170
+  ypos -1042
+  addUserKnob {20 User}
+  addUserKnob {26 mlist l "" +STARTLINE T "M_cinderella_skin.red\n M_janitor_skin.red\n M_sleepingBeauty_skin.red\n M_snowWhite_skin.red\n M_witch_skin.red"}
+ }
+  Input {
+   inputs 0
+   name Input1
+  }
+add_layer {M_cinderella_skin M_cinderella_skin.red M_cinderella_skin.green M_cinderella_skin.blue}
+  AddChannels {
+   channels {M_cinderella_skin.red -M_cinderella_skin.green -M_cinderella_skin.blue}
+   name AddChannels1
+  }
+add_layer {M_janitor_skin M_janitor_skin.red M_janitor_skin.green M_janitor_skin.blue}
+  AddChannels {
+   channels {M_janitor_skin.red -M_janitor_skin.green -M_janitor_skin.blue}
+   name AddChannels2
+  }
+add_layer {M_sleepingBeauty_skin M_sleepingBeauty_skin.red M_sleepingBeauty_skin.green M_sleepingBeauty_skin.blue}
+  AddChannels {
+   channels {M_sleepingBeauty_skin.red -M_sleepingBeauty_skin.green -M_sleepingBeauty_skin.blue}
+   name AddChannels3
+  }
+add_layer {M_snowWhite_skin M_snowWhite_skin.red M_snowWhite_skin.green M_snowWhite_skin.blue}
+  AddChannels {
+   channels {M_snowWhite_skin.red -M_snowWhite_skin.green -M_snowWhite_skin.blue}
+   name AddChannels4
+  }
+add_layer {M_witch_skin M_witch_skin.red M_witch_skin.green M_witch_skin.blue}
+  AddChannels {
+   channels {M_witch_skin.red -M_witch_skin.green -M_witch_skin.blue}
+   name AddChannels5
+  }
+add_layer {rgba redguard1.glow rgba.warper rgba.Z}
+  Expression {
+   channel3 rgba
+   expr3 "M_cinderella_skin.red + M_janitor_skin.red + M_sleepingBeauty_skin.red + M_snowWhite_skin.red + M_witch_skin.red"
+   name Expression1
+  }
+  Remove {
+   operation keep
+   channels alpha
+   name Remove1
+  }
+  Output {
+   name Output1
+   selected true
+  }
+ end_group
+push $N1371a120
+ Group {
+  name characters
+  tile_color 0xff000000
+  xpos 1170
+  ypos -1114
+  addUserKnob {20 User}
+  addUserKnob {26 mlist l "" +STARTLINE T "M_janitor_clothes.red\n M_janitor_skin.red\n M_sleepingBeauty_clothes.red\n M_sleepingBeauty_scarf.red\n M_sleepingBeauty_skin.red\n M_snowWhite_clothes.red\n M_snowWhite_skin.red\n M_witch_clothes.red\n M_witch_skin.red"}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 290
+   ypos -117
+  }
+add_layer {M_janitor_clothes M_janitor_clothes.red M_janitor_clothes.green M_janitor_clothes.blue}
+  AddChannels {
+   channels {M_janitor_clothes.red -M_janitor_clothes.green -M_janitor_clothes.blue}
+   name AddChannels1
+   xpos 290
+   ypos -91
+  }
+  AddChannels {
+   channels {M_janitor_skin.red -M_janitor_skin.green -M_janitor_skin.blue}
+   name AddChannels2
+   xpos 290
+   ypos -65
+  }
+add_layer {M_sleepingBeauty_clothes M_sleepingBeauty_clothes.red M_sleepingBeauty_clothes.green M_sleepingBeauty_clothes.blue}
+  AddChannels {
+   channels {M_sleepingBeauty_clothes.red -M_sleepingBeauty_clothes.green -M_sleepingBeauty_clothes.blue}
+   name AddChannels3
+   xpos 290
+   ypos -39
+  }
+add_layer {M_sleepingBeauty_scarf M_sleepingBeauty_scarf.red M_sleepingBeauty_scarf.green M_sleepingBeauty_scarf.blue}
+  AddChannels {
+   channels {M_sleepingBeauty_scarf.red -M_sleepingBeauty_scarf.green -M_sleepingBeauty_scarf.blue}
+   name AddChannels4
+   xpos 290
+   ypos -13
+  }
+  AddChannels {
+   channels {M_sleepingBeauty_skin.red -M_sleepingBeauty_skin.green -M_sleepingBeauty_skin.blue}
+   name AddChannels5
+   xpos 290
+   ypos 13
+  }
+add_layer {M_snowWhite_clothes M_snowWhite_clothes.red M_snowWhite_clothes.green M_snowWhite_clothes.blue}
+  AddChannels {
+   channels {M_snowWhite_clothes.red -M_snowWhite_clothes.green -M_snowWhite_clothes.blue}
+   name AddChannels6
+   xpos 290
+   ypos 39
+  }
+  AddChannels {
+   channels {M_snowWhite_skin.red -M_snowWhite_skin.green -M_snowWhite_skin.blue}
+   name AddChannels7
+   xpos 290
+   ypos 65
+  }
+add_layer {M_witch_clothes M_witch_clothes.red M_witch_clothes.green M_witch_clothes.blue}
+  AddChannels {
+   channels {M_witch_clothes.red -M_witch_clothes.green -M_witch_clothes.blue}
+   name AddChannels8
+   xpos 290
+   ypos 91
+  }
+  AddChannels {
+   channels {M_witch_skin.red -M_witch_skin.green -M_witch_skin.blue}
+   name AddChannels9
+   xpos 290
+   ypos 117
+  }
+  Expression {
+   channel3 rgba
+   expr3 "M_janitor_clothes.red + M_janitor_skin.red + M_sleepingBeauty_clothes.red + M_sleepingBeauty_scarf.red + M_sleepingBeauty_skin.red + M_snowWhite_clothes.red + M_snowWhite_skin.red + M_witch_clothes.red + M_witch_skin.red"
+   name Expression1
+   xpos 290
+   ypos 143
+  }
+  Remove {
+   operation keep
+   channels alpha
+   name Remove1
+   selected true
+   xpos 290
+   ypos 169
+  }
+  Output {
+   name Output1
+   xpos 290
+   ypos 302
+  }
+ end_group
+push $N1371a120
+add_layer {M_characters M_characters.red}
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 M_characters.red
+  name Copy1
+  xpos 1280
+  ypos -1073
+ }
+add_layer {M_skin M_skin.red}
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 M_skin.red
+  name Copy2
+  xpos 1280
+  ypos -1025
+ }
+ Dot {
+  name Dot34
+  label " Set Max ZDepth"
+  note_font_size 40
+  xpos 1314
+  ypos -966
+ }
+ ZDepthCalc {
+  inputs 2
+  name ZDepthCalc1
+  xpos 1280
+  ypos -850
+  MaxZDepth 50000
+ }
+ Dot {
+  name Dot35
+  xpos 1314
+  ypos -774
+ }
+set Ndf3710c0 [stack 0]
+ Dot {
+  name Dot36
+  xpos 1094
+  ypos -774
+ }
+set Ndf3713f0 [stack 0]
+ Dot {
+  name Dot85
+  xpos 874
+  ypos -774
+ }
+set Ndf371720 [stack 0]
+ Dot {
+  name Dot87
+  xpos 434
+  ypos -774
+ }
+ Dot {
+  name Dot37
+  xpos -6
+  ypos -774
+ }
+ Dot {
+  name Dot7
+  xpos -6
+  ypos -582
+ }
+set Ndf3720b0 [stack 0]
+ Dot {
+  name Dot38
+  label " Direct Lighting"
+  note_font_size 40
+  xpos -6
+  ypos -342
+ }
+ Dot {
+  name Dot39
+  xpos -6
+  ypos -294
+ }
+set Ndf372710 [stack 0]
+ Dot {
+  name Dot13
+  xpos -6
+  ypos -174
+ }
+set Ndf372a40 [stack 0]
+ Dot {
+  name Dot9
+  xpos -6
+  ypos 234
+ }
+set Ndf372d70 [stack 0]
+ Dot {
+  name Dot8
+  xpos -6
+  ypos 378
+ }
+set Ndf3730a0 [stack 0]
+ Dot {
+  name Dot2
+  xpos -6
+  ypos 594
+ }
+set Ndf3733d0 [stack 0]
+ Dot {
+  name Dot40
+  label " Indirect Lighting"
+  note_font_size 40
+  xpos -6
+  ypos 714
+ }
+ Dot {
+  name Dot41
+  xpos -6
+  ypos 738
+ }
+set Ndf373a30 [stack 0]
+ Dot {
+  name Dot42
+  label " SSS"
+  note_font_size 40
+  xpos -6
+  ypos 2010
+ }
+ Dot {
+  name Dot43
+  xpos -6
+  ypos 2058
+ }
+set Ndf374090 [stack 0]
+ Dot {
+  name Dot44
+  label " Reflection"
+  note_font_size 40
+  xpos -6
+  ypos 2490
+ }
+ Dot {
+  name Dot45
+  xpos -6
+  ypos 2538
+ }
+set Ndf3746f0 [stack 0]
+ Dot {
+  name Dot46
+  label " Specular"
+  note_font_size 40
+  xpos -6
+  ypos 2850
+ }
+ Dot {
+  name Dot47
+  xpos -6
+  ypos 2898
+ }
+set Ndf374d50 [stack 0]
+ Dot {
+  name Dot94
+  xpos -6
+  ypos 3041
+ }
+set Ndf375080 [stack 0]
+ Dot {
+  name Dot24
+  xpos -6
+  ypos 3186
+ }
+set Ndf3753b0 [stack 0]
+ Dot {
+  name Dot48
+  label " Refraction"
+  note_font_size 40
+  xpos -6
+  ypos 3498
+ }
+ Dot {
+  name Dot49
+  xpos -6
+  ypos 3546
+ }
+set Ndf375a10 [stack 0]
+ Dot {
+  name Dot50
+  label " Fire"
+  note_font_size 40
+  xpos -6
+  ypos 3930
+ }
+ Dot {
+  name Dot51
+  xpos -6
+  ypos 3978
+ }
+set Ndf376070 [stack 0]
+ Dot {
+  name Dot52
+  label " Smoke"
+  note_font_size 40
+  xpos -6
+  ypos 4290
+ }
+ Dot {
+  name Dot53
+  xpos -6
+  ypos 4338
+ }
+set Ndf3766d0 [stack 0]
+ Dot {
+  name Dot54
+  label " Beauty Remnants"
+  note_font_size 40
+  xpos -6
+  ypos 4650
+ }
+ Dot {
+  name Dot55
+  xpos -6
+  ypos 4698
+ }
+set Ndf584e30 [stack 0]
+ Dot {
+  name Dot56
+  label " Self Illumination"
+  note_font_size 40
+  xpos -6
+  ypos 5010
+ }
+ Dot {
+  name Dot57
+  xpos -6
+  ypos 5058
+ }
+set Ndf585490 [stack 0]
+ Dot {
+  name Dot4
+  xpos -6
+  ypos 6018
+ }
+set Ndf585af0 [stack 0]
+ Dot {
+  name Dot151
+  label " Z Depth"
+  note_font_size 40
+  xpos -6
+  ypos 6162
+ }
+ Dot {
+  name Dot152
+  xpos -6
+  ypos 6186
+ }
+ Shuffle {
+  in depth
+  in2 rgba
+  alpha alpha2
+  name ZDepth1
+  xpos 70
+  ypos 6182
+ }
+ Premult {
+  name Premult5
+  xpos 70
+  ypos 6230
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 1
+  name Constant1
+  xpos -40
+  ypos 6279
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 70
+  ypos 6302
+ }
+set Ndf586ae0 [stack 0]
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle2
+  label "\[value in]"
+  note_font Helvetica
+  xpos 180
+  ypos 6294
+ }
+ Grade {
+  channels all
+  blackpoint 0.065
+  name Grade5
+  xpos 400
+  ypos 6295
+ }
+push $Ndf585af0
+add_layer {NormalsBumped NormalsBumped.X NormalsBumped.Y NormalsBumped.Z}
+add_layer {VRayExtraTex_Falloff VRayExtraTex_Falloff.red VRayExtraTex_Falloff.green VRayExtraTex_Falloff.blue}
+ IE_RimControl {
+  name IE_RimControl1
+  xpos 840
+  ypos 6014
+  facingGain 1.5
+  upGain 1.4
+  upMask 0.7
+  normals NormalsBumped
+  useRGBFalloff true
+  rgbFalloff VRayExtraTex_Falloff
+  upMaskLookup 0
+  lut {master {curve C 0 x0.5 1 0}
+    red {}
+    green {}
+    blue {}
+    alpha {}}
+ }
+push $Ndf585490
+add_layer {SelfIllumination SelfIllumination.red SelfIllumination.green SelfIllumination.blue}
+ Shuffle {
+  in SelfIllumination
+  name SelfIllumination1
+  xpos 730
+  ypos 5054
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove2
+  xpos 730
+  ypos 5078
+ }
+ Dot {
+  name Dot58
+  label " CC Self Ilum"
+  note_font_size 40
+  xpos 764
+  ypos 5130
+ }
+ Dot {
+  name Dot59
+  xpos 764
+  ypos 5250
+ }
+set Ndf590710 [stack 0]
+ Dot {
+  name Dot60
+  xpos 654
+  ypos 5250
+ }
+ Glow {
+  effect_only true
+  name Glow1
+  xpos 620
+  ypos 5438
+ }
+ Dot {
+  name Dot61
+  xpos 654
+  ypos 5754
+ }
+push $Ndf3710c0
+ Dot {
+  name Dot1
+  xpos 1314
+  ypos -541
+ }
+set Ndf5913d0 [stack 0]
+ Dot {
+  name Dot62
+  xpos 1314
+  ypos 2106
+ }
+set Ndf591700 [stack 0]
+ Dot {
+  name Dot63
+  xpos 1314
+  ypos 5466
+ }
+set Ndf591a30 [stack 0]
+push $Ndf590710
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace1
+  label "Linear to sRGB"
+  xpos 730
+  ypos 5311
+ }
+ Dot {
+  name Dot64
+  xpos 764
+  ypos 5346
+ }
+push $Ndf584e30
+add_layer {BeautyRemnants BeautyRemnants.red BeautyRemnants.green BeautyRemnants.blue}
+ Shuffle {
+  in BeautyRemnants
+  name BeautyRemnants1
+  xpos 730
+  ypos 4694
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove11
+  xpos 730
+  ypos 4718
+ }
+ Dot {
+  name Dot65
+  label " CC Remnants"
+  note_font_size 40
+  xpos 764
+  ypos 4746
+ }
+ Clamp {
+  name Clamp1
+  xpos 730
+  ypos 4783
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace3
+  label "Linear to sRGB"
+  xpos 730
+  ypos 4927
+ }
+ Dot {
+  name Dot66
+  xpos 764
+  ypos 4962
+ }
+push $Ndf3766d0
+add_layer {Smoke Smoke.red Smoke.green Smoke.blue}
+ Shuffle {
+  in Smoke
+  name Smoke2
+  xpos 730
+  ypos 4334
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove12
+  xpos 730
+  ypos 4358
+ }
+ Dot {
+  name Dot67
+  label " CC Smoke"
+  note_font_size 40
+  xpos 764
+  ypos 4386
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace4
+  label "Linear to sRGB"
+  xpos 730
+  ypos 4591
+ }
+ Dot {
+  name Dot68
+  xpos 764
+  ypos 4626
+ }
+push $Ndf376070
+add_layer {Fire Fire.red Fire.green Fire.blue}
+ Shuffle {
+  in Fire
+  name Fire2
+  xpos 730
+  ypos 3974
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove13
+  xpos 730
+  ypos 3998
+ }
+ Dot {
+  name Dot69
+  label " CC Fire"
+  note_font_size 40
+  xpos 764
+  ypos 4026
+ }
+ Glow {
+  name Glow2
+  xpos 730
+  ypos 4118
+  disable true
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace20
+  label "Linear to sRGB"
+  xpos 730
+  ypos 4231
+ }
+ Dot {
+  name Dot70
+  xpos 764
+  ypos 4266
+ }
+push $N1e2c8cf0
+push $Ndf3730a0
+ IE_RimControl {
+  inputs 2
+  name xx_IE_RimControl2
+  xpos 70
+  ypos 422
+  facingGain 1.5
+  upGain 1.4
+  upMask 0.7
+  normals NormalsBumped
+  useRGBFalloff true
+  rgbFalloff VRayExtraTex_Falloff
+  upMaskLookup 0
+  lut {master {curve C 0 x0.5 1 0}
+    red {}
+    green {}
+    blue {}
+    alpha {}}
+ }
+ Multiply {
+  value 4
+  maskChannelInput M_characters.red
+  name xx_character_rim
+  xpos 70
+  ypos 535
+ }
+set Ndf8dac60 [stack 0]
+ Dot {
+  name Dot3
+  xpos 104
+  ypos 690
+ }
+set Ndf8daf90 [stack 0]
+ Dot {
+  name Dot17
+  xpos 104
+  ypos 1122
+ }
+set Ndf8db2c0 [stack 0]
+ Dot {
+  name Dot5
+  xpos 104
+  ypos 3258
+ }
+set Ndf8db5f0 [stack 0]
+ Dot {
+  name Dot25
+  xpos 104
+  ypos 3834
+ }
+push $Ndf375a10
+add_layer {Refraction Refraction.red Refraction.green Refraction.blue}
+ Shuffle {
+  in Refraction
+  name Refraction1
+  xpos 730
+  ypos 3542
+ }
+ Dot {
+  name Dot71
+  label " CC Refraction"
+  note_font_size 40
+  xpos 764
+  ypos 3594
+ }
+ Multiply {
+  value 0
+  maskChannelInput M_characters.red
+  name xx_character_refraction
+  xpos 730
+  ypos 3631
+ }
+add_layer {M_windows M_windows.red M_windows.green M_windows.blue}
+ Multiply {
+  value 0.1
+  maskChannelInput M_windows.red
+  name Multiply1
+  xpos 730
+  ypos 3671
+ }
+set Ndf8dc5e0 [stack 0]
+ ColorCorrect {
+  gain {0.2722232938 0.493676424 1 1}
+  maskChannelInput M_sleepingBeauty_clothes.red
+  name ColorCorrect1
+  xpos 730
+  ypos 3711
+ }
+ Multiply {
+  inputs 1+1
+  value 3.16
+  name Multiply8
+  xpos 730
+  ypos 3823
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace21
+  label "Linear to sRGB"
+  xpos 730
+  ypos 3871
+ }
+ Dot {
+  name Dot72
+  xpos 764
+  ypos 3930
+ }
+push $Ndf8db5f0
+push $Ndf3753b0
+ Shuffle {
+  in M_skin
+  name Shuffle6
+  label "\[value in]"
+  xpos 290
+  ypos 3175
+ }
+push $Ndf375080
+push $Ndf374d50
+ Dot {
+  name Dot84
+  xpos 324
+  ypos 2898
+ }
+set Ndf8ddf60 [stack 0]
+add_layer {DiffuseFilter DiffuseFilter.red DiffuseFilter.green DiffuseFilter.blue}
+ Shuffle {
+  in DiffuseFilter
+  name Shuffle7
+  label "\[value in]"
+  xpos 290
+  ypos 2916
+ }
+ Keyer {
+  operation "luminance key"
+  range {0.3310585591 0.6916555137 1 1}
+  name Keyer2
+  xpos 290
+  ypos 2959
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  Achannels {rgba.red rgba.green rgba.blue M_characters.red}
+  name Merge10
+  xpos 290
+  ypos 3038
+ }
+push $Ndf8ddf60
+add_layer {Specular Specular.red Specular.green Specular.blue}
+ Shuffle {
+  in Specular
+  name Specular1
+  xpos 730
+  ypos 2894
+ }
+ Dot {
+  name Dot73
+  label " CC Specular"
+  note_font_size 40
+  xpos 764
+  ypos 2970
+ }
+ Multiply {
+  name xx_overall_spec
+  xpos 730
+  ypos 2988
+ }
+ Multiply {
+  inputs 1+1
+  value 0.25
+  name Multiply9
+  xpos 730
+  ypos 3031
+ }
+add_layer {M_arches M_arches.red M_arches.green M_arches.blue}
+ Multiply {
+  value 0.12
+  maskChannelInput M_arches.red
+  name Multiply5
+  xpos 730
+  ypos 3103
+ }
+ Multiply {
+  inputs 1+1
+  value 0.1
+  name Multiply6
+  xpos 730
+  ypos 3175
+ }
+ Multiply {
+  inputs 1+1
+  value 3.16
+  name Multiply3
+  xpos 730
+  ypos 3247
+ }
+set Ndfb63d60 [stack 0]
+ Glow {
+  brightness 0.25
+  effect_only true
+  name Glow3
+  xpos 620
+  ypos 3302
+ }
+ Glow {
+  brightness 0.25
+  size 40
+  name Glow4
+  xpos 620
+  ypos 3326
+ }
+ Glow {
+  brightness 0.125
+  size 100
+  name Glow5
+  xpos 620
+  ypos 3350
+ }
+push $Ndfb63d60
+ Merge2 {
+  inputs 2
+  operation plus
+  name xx_spec_glow
+  xpos 730
+  ypos 3350
+ }
+set Ndfb64a20 [stack 0]
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace22
+  label "Linear to sRGB"
+  xpos 730
+  ypos 3391
+ }
+ Dot {
+  name Dot74
+  xpos 764
+  ypos 3426
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {1 0.9421418309 0.7599999905 1}
+  name Constant2
+  selected true
+  xpos 620
+  ypos 2631
+ }
+push $Ndf3746f0
+add_layer {Reflection Reflection.red Reflection.green Reflection.blue}
+ Shuffle {
+  in Reflection
+  name Reflection1
+  xpos 730
+  ypos 2534
+ }
+ Dot {
+  name Dot75
+  label " CC Reflection"
+  note_font_size 40
+  xpos 764
+  ypos 2562
+ }
+ ColorCorrect {
+  saturation 0
+  contrast 0.8
+  gamma 1.32
+  gain {28.45786667 35.74682617 40 1}
+  maskChannelInput M_windows.red
+  name xx_window_cc
+  xpos 730
+  ypos 2607
+ }
+ Dissolve {
+  inputs 2
+  which 0.66
+  maskChannelInput M_windows.red
+  name xx_refl_mix
+  xpos 730
+  ypos 2647
+ }
+ Glow {
+  brightness 0.125
+  name Glow9
+  xpos 730
+  ypos 2702
+  disable true
+ }
+ Glow {
+  brightness 0.125
+  size 40
+  name Glow10
+  xpos 730
+  ypos 2726
+  disable true
+ }
+ Glow {
+  brightness 0.0625
+  size 100
+  name Glow11
+  xpos 730
+  ypos 2750
+  disable true
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace23
+  label "Linear to sRGB"
+  xpos 730
+  ypos 2791
+ }
+ Dot {
+  name Dot76
+  xpos 764
+  ypos 2826
+ }
+push $Ndf374090
+add_layer {SSS SSS.red SSS.green SSS.blue}
+ Shuffle {
+  in SSS
+  name SSS2
+  xpos 730
+  ypos 2054
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove17
+  xpos 730
+  ypos 2078
+ }
+ Dot {
+  name Dot78
+  label " CC SSS"
+  note_font_size 40
+  xpos 764
+  ypos 2106
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace24
+  label "Linear to sRGB"
+  xpos 730
+  ypos 2359
+ }
+ Dot {
+  name Dot79
+  xpos 764
+  ypos 2418
+ }
+push $Ndf591700
+push $Ndf3733d0
+ Shuffle {
+  in M_skin
+  name Shuffle3
+  label "\[value in]"
+  xpos 180
+  ypos 583
+ }
+ Dot {
+  name Dot23
+  xpos 544
+  ypos 594
+ }
+set Ndfb699d0 [stack 0]
+push $Ndf8daf90
+ Grade {
+  channels all
+  white 0.45
+  gamma 0.89
+  name Grade4
+  xpos 400
+  ypos 679
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge5
+  xpos 510
+  ypos 686
+ }
+push $Ndfb699d0
+push $Ndf8dac60
+push $Ndf3720b0
+add_layer {Point Point.red Point.green Point.blue}
+ IE_PointMatte_v02 {
+  name IE_PointMatte_v02_4
+  xpos 70
+  ypos -586
+  in Point
+  mode_select "x axis"
+  white {1017.400024 493}
+  black {1016 499}
+  invertYgradient false
+  axis_mode 1
+  axis_bp 3860
+  axis_wp 5844
+  distance_mode 1
+ }
+set Ndf90c4b0 [stack 0]
+ Dot {
+  name Dot19
+  xpos 104
+  ypos -222
+ }
+set Ndfb6e320 [stack 0]
+ Dot {
+  name Dot18
+  xpos 104
+  ypos -126
+ }
+set Ndfb6e650 [stack 0]
+ Dot {
+  name Dot22
+  xpos 104
+  ypos 306
+ }
+push $Ndf372d70
+ Dot {
+  name Dot21
+  xpos 214
+  ypos 234
+ }
+set Ndfb6ecb0 [stack 0]
+ IE_PointMatte_v02 {
+  name IE_PointMatte_v02_6
+  xpos 180
+  ypos 254
+  in Point
+  mode_select "y axis"
+  white {988 1038}
+  black {1092 542}
+  invertYgradient false
+  axis_mode 1
+  axis_bp 1000
+  axis_wp 6000
+  distance_mode 1
+ }
+push $Ndfb6ecb0
+ Dot {
+  name Dot20
+  xpos 324
+  ypos 234
+ }
+ IE_PointMatte_v02 {
+  name IE_PointMatte_v02_5
+  xpos 290
+  ypos 254
+  in Point
+  mode_select "y axis"
+  white {988 1038}
+  black {1092 542}
+  invertYgradient false
+  axis_mode 1
+  axis_bp 1000
+  axis_wp 8000
+  distance_mode 1
+ }
+ Dissolve {
+  inputs 2+1
+  which 1
+  name Dissolve2
+  xpos 290
+  ypos 295
+ }
+ Dot {
+  name Dot15
+  xpos 324
+  ypos 354
+ }
+set Nf3b03d40 [stack 0]
+ Grade {
+  channels all
+  gamma 2
+  name Grade3
+  xpos 400
+  ypos 343
+ }
+push $Ndf3720b0
+push $Ndf90c4b0
+add_layer {M_ground M_ground.red M_ground.green M_ground.blue}
+ Merge2 {
+  inputs 2
+  operation mask
+  Achannels {rgba.red rgba.green rgba.blue M_ground.red}
+  name Merge8
+  xpos 180
+  ypos -490
+ }
+set Nf3b043a0 [stack 0]
+ Dot {
+  name Dot77
+  xpos 214
+  ypos 162
+ }
+push $Ndfb6e650
+push $Ndf372a40
+add_layer {M_beaker_sconce M_beaker_sconce.red M_beaker_sconce.green M_beaker_sconce.blue}
+ Shuffle {
+  in M_beaker_sconce
+  green red
+  blue red
+  alpha red
+  name Shuffle5
+  label "\[value in]"
+  note_font Helvetica
+  xpos 290
+  ypos -186
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge7
+  xpos 290
+  ypos -130
+ }
+ Multiply {
+  value 4
+  name Multiply7
+  xpos 290
+  ypos -113
+ }
+ Blur {
+  size 200
+  name Blur1
+  label "\[value size]"
+  xpos 290
+  ypos -72
+ }
+ Glow {
+  name Glow6
+  xpos 290
+  ypos -10
+ }
+ Glow {
+  brightness 0.5
+  size 40
+  name Glow7
+  xpos 290
+  ypos 14
+ }
+ Glow {
+  brightness 0.25
+  size 100
+  name Glow8
+  xpos 290
+  ypos 38
+ }
+ Dot {
+  name Dot14
+  xpos 324
+  ypos 90
+ }
+push $Ndf372710
+push $Ndfb6e320
+ Merge2 {
+  inputs 2
+  operation mask
+  Achannels {rgba.red rgba.green rgba.blue M_ground.red}
+  name Merge1
+  xpos 290
+  ypos -226
+ }
+push $Ndf372710
+add_layer {RawLighting RawLighting.red RawLighting.green RawLighting.blue}
+ Shuffle {
+  in RawLighting
+  name RawLighting1
+  xpos 730
+  ypos -298
+ }
+ ColorCorrect {
+  inputs 1+1
+  saturation 0.5
+  contrast 2.5
+  maskChannelInput -M_ground.red
+  name hallway_ground
+  xpos 730
+  ypos -226
+ }
+ Colorspace {
+  colorspace_out HSV
+  name Colorspace2
+  xpos 730
+  ypos -154
+ }
+set Nf3b06d10 [stack 0]
+ Dot {
+  name Dot10
+  xpos 654
+  ypos -150
+ }
+ Dot {
+  name Dot11
+  xpos 654
+  ypos -78
+ }
+push $Nf3b06d10
+ ColorLookup {
+  lut {master {curve C 0 x0.6654694676 0.6751245619 k x1.008878469 0.9350745678 s0.150000006 u0.8538665175}
+    red {}
+    green {}
+    blue {}
+    alpha {}}
+  maskChannelInput M_ground.red
+  invert_mask true
+  name ColorLookup1
+  xpos 730
+  ypos -129
+ }
+ Dissolve {
+  inputs 2
+  channels {rgba.red rgba.green -rgba.blue}
+  which 1
+  name Dissolve1
+  xpos 730
+  ypos -89
+ }
+ Colorspace {
+  colorspace_in HSV
+  name Colorspace5
+  xpos 730
+  ypos -34
+ }
+ ColorCorrect {
+  inputs 1+1
+  gain 16
+  name xx_sconce_glow
+  xpos 730
+  ypos 86
+ }
+ ColorCorrect {
+  inputs 1+1
+  gain {0.297003448 0.4671114087 1 1}
+  name ColorCorrect8
+  xpos 730
+  ypos 158
+ }
+ ColorCorrect {
+  gain 0.5
+  name darken
+  xpos 730
+  ypos 254
+ }
+ Grade {
+  inputs 1+1
+  white 0
+  name xx_vertical_darken
+  xpos 730
+  ypos 350
+ }
+ Multiply {
+  inputs 1+1
+  value 4
+  name xx_direct_rim
+  xpos 730
+  ypos 535
+ }
+ ColorCorrect {
+  inputs 1+1
+  saturation 0.5
+  name skin_cc
+  xpos 730
+  ypos 590
+ }
+ ColorCorrect {
+  inputs 1+1
+  offset {0.3799999952 0.1578427255 0.1519999951 0}
+  name xx_fake_sss_offset
+  xpos 730
+  ypos 686
+ }
+ Multiply {
+  value 1.2
+  name xx_overall_direct
+  xpos 730
+  ypos 712
+ }
+set Nf3b0a340 [stack 0]
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace26
+  label "Linear to sRGB"
+  xpos 730
+  ypos 1183
+ }
+push $Ndf8db2c0
+push $Nf3b03d40
+ Dot {
+  name Dot16
+  xpos 324
+  ypos 1050
+ }
+ Grade {
+  channels all
+  gamma 2
+  name Grade7
+  xpos 400
+  ypos 1039
+ }
+push $Ndf373a30
+ Dot {
+  name Dot6
+  xpos 434
+  ypos 738
+ }
+set Nf3b0b660 [stack 0]
+ Dot {
+  name Dot80
+  xpos 544
+  ypos 738
+ }
+set Nf3b0b990 [stack 0]
+ Dot {
+  name Dot81
+  xpos 654
+  ypos 738
+ }
+add_layer {AO AO.red AO.green AO.blue}
+ Shuffle {
+  in AO
+  name AO1
+  xpos 620
+  ypos 758
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove18
+  xpos 620
+  ypos 782
+ }
+ Dot {
+  name Dot82
+  label " AO"
+  note_font_size 40
+  xpos 654
+  ypos 810
+ }
+ Grade {
+  white 1.1
+  name xx_grade_ao
+  xpos 620
+  ypos 950
+ }
+set Nf3b0c980 [stack 0]
+ Shuffle {
+  alpha red
+  name Shuffle4
+  label "AO in Alpha"
+  xpos 620
+  ypos 991
+ }
+push $Nf3b0b660
+ Shuffle {
+  in VRayExtraTex_Falloff
+  red green
+  blue green
+  alpha green
+  name Shuffle1
+  label "\[value in]"
+  note_font Helvetica
+  xpos 400
+  ypos 798
+ }
+ Grade {
+  channels all
+  add 0.25
+  name Grade2
+  xpos 400
+  ypos 847
+ }
+ Dot {
+  name Dot12
+  xpos 434
+  ypos 906
+ }
+push $Nf3b0b990
+add_layer {RawGlobalIllumination RawGlobalIllumination.red RawGlobalIllumination.green RawGlobalIllumination.blue}
+ Shuffle {
+  in RawGlobalIllumination
+  name RawGlobalIllumination1
+  xpos 510
+  ypos 758
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove19
+  xpos 510
+  ypos 782
+ }
+ Grade {
+  inputs 1+1
+  add {1 0.893204987 0.8019503951 0}
+  name xx_overall_gi
+  xpos 510
+  ypos 902
+ }
+ Multiply {
+  inputs 1+1
+  value 0
+  name Multiply10
+  xpos 510
+  ypos 991
+ }
+ Grade {
+  inputs 1+1
+  white 0.4
+  name xx_vertical_dark_gi
+  xpos 510
+  ypos 1046
+ }
+ Multiply {
+  inputs 1+1
+  value 1.5
+  name xx_rim
+  xpos 510
+  ypos 1111
+ }
+set Nf3b0e960 [stack 0]
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace25
+  label "Linear to sRGB"
+  xpos 510
+  ypos 1183
+ }
+ Dot {
+  name Dot83
+  xpos 544
+  ypos 1242
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus1
+  xpos 730
+  ypos 1238
+ }
+ Dot {
+  name Dot88
+  label " CC Lighting"
+  note_font_size 40
+  xpos 764
+  ypos 1266
+ }
+ Colorspace {
+  colorspace_in sRGB
+  name Colorspace27
+  label "sRGB to Linear"
+  xpos 730
+  ypos 1303
+ }
+set Nf3da60b0 [stack 0]
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace28
+  label "Linear to sRGB"
+  xpos 730
+  ypos 1543
+ }
+ Dot {
+  name Dot89
+  xpos 764
+  ypos 1578
+ }
+push $Nf3b043a0
+push $Ndf5913d0
+push $Ndf3713f0
+ Shuffle {
+  in DiffuseFilter
+  name DiffuseFilter1
+  xpos 1060
+  ypos -754
+ }
+set Nf3da7700 [stack 0]
+ Keyer {
+  operation "luminance key"
+  range {0.017070276 0.3914105704 1 1}
+  name Keyer1
+  xpos 1170
+  ypos -665
+ }
+add_layer {M_tables M_tables.red M_tables.green M_tables.blue}
+ Merge2 {
+  inputs 2
+  operation mask
+  Achannels {rgba.red rgba.green rgba.blue M_tables.red}
+  name Merge6
+  xpos 1170
+  ypos -545
+ }
+push $Nf3da7700
+ HueKeyer {
+  lut {amount {curve x-0.3186914921 0 x0.04598161578 0 x0.4214811325 0 x0.9676839113 1 x1.150827408 1 x1.649748206 0 x6 0 s0}
+    sat_thrsh {}}
+  invert false
+  name HueKeyer1
+  xpos 950
+  ypos -665
+ }
+push $Ndf371720
+add_layer {M_walls M_walls.red M_walls.green M_walls.blue}
+ Shuffle {
+  in M_walls
+  alpha red
+  name Shuffle8
+  label "\[value in]"
+  xpos 840
+  ypos -713
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge9
+  xpos 840
+  ypos -658
+ }
+ Dot {
+  name Dot86
+  xpos 874
+  ypos -582
+ }
+push $Nf3da7700
+ Dot {
+  name Dot90
+  label " CC Diffuse"
+  note_font_size 40
+  xpos 1094
+  ypos -702
+ }
+ ColorCorrect {
+  gain {1.299999952 0.9010121226 0.6339591146 1}
+  maskChannelInput M_arches.red
+  name ColorCorrect16
+  xpos 1060
+  ypos -665
+ }
+ ColorCorrect {
+  inputs 1+1
+  saturation 1.2
+  gain {1 0.5142920017 0.3937576413 1}
+  name reder_redwall
+  xpos 1060
+  ypos -586
+ }
+ ColorCorrect {
+  inputs 1+1
+  gamma 0.8
+  gain {1 0.6930862665 0.4876608849 1}
+  maskChannelInput -M_tables.red
+  mix 0.5
+  name darken_table_legs
+  xpos 1060
+  ypos -545
+ }
+ ColorCorrect {
+  inputs 1+1
+  shadows.contrast 2
+  midtones.gain 0.25
+  highlights.gain 0.25
+  maskChannelInput -M_ground.red
+  name darken_hallway_ground
+  xpos 1060
+  ypos -490
+ }
+ ColorCorrect {
+  contrast 0.8
+  gain {0.8999999762 0.7733554244 0.5975611806 1}
+  maskChannelInput M_walls.red
+  name ColorCorrect11
+  xpos 1060
+  ypos -425
+ }
+add_layer {M_bricks M_bricks.red M_bricks.green M_bricks.blue}
+ ColorCorrect {
+  gamma 0.9
+  gain {0.4799999893 0.3732274473 0.2861867249 1}
+  maskChannelInput M_bricks.red
+  name ColorCorrect10
+  xpos 1060
+  ypos -377
+ }
+ ColorCorrect {
+  gain 0.52
+  maskChannelInput M_janitor_clothes.red
+  name ColorCorrect6
+  xpos 1060
+  ypos -305
+ }
+add_layer {M_books M_books.red M_books.green M_books.blue}
+ ColorCorrect {
+  saturation 0.8
+  contrast 1.2
+  gain 0.35
+  maskChannelInput M_books.red
+  name ColorCorrect12
+  xpos 1060
+  ypos -233
+ }
+ ColorCorrect {
+  saturation 0
+  maskChannelInput M_windows.red
+  name ColorCorrect14
+  xpos 1060
+  ypos -113
+ }
+ ColorCorrect {
+  midtones.gain 0.5
+  highlights.gain 0.5
+  maskChannelInput M_janitor_clothes.red
+  name ColorCorrect7
+  xpos 1060
+  ypos -41
+ }
+ ColorCorrect {
+  gamma 0.8
+  gain {1.024039388 0.5386497378 1.200000048 1}
+  maskChannelInput M_witch_skin.red
+  name purple_witch_skin
+  xpos 1060
+  ypos 38
+ }
+ ColorCorrect {
+  saturation 1.2
+  gamma 0.95
+  gain {1 0.8416763544 0.7933280468 1}
+  maskChannelInput M_cinderella_skin.red
+  name darker_cinderella
+  xpos 1060
+  ypos 103
+ }
+set Nf3dab390 [stack 0]
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace29
+  label "Linear to sRGB"
+  xpos 1060
+  ypos 1519
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name Multiply2
+  xpos 1060
+  ypos 1574
+ }
+ Dot {
+  name Dot91
+  label " CC Diffuse + Lighting"
+  note_font_size 40
+  xpos 1094
+  ypos 1626
+ }
+ Colorspace {
+  colorspace_in sRGB
+  name Colorspace30
+  label "sRGB to Linear"
+  xpos 1060
+  ypos 1687
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace31
+  label "Linear to sRGB"
+  xpos 1060
+  ypos 2047
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy3
+  xpos 1060
+  ypos 2095
+ }
+ Premult {
+  name Premult2
+  xpos 1060
+  ypos 2150
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge3
+  xpos 1060
+  ypos 2414
+  disable true
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus2
+  xpos 1060
+  ypos 2822
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus3
+  xpos 1060
+  ypos 3422
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus4
+  xpos 1060
+  ypos 3926
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus5
+  xpos 1060
+  ypos 4262
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos 1060
+  ypos 4622
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus6
+  xpos 1060
+  ypos 4958
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus7
+  xpos 1060
+  ypos 5342
+  disable true
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy4
+  xpos 1060
+  ypos 5455
+ }
+ Dot {
+  name Dot92
+  label " Final Color Correction"
+  note_font_size 40
+  xpos 1094
+  ypos 5514
+ }
+ Colorspace {
+  colorspace_in sRGB
+  name Colorspace32
+  label "sRGB to Linear"
+  xpos 1060
+  ypos 5527
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus8
+  xpos 1060
+  ypos 5750
+  disable true
+ }
+ ColorCorrect {
+  inputs 1+1
+  offset {0.008750000037 0.009245974943 0.009999999776 0.01999999955}
+  name xx_edge_offset
+  xpos 1060
+  ypos 6014
+ }
+ ColorCorrect {
+  inputs 1+1
+  saturation 0.5
+  contrast 0.57
+  gamma 0.44
+  name xx_depth_cc
+  xpos 1060
+  ypos 6302
+ }
+ Premult {
+  name Premult3
+  xpos 1060
+  ypos 6542
+ }
+ Dot {
+  name Dot93
+  label " FX After Premult (ex: Glow)"
+  note_font_size 40
+  xpos 1094
+  ypos 6594
+ }
+ Clamp {
+  name Clamp2
+  xpos 1060
+  ypos 6799
+ }
+ Remove {
+  operation keep
+  channels rgba
+  channels2 depth
+  name Remove22
+  xpos 1060
+  ypos 6950
+ }
+ Dot {
+  name Dot150
+  xpos 1094
+  ypos 7002
+ }
+set Nf3db1ff0 [stack 0]
+push $Ndf591a30
+ Dot {
+  name Dot154
+  xpos 1754
+  ypos 5466
+ }
+ Shuffle {
+  in Point
+  name Point1
+  xpos 1720
+  ypos 6950
+ }
+ PositionToPoints {
+  inputs 2
+  detail 0.2
+  pointSize 1.5
+  name PositionToPoints1
+  xpos 1720
+  ypos 6998
+ }
+ Dot {
+  name Dot155
+  label " Output in 3D"
+  note_font_size 40
+  xpos 1754
+  ypos 7074
+ }
+push $N1e2c9ce0
+ Dot {
+  name Dot96
+  xpos 1974
+  ypos -1206
+ }
+ Unpremult {
+  name Unpremult2
+  xpos 1940
+  ypos -1114
+ }
+ Colorspace {
+  colorspace_in sRGB
+  name Colorspace6
+  label "sRGB to Linear"
+  xpos 1940
+  ypos -1073
+ }
+ Premult {
+  name Premult1
+  xpos 1940
+  ypos -1018
+ }
+push $Ndf586ae0
+push $Ndfb64a20
+push $Nf3da60b0
+push $Ndf8dac60
+push $Nf3b0c980
+push $Nf3b0e960
+push $Nf3b0a340
+push $Nf3dab390
+push $Ndf586ae0
+ Dot {
+  name Dot153
+  xpos 104
+  ypos 7242
+ }
+push $Nf3db1ff0
+ OFXcom.frischluft.openfx.depthoffield_v1 {
+  inputs 2
+  show "normal blur"
+  radius 2
+  focal_distance 238.8985901
+  focal_point {1374 618}
+  highlight_intensity 0
+  gamma_correction true
+  "-> Depth Buffer..." 1
+  depth_invert true
+  depth_curve 1
+  black_point 0
+  white_point 1
+  "-> Iris..." 1
+  iris_rounded 0.25
+  iris_facets 6
+  iris_angle 0
+  iris_border_thickness 0.3
+  iris_border_brightness 0.3
+  iris_aspect 0
+  "-> Highlight Selection..." 1
+  lightness_start 0.8
+  lightness_end 1
+  lightness_soften 0
+  "-> Outside Image..." 1
+  outside_horizontal "border color"
+  outside_vertical "border color"
+  outside_color 0
+  name xx_dof
+  xpos 1060
+  ypos 7238
+ }
+ LensDistortion1_0 {
+  serializeKnob ""
+  serialiseKnob "22 serialization::archive 4 0 0 0 0 0 0 0 0 0 0 0 0"
+  distortion1 -0.008
+  cardScale {0.9921255708 0.9921255708 1}
+  a 0.001540492405
+  b 0.004423515871
+  c 0.002043886809
+  name xx_distortion_radial1
+  xpos 1060
+  ypos 7262
+ }
+ IE_Abberation_v3 {
+  name IE_Abberation_v3_1
+  note_font Verdana
+  xpos 1060
+  ypos 7310
+  red_scale 1.001
+ }
+ Grain2 {
+  name Grain2_2
+  label "Kodak 5218"
+  xpos 1060
+  ypos 7351
+  red_size 0.1
+  green_size 1.6
+  blue_size 1.91
+  green_i 0.86
+  blue_i 0.73
+  red_m 0.19
+  green_m 0.085
+  blue_m 0.435
+  black {0 0 0}
+  minimum {0 0 0}
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop3
+  xpos 1060
+  ypos 7502
+ }
+ Switch {
+  inputs 9
+  which {{parent.view_select i}}
+  name view_select
+  xpos 3480
+  ypos 8414
+ }
+ Output {
+  name Output1
+  xpos 3480
+  ypos 8582
+ }
+push 0
+push 0
+push 0
+push 0
+push $Ndf8dc5e0
+ Viewer {
+  inputs 6
+  frame_increment 8
+  input_number 5
+  input_process false
+  far 1000000
+  name Viewer1
+  xpos 620
+  ypos 8270
+ }
+end_group

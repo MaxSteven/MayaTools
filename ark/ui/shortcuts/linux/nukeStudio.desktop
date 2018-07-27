@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=true
+Exec=nuke --studio --nocrashprompt
+Name=Nuke Studio
+Icon=/usr/Nuke10.0v4/plugins/icons/NukeStudioApp48.png

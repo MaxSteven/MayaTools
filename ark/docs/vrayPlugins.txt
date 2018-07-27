@@ -1,0 +1,413 @@
+Plugin: 'GeomStaticMesh' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'BRDFSimbiont' Interfaces: EXT_BSDF
+Plugin: 'BRDFHair3' Interfaces: EXT_BSDF
+Plugin: 'BRDFHair2' Interfaces: EXT_BSDF
+Plugin: 'BRDFHair' Interfaces: EXT_BSDF
+Plugin: 'MtlGLSL' Interfaces: EXT_BSDF, EXT_MATERIAL, EXT_TEXTURE
+Plugin: 'GeomInfinitePlane' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'TexSoftbox' Interfaces: EXT_TEXTURE
+Plugin: 'PhxShaderTexAlpha' Interfaces: EXT_TEXTURE
+Plugin: 'PhxShaderSimVol' Interfaces: EXT_VOLUMETRIC
+Plugin: 'PhxShaderPrtLoader'
+Plugin: 'PhxShaderPGroup'
+Plugin: 'PhxShaderFoam'
+Plugin: 'PhxShaderSim' Interfaces: EXT_LIGHT
+Plugin: 'PhxShaderCache'
+Plugin: 'PhxShaderOceanTex' Interfaces: EXT_TEXTURE
+Plugin: 'PhxShaderTex' Interfaces: EXT_TEXTURE
+Plugin: 'PhxShaderSimMesh' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'PhxShaderSimGeom' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'Mtl2Sided' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlBump' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlDiffuse' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlDoubleSided' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlLayeredBRDF' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlMaterialID' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlMulti' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlOverride' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlMayaRamp' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlRenderStats' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlSingleBRDF' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlWrapperMaya' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MtlWrapper' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'LightIESMax' Interfaces: EXT_LIGHT
+Plugin: 'LightIES' Interfaces: EXT_LIGHT
+Plugin: 'SettingsVertexBaker'
+Plugin: 'LightRectangle' Interfaces: EXT_GEOM_GEN, EXT_LIGHT
+Plugin: 'SphericalHarmonicsRenderer'
+Plugin: 'SphericalHarmonicsExporter'
+Plugin: 'TexMaxHairInfo' Interfaces: EXT_TEXTURE
+Plugin: 'TexCompMax' Interfaces: EXT_TEXTURE
+Plugin: 'TexMaxGamma' Interfaces: EXT_TEXTURE
+Plugin: 'TexColorToFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexFloatToColor' Interfaces: EXT_TEXTURE
+Plugin: 'TexRGBMultiplyMax' Interfaces: EXT_TEXTURE
+Plugin: 'TexRGBTintMax' Interfaces: EXT_TEXTURE
+Plugin: 'TexCombineColorLightMtl' Interfaces: EXT_TEXTURE
+Plugin: 'TexCombineColor' Interfaces: EXT_TEXTURE
+Plugin: 'TexCombineFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexBezierCurve' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexNormalMapFlip' Interfaces: EXT_TEXTURE
+Plugin: 'TexOutput' Interfaces: EXT_TEXTURE
+Plugin: 'UVWGenObjectBBox' Interfaces: EXT_UVWGEN
+Plugin: 'MtlObjBBox' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'TexGradient' Interfaces: EXT_TEXTURE
+Plugin: 'TexFalloff' Interfaces: EXT_TEXTURE
+Plugin: 'TexNoiseMax' Interfaces: EXT_TEXTURE
+Plugin: 'TexMaskMax' Interfaces: EXT_TEXTURE
+Plugin: 'TexMix' Interfaces: EXT_TEXTURE
+Plugin: 'TexMarbleMax' Interfaces: EXT_TEXTURE
+Plugin: 'TexSwirl' Interfaces: EXT_TEXTURE
+Plugin: 'TexTiles' Interfaces: EXT_TEXTURE
+Plugin: 'TexSpeckle' Interfaces: EXT_TEXTURE
+Plugin: 'TexSmoke' Interfaces: EXT_TEXTURE
+Plugin: 'TexStucco' Interfaces: EXT_TEXTURE
+Plugin: 'TexSplat' Interfaces: EXT_TEXTURE
+Plugin: 'TexLayeredMax' Interfaces: EXT_TEXTURE
+Plugin: 'TexBerconDistortion' Interfaces: EXT_TEXTURE
+Plugin: 'TexBerconNoise' Interfaces: EXT_TEXTURE
+Plugin: 'TexBerconTile' Interfaces: EXT_TEXTURE
+Plugin: 'TexBerconWood' Interfaces: EXT_TEXTURE
+Plugin: 'TexBerconGrad' Interfaces: EXT_TEXTURE
+Plugin: 'TexGradRamp' Interfaces: EXT_TEXTURE
+Plugin: 'ColorCorrect' Interfaces: EXT_TEXTURE
+Plugin: 'ColorTextureToMono' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'ColorCorrection' Interfaces: EXT_TEXTURE
+Plugin: 'LightAmbientMax' Interfaces: EXT_LIGHT
+Plugin: 'LightDirectMax' Interfaces: EXT_LIGHT, EXT_UVWGEN
+Plugin: 'LightSpotMax' Interfaces: EXT_LIGHT, EXT_UVWGEN
+Plugin: 'LightOmniMax' Interfaces: EXT_LIGHT, EXT_UVWGEN
+Plugin: 'FilterPoint'
+Plugin: 'FilterMitNet'
+Plugin: 'FilterCookVariable'
+Plugin: 'FilterGaussian'
+Plugin: 'FilterSinc'
+Plugin: 'FilterCatmullRom'
+Plugin: 'FilterLanczos'
+Plugin: 'FilterTriangle'
+Plugin: 'FilterBox'
+Plugin: 'FilterArea'
+Plugin: 'UVWGenBercon' Interfaces: EXT_UVWGEN
+Plugin: 'UVWGenChannel' Interfaces: EXT_UVWGEN
+Plugin: 'UVWGenEnvironment' Interfaces: EXT_UVWGEN
+Plugin: 'UVWGenExplicit' Interfaces: EXT_UVWGEN
+Plugin: 'UVWGenObject' Interfaces: EXT_UVWGEN
+Plugin: 'UVWGenPlanarWorld' Interfaces: EXT_UVWGEN
+Plugin: 'UVWGenProjection' Interfaces: EXT_UVWGEN
+Plugin: 'TexMultiProjection' Interfaces: EXT_TEXTURE
+Plugin: 'CameraDefault'
+Plugin: 'RenderView' Interfaces: EXT_RENDER_VIEW
+Plugin: 'TexXSIVertexColorLookup' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIWeightmapColorLookup' Interfaces: EXT_TEXTURE, EXT_TEXTURE_FLOAT
+Plugin: 'TexXSIWeightmapLookup' Interfaces: EXT_TEXTURE, EXT_TEXTURE_FLOAT
+Plugin: 'texRenderHair' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIMulti' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexXSIScalarInvert' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexXSIColorBalance' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIRGBAKeyer' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIHLSAdjust' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIIntensity' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSINormalMap' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSISnow' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIFalloff' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIFlagstone' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIColorMix' Interfaces: EXT_TEXTURE
+Plugin: 'TexColorSwitch' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIRipple' Interfaces: EXT_TEXTURE
+Plugin: 'texXSIColor2Vector' Interfaces: EXT_TEXTURE
+Plugin: 'texXSIColor2Alpha' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIScalar2Color' Interfaces: EXT_TEXTURE
+Plugin: 'TexColor2Scalar' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexBillboardParticle' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIColorCorrection' Interfaces: EXT_TEXTURE
+Plugin: 'TexParticleShape' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIFabric' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIVein' Interfaces: EXT_TEXTURE
+Plugin: 'TexDisplacacementRestrict' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexColorAverage' Interfaces: EXT_TEXTURE
+Plugin: 'TexColorExponential' Interfaces: EXT_TEXTURE
+Plugin: 'TexScalarExponential' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexColorCurve' Interfaces: EXT_TEXTURE
+Plugin: 'TexScalarCurve' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexInterpLinear' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexColorMathBasic' Interfaces: EXT_TEXTURE
+Plugin: 'TexScalarMathBasic' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexXSILayered' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIBitmap' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIGradient' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSIWood' Interfaces: EXT_TEXTURE
+Plugin: 'volumeXSIMulti' Interfaces: EXT_VOLUMETRIC
+Plugin: 'TexSurfIncidence' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexXSIRock' Interfaces: EXT_TEXTURE
+Plugin: 'TexFloatPerVertexHairSampler' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexPerVertexHairSampler' Interfaces: EXT_TEXTURE
+Plugin: 'TexScalarHairRootSampler' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexHairRootSampler' Interfaces: EXT_TEXTURE
+Plugin: 'xsiUVWGenEnvironment' Interfaces: EXT_UVWGEN
+Plugin: 'TexColor8Mix' Interfaces: EXT_TEXTURE
+Plugin: 'TexXSICell' Interfaces: EXT_TEXTURE
+Plugin: 'xsiUVWGenChannel' Interfaces: EXT_UVWGEN
+Plugin: 'TexRgbaCombine' Interfaces: EXT_TEXTURE
+Plugin: 'TexRgbaSplit'
+Plugin: 'BRDFDiffuse_forSSSASGVIS' Interfaces: EXT_BSDF
+Plugin: 'BRDFDiffuseASGVIS' Interfaces: EXT_BSDF
+Plugin: 'VRayScene'
+Plugin: 'TexFalloffASGVIS' Interfaces: EXT_TEXTURE
+Plugin: 'SettingsImageFilter'
+Plugin: 'RenderChannelDRBucket' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelMtlID' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelNodeID' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelCoverage' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelExtraTex' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelVelocity' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelRenderID' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelZDepth' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelBumpNormals' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelNormals' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelGlossiness' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelColorModo' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelColor' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'ASGVISNode' Interfaces: EXT_GEOM_GEN
+Plugin: 'TexPtex' Interfaces: EXT_TEXTURE
+Plugin: 'TexAColor' Interfaces: EXT_TEXTURE
+Plugin: 'TexBitmap' Interfaces: EXT_TEXTURE
+Plugin: 'TexBlendBumpNormal' Interfaces: EXT_TEXTURE
+Plugin: 'TexBlend' Interfaces: EXT_TEXTURE
+Plugin: 'TexBulge' Interfaces: EXT_TEXTURE
+Plugin: 'TexChecker' Interfaces: EXT_TEXTURE
+Plugin: 'TexCondition' Interfaces: EXT_TEXTURE
+Plugin: 'TexClamp' Interfaces: EXT_TEXTURE
+Plugin: 'TexCloth' Interfaces: EXT_TEXTURE
+Plugin: 'TexCustomBitmap' Interfaces: EXT_TEXTURE
+Plugin: 'TexDirt' Interfaces: EXT_TEXTURE
+Plugin: 'TexEdges' Interfaces: EXT_TEXTURE
+Plugin: 'TexFresnel' Interfaces: EXT_TEXTURE
+Plugin: 'TexGranite' Interfaces: EXT_TEXTURE
+Plugin: 'TexGrid' Interfaces: EXT_TEXTURE
+Plugin: 'TexICC' Interfaces: EXT_TEXTURE
+Plugin: 'TexInvertFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexInvert' Interfaces: EXT_TEXTURE
+Plugin: 'TexLayered' Interfaces: EXT_TEXTURE
+Plugin: 'TexLeather' Interfaces: EXT_TEXTURE
+Plugin: 'TexLut' Interfaces: EXT_TEXTURE
+Plugin: 'TexMarble' Interfaces: EXT_TEXTURE
+Plugin: 'TexInt' Interfaces: EXT_TEXTURE_INT
+Plugin: 'TexFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexMultiFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexMulti' Interfaces: EXT_TEXTURE
+Plugin: 'TexMultiX' Interfaces: EXT_TEXTURE
+Plugin: 'TexNoise' Interfaces: EXT_TEXTURE
+Plugin: 'TexOCIO' Interfaces: EXT_TEXTURE
+Plugin: 'TexParticleId' Interfaces: EXT_TEXTURE_INT
+Plugin: 'TexParticleSampler'
+Plugin: 'TexParticleDiffuse' Interfaces: EXT_TEXTURE
+Plugin: 'TexIDIntegerMap' Interfaces: EXT_TEXTURE_INT
+Plugin: 'TexRamp' Interfaces: EXT_TEXTURE
+Plugin: 'TexRaySwitch' Interfaces: EXT_TEXTURE
+Plugin: 'TexRemap' Interfaces: EXT_TEXTURE, EXT_TEXTURE_FLOAT
+Plugin: 'TexRemapFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexRock' Interfaces: EXT_TEXTURE
+Plugin: 'TexMotionOcclusion' Interfaces: EXT_TEXTURE
+Plugin: 'TexIntToFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexAColorChannel' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'Float3ToAColor' Interfaces: EXT_TEXTURE
+Plugin: 'TexAColorOp' Interfaces: EXT_TEXTURE
+Plugin: 'TexFloatOp' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexVectorOp' Interfaces: EXT_TEXTURE_VECTOR
+Plugin: 'TexSampler' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexSnow' Interfaces: EXT_TEXTURE
+Plugin: 'UVWGenSwitch' Interfaces: EXT_UVWGEN
+Plugin: 'TexSwitchInt' Interfaces: EXT_TEXTURE_INT
+Plugin: 'TexSwitchTransform' Interfaces: EXT_TEXTURE_TRANSFORM
+Plugin: 'TexSwitchMatrix' Interfaces: EXT_TEXTURE_MATRIX
+Plugin: 'TexSwitchFloat' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexSwitch' Interfaces: EXT_TEXTURE
+Plugin: 'TexTemperature' Interfaces: EXT_TEXTURE
+Plugin: 'TexThickness' Interfaces: EXT_TEXTURE
+Plugin: 'TexUVW' Interfaces: EXT_TEXTURE
+Plugin: 'TexVoxelData' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexWood' Interfaces: EXT_TEXTURE
+Plugin: 'TexTriPlanar' Interfaces: EXT_TEXTURE
+Plugin: 'BRDFScanned' Interfaces: EXT_BSDF
+Plugin: 'SettingsPtexBaker'
+Plugin: 'SettingsVFBChannels' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'MtlOSL' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'CameraPhysical'
+Plugin: 'MtlAngleBlend' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'BRDFReflection' Interfaces: EXT_BSDF
+Plugin: 'TrimmingRegion'
+Plugin: 'TrimmingRegionsComplex'
+Plugin: 'NURBSCurve'
+Plugin: 'GeomStaticNURBS' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'RawBitmapBuffer' Interfaces: EXT_BITMAP, EXT_BITMAP2
+Plugin: 'BitmapBuffer' Interfaces: EXT_BITMAP, EXT_BITMAP2
+Plugin: 'BRDFSSS' Interfaces: EXT_BSDF
+Plugin: 'GeomLocalRayserver' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'BRDFGGX' Interfaces: EXT_BSDF
+Plugin: 'BRDFCookTorrance' Interfaces: EXT_BSDF
+Plugin: 'BRDFWard' Interfaces: EXT_BSDF
+Plugin: 'BRDFBlinn' Interfaces: EXT_BSDF
+Plugin: 'BRDFBump' Interfaces: EXT_BSDF
+Plugin: 'BRDFDiffuse_forSSS' Interfaces: EXT_BSDF
+Plugin: 'BRDFDiffuse' Interfaces: EXT_BSDF
+Plugin: 'BRDFGlassGlossy' Interfaces: EXT_BSDF
+Plugin: 'BRDFGlass' Interfaces: EXT_BSDF
+Plugin: 'BRDFLayered' Interfaces: EXT_BSDF
+Plugin: 'BRDFLight' Interfaces: EXT_BSDF
+Plugin: 'BRDFMirror' Interfaces: EXT_BSDF
+Plugin: 'BRDFMultiBump' Interfaces: EXT_BSDF
+Plugin: 'BRDFPhong' Interfaces: EXT_BSDF
+Plugin: 'BSDFPointParticle' Interfaces: EXT_BSDF
+Plugin: 'MtlASGVIS' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'VRayClipper' Interfaces: EXT_GEOM_GEN, EXT_STATIC_GEOM_SOURCE
+Plugin: 'BakeView' Interfaces: EXT_RENDER_VIEW
+Plugin: 'EnvFogMeshGizmo'
+Plugin: 'EnvironmentFog' Interfaces: EXT_VOLUMETRIC
+Plugin: 'VolumeChannels' Interfaces: EXT_VOLUMETRIC
+Plugin: 'VolumeMulti' Interfaces: EXT_VOLUMETRIC
+Plugin: 'SphereFadeGizmo'
+Plugin: 'SphereFade' Interfaces: EXT_VOLUMETRIC
+Plugin: 'VolumeVRayToon' Interfaces: EXT_VOLUMETRIC
+Plugin: 'VolumeScatterFog' Interfaces: EXT_VOLUMETRIC
+Plugin: 'VolumeFog' Interfaces: EXT_VOLUMETRIC
+Plugin: 'SettingsDR'
+Plugin: 'MtlVRmat' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'BRDFFlakes' Interfaces: EXT_BSDF
+Plugin: 'BRDFCarPaint' Interfaces: EXT_BSDF
+Plugin: 'LightMesh' Interfaces: EXT_GEOM_GEN, EXT_LIGHT
+Plugin: 'TexOpenVDB' Interfaces: EXT_TEXTURE, EXT_TEXTURE_FLOAT
+Plugin: 'GeomBifrost' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'BRDFVRayMtl' Interfaces: EXT_BSDF
+Plugin: 'GeomMayaHair' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomHair' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomBox' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomImagePlane' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomMeshFile' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomMeshLoader' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomMeshTest' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomMetaballSystem' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'GeomPlane' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'MtlToon' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'GeomSphere' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'Instancer2' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'Instancer' Interfaces: EXT_GEOM_GEN
+Plugin: 'MtlSkp2Sided' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'TexDistanceToObject' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexAnimationCurve' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexColorMask' Interfaces: EXT_TEXTURE
+Plugin: 'TexColorCorrect' Interfaces: EXT_TEXTURE
+Plugin: 'TexColorLogic' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexColorCondition' Interfaces: EXT_TEXTURE
+Plugin: 'TexColorConstant' Interfaces: EXT_TEXTURE
+Plugin: 'TexComposite' Interfaces: EXT_TEXTURE
+Plugin: 'TexSimplexNoise' Interfaces: EXT_TEXTURE
+Plugin: 'TexBifrostVVMix' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexSurfaceLuminance' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'ParticleTex' Interfaces: EXT_TEXTURE
+Plugin: 'TexUserScalar' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexUserColor' Interfaces: EXT_TEXTURE
+Plugin: 'TexNoiseMaya' Interfaces: EXT_TEXTURE
+Plugin: 'TexTemperatureToColor' Interfaces: EXT_TEXTURE
+Plugin: 'MtlStreakFade' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'TexVertexColorDirect' Interfaces: EXT_TEXTURE
+Plugin: 'TexMayaConversion' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexStencil' Interfaces: EXT_TEXTURE
+Plugin: 'TexColorAndAlpha' Interfaces: EXT_TEXTURE
+Plugin: 'TexLuminance' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexMeshVertexColorChannel' Interfaces: EXT_TEXTURE
+Plugin: 'TexMeshVertexColorWithDefault' Interfaces: EXT_TEXTURE
+Plugin: 'TexMeshVertexColor' Interfaces: EXT_TEXTURE, EXT_TEXTURE_FLOAT
+Plugin: 'TexMayaContrast' Interfaces: EXT_TEXTURE
+Plugin: 'TexUVWGenToTexture' Interfaces: EXT_TEXTURE
+Plugin: 'TexCondition2' Interfaces: EXT_TEXTURE
+Plugin: 'TransformToTex' Interfaces: EXT_TEXTURE_TRANSFORM
+Plugin: 'FloatToTex' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexPlusMinusAverage' Interfaces: EXT_TEXTURE
+Plugin: 'TexDistanceBetween' Interfaces: EXT_TEXTURE_FLOAT
+Plugin: 'TexVectorToColor' Interfaces: EXT_TEXTURE
+Plugin: 'TexVectorProduct' Interfaces: EXT_TEXTURE
+Plugin: 'TexSetRange' Interfaces: EXT_TEXTURE
+Plugin: 'TexHSVToRGB' Interfaces: EXT_TEXTURE
+Plugin: 'TexRGBToHSV' Interfaces: EXT_TEXTURE
+Plugin: 'MayaProjectionTex' Interfaces: EXT_TEXTURE
+Plugin: 'UVWGenMayaPlace2dTexture' Interfaces: EXT_UVWGEN
+Plugin: 'MayaMtlMatte' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'MayaGamma' Interfaces: EXT_TEXTURE
+Plugin: 'MayaMultiplyDivide' Interfaces: EXT_TEXTURE
+Plugin: 'TexHairSampler'
+Plugin: 'TexVRayFurSampler'
+Plugin: 'TexMayaHairTransparency' Interfaces: EXT_TEXTURE
+Plugin: 'TexMayaHairIncandescence' Interfaces: EXT_TEXTURE
+Plugin: 'TexMayaHairColor' Interfaces: EXT_TEXTURE
+Plugin: 'TexMayaFluidTransformed' Interfaces: EXT_TEXTURE, EXT_TEXTURE_FLOAT
+Plugin: 'TexMayaFluidCombined'
+Plugin: 'TexMayaFluidProcedural'
+Plugin: 'TexMayaFluid' Interfaces: EXT_TEXTURE, EXT_TEXTURE_FLOAT
+Plugin: 'TexFresnelASGVIS' Interfaces: EXT_TEXTURE
+Plugin: 'TexNoiseASGVIS' Interfaces: EXT_TEXTURE
+Plugin: 'BRDFStochasticFlakes' Interfaces: EXT_BSDF
+Plugin: 'VolumeAerialPerspective' Interfaces: EXT_VOLUMETRIC
+Plugin: 'TexSky' Interfaces: EXT_TEXTURE
+Plugin: 'SunLight' Interfaces: EXT_LIGHT
+Plugin: 'RenderChannelObjectSelect' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'RenderChannelMultiMatte' Interfaces: EXT_RENDER_CHANNEL
+Plugin: 'Node' Interfaces: EXT_GEOM_GEN
+Plugin: 'BRDFSkinComplex' Interfaces: EXT_BSDF
+Plugin: 'BRDFSSS2Complex' Interfaces: EXT_BSDF
+Plugin: 'BRDFSSS2' Interfaces: EXT_BSDF
+Plugin: 'TexDistance' Interfaces: EXT_TEXTURE
+Plugin: 'GeomDisplacedMesh' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'LightDome' Interfaces: EXT_GEOM_GEN, EXT_LIGHT
+Plugin: 'GeomStaticSmoothedMesh' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'TexCellular' Interfaces: EXT_TEXTURE
+Plugin: 'TexWater' Interfaces: EXT_TEXTURE
+Plugin: 'GeomParticleSystem' Interfaces: EXT_STATIC_GEOM_SOURCE
+Plugin: 'LightDirectModo' Interfaces: EXT_LIGHT
+Plugin: 'LightDirect' Interfaces: EXT_LIGHT
+Plugin: 'LightAmbient' Interfaces: EXT_LIGHT
+Plugin: 'LightOmni' Interfaces: EXT_LIGHT
+Plugin: 'LightSphere' Interfaces: EXT_GEOM_GEN, EXT_LIGHT
+Plugin: 'LightSpot' Interfaces: EXT_LIGHT
+Plugin: 'MayaLightDirect' Interfaces: EXT_LIGHT
+Plugin: 'TexCurvature' Interfaces: EXT_TEXTURE
+Plugin: 'SettingsRTEngine'
+Plugin: 'RTEngine'
+Plugin: 'MtlRoundEdges' Interfaces: EXT_BSDF, EXT_MATERIAL
+Plugin: 'TexOSL' Interfaces: EXT_TEXTURE
+Plugin: 'BRDFRefraction' Interfaces: EXT_BSDF
+Plugin: 'CameraDome'
+Plugin: 'CameraFilmTransform'
+Plugin: 'VRayStereoscopicSettings'
+Plugin: 'OutputDeepWriter'
+Plugin: 'SettingsVFB'
+Plugin: 'SettingsCurrentFrame'
+Plugin: 'SettingsUnitsInfo'
+Plugin: 'SettingsRenderChannels'
+Plugin: 'SettingsRegionsGenerator'
+Plugin: 'SettingsRaycaster'
+Plugin: 'SettingsDMCSampler'
+Plugin: 'SettingsDMCGI'
+Plugin: 'SettingsPhotonMap'
+Plugin: 'SettingsTGA'
+Plugin: 'SettingsSGI'
+Plugin: 'SettingsTIFF'
+Plugin: 'SettingsJPEG'
+Plugin: 'SettingsPNG'
+Plugin: 'SettingsVRST'
+Plugin: 'SettingsEXR'
+Plugin: 'SettingsOutput'
+Plugin: 'SettingsOptions'
+Plugin: 'SettingsMotionBlur'
+Plugin: 'SettingsLightTree'
+Plugin: 'SettingsLightCache'
+Plugin: 'SettingsLightLinker' Interfaces: EXT_LIGHT_LINKER
+Plugin: 'SettingsIrradianceMap'
+Plugin: 'SettingsImageSampler'
+Plugin: 'SettingsGI'
+Plugin: 'SettingsEnvironment'
+Plugin: 'SettingsDefaultDisplacement'
+Plugin: 'SettingsColorMappingModo'
+Plugin: 'SettingsColorMapping'
+Plugin: 'SettingsCaustics'
+Plugin: 'SettingsCameraDof'
+Plugin: 'SettingsCamera'

@@ -1,0 +1,180 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+add_layer {Point Point.red Point.green Point.blue}
+Gizmo {
+ help "For use with the <i>Point</i> Pass.\nBefore initial setup, hit the <i>Run</i> Button, then the user can appropriatly select the proper Y-axis (though default is green). <i>Switch Views</i> allows the user to view the original image with the channel copyed back in, or the setup of the blackpoint and whitepoint values.\n<hr/><hr/>\n<b>Option 1</b> - User must select blackpoint and whitepoint manually. <i>Disable Grade</i> can allow selection without interfering the image from drastically changing based on selection.\n<hr/>\n<b>Option 2</b> - After hitting the initial <i>'Run'</i> button, that launches the knobchanged variable, it also runs a min-max script that finds the minimum and maximum values of the image at the current frame, and inputs them into a preliminary grade node. The user from there can use the <i>blackpoint</i> and <i>whitepoint</i> sliders, based on a normalized range of 0-1.\n<hr/>\nWhen the mask has been created, select which channel to copy into the main stream to use as part of the stream."
+ knobChanged "\nif nuke.thisKnob().name() == \"Ysel\":\n    userChoice = nuke.thisKnob().value()\n    if nuke.thisKnob().value() == userChoice:\n        for channel in channels:\n            shuf\[channel].setValue(userChoice)\n"
+ tile_color 0x6a6c47ff
+ addUserKnob {20 User t "For use with the <i>Point</i> Pass.\nBefore initial setup, hit the <i>Run</i> Button, then the user can appropriatly select the proper Y-axis (though default is green). <i>Switch Views</i> allows the user to view the original image with the channel copyed back in, or the setup of the blackpoint and whitepoint values.\n<hr/><hr/>\n<b>Option 1</b> - User must select blackpoint and whitepoint manually. <i>Disable Grade</i> can allow selection without interfering the image from drastically changing based on selection.\n<hr/>\n<b>Option 2</b> - After hitting the initial <i>'Run'</i> button, that launches the knobchanged variable, it also runs a min-max script that finds the minimum and maximum values of the image at the current frame, and inputs them into a preliminary grade node. The user from there can use the <i>blackpoint</i> and <i>whitepoint</i> sliders, based on a normalized range of 0-1.\n<hr/>\nWhen the mask has been created, select which channel to copy into the main stream to use as part of the stream."}
+ addUserKnob {26 space_3 l "" -STARTLINE T "      "}
+ addUserKnob {41 in l "" t "Select Point pass to produce Y-Gradient" -STARTLINE T PointPass_Shuffle.in}
+ addUserKnob {26 space_1 l "" -STARTLINE T "      "}
+ addUserKnob {4 SelectY l "Axis Select" -STARTLINE M {X Y Z "" "" "" "" ""}}
+ SelectY Y
+ addUserKnob {26 space_2 l "" -STARTLINE T "      "}
+ addUserKnob {4 switchviews l "Switch Views" -STARTLINE M {Final "View Pass"}}
+ switchviews "View Pass"
+ addUserKnob {26 ""}
+ addUserKnob {12 wpPos l "whitepoint position"}
+ addUserKnob {12 bpPos l "blackpoint position"}
+ addUserKnob {22 run l Evaluate T "pt = nuke.thisNode()\ntrackx = pt\['wpPos'].getValue()\[0]\ntracky = pt\['wpPos'].getValue()\[1]\nbtrackx = pt\['bpPos'].getValue()\[0]\nbtracky = pt\['bpPos'].getValue()\[1]\nshuf = pt.node('Switch3')\nwp = shuf.sample('rgba.red',trackx,tracky)\nbp = shuf.sample('rgba.red',btrackx,btracky)\n\nnuke.toNode('Grade')\['blackpoint'].setValue(bp)\nnuke.toNode('Grade')\['whitepoint'].setValue(wp)" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {20 GradeInfo l Info n 1}
+ GradeInfo 0
+ addUserKnob {41 blackpoint T Grade.blackpoint}
+ addUserKnob {41 whitepoint T Grade.whitepoint}
+ addUserKnob {26 ""}
+ addUserKnob {6 disableG l "Disable Grade" t "This is to make selection of values easier" +STARTLINE}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {7 bpSlider l Blackpoint R -1 1}
+ addUserKnob {7 wpSlider l Whitepoint R -1 1}
+ wpSlider 1
+ addUserKnob {26 ""}
+ addUserKnob {6 invertYgradient l Invert? +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 from0 l "Copy channel" T Copy10.from0}
+ addUserKnob {26 to l INVISIBLE -STARTLINE +INVISIBLE T to}
+ addUserKnob {41 to0 l " to" -STARTLINE T Copy10.to0}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 0
+  ypos -406
+ }
+ Dot {
+  name Dot1
+  xpos 34
+  ypos -322
+ }
+set N849a1760 [stack 0]
+ Dot {
+  name Dot3
+  xpos 34
+  ypos 12
+ }
+set N849a1a90 [stack 0]
+push $N849a1760
+add_layer {19}
+add_layer {rgba redguard1.glow rgba.warper rgba.Z}
+ Shuffle {
+  in Point
+  name PointPass_Shuffle
+  label "\[value in]"
+  xpos -319
+  ypos -331
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove1
+  xpos -319
+  ypos -283
+ }
+set N849a20f0 [stack 0]
+ Shuffle {
+  red blue
+  green blue
+  alpha blue
+  name ShuffleBlue
+  label "\[value in]"
+  xpos -201
+  ypos -171
+ }
+push $N849a20f0
+ Shuffle {
+  red green
+  blue green
+  alpha green
+  name ShuffleGreen
+  label "\[value in]"
+  xpos -319
+  ypos -168
+ }
+push $N849a20f0
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name ShuffleRed
+  label "\[value in]"
+  xpos -434
+  ypos -172
+ }
+ Switch {
+  inputs 3
+  which {{parent.SelectY i}}
+  name Switch3
+  xpos -319
+  ypos -96
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy9
+  xpos -319
+  ypos 3
+ }
+add_layer {rgb rgb.red rgb.green rgb.blue rgb.alpha}
+ Unpremult {
+  name Unpremult4
+  xpos -319
+  ypos 95
+ }
+ Grade {
+  channels rgba
+  black_clamp false
+  name Grade
+  xpos -319
+  ypos 266
+  disable {{parent.disableG 1}}
+ }
+ Grade {
+  blackpoint {{parent.bpSlider}}
+  whitepoint {{parent.wpSlider}}
+  white_clamp true
+  name UserChangeGrade
+  xpos -319
+  ypos 343
+ }
+ Invert {
+  channels rgb
+  name Invert3
+  xpos -319
+  ypos 498
+  disable {{!parent.invertYgradient i}}
+ }
+ Dot {
+  name Dot160
+  xpos -152
+  ypos 501
+ }
+set N849a3da0 [stack 0]
+ Dot {
+  name Dot2
+  xpos -152
+  ypos 620
+ }
+push $N849a3da0
+push $N849a1a90
+ Copy {
+  inputs 2
+  name Copy10
+  xpos 0
+  ypos 492
+ }
+ Switch {
+  inputs 2
+  which {{parent.switchviews i}}
+  name Switch1
+  xpos 0
+  ypos 617
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 718
+ }
+end_group

@@ -1,0 +1,518 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+Gizmo {
+ inputs 0
+ tile_color 0x8ebbd4ff
+ note_font Verdana
+ mapsize {0.15 0.15}
+ addUserKnob {20 User l Setup}
+ addUserKnob {12 pos t "Animate on mouth"}
+ addUserKnob {7 Scale R 1 3}
+ Scale 1
+ addUserKnob {7 poof t "Animate this for a 'push' feel when speaking" R 1 3}
+ poof 1
+ addUserKnob {41 value l Brightness T Multiply2.value}
+ addUserKnob {7 SmokeSpeed l "Smoke Speed"}
+ SmokeSpeed 0.01
+ addUserKnob {3 seed l Seed -STARTLINE}
+ seed 33333
+ addUserKnob {26 ""}
+ addUserKnob {4 views M {Final Motion "Main Noise" "Add Noise" "Detail Noise"}}
+ addUserKnob {3 tailFrames l "Tail Length" -STARTLINE}
+ tailFrames 20
+ addUserKnob {26 ""}
+ addUserKnob {26 MainNoise l "<font color='#006633'>Main Noise</font>"}
+ addUserKnob {41 size l x/ysize T Main_Noise.size}
+ addUserKnob {41 gain T Main_Noise.gain}
+ addUserKnob {41 gamma T Main_Noise.gamma}
+ addUserKnob {26 AddNoise l "<font color='#006633'>Add Noise</font>"}
+ addUserKnob {41 size_1 l x/ysize T AddNoise1.size}
+ addUserKnob {41 gain_1 l gain T AddNoise1.gain}
+ addUserKnob {41 gamma_1 l gamma T AddNoise1.gamma}
+ addUserKnob {26 DetailNoise l "<font color='#006633'>Detail Noise</font>"}
+ addUserKnob {41 gamma_2 l gamma T Detail_Noise.gamma}
+ addUserKnob {41 gain_2 l gain T Detail_Noise.gain}
+ addUserKnob {41 size_2 l x/ysize T Detail_Noise.size}
+}
+ Radial {
+  inputs 0
+  area {837 430 1083 650}
+  softness 2
+  name Radial2
+  xpos 3600
+  ypos -1347
+ }
+ Transform {
+  scale {{parent.poof i}}
+  center {960 540}
+  name Transform3
+  xpos 3600
+  ypos -1311
+ }
+ Radial {
+  area {837 430 1083 650}
+  name Radial1
+  xpos 3600
+  ypos -1203
+ }
+ Transform {
+  scale {{parent.Scale i}}
+  center {960 540}
+  name Transform4
+  xpos 3600
+  ypos -1167
+ }
+ Blur {
+  size 60
+  name Blur1
+  label "\[value size]"
+  xpos 3600
+  ypos -1107
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos 3740
+  ypos -1119
+ }
+ MotionBlur2D {
+  uv forward
+  name MotionBlur2D1
+  xpos 3740
+  ypos -1023
+ }
+push 0
+ Copy {
+  inputs 2
+  from0 forward.u
+  to0 forward.u
+  from1 forward.v
+  to1 forward.v
+  name Copy1
+  xpos 3740
+  ypos -855
+ }
+ CopyBBox {
+  name CopyBBox1
+  xpos 3600
+  ypos -843
+ }
+ VectorBlur {
+  uv motion
+  name VectorBlur1
+  xpos 3600
+  ypos -777
+ }
+set N2b37b090 [stack 0]
+push $N2b37b090
+ Dot {
+  name Dot4
+  xpos 4194
+  ypos -768
+ }
+set N2b37b3c0 [stack 0]
+ Dot {
+  name Dot5
+  xpos 4194
+  ypos -336
+ }
+push $N2b37b3c0
+ Dot {
+  name Dot1
+  xpos 4334
+  ypos -768
+ }
+set N2b3a5b30 [stack 0]
+ TimeEcho {
+  mode Average
+  framesbehind 2
+  frmaesfade 2
+  name TimeEcho2
+  xpos 4300
+  ypos -735
+ }
+ Transform {
+  translate {0 30}
+  center {960 540}
+  name Transform2
+  xpos 4300
+  ypos -663
+ }
+ Dot {
+  name Dot6
+  xpos 4334
+  ypos -408
+ }
+push $N2b3a5b30
+ Dot {
+  name Dot7
+  xpos 4614
+  ypos -768
+ }
+ TimeOffset {
+  time_offset 4
+  name TimeOffset2
+  label "\[value time_offset]"
+  xpos 4580
+  ypos -741
+ }
+ Transform {
+  translate {0 100}
+  center {960 540}
+  name Transform6
+  xpos 4580
+  ypos -693
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge2
+  xpos 4580
+  ypos -411
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos 4580
+  ypos -339
+ }
+ Multiply {
+  value 0.1
+  name Multiply1
+  xpos 4580
+  ypos -273
+ }
+ Dot {
+  name Dot3
+  xpos 4614
+  ypos -120
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge3
+  xpos 3600
+  ypos -123
+ }
+ Dot {
+  name Dot2
+  xpos 3634
+  ypos -48
+ }
+set N2b3ecd90 [stack 0]
+ Dot {
+  name Dot8
+  xpos 3634
+  ypos 168
+ }
+push $N2b3ecd90
+ Dot {
+  name Dot9
+  xpos 3774
+  ypos -48
+ }
+set N2b3ed0c0 [stack 0]
+ Invert {
+  name Invert1
+  xpos 3740
+  ypos 15
+ }
+ Expression {
+  channel0 {-rgba.red rgba.green rgba.blue}
+  expr0 min(0,0)
+  name Expression4
+  xpos 3740
+  ypos 93
+ }
+push $N2b3ed0c0
+ Grade {
+  channels rgba
+  whitepoint {0.1291362792 0.1291362792 0.1291362792 0.1291362792}
+  white_clamp true
+  name Grade1
+  xpos 3880
+  ypos -51
+ }
+ Expression {
+  channel0 {rgba.red rgba.green -rgba.blue}
+  expr0 min(0,0)
+  name Expression2
+  xpos 4020
+  ypos -51
+ }
+ TimeEcho {
+  mode Average
+  framesbehind 6
+  frmaesfade 5
+  name TimeEcho3
+  xpos 4020
+  ypos -15
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge5
+  xpos 4020
+  ypos 93
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos 4020
+  ypos 159
+  disable true
+ }
+ Dot {
+  name Dot10
+  xpos 4054
+  ypos 312
+ }
+ Noise {
+  inputs 0
+  size 66
+  zoffset {{(t*parent.SmokeSpeed)+parent.seed}}
+  gain 0.745
+  gamma 1
+  translate {600 {t*2}}
+  center {960 540}
+  name Detail_Noise
+  xpos -40
+  ypos -117
+ }
+ Noise {
+  inputs 0
+  size 450
+  zoffset {{(t*parent.SmokeSpeed)+parent.seed}}
+  gain 0.39
+  gamma 0.195
+  translate {1000 {t*2}}
+  center {960 540}
+  name AddNoise1
+  xpos -40
+  ypos -225
+ }
+ Noise {
+  inputs 0
+  zoffset {{(t*parent.SmokeSpeed)+parent.seed}}
+  gain 0.39
+  gamma 0.675
+  translate {0 {t*2}}
+  center {960 540}
+  name Main_Noise
+  xpos -180
+  ypos -333
+ }
+set N2b49df60 [stack 0]
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge7
+  xpos -180
+  ypos -225
+ }
+set N2b49e290 [stack 0]
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge6
+  xpos -180
+  ypos -117
+ }
+set N2b49e5c0 [stack 0]
+ Dot {
+  name Dot16
+  xpos -286
+  ypos -114
+ }
+ Dot {
+  name Dot19
+  xpos -286
+  ypos 318
+ }
+push $N2b49e290
+ Dot {
+  name Dot15
+  xpos -286
+  ypos -222
+ }
+ Dot {
+  name Dot18
+  xpos -286
+  ypos 318
+ }
+push $N2b49df60
+ Dot {
+  name Dot14
+  xpos -286
+  ypos -330
+ }
+ Dot {
+  name Dot17
+  xpos -286
+  ypos 318
+ }
+ Radial {
+  inputs 0
+  area {837 430 1083 650}
+  name Radial4
+  xpos 240
+  ypos -981
+ }
+ Transform {
+  scale {{parent.poof i}}
+  center {960 540}
+  name Transform8
+  xpos 240
+  ypos -909
+ }
+ Radial {
+  area {837 430 1083 650}
+  name Radial5
+  xpos 240
+  ypos -837
+ }
+ Transform {
+  scale {{parent.Scale i}}
+  center {960 540}
+  name Transform10
+  xpos 240
+  ypos -765
+ }
+ Transform {
+  translate {{parent.pos-960 i} {parent.pos-540 i}}
+  center {960 540}
+  name Transform1
+  xpos 240
+  ypos -693
+ }
+set N2b36f560 [stack 0]
+ Dot {
+  name Dot21
+  xpos 554
+  ypos -690
+ }
+ Dot {
+  name Dot20
+  xpos 554
+  ypos 318
+ }
+push $N2b36f560
+ Transform {
+  scale 2
+  center {{960+parent.Transform1.translate.x i} {540+parent.Transform1.translate.y i}}
+  name Transform7
+  xpos 100
+  ypos -621
+ }
+ Expression {
+  channel0 {rgba.red rgba.green -rgba.blue}
+  expr0 r<=1?0:1
+  name Expression5
+  xpos 100
+  ypos -549
+ }
+ TimeEcho {
+  mode Average
+  framesbehind {{parent.TimeEcho5.framesbehind/2 i}}
+  frmaesfade {{parent.TimeEcho5.frmaesfade/2 i}}
+  name TimeEcho4
+  xpos 100
+  ypos -477
+ }
+push $N2b36f560
+ Dot {
+  name Dot11
+  xpos 414
+  ypos -618
+ }
+ Expression {
+  channel0 {rgba.red -rgba.green rgba.blue}
+  expr0 r<=1?0:1
+  name Expression6
+  xpos 380
+  ypos -549
+ }
+ TimeEcho {
+  mode Average
+  framesbehind {{parent.tailFrames i}}
+  frmaesfade {{parent.tailFrames i}}
+  name TimeEcho5
+  xpos 380
+  ypos -477
+ }
+ Merge2 {
+  inputs 2
+  operation atop
+  name Merge9
+  xpos 240
+  ypos -405
+ }
+ Dot {
+  name Dot13
+  xpos 274
+  ypos -6
+ }
+set N2b6e07c0 [stack 0]
+ Dot {
+  name Dot12
+  xpos 274
+  ypos 102
+ }
+push $N2b6e07c0
+push $N2b49e5c0
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge1
+  xpos -180
+  ypos -9
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge8
+  xpos -180
+  ypos 99
+ }
+ TimeEcho {
+  mode Average
+  framesbehind 6
+  frmaesfade 5
+  name TimeEcho1
+  xpos -180
+  ypos 207
+ }
+ Switch {
+  inputs 5
+  which {{parent.views i}}
+  name Switch1
+  xpos -180
+  ypos 315
+ }
+ Multiply {
+  name Multiply2
+  xpos -180
+  ypos 417
+ }
+ Output {
+  name Output1
+  xpos -180
+  ypos 531
+ }
+push $N2b36f560
+push 0
+ Viewer {
+  inputs 2
+  frame 28
+  frame_increment 8
+  input_process false
+  far 1000000
+  name Viewer1
+  xpos 380
+  ypos -909
+ }
+end_group

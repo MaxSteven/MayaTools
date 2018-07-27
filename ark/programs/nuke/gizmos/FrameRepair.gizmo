@@ -1,0 +1,233 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+version 10.0 v4
+Gizmo {
+ label "Frame \[value badFrame]-\[value EndFrame]"
+ addUserKnob {20 User}
+ addUserKnob {41 badFrame l "First Badframe" T FrameSelection.badFrame}
+ addUserKnob {3 EndFrame l "Last Badframe" -STARTLINE}
+ EndFrame 1000
+ addUserKnob {6 RangeCheck l "Range of Frames" +STARTLINE}
+ addUserKnob {41 method l Method T FrameSelection.method}
+ addUserKnob {41 clamp l "Clamp Input" T FrameSelection.clamp}
+ addUserKnob {41 text l "Text Overlay" -STARTLINE T FrameSelection.text}
+ addUserKnob {26 ""}
+ addUserKnob {26 howtouse l "" +STARTLINE T "By default  it repairs the First Badframe.\nWhen Range of Frames option is checked,  it repairs frames from the first Badframe to the last Badframe."}
+}
+ Input {
+  inputs 0
+  name Src
+  xpos -739
+  ypos -597
+ }
+ Dot {
+  name Dot2
+  xpos -705
+  ypos -451
+ }
+set N6a56400 [stack 0]
+ Dot {
+  name Dot1
+  xpos -1035
+  ypos -451
+ }
+ NoOp {
+  name FrameSelection
+  label "\[value badFrame]"
+  xpos -1069
+  ypos -371
+  addUserKnob {20 User}
+  addUserKnob {3 combinelastframe}
+  combinelastframe {{RangeCheck?EndFrame:badFrame}}
+  addUserKnob {3 badFrame l Frame t "The frame to be redrawn"}
+  badFrame 1000
+  addUserKnob {6 clamp l "Clamp Input" +STARTLINE}
+  addUserKnob {68 method l Method M {OFlow Kronos}}
+  method Kronos
+  addUserKnob {6 text l "Text Overlay" +STARTLINE}
+ }
+set N6a57c00 [stack 0]
+ frameholdCurrent {
+  name frameholdCurrent1
+  label "(frame \[value first_frameNode])"
+  xpos -838
+  ypos -194
+  first_frameNode {{EndFrame+1}}
+ }
+push $N6a57c00
+ FrameHold {
+  first_frame {{"FrameSelection.knob.badFrame + 1"}}
+  name FrameHold2
+  xpos -997
+  ypos -197
+ }
+ Switch {
+  inputs 2
+  which {{RangeCheck}}
+  name Switch3
+  xpos -976
+  ypos -133
+ }
+push $N6a57c00
+ FrameHold {
+  first_frame {{"(FrameSelection.knob.badFrame) - 1"}}
+  name FrameHold1
+  xpos -1162
+  ypos -186
+ }
+ Switch {
+  inputs 2
+  which {{curve 0 1}}
+  name FrameSwitch
+  xpos -1081
+  ypos -80
+ }
+set Nac43c480 [stack 0]
+ Clamp {
+  name Clamp1
+  xpos -1081
+  ypos -33
+  disable {{"(FrameSelection.clamp) - 1"}}
+ }
+ Dot {
+  name Dot4
+  xpos -1047
+  ypos 67
+ }
+set Nac479400 [stack 0]
+ Kronos {
+  retimedChannels all
+  timing2 Frame
+  timingFrame2 {{(frame-badFrame+1)/(FrameSelection.combinelastframe-badFrame+2)}}
+  showLegacyMode false
+  motionEstimation Regularized
+  legacyModeNuke9 false
+  name Kronos1
+  xpos -1002
+  ypos 152
+ }
+ Text2 {
+  font_size_toolbar 70
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message KRONOS
+  old_message {{75 82 79 78 79 83}
+    }
+  box {0 1009 289 1080}
+  transforms {{0 2}
+    }
+  font_size_values {{0 70 1 70 2 70 3 70 4 70 5 70}
+    }
+  font_size 70
+  scale {1 1}
+  cursor_initialised true
+  initial_cursor_position {{0 1080}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
+    }
+  name Text2
+  xpos -1002
+  ypos 256
+  disable {{"(FrameSelection.text) -1"}}
+ }
+push $Nac479400
+ OFlow2 {
+  timing2 Frame
+  timingFrame2 {{(frame-badFrame+1)/(EndFrame-badFrame+2)}}
+  name OFlow1
+  xpos -1153
+  ypos 149
+ }
+ Text2 {
+  font_size_toolbar 70
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message OFLOW
+  old_message {{79 70 76 79 87}
+    }
+  box {0 1009 251 1080}
+  transforms {{0 2}
+    }
+  font_size_values {{0 70 1 70 2 70 3 70 4 70}
+    }
+  font_size 70
+  scale {1 1}
+  cursor_initialised true
+  initial_cursor_position {{0 1080}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
+    }
+  name Text1
+  xpos -1144
+  ypos 233
+  disable {{"(FrameSelection.text) -1"}}
+ }
+ Switch {
+  inputs 2
+  which {{"FrameSelection.method == 1 ? 1 : 0"}}
+  name Switch1
+  xpos -1067
+  ypos 324
+ }
+ Dot {
+  name Dot3
+  xpos -1033
+  ypos 350
+ }
+set Nb055fc00 [stack 0]
+push $N6a56400
+ Switch {
+  inputs 2
+  which {{"frame < badFrame ? 0 : frame > EndFrame ? 0 : 1"}}
+  name Switch2
+  xpos -878
+  ypos 401
+ }
+push $Nb055fc00
+push $N6a56400
+ Switch {
+  inputs 2
+  which {{"frame < badFrame ? 0 : frame > badFrame ? 0 : 1"}}
+  name Switch4
+  xpos -664
+  ypos 337
+ }
+ Switch {
+  inputs 2
+  which {{RangeCheck}}
+  name Switch5
+  xpos -736
+  ypos 414
+ }
+ Output {
+  name Output2
+  xpos -736
+  ypos 501
+ }
+ Transform {
+  inputs 0
+  center {960 540}
+  name Transform1
+  xpos -1410
+  ypos -488
+  disable {{parent.Transform2.disable}}
+ }
+ Transform {
+  inputs 0
+  center {960 540}
+  name Transform2
+  xpos -1337
+  ypos -634
+ }
+push $Nac43c480
+ Viewer {
+  frame_range 1000-1060
+  frame_increment 8
+  fps 23.97602463
+  far 1000000
+  name Viewer1
+  xpos -926
+  ypos -44
+ }
+end_group

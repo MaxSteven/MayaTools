@@ -1,0 +1,20 @@
+#LXMacro#
+
+# invertWeightMap.lxm
+# Created and shared by William Vaughan
+# http://www.pushingpoints.com
+
+vertMap.copy wght
+vertMap.new temp_invert_source wght false {0.78 0.78 0.78} 1.0
+vertMap.paste wght
+vertMap.new temp_invert_target wght false {0.78 0.78 0.78} 1.0
+vertMap.math "WGHT[1]:temp_invert_target" "WGHT[1]:temp_invert_source" -1.0 0.0 direct 0 {} 1.0 0.0 direct 0
+tool.set vertMap.setWeight on
+tool.attr vertMap.setWeight additive true
+tool.setAttr vertMap.setWeight additive true
+tool.setAttr vertMap.setWeight weight 1.0
+tool.doApply
+select.vertexMap temp_invert_source wght replace
+!vertMap.delete wght
+select.vertexMap temp_invert_target wght replace
+?vertMap.name "" wght active

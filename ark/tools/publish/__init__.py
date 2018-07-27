@@ -1,0 +1,1 @@
+from publishApp import main

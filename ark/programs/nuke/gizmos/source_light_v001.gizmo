@@ -1,0 +1,151 @@
+#! C:/Program Files/Nuke7.0v6/Nuke7.0.exe -nx
+version 7.0 v6
+Gizmo {
+ inputs 3
+ addUserKnob {20 SourceLight l "Source Light"}
+ addUserKnob {4 view M {result "source blur" "brightness key" "brightness key blurred" ""}}
+ addUserKnob {41 brightness T ColorCorrect1.gain}
+ addUserKnob {41 sourceblur l "source blur" T source_blur.size}
+ addUserKnob {41 keyblur l "key blur" T key_blur.size}
+ addUserKnob {41 brightnesskey l "brightness key" T Keyer1.range}
+}
+ Input {
+  inputs 0
+  name bg
+  xpos 70
+  ypos -873
+ }
+ Dot {
+  name Dot1
+  xpos 104
+  ypos -774
+ }
+set N2eded560 [stack 0]
+ Dot {
+  name Dot2
+  xpos -6
+  ypos -774
+ }
+ Keyer {
+  operation "luminance key"
+  range {0.01101919966 0.2472452001 1 1}
+  name Keyer1
+  xpos -40
+  ypos -711
+ }
+set N2ededc40 [stack 0]
+ ExponBlur {
+  name key_blur
+  note_font "Bitstream Vera Sans"
+  xpos -40
+  ypos -657
+  size 8
+ }
+set N2e4afe10 [stack 0]
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle3
+  label "\[value in]"
+  xpos 400
+  ypos -519
+  hide_input true
+ }
+push $N2ededc40
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle2
+  label "\[value in]"
+  xpos 290
+  ypos -519
+  hide_input true
+ }
+ Input {
+  inputs 0
+  name source
+  xpos -150
+  ypos -825
+  number 1
+ }
+ ExponBlur {
+  name source_blur
+  note_font "Bitstream Vera Sans"
+  xpos -150
+  ypos -729
+  size 80
+ }
+set N2e4b0260 [stack 0]
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  label "\[value in]"
+  xpos 180
+  ypos -519
+  hide_input true
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos -260
+  ypos -681
+  number 2
+ }
+ Dot {
+  name Dot5
+  xpos -226
+  ypos -558
+ }
+push $N2e4b0260
+ Dot {
+  name Dot4
+  xpos -116
+  ypos -606
+ }
+push $N2e4afe10
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge1
+  xpos -40
+  ypos -609
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge2
+  selected true
+  xpos -40
+  ypos -561
+  disable {{"!\[exists parent.input2]"}}
+ }
+ Dot {
+  name Dot3
+  xpos -6
+  ypos -486
+ }
+push $N2eded560
+ ColorCorrect {
+  inputs 1+1
+  gain 40
+  name ColorCorrect1
+  xpos 70
+  ypos -489
+ }
+ Switch {
+  inputs 4
+  which {{parent.view}}
+  name viewer
+  xpos 70
+  ypos -393
+ }
+ Output {
+  name Output1
+  xpos 70
+  ypos -273
+ }
+end_group

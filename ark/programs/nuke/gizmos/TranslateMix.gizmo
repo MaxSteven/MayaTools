@@ -1,0 +1,48 @@
+#! C:/Program Files/Nuke6.2v2/Nuke6.2.exe -nx
+version 6.2 v2
+Gizmo {
+ inputs 2
+ addUserKnob {20 TranslateMix}
+ addUserKnob {41 tAmt l "translate amt" T Transform3.tAmt}
+ addUserKnob {41 invert_matrix l invert T Transform3.invert_matrix}
+ addUserKnob {41 filter T Transform3.filter}
+ addUserKnob {41 clamp T Transform3.clamp}
+ addUserKnob {41 black_outside l "black outside" T Transform3.black_outside}
+ addUserKnob {41 motionblur T Transform3.motionblur}
+ addUserKnob {41 shutter T Transform3.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T Transform3.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T Transform3.shuttercustomoffset}
+}
+ Input {
+  inputs 0
+  name image
+  xpos -176
+  ypos -607
+ }
+ Transform {
+  translate {{-parent.input1.translate.x*(1-this.tAmt)*this.scale} {-parent.input1.translate.y*(1-this.tAmt)*this.scale}}
+  rotate {{-parent.input1.rotate*(1-this.tAmt)}}
+  scale {{1*this.tAmt+1/parent.input1.scale*(1-this.tAmt)}}
+  skew {{-parent.input1.skew*(1-this.tAmt)}}
+  center {{parent.input1.center.x} {parent.input1.center.y}}
+  name Transform3
+  selected true
+  xpos -176
+  ypos -505
+  addUserKnob {20 User}
+  addUserKnob {7 tAmt l "translate amt"}
+  tAmt 1
+ }
+ Output {
+  name Output1
+  xpos -176
+  ypos -405
+ }
+ Input {
+  inputs 0
+  name tracker
+  xpos -336
+  ypos -558
+  number 1
+ }
+end_group

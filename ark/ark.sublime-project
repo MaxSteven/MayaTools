@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"path": "./",
+			"folder_exclude_patterns": [],
+			"file_exclude_patterns": ["*.sublime-workspace","*.sublime-project"]
+		},
+		{
+			"path": "/C/Google Drive/Projects/snippets"
+		}
+	]
+}

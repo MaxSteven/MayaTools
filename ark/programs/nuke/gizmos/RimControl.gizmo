@@ -1,0 +1,199 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+version 10.0 v4
+add_layer {normals normals.X normals.Y normals.Z}
+add_layer {extraTex_VRayFalloff2 extraTex_VRayFalloff2.red extraTex_VRayFalloff2.green extraTex_VRayFalloff2.blue}
+Gizmo {
+ inputs 2
+ addUserKnob {20 RimControls l "Rim Controls"}
+ addUserKnob {41 facingGain l "facing gain" T grade_facing.white}
+ addUserKnob {41 facingGamma l "facing gamma" T grade_facing.gamma}
+ addUserKnob {41 upGain l "up gain" T grade_up.white}
+ addUserKnob {41 upGamma l "up gamma" T grade_up.gamma}
+ addUserKnob {41 upMask l "up mask" T up_mask.mix}
+ addUserKnob {6 invertFacing l "invert facing" +STARTLINE}
+ addUserKnob {6 invertUp l "invert up" +STARTLINE}
+ addUserKnob {41 normals T falloff_facing.normals}
+ addUserKnob {6 useRGBFalloff l "use rgb falloff" +STARTLINE}
+ addUserKnob {41 rgbFalloff l "rgb falloff" T shuffle_up.in}
+ addUserKnob {20 upDirection l "up direction" n 1}
+ upDirection 0
+ addUserKnob {41 xFalloff l "x falloff" T falloff_up.xFalloff}
+ addUserKnob {41 yFalloff l "y falloff" T falloff_up.yFalloff}
+ addUserKnob {41 zFalloff l "z falloff" T falloff_up.zFalloff}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 upmasklookup l "up mask lookup" n 1}
+ upmasklookup 0
+ addUserKnob {6 useUpMaskLookup l enabled +STARTLINE}
+ addUserKnob {41 upLookupMix l "up lookup mix" T up_lookup.mix}
+ addUserKnob {41 lut l "" +STARTLINE T up_lookup.lut}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+}
+ Input {
+  inputs 0
+  name cg
+  xpos -700
+  ypos -1018
+ }
+ Dot {
+  name Dot84
+  xpos -666
+  ypos -918
+ }
+set N40331000 [stack 0]
+ Dot {
+  name Dot2
+  xpos -336
+  ypos -918
+ }
+set N40330c00 [stack 0]
+ Shuffle {
+  in extraTex_VRayFalloff2
+  red green
+  blue green
+  alpha green
+  name shuffle_up
+  label "\[value in]\nUp"
+  xpos -370
+  ypos -840
+ }
+ ColorLookup {
+  lut {master {curve C 0 x0.5 1 0}
+    red {}
+    green {}
+    blue {}
+    alpha {}}
+  name up_lookup
+  xpos -370
+  ypos -778
+  disable {{!parent.useUpMaskLookup i}}
+ }
+ set C40330400 [stack 0]
+ Input {
+  inputs 0
+  name cam
+  xpos -920
+  ypos -826
+  number 1
+ }
+set N40330000 [stack 0]
+push $N40331000
+add_layer {Normal Normal.X Normal.Y Normal.Z}
+ FalloffCalc {
+  inputs 2
+  name falloff_up
+  label Up
+  selected true
+  xpos -590
+  ypos -833
+  yFalloff 0
+  zFalloff -1
+  cameraFacing false
+  format 0
+  normals {{{falloff_facing.Normals.in}}}
+ }
+set N45761400 [stack 0]
+clone $C40330400 {
+  xpos -590
+  ypos -778
+  selected false
+ }
+ Switch {
+  inputs 2
+  which {{parent.useRGBFalloff i}}
+  name switch_method
+  xpos -480
+  ypos -730
+ }
+ set C3cacc480 [stack 0]
+ Invert {
+  name invert_up
+  xpos -480
+  ypos -641
+  disable {{!invertUp i}}
+ }
+ Grade {
+  name grade_up
+  xpos -480
+  ypos -586
+ }
+push $N40330c00
+add_layer {VRayExtraTex_Falloff VRayExtraTex_Falloff.red VRayExtraTex_Falloff.green VRayExtraTex_Falloff.blue}
+ Shuffle {
+  in VRayExtraTex_Falloff
+  green red
+  blue red
+  alpha red
+  name shuffle_facing
+  label "\[value in]\nFacing"
+  xpos -480
+  ypos -840
+ }
+push $N40330000
+push $N40331000
+ FalloffCalc {
+  inputs 2
+  name falloff_facing
+  label Facing
+  xpos -700
+  ypos -833
+  format 0
+  normals normals
+ }
+clone $C3cacc480 {
+  inputs 2
+  xpos -590
+  ypos -730
+  selected false
+ }
+ Invert {
+  name invert_facing
+  xpos -590
+  ypos -641
+  disable {{!invertFacing i}}
+ }
+ Grade {
+  name grade_facing
+  xpos -590
+  ypos -586
+ }
+ Dot {
+  name Dot1
+  xpos -556
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name up_mask
+  xpos -480
+  ypos -538
+ }
+ Grade {
+  gamma 0.5
+  name grade_overall
+  xpos -480
+  ypos -514
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name all_red
+  xpos -480
+  ypos -490
+ }
+ Output {
+  name Output1
+  xpos -480
+  ypos -418
+ }
+push $N45761400
+ Viewer {
+  frame_range 1001-1205
+  frame_increment 8
+  far 1000000
+  name Viewer1
+  xpos -787
+  ypos -653
+ }
+end_group

@@ -97,6 +97,7 @@ class IkFkBlending():
 		return groupName
 
 	def createIKControl(self):
+		print self.ikJoints
 		for joint in self.ikJoints:
 			if 'ankle' in joint.lower():
 				ankleJoint = joint

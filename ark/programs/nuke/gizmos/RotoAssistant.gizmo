@@ -1,0 +1,231 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name Roto_Assistant
+ tile_color 0xae82ff
+ note_font_size 10
+ selected true
+ addUserKnob {20 User}
+ addUserKnob {6 contournShow l "Show Contourn" +STARTLINE}
+ addUserKnob {41 size l "Contourn Size" T Dilate1.size}
+ addUserKnob {41 mix T Merge1.mix}
+ addUserKnob {26 ""}
+ addUserKnob {6 showMask l "Show Mask Overlay" +STARTLINE}
+ addUserKnob {41 gain T ColorCorrect2.gain}
+ addUserKnob {6 desatBG l "Desaturate Cut Out" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {4 viewon l "View on" M {"On Original" "On Black" "On White" "On Checkerboard" "On Colorbars" "On Custom BG" ""}}
+ addUserKnob {20 About}
+ addUserKnob {26 About_1 l Info T "Mario Pece\n   Roto Assistant - V1\n\ninfo@mariopece.com\n   "}
+}
+ Input {
+  inputs 0
+  name Roto
+  xpos -470
+  ypos -616
+  number 1
+ }
+set N348c4590 [stack 0]
+ Dot {
+  name Dot2
+  xpos -263
+  ypos -613
+ }
+set N348c48c0 [stack 0]
+ Dot {
+  name Dot1
+  xpos 118
+  ypos -613
+ }
+ Dot {
+  name Dot5
+  xpos 118
+  ypos -21
+ }
+push $N348c48c0
+add_layer {rgba redguard1.glow rgba.warper rgba.Z}
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle2
+  label "\[value in]"
+  xpos -297
+  ypos -540
+ }
+add_layer {rgb rgb.red rgb.green rgb.blue rgb.alpha}
+ Expression {
+  expr0 "a == 1"
+  expr1 "a == 1"
+  expr2 "a == 1"
+  expr3 "a == 1"
+  name Expression1
+  xpos -297
+  ypos -504
+ }
+ EdgeDetectWrapper {
+  name EdgeDetectWrapper2
+  xpos -297
+  ypos -480
+ }
+ Dilate {
+  size 1
+  name Dilate1
+  xpos -297
+  ypos -444
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  label "\[value in]"
+  xpos -297
+  ypos -408
+ }
+ ColorCorrect {
+  gain {4 0.03744697571 0 1}
+  name ColorCorrect1
+  xpos -297
+  ypos -372
+ }
+ BlackOutside {
+  name BlackOutside1
+  xpos -297
+  ypos -336
+ }
+ Dot {
+  name Dot3
+  xpos -263
+  ypos -134
+ }
+push $N348c4590
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle3
+  label "\[value in]"
+  xpos -470
+  ypos -592
+ }
+ ColorCorrect {
+  gain {1 0 0 0}
+  name ColorCorrect2
+  xpos -470
+  ypos -556
+ }
+ Dot {
+  name Dot4
+  xpos -436
+  ypos -477
+ }
+ Input {
+  inputs 0
+  name SRC
+  xpos -612
+  ypos -631
+ }
+set N34dc6e90 [stack 0]
+ Merge2 {
+  inputs 2
+  operation overlay
+  name Merge4
+  xpos -612
+  ypos -480
+  disable {{"showMask == 0" i x69 0}}
+ }
+ Merge2 {
+  inputs 2
+  name Merge1
+  selected true
+  xpos -612
+  ypos -137
+  disable {{"contournShow == 0"}}
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge2
+  xpos -612
+  ypos -24
+ }
+ Input {
+  inputs 0
+  name BG
+  xpos -1298
+  ypos 164
+  number 2
+ }
+ ColorBars {
+  inputs 0
+  name ColorBars1
+  xpos -1307
+  ypos 42
+ }
+ CheckerBoard2 {
+  inputs 0
+  boxsize 25.5
+  linecolor 0
+  centerlinewidth 0
+  name CheckerBoard1
+  xpos -1287
+  ypos -55
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 1
+  name Constant1
+  xpos -1054
+  ypos -150
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant2
+  xpos -1195
+  ypos -127
+ }
+push $N34dc6e90
+ Saturation {
+  saturation {{"desatBG == 0" i}}
+  name Saturation1
+  xpos -754
+  ypos -265
+ }
+ Switch {
+  inputs 6
+  which {{viewon i}}
+  name Switch2
+  xpos -882
+  ypos 108
+ }
+ Dot {
+  name Dot6
+  xpos -848
+  ypos 132
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos -612
+  ypos 129
+ }
+set N321003e0 [stack 0]
+ Output {
+  name Output1
+  xpos -612
+  ypos 253
+ }
+push $N321003e0
+ Viewer {
+  frame_increment 8
+  input_process false
+  far 1000000
+  name Viewer1
+  xpos -915
+  ypos -137
+ }
+end_group

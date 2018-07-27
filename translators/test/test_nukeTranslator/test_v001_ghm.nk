@@ -1,0 +1,87 @@
+#! C:/Program Files/Nuke9.0v8/nuke-9.0.8.dll -nx
+#write_info Write1 file:"some/path/yea.%04d.jpg" format:"960 540 1" chans:":rgba.red:rgba.green:rgba.blue:" framerange:"1001 1275" fps:"0" colorspace:"default (sRGB)" datatype:"8 bit" transfer:"unknown" views:"main"
+version 9.0 v8
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="5749" y="747" w="2902" h="1822" maximized="1" screen="2">
+        <splitter orientation="1">
+            <split size="1822"/>
+            <splitter orientation="2">
+                <split size="870"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="869"/>
+                <dock id="" activePageId="uk.co.thefoundry.scripteditor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                </dock>
+            </splitter>
+            <split size="1054"/>
+            <splitter orientation="2">
+                <split size="870"/>
+                <dock id="" hideTitles="1" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="869"/>
+                <dock id="" hideTitles="1" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name c:/ie/translators/test/test_nukeTranslator/test_v001_ghm.nk
+ frame 1001
+ first_frame 1001
+ last_frame 1275
+ fps 23.976
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ onScriptLoad arkNuke.scriptLoad()
+ onScriptSave arkNuke.scriptSave()
+ onScriptClose arkNuke.scriptClose()
+ addUserKnob {20 studio l Studio}
+ addUserKnob {1 timeline_write_node}
+}
+Constant {
+ inputs 0
+ channels rgb
+ name Constant1
+ xpos -61
+ ypos -191
+}
+Reformat {
+ type scale
+ scale 0.5
+ name Reformat1
+ xpos -61
+ ypos -119
+}
+Noise {
+ center {1024 778}
+ name Noise1
+ xpos -61
+ ypos -68
+}
+Write {
+ file some/path/yea.%04d.jpg
+ file_type jpeg
+ _jpeg_quality 1
+ checkHashOnRead false
+ beforeRender arkNuke.beforeRender()
+ name Write1
+ xpos -61
+ ypos 32
+}
+Viewer {
+ frame 1001
+ frame_range 1001-1275
+ fps 23.97602463
+ name Viewer1
+ xpos 115
+ ypos 158
+}

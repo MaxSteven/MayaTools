@@ -1,0 +1,69 @@
+#! C:/Program Files/Nuke6.2v2/Nuke6.2.exe -nx
+version 6.2 v2
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1936" h="1160" screen="1">
+        <splitter orientation="2">
+            <split size="837"></split>
+            <dock id="" hideTitles="1" activePageId="Viewer.1">
+                <page id="Viewer.1"></page>
+            </dock>
+            <split size="255"></split>
+            <dock id="" activePageId="Curve Editor.1">
+                <page id="Curve Editor.1"></page>
+                <page id="DopeSheet.1"></page>
+            </dock>
+        </splitter>
+    </window>
+    <window x="1920" y="0" w="1925" h="1200" screen="0">
+        <splitter orientation="1">
+            <split size="795"></split>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"></page>
+            </dock>
+            <split size="40"></split>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"></page>
+            </dock>
+            <split size="1066"></split>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"></page>
+                <page id="Script Editor.1"></page>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name Q:/ASSETS/Tools/Nuke/gizmos/timecode_v01_ghm.nk
+ frame 63
+ format "1920 1080 0 0 1920 1080 1 HD"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ onScriptLoad ieLib.scriptLoad()
+ onScriptSave ieLib.scriptSave()
+ onScriptClose ieLib.scriptClose()
+}
+Text {
+ inputs 0
+ message "\[python '00:%02d:%02d' % (math.floor( max(0,(nuke.frame()-50) / 30)) % 60,(max(0,nuke.frame()-50)) % 30)]"
+ font C:/Windows/Fonts/arial.ttf
+ yjustify center
+ box {480 270 1440 810}
+ center {960 540}
+ name Text1
+ selected true
+ xpos -358
+ ypos -159
+ addUserKnob {20 timecodeSettings}
+ addUserKnob {3 timeOffset}
+}
+Viewer {
+ frame 63
+ frame_increment 8
+ input_process false
+ name Viewer1
+ xpos -40
+ ypos -10
+}

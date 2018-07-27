@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=4
+Type=Application
+Terminal=false
+Exec=mochapro
+Name=Mocha
+Icon=/opt/isl/mochaproV4/resources/Icon.ico

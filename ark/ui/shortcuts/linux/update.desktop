@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=2.0
+Type=Application
+Terminal=false
+Exec=xterm -hold -e "sudo /var/ie/ark/updateLinux"
+Path=/var/ie/ark/
+Name=Update Tools
+Comment=Fresh to death
+Icon=/var/ie/ark/ui/icons/update.png

@@ -1,0 +1,3 @@
+#LXMacro#
+poly.subdivide flat 0.0 179.0 false smooth false
+tool.doApply

@@ -1,0 +1,2 @@
+python stitcherGui.py
+pause

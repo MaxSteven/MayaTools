@@ -1,0 +1,53 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+				"*.sublime-project"
+			],
+			"path": "ark"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+				"*.sublime-project"
+			],
+			"path": "cOS"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+				"*.sublime-project"
+			],
+			"path": "ieUtil"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+				"*.sublime-project"
+			],
+			"path": "shepherd"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+				"*.sublime-project"
+			],
+			"path": "translators"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-workspace",
+				"*.sublime-project"
+			],
+			"path": "weaver"
+		}
+	]
+}

@@ -1,0 +1,791 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+Gizmo {
+ note_font Verdana
+ mapsize {0.15 0.15}
+ addUserKnob {20 CG_Options l "CG Options"}
+ addUserKnob {6 srgb_or_linear l "Linear Color Correction" t "Whether you'd like to color correct in a Linear colorspace as opposed to sRGB\n(Does not affect dynamic range, only the applied gamma curve)" +STARTLINE}
+}
+add_layer {rgba redguard1.glow rgba.warper rgba.Z}
+ Gamma {
+  inputs 0
+  channels rgb
+  value 0.4545454521
+  name Gamma2
+  xpos 2050
+  ypos 783
+ }
+add_layer {DiffuseFilter DiffuseFilter.red DiffuseFilter.green DiffuseFilter.blue}
+ Gamma {
+  channels DiffuseFilter
+  value 0.4545454521
+  name Gamma1
+  xpos 2050
+  ypos 807
+ }
+add_layer {RawLighting RawLighting.red RawLighting.green RawLighting.blue}
+ Gamma {
+  channels RawLighting
+  value 0.4545454521
+  name Gamma3
+  xpos 2050
+  ypos 843
+ }
+add_layer {RawGlobalIllumination RawGlobalIllumination.red RawGlobalIllumination.green RawGlobalIllumination.blue}
+ Gamma {
+  channels RawGlobalIllumination
+  value 0.4545454521
+  name Gamma4
+  xpos 2050
+  ypos 879
+ }
+add_layer {AO AO.red AO.green AO.blue}
+ Gamma {
+  channels AO
+  value 0.4545454521
+  name Gamma12
+  xpos 2050
+  ypos 915
+ }
+add_layer {Reflection Reflection.red Reflection.green Reflection.blue}
+ Gamma {
+  channels Reflection
+  value 0.4545454521
+  name Gamma5
+  xpos 2050
+  ypos 951
+ }
+add_layer {Refraction Refraction.red Refraction.green Refraction.blue}
+ Gamma {
+  channels Refraction
+  value 0.4545454521
+  name Gamma6
+  xpos 2050
+  ypos 987
+ }
+add_layer {Specular Specular.red Specular.green Specular.blue}
+ Gamma {
+  channels Specular
+  value 0.4545454521
+  name Gamma11
+  xpos 2050
+  ypos 1023
+ }
+add_layer {SSS SSS.red SSS.green SSS.blue}
+ Gamma {
+  channels SSS
+  value 0.4545454521
+  name Gamma7
+  xpos 2050
+  ypos 1059
+ }
+add_layer {SelfIllumination SelfIllumination.red SelfIllumination.green SelfIllumination.blue}
+ Gamma {
+  channels SelfIllumination
+  value 0.4545454521
+  name Gamma8
+  xpos 2050
+  ypos 1095
+ }
+add_layer {Smoke Smoke.red Smoke.green Smoke.blue}
+ Gamma {
+  channels Smoke
+  value 0.4545454521
+  name Gamma9
+  xpos 2050
+  ypos 1131
+ }
+add_layer {Fire Fire.red Fire.green Fire.blue}
+ Gamma {
+  channels Fire
+  value 0.4545454521
+  name Gamma10
+  xpos 2050
+  ypos 1167
+ }
+add_layer {BeautyRemnants BeautyRemnants.red BeautyRemnants.green BeautyRemnants.blue}
+ Gamma {
+  channels BeautyRemnants
+  value 0.4545454521
+  name Gamma13
+  xpos 2050
+  ypos 1203
+ }
+ Input {
+  inputs 0
+  name CG_Render
+  xpos 1830
+  ypos -501
+ }
+set N1bef8aa0 [stack 0]
+ Dot {
+  name Dot13
+  label " Add Channels\n (To prevent errors)"
+  note_font_size 20
+  xpos 1864
+  ypos -402
+ }
+add_layer {Normal Normal.red Normal.green Normal.blue Normal.X Normal.Y Normal.Z}
+add_layer {Point Point.red Point.green Point.blue}
+ AddChannels {
+  channels DiffuseFilter
+  channels2 Normal
+  channels3 Point
+  channels4 RawGlobalIllumination
+  name AddChannels1
+  xpos 1830
+  ypos -351
+ }
+ AddChannels {
+  channels RawLighting
+  channels2 Reflection
+  channels3 Refraction
+  channels4 SelfIllumination
+  name AddChannels2
+  xpos 1830
+  ypos -315
+ }
+ AddChannels {
+  channels Specular
+  channels2 BeautyRemnants
+  channels3 AO
+  channels4 rgba
+  name AddChannels3
+  xpos 1830
+  ypos -279
+ }
+add_layer {UVW UVW.red UVW.green UVW.blue}
+ AddChannels {
+  channels UVW
+  channels2 SSS
+  channels3 Smoke
+  channels4 Fire
+  name AddChannels7
+  xpos 1830
+  ypos -243
+ }
+ Dot {
+  name Dot14
+  label " Create Beauty Remnants"
+  note_font_size 20
+  xpos 1864
+  ypos -162
+ }
+ Dot {
+  name Dot15
+  xpos 1864
+  ypos -90
+ }
+set N1befa0f0 [stack 0]
+ Dot {
+  name Dot16
+  xpos 1974
+  ypos -90
+ }
+set N1befa420 [stack 0]
+ Dot {
+  name Dot17
+  xpos 2084
+  ypos -90
+ }
+set N1befa750 [stack 0]
+ Dot {
+  name Dot18
+  xpos 2194
+  ypos -90
+ }
+set N1befaa80 [stack 0]
+ Dot {
+  name Dot35
+  xpos 2304
+  ypos -90
+ }
+set N1befadb0 [stack 0]
+ Dot {
+  name Dot19
+  xpos 2414
+  ypos -90
+ }
+set N1befb0e0 [stack 0]
+ Dot {
+  name Dot20
+  xpos 2524
+  ypos -90
+ }
+set N1befb410 [stack 0]
+ Dot {
+  name Dot23
+  xpos 2634
+  ypos -90
+ }
+set N1befb740 [stack 0]
+ Dot {
+  name Dot4
+  xpos 2744
+  ypos -90
+ }
+set N1befba70 [stack 0]
+ Dot {
+  name Dot3
+  xpos 2854
+  ypos -90
+ }
+set N1befbda0 [stack 0]
+ Dot {
+  name Dot5
+  xpos 2964
+  ypos -90
+ }
+set N1befc0d0 [stack 0]
+ Dot {
+  name Dot6
+  xpos 3074
+  ypos -90
+ }
+set N1befc400 [stack 0]
+ Dot {
+  name Dot7
+  xpos 3184
+  ypos -90
+ }
+set N1befc730 [stack 0]
+ Dot {
+  name Dot24
+  xpos 3294
+  ypos -90
+ }
+set N1befca60 [stack 0]
+ Dot {
+  name Dot25
+  xpos 3404
+  ypos -90
+ }
+add_layer {19}
+ Shuffle {
+  name rgba1
+  xpos 3370
+  ypos -69
+ }
+push $N1befca60
+ Shuffle {
+  in SelfIllumination
+  name SelfIllumination1
+  xpos 3260
+  ypos -69
+ }
+push $N1befc730
+ Shuffle {
+  in none
+  name Additional3
+  xpos 3150
+  ypos -69
+ }
+push $N1befc400
+ Shuffle {
+  in none
+  name Additional2
+  xpos 3040
+  ypos -69
+ }
+push $N1befc0d0
+ Shuffle {
+  in none
+  name Additonal1
+  xpos 2930
+  ypos -69
+ }
+push $N1befbda0
+ Shuffle {
+  in Smoke
+  name Smoke
+  xpos 2820
+  ypos -69
+ }
+push $N1befba70
+ Shuffle {
+  in Fire
+  name Fire
+  xpos 2710
+  ypos -69
+ }
+push $N1befb740
+ Shuffle {
+  in Refraction
+  name Refraction1
+  xpos 2600
+  ypos -69
+ }
+push $N1befb410
+ Shuffle {
+  in Specular
+  name Specular1
+  xpos 2490
+  ypos -69
+ }
+push $N1befb0e0
+ Shuffle {
+  in Reflection
+  name Reflection1
+  xpos 2380
+  ypos -69
+ }
+push $N1befadb0
+ Shuffle {
+  in SSS
+  name SSS1
+  xpos 2270
+  ypos -69
+ }
+push $N1befaa80
+ Shuffle {
+  in DiffuseFilter
+  name DiffuseFilter1
+  xpos 2160
+  ypos -69
+ }
+push $N1befa750
+ Shuffle {
+  in RawLighting
+  name RawLighting1
+  xpos 2050
+  ypos -69
+ }
+push $N1befa420
+ Shuffle {
+  in RawGlobalIllumination
+  name RawGlobalIllumination1
+  xpos 1940
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus6
+  xpos 2050
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Multiply3
+  xpos 2160
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus11
+  xpos 2270
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus7
+  xpos 2380
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus8
+  xpos 2490
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus9
+  xpos 2600
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus2
+  xpos 2710
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 2820
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos 2930
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos 3040
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  name Merge7
+  xpos 3150
+  ypos -21
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus10
+  xpos 3260
+  ypos -21
+ }
+set N33d98920 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge1
+  xpos 3370
+  ypos -21
+ }
+set N33d98c50 [stack 0]
+ Dot {
+  name Dot26
+  xpos 3404
+  ypos 30
+ }
+set N33d98f80 [stack 0]
+ Dot {
+  name Dot28
+  xpos 3404
+  ypos 102
+ }
+push $N1befa0f0
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 BeautyRemnants.red
+  from1 rgba.green
+  to1 BeautyRemnants.green
+  from2 rgba.blue
+  to2 BeautyRemnants.blue
+  name Copy4
+  xpos 1830
+  ypos 81
+ }
+ Unpremult {
+  name Unpremult1
+  xpos 1830
+  ypos 207
+ }
+ Unpremult {
+  channels DiffuseFilter
+  name Unpremult2
+  xpos 1830
+  ypos 231
+ }
+ Unpremult {
+  channels RawLighting
+  name Unpremult3
+  xpos 1830
+  ypos 267
+ }
+ Unpremult {
+  channels RawGlobalIllumination
+  name Unpremult4
+  xpos 1830
+  ypos 306
+ }
+ Unpremult {
+  channels AO
+  name Unpremult5
+  xpos 1830
+  ypos 342
+ }
+ Unpremult {
+  channels Reflection
+  name Unpremult6
+  xpos 1830
+  ypos 378
+ }
+ Unpremult {
+  channels Refraction
+  name Unpremult7
+  xpos 1830
+  ypos 414
+ }
+ Unpremult {
+  channels Specular
+  name Unpremult8
+  xpos 1830
+  ypos 450
+ }
+ Unpremult {
+  channels SSS
+  name Unpremult9
+  xpos 1830
+  ypos 486
+ }
+ Unpremult {
+  channels SelfIllumination
+  name Unpremult10
+  xpos 1830
+  ypos 522
+ }
+ Unpremult {
+  channels Smoke
+  name Unpremult11
+  xpos 1830
+  ypos 558
+ }
+ Unpremult {
+  channels Fire
+  name Unpremult12
+  xpos 1830
+  ypos 594
+ }
+ Unpremult {
+  channels BeautyRemnants
+  name Unpremult13
+  xpos 1830
+  ypos 630
+ }
+ Dot {
+  name Dot29
+  xpos 1864
+  ypos 714
+ }
+set N33d9c280 [stack 0]
+ Dot {
+  name Dot30
+  xpos 1974
+  ypos 714
+ }
+ Dot {
+  name Dot31
+  label " Linear"
+  note_font_size 20
+  xpos 1974
+  ypos 1464
+ }
+push $N33d9c280
+ Dot {
+  name Dot32
+  xpos 1754
+  ypos 714
+ }
+ Dot {
+  name Dot36
+  xpos 1754
+  ypos 1392
+ }
+push $N33d9c280
+ Colorspace {
+  colorspace_in sRGB
+  name Colorspace1
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 753
+ }
+ Colorspace {
+  channels DiffuseFilter
+  colorspace_in sRGB
+  name Colorspace6
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 789
+ }
+ Colorspace {
+  channels RawLighting
+  colorspace_in sRGB
+  name Colorspace7
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 837
+ }
+ Colorspace {
+  channels RawGlobalIllumination
+  colorspace_in sRGB
+  name Colorspace8
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 885
+ }
+ Colorspace {
+  channels AO
+  colorspace_in sRGB
+  name Colorspace9
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 933
+ }
+ Colorspace {
+  channels Reflection
+  colorspace_in sRGB
+  name Colorspace10
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 981
+ }
+ Colorspace {
+  channels Refraction
+  colorspace_in sRGB
+  name Colorspace5
+  label "sRGB to Linear"
+  selected true
+  xpos 1830
+  ypos 1029
+ }
+ Colorspace {
+  channels Specular
+  colorspace_in sRGB
+  name Colorspace11
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 1089
+ }
+ Colorspace {
+  channels SSS
+  colorspace_in sRGB
+  name Colorspace12
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 1137
+ }
+ Colorspace {
+  channels SelfIllumination
+  colorspace_in sRGB
+  name Colorspace13
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 1185
+ }
+ Colorspace {
+  channels Smoke
+  colorspace_in sRGB
+  name Colorspace2
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 1239
+ }
+ Colorspace {
+  channels Fire
+  colorspace_in sRGB
+  name Colorspace4
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 1287
+ }
+ Colorspace {
+  channels BeautyRemnants
+  colorspace_in sRGB
+  name Colorspace3
+  label "sRGB to Linear"
+  xpos 1830
+  ypos 1335
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy5
+  xpos 1830
+  ypos 1383
+ }
+ Dot {
+  name Dot2
+  label " sRGB"
+  note_font_size 20
+  xpos 1864
+  ypos 1440
+ }
+ Switch {
+  inputs 2
+  which {{srgb_or_linear}}
+  name srgb_or_linear1
+  xpos 1830
+  ypos 1461
+ }
+ Dot {
+  name Dot34
+  label " Normal and Point\n Modification"
+  note_font_size 20
+  xpos 1864
+  ypos 1536
+ }
+ Shuffle {
+  in Point
+  green blue
+  blue green
+  out Point
+  name Shuffle1
+  label "Swap Point channels"
+  xpos 1830
+  ypos 1575
+ }
+ Multiply {
+  channels {-Point.red -Point.green Point.blue}
+  value -1
+  name Multiply4
+  label "Flip point Z"
+  xpos 1830
+  ypos 1611
+ }
+add_layer {Normals Normals.X Normals.Y Normals.Z}
+ Shuffle {
+  in Normals
+  green blue
+  blue green
+  out Normals
+  name Shuffle3
+  label "Swap Normal channels"
+  xpos 1830
+  ypos 1659
+ }
+ Multiply {
+  channels {-Normals.X -Normals.Y Normals.Z}
+  value -1
+  name Multiply6
+  label "Flilp Normals Z"
+  xpos 1830
+  ypos 1695
+ }
+ Multiply {
+  channels Point
+  value 10
+  name Multiply7
+  label "Scale Point values"
+  xpos 1830
+  ypos 1743
+ }
+ Output {
+  name Prepd_passes
+  xpos 1830
+  ypos 1845
+ }
+push $N33d98920
+push $N33d98c50
+push $N1bef8aa0
+push $N33d98920
+push $N33d98f80
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus12
+  xpos 3260
+  ypos 27
+ }
+ Dot {
+  name Dot27
+  label "Comp'd CG"
+  note_font_size 20
+  xpos 3294
+  ypos 78
+ }
+ Viewer {
+  inputs 4
+  frame_increment 8
+  input_number 2
+  input_process false
+  name Viewer1
+  xpos 3150
+  ypos 831
+ }
+end_group

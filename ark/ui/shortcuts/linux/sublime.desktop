@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=10.0.1
+Type=Application
+Terminal=false
+Exec=/usr/sublime_text_3/sublime_text
+Name=Sublime
+Icon=/usr/sublime_text_3/Icon/48x48/sublime-text.png

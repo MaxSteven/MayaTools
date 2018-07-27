@@ -1,0 +1,75 @@
+Dot {
+name Dot1
+selected true
+xpos 345
+ypos -141
+}
+set N28375e50 [stack 0]
+Dot {
+name Dot2
+selected true
+xpos 479
+ypos -141
+}
+push $N28375e50
+push $N28375e50
+Invert {
+channels rgba
+name Invert1
+selected true
+xpos 227
+ypos -145
+}
+Constant {
+inputs 0
+channels rgb
+color {1 0 0 0}
+name BG_COLOR
+selected true
+xpos 168
+ypos -238
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy1
+selected true
+xpos 168
+ypos -108
+}
+Premult {
+name Premult2
+selected true
+xpos 168
+ypos -69
+}
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+selected true
+xpos 311
+ypos -69
+}
+Dot {
+name Dot3
+selected true
+xpos 345
+ypos -6
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy2
+selected true
+xpos 445
+ypos -16
+}
+Dot {
+name Dot4
+selected true
+xpos 479
+ypos 57
+}

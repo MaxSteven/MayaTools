@@ -1,0 +1,116 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+Gizmo {
+ inputs 3
+ addUserKnob {20 User}
+ addUserKnob {41 uv_offset l "UV offset" T IDistort1.uv_offset}
+ addUserKnob {41 uv_scale l "UV scale" T IDistort1.uv_scale}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {6 invertM l "Invert Mask" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos -232
+  ypos -156
+  number 2
+ }
+ AddChannels {
+  channels alpha
+  name AddChannels3
+  xpos -232
+  ypos -76
+ }
+ Dot {
+  name Dot2
+  xpos -198
+  ypos 80
+ }
+set N18b8b2a0 [stack 0]
+ Dot {
+  name Dot3
+  xpos -198
+  ypos 152
+ }
+push $N18b8b2a0
+ Input {
+  inputs 0
+  name UV
+  xpos -67
+  ypos -156
+  number 1
+ }
+add_layer {UV_distort UV_distort.red UV_distort.green UV_distort.blue}
+ AddChannels {
+  channels rgba
+  channels2 {UV_distort.red UV_distort.green -UV_distort.blue}
+  name AddChannels2
+  xpos -67
+  ypos -66
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  also_merge all
+  name Merge1
+  xpos -67
+  ypos 77
+  disable {{parent.invertM i}}
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge2
+  xpos -67
+  ypos 149
+  disable {{!parent.invertM i}}
+ }
+ Dot {
+  name Dot1
+  xpos -33
+  ypos 246
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos 107
+  ypos -158
+ }
+ AddChannels {
+  channels UV_distort
+  channels2 rgba
+  name AddChannels1
+  xpos 107
+  ypos -71
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 UV_distort.red
+  from1 rgba.green
+  to1 UV_distort.green
+  from2 rgba.blue
+  to2 UV_distort.blue
+  name Copy1
+  xpos 107
+  ypos 225
+ }
+ IDistort {
+  uv UV_distort
+  uv_scale 0
+  name IDistort1
+  xpos 107
+  ypos 369
+ }
+ Remove {
+  channels UV_distort
+  name Remove1
+  xpos 107
+  ypos 472
+ }
+ Output {
+  name Output1
+  xpos 107
+  ypos 584
+ }
+end_group

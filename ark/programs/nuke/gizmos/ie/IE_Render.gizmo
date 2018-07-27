@@ -1,0 +1,47 @@
+#! C:/Program Files/Nuke8.0v5/nuke-8.0.v5.dll -nx
+version 8.0 v5
+Gizmo {
+ addUserKnob {20 render l Render}
+ addUserKnob {4 type M {"final render" posting element plates}}
+ type posting
+ addUserKnob {1 name_1 l name}
+ addUserKnob {41 scale T ie_reformat_node.scale}
+ addUserKnob {4 element_ext M {jpg dpx exr}}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 outputname l "" +STARTLINE T "q:/Test_Project/final_renders\n/CornellBox/CornellBox.%04d.dpx"}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {22 Render -STARTLINE T ieNuke.ieLocalRender(nuke.thisNode())}
+ addUserKnob {22 shepRender l Submit -STARTLINE T ieNuke.launchShepherdSubmit(nuke.thisNode())}
+ addUserKnob {22 explore_button l Explore -STARTLINE T ieNuke.exploreDept()}
+ addUserKnob {22 readButton l Read -STARTLINE T "print \"LOL not yet\""}
+ addUserKnob {41 file l INVISIBLE +INVISIBLE T ie_render_node.file}
+}
+ Input {
+  inputs 0
+  name Input1
+  selected true
+  xpos -311
+  ypos -81
+ }
+ Write {
+  file q:/Test_Project/WORKSPACES/CornellBox/assets/.%04d.jpg
+  colorspace sRGB
+  file_type dpx
+  checkHashOnRead false
+  beforeRender ieNuke.beforeRender(nuke.thisNode())
+  name ie_render_node
+  xpos -311
+  ypos -9
+ }
+ Reformat {
+  type scale
+  name ie_reformat_node
+  xpos -311
+  ypos 39
+ }
+ Output {
+  name Output1
+  xpos -311
+  ypos 87
+ }
+end_group

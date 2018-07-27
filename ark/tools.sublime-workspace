@@ -1,0 +1,3687 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"vrscene",
+				"vrsceneInputNormalized"
+			],
+			[
+				"Deadline",
+				"DeadlineJob"
+			],
+			[
+				"jobI",
+				"jobIDs"
+			],
+			[
+				"Sub",
+				"SubmitVRayRenderJob"
+			],
+			[
+				"submitted",
+				"submittedIDs"
+			],
+			[
+				"file",
+				"fileArg"
+			],
+			[
+				"maya",
+				"mayabatchExe"
+			],
+			[
+				"fbx",
+				"fbxFilename"
+			],
+			[
+				"export",
+				"exportDir"
+			],
+			[
+				"FBXE",
+				"FBXExportLights"
+			],
+			[
+				"crow",
+				"crowdExport"
+			],
+			[
+				"ankle",
+				"ankleJoint"
+			],
+			[
+				"leg",
+				"legJointRoot"
+			],
+			[
+				"legJoint",
+				"legJoints"
+			],
+			[
+				"control",
+				"controlGroupParent"
+			],
+			[
+				"sof",
+				"softwareVersionStringList"
+			],
+			[
+				"appli",
+				"applicationVersion"
+			],
+			[
+				"transl",
+				"translators"
+			],
+			[
+				"translat",
+				"translator"
+			],
+			[
+				"wed",
+				"wedgeNode"
+			],
+			[
+				"call",
+				"callback"
+			],
+			[
+				"frame",
+				"frameRangeText"
+			],
+			[
+				"frameRa",
+				"frameRangeTuple"
+			],
+			[
+				"latest",
+				"latestVersion"
+			],
+			[
+				"convers",
+				"conversionName"
+			],
+			[
+				"May",
+				"MayaQWidgetDockableMixin"
+			],
+			[
+				"whi",
+				"whitespace"
+			],
+			[
+				"postJ",
+				"postJobResult"
+			],
+			[
+				"chec",
+				"checkError"
+			],
+			[
+				"ver",
+				"versionDict"
+			],
+			[
+				"handl",
+				"handler"
+			],
+			[
+				"handler",
+				"handlers"
+			],
+			[
+				"grid",
+				"gridView"
+			],
+			[
+				"shepher",
+				"shepherdJob"
+			],
+			[
+				"getJob",
+				"getJobFrames"
+			],
+			[
+				"getJ",
+				"getJobFrames"
+			],
+			[
+				"requ",
+				"requestCount"
+			],
+			[
+				"chu",
+				"chunkSize"
+			],
+			[
+				"req",
+				"requests"
+			],
+			[
+				"singleNo",
+				"singleNodeJobs"
+			],
+			[
+				"single",
+				"singleNode"
+			],
+			[
+				"program",
+				"programList"
+			],
+			[
+				"ide",
+				"idleTimer"
+			],
+			[
+				"idle",
+				"idleTimer"
+			],
+			[
+				"proce",
+				"processResult"
+			],
+			[
+				"Ex",
+				"Exception"
+			],
+			[
+				"She",
+				"SheepError"
+			],
+			[
+				"conti",
+				"continueLoop"
+			],
+			[
+				"global",
+				"globalSettings"
+			],
+			[
+				"getShee",
+				"getSheepPath"
+			],
+			[
+				"sheep",
+				"sheepProcess"
+			],
+			[
+				"No",
+				"NoSuchProcess"
+			],
+			[
+				"shell",
+				"shellPid"
+			],
+			[
+				"python",
+				"pythonPid"
+			],
+			[
+				"shel",
+				"shellPid"
+			],
+			[
+				"framed",
+				"framedJobs"
+			],
+			[
+				"aciv",
+				"activeSheep"
+			],
+			[
+				"active",
+				"activeSheep"
+			],
+			[
+				"adds",
+				"addSheep"
+			],
+			[
+				"acti",
+				"activeSheep"
+			],
+			[
+				"init",
+				"initialize"
+			],
+			[
+				"qued",
+				"queuedFrames"
+			],
+			[
+				"settin",
+				"settingsManager"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"regex",
+				"regexFromTemplate"
+			],
+			[
+				"hasa",
+				"hasattr"
+			],
+			[
+				"shep",
+				"shepherdJob"
+			],
+			[
+				"sheph",
+				"shepherdJob"
+			],
+			[
+				"renderVer",
+				"renderVersionData"
+			],
+			[
+				"sort",
+				"sortField"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"launc",
+				"launchExistingVersion"
+			],
+			[
+				"caretak",
+				"caretaker_action"
+			],
+			[
+				"displa",
+				"displayFields"
+			],
+			[
+				"getCh",
+				"getChildViewByKey"
+			],
+			[
+				"not",
+				"notEnoughData"
+			],
+			[
+				"exist",
+				"existingVersions"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "config/default.json",
+			"settings":
+			{
+				"buffer_size": 11992,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/S/custom/scripts/Jobs/postVrayJob.py",
+			"settings":
+			{
+				"buffer_size": 1181,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/S/custom/scripts/Jobs/postMantraJob.py",
+			"settings":
+			{
+				"buffer_size": 1887,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/deadline/jobTypes/DeadlineJob.py",
+			"settings":
+			{
+				"buffer_size": 13898,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/deadline/jobTypes/MayaVRay.py",
+			"settings":
+			{
+				"buffer_size": 2958,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/deadline/submission/Houdini/HoudiniDeadlineUtil.py",
+			"settings":
+			{
+				"buffer_size": 8161,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/deadline/jobTypes/VrayJob.py",
+			"settings":
+			{
+				"buffer_size": 1262,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/__init__.py",
+			"settings":
+			{
+				"buffer_size": 23,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/deadline/__init__.py",
+			"settings":
+			{
+				"buffer_size": 53,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/deadline/jobTypes/__init__.py",
+			"settings":
+			{
+				"buffer_size": 524,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "programs/nuke/python/arkNuke.py",
+			"settings":
+			{
+				"buffer_size": 69575,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/cOS/cOS/cOS.py",
+			"settings":
+			{
+				"buffer_size": 45236,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "setup/programSetup.py",
+			"settings":
+			{
+				"buffer_size": 53631,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "admin/releaseManager.py",
+			"settings":
+			{
+				"buffer_size": 2672,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/ie/deadline/bin/jobSubmit.py",
+			"settings":
+			{
+				"buffer_size": 583,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/S/plugins/Houdini/hrender_dl.py",
+			"settings":
+			{
+				"buffer_size": 19794,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "import os\nimport arkInit\narkInit.init()\n\nimport cOS\nimport traceback\nimport subprocess\n\nimport translators\ntranslator = translators.getCurrent()\nimport baseWidget\n\nimport settingsManager\nglobalSettings = settingsManager.globalSettings()\n\nclass FbxExporter(baseWidget.BaseWidget):\n	defaultOptions = {\n			'title': 'FBX Exporter',\n			'width': 600,\n			'height': 200,\n\n		'knobs': [\n			{\n				'name': 'Animation Directory',\n				'dataType': 'Directory',\n				'extension': '*.mb'\n			},\n			{\n				'name': 'Animation Files',\n				'dataType': 'ListBox',\n				'selectionMode': 'multi',\n			},\n			{\n				'name': 'Crowd',\n				'dataType': 'checkbox',\n				'value': True\n			},\n			{\n				'name': 'Export Directory',\n				'dataType': 'Directory'\n			},\n			{\n				'name': 'Export Animation',\n				'dataType': 'PythonButton',\n				'callback': 'exportFBXAnimation'\n			}\n		]\n	}\n\n	def init(self):\n		pass\n\n	def postShow(self):\n		self.getKnob('Animation Directory').on('changed', self.populateAnimFiles)\n\n	def populateAnimFiles(self, *args):\n		self.animDir = self.getKnob('Animation Directory').getValue()\n		animFiles = cOS.getFiles(self.animDir, fileIncludes=['.mb'], filesOnly=True, fullPath=False, depth=0)\n		self.getKnob('Animation Files').addItems(animFiles)\n\n	def exportFBXAnimation(self):\n		exportDir = self.getKnob('Export Directory').getValue()\n		exportDir = cOS.normalizeDir(exportDir)\n		crowdExport = self.getKnob('Crowd').getValue()\n		443970\n		animFiles = self.getKnob('Animation Files').getValue()\n		print animFiles\n		for animFile in animFiles:\n			args = [globalSettings.MAYA_BATCH_EXE]\n			args.extend(['-file', self.animDir + animFile])\n			args.extend(['-command', 'python (\"import fbxExporter;fbxExporter.prepAndExportFBX(crowdExport = ' + str(crowdExport) + ', exportDir = \\'' + exportDir + '\\');\")'])\n			# args = [mayabatchExe, fileArg, command]\n			# print args\n			process = cOS.startSubprocess(args)\n			out, err = cOS.waitOnProcess(process)\n			if 'Error' not in out and not err:\n				print 'Export Success!'\n			else:\n				print err\n				pass\n\n\ndef gui(self):\n	return FbxExporter()\n\ndef launch(docked=False):\n	translator.launch(FbxExporter, docked=docked)\n\ndef prepAndExportFBX(crowdExport = True, exportDir = True):\n	import maya.cmds as mc\n	import pymel.core as pymel\n	import os\n	import maya.mel as mel\n\n	# Change this to desired frame range before you run it\n	startframe = int(mc.playbackOptions(query=True, minTime=True))\n	endframe = int(mc.playbackOptions(query=True, maxTime=True))\n\n	frameRange = (startframe, endframe)\n\n	namespaces = mc.namespaceInfo(listOnlyNamespaces=True)\n	if crowdExport:\n		for namespace in namespaces:\n			if mc.objExists(namespace + ':body_lowPoly'):\n				selection = mc.ls(namespace + ':body_lowPoly')[0]\n				break\n	else:\n		for namespace in namespaces:\n			if mc.objExists(namespace + ':body'):\n				selection = mc.ls(namespace + ':body')[0]\n				break\n\n	isReference=True\n	while isReference==True:\n		referenceNode = mc.referenceQuery(selection, rfn = True, tr=True)\n		referenceFile = mc.referenceQuery(referenceNode, filename=True)\n		namespace = mc.referenceQuery(selection, namespace=True).replace(':', '')\n		mc.file(referenceFile, importReference = True)\n		isReference = mc.referenceQuery(selection, isNodeReferenced = True)\n\n	geoGroup = mc.listRelatives(selection, parent=True)[0]\n	geoObjects = [obj for obj in mc.listRelatives(geoGroup, allDescendents = True) if mc.objectType(obj)== 'mesh']\n	geoTransforms = [mc.listRelatives(obj, parent=True)[0] for obj in geoObjects]\n	bindJoints = []\n	for obj in geoTransforms:\n		joints = mc.skinCluster(obj, query=True, weightedInfluence = True)\n		bindJoints.extend(joints)\n\n	print namespace\n	mc.select(namespace + ':Human_rig', hi = True)\n	allObjects = mc.ls(sl=True)\n	newAllObjects = []\n	for obj in allObjects:\n		try:\n			newObj = mc.rename(obj, obj.replace(namespace + ':', ''))\n			newAllObjects.append(newObj)\n		except:\n			pass\n\n	geo = selection.replace(namespace + ':', '')\n	mc.select('GroundBindRoot_JNT', hi = True)\n	allBindNodes = mc.ls(sl=True)\n	bakedNodes = []\n	for obj in allBindNodes:\n		if 'Constraint' not in mc.objectType(obj):\n			print obj\n			bakedNodes.append(obj)\n\n	mc.bakeResults(bakedNodes, simulation=True, t = frameRange,\n				sampleBy = 1, disableImplicitControl=True,\n				preserveOutsideKeys=True, sparseAnimCurveBake=False,\n				removeBakedAttributeFromLayer=False, removeBakedAnimFromLayer=False,\n				bakeOnOverrideLayer=False, minimizeRotation=True, controlPoints=False,\n				shape=True\n				)\n	scaleConnectedObjects = ['R_ArmRig_JNT', 'R_ForearmRig_JNT',\n							 'L_ArmRig_JNT', 'L_ForearmRig_JNT',\n							 'L_upLegRig_JNT', 'L_ShinRig_JNT', 'L_AnkleRig_JNT', 'L_FootBaseRig_JNT', 'L_BallRig_JNT',\n							 'R_upLegRig_JNT', 'R_ShinRig_JNT', 'R_AnkleRig_JNT', 'R_FootBaseRig_JNT', 'R_BallRig_JNT']\n	for obj in scaleConnectedObjects:\n		try:\n			mc.disconnectAttr(obj + '.scale', obj.replace('Rig', 'Bind') + '.scale')\n		except:\n			print obj\n			pass\n\n	mc.delete('World_CTL')\n\n	mc.delete('DO_NOT_TOUCH')\n\n	for obj in mc.listRelatives('Deformation', children=True):\n		if obj != 'GroundBindRoot_JNT':\n			mc.delete(obj)\n\n	newBindJoints = []\n\n	geoObjects = [obj for obj in mc.listRelatives('GEO', allDescendents = True) if mc.objectType(obj)== 'mesh']\n	geoTransforms = [mc.listRelatives(obj, parent=True)[0] for obj in geoObjects]\n	for obj in geoTransforms:\n		joints = mc.skinCluster(obj, query=True, weightedInfluence = True)\n		newBindJoints.extend(joints)\n\n	nonBindNodes = []\n	for obj in allBindNodes:\n		if mc.objExists(obj) == True and obj not in newBindJoints:\n			if not mc.listRelatives(obj, children = True):\n				mc.delete(obj)\n\n			else:\n				nonBindNodes.append(obj)\n\n	nonBindJointExceptions = ['R_ObjectHoldBind_JNT', 'R_ObjectHoldEndBind_JNT', 'L_ObjectHoldBind_JNT', 'L_ObjectHoldEndBind_JNT']\n\n	# Deleting non-bind nodes\n	for obj in nonBindNodes:\n		if not mc.listRelatives(obj, children = True) and obj not in nonBindJointExceptions:\n			print obj\n			mc.delete(obj)\n\n	mc.setAttr('Deformation.scaleX', 0.01)\n	mc.setAttr('Deformation.scaleY', 0.01)\n	mc.setAttr('Deformation.scaleZ', 0.01)\n\n	# keying blendshapes\n	blendshapeNode = namespace + ':all_lowPoly_BSH'\n	for attr in mc.listAttr(blendshapeNode, keyable=True):\n		try:\n			mc.setKeyframe(blendshapeNode + '.' + attr)\n		except:\n			pass\n\n	# Only for crowd export\n	if crowdExport:\n		mc.delete('body')\n		mc.delete('nails')\n\n	mc.select('Human_rig')\n	currentFilename = mc.file(query=True, sn=True, shn=True)\n	fbxFilename = currentFilename.rpartition('_')[0] + '_' + str(startframe) + '_' + str(endframe) + '.fbx'\n\n	mel.eval('FBXExportCameras -v false;')\n	mel.eval('FBXExportLights -v false;')\n	mel.eval('FBXExportInAscii -v false;')\n	mel.eval('FBXExportInAscii -q;')\n	exportDir = cOS.normalizeDir(exportDir)\n	fbxPath = exportDir + fbxFilename\n	mel.eval('FBXExport -f \"' + fbxPath + '\" -s;')\n	print 'Saving FBX:', fbxPath\n\nif __name__=='__main__':\n	launch()\n\n\n",
+			"file": "tools/fbxExporter/fbxExporter.py",
+			"file_size": 7094,
+			"file_write_time": 131770429490939294,
+			"settings":
+			{
+				"buffer_size": 6869,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"toggle line",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"wor",
+				"Word Wrap: Toggle"
+			],
+			[
+				"tabs",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"pytho",
+				"Set Syntax: Python"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"convert spa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"pyt",
+				"Set Syntax: Python"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"me",
+				"View: Toggle Menu"
+			],
+			[
+				"men",
+				"View: Toggle Menu"
+			],
+			[
+				"tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"wo",
+				"Word Wrap: Toggle"
+			],
+			[
+				"pyth",
+				"Set Syntax: Python"
+			],
+			[
+				"CONTABS",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convert",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"syntax",
+				"Set Syntax: Batch File"
+			],
+			[
+				"convert ta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convert to ta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convert to ",
+				"Indentation: Convert to Spaces"
+			]
+		],
+		"width": 514.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/ie/ark/tools.sublime-project",
+		"/C/ie/deadline/deadline/submission/Houdini/SubmitHoudiniToDeadline.py",
+		"/C/ie/deadline/deadline/submission/Houdini/IE_SubmitDeadlineRop.py",
+		"/C/ie/deadline/admin/hrender_dl.py",
+		"/R/Test_Project/Workspaces/TPO_Video/Asset_Build/vrscenes/fx_thing_vray/v0001/fx_thing_vray_v0001.0001.vrscene",
+		"/R/Test_Project/Workspaces/TPO_Video/Asset_Build/vrscenes/fx_thing_vray/v0001/fx_thing_vray_v0001.0002.vrscene",
+		"/C/ie/deadline/deadline/jobTypes/VrayJOb.py",
+		"/C/ie/deadline/deadline/submission/Houdini/SubmitHoudiniToDeadlineFunctions.py",
+		"/N/MayaTools/handRig.py",
+		"/N/MayaTools/newLegRig.py",
+		"/C/Users/IE/Documents/maya/scripts/wireShape.mel",
+		"/C/ie/ark/tools/updateManager/updateManager.py",
+		"/N/MayaTools/spineRigLogic.py",
+		"/C/ie/ark/tools/fbxExporter/fbxExporter.py",
+		"/C/config/computerSettings.json",
+		"/C/ie/ark/setup/programSetup.py",
+		"/N/MayaTools/legRigger.py",
+		"/C/ie/ark/tools/fbxExporter/__init__.py",
+		"/C/ie/translators/translators/Maya.py",
+		"/C/ie/ark/programs/maya/scripts/initMaya.py",
+		"/C/ie/ark/admin/releaseManager.py",
+		"/C/ie/ark/config/default.json",
+		"/C/ie/deadline/bin/jobSubmit.py",
+		"/C/ie/deadline/deadline/jobTypes/MayaVRay.py",
+		"/C/ie/ark/tools/houdiniNCConverter/houdiniNCConverter.py",
+		"/C/ie/cOS/cOS/cOS.py",
+		"/C/Users/IE/config/default.json",
+		"/C/ie/shepherd/shepherd/jobTypes/Maya_VRayStandalone.py",
+		"/C/ie/shepherd/shepherd/sheep.py",
+		"/C/ie/shepherd/shepherd/jobTypes/ShepherdJob.py",
+		"/C/ie/ark/tools/shotBuilder/shotBuilder.py",
+		"/C/ie/ark/ui/knobs/listKnobs.py",
+		"/C/ie/shepherd/shepherd/jobTypes/Maya_VRay.py",
+		"/Q/Users/Shobhit_Stuff/VRay.dmp",
+		"/C/ie/ark/programs/houdini/houdini16.5/houdini.env",
+		"/C/ie/ark/tools/fbxExporter/prepAndExportFBX.py",
+		"/C/ie/ark/ui/knobs/fileKnobs.py",
+		"/C/ie/ark/programs/hiero/Python/tools/shotImporter.py",
+		"/C/ie/ark/tools/shotConverter/__init__.py",
+		"/C/ie/ark/tools/hub/sheepLoop.bat",
+		"/R/Assets/Software/VRay/houdini/vfh-b588240/houdini.env",
+		"/R/Assets/Software/VRay/houdini/vfh-b588240/hfs16.5.496.bat",
+		"/C/ie/ark/tools/updateManager/runUpdateManager.bat",
+		"/C/Program Files/Chaos Group/V-Ray/Houdini_16.5.496/vfh-b588240/hfs16.5.496.bat",
+		"/C/Program Files/Chaos Group/V-Ray/Houdini_16.5.496/vfh-b588240/houdini.env",
+		"/C/ie/ark/programs/houdini/houdini16.0/houdini.env",
+		"/C/vray/vfh-6e42f89/core.bat",
+		"/S/plugins/Houdini/hrender_dl.py",
+		"/C/Users/IE/houdini16.5/scripts/python/pythonrc.py",
+		"/C/ie/translators/translators/Translator.py",
+		"/C/ie/translators/translators/Nuke.py",
+		"/C/ie/translators/translators/Houdini.py",
+		"/C/ie/deadline/deadline/jobTypes/MayaJob.py",
+		"/C/ie/deadline/custom/scripts/Jobs/deadlineProcessedAlembic.py",
+		"/C/ie/ark/tools/publishManager/publishManager.py",
+		"/C/Users/IE/houdini16.5/_back/houdini.env",
+		"/C/Users/IE/houdini16.5/houdini.env",
+		"/C/Users/IE/houdini16.5_temp/scripts/python/pythonrc.py",
+		"/C/ie/ark/programs/houdini/houdini16.5/scripts/456.py",
+		"/C/ie/ark/programs/houdini/houdini16.5/scripts/123.py",
+		"/C/ie/ark/programs/houdini/ftrack/pythonrc.py",
+		"/C/ie/translators/translators/qt.py",
+		"/C/Users/IE/houdini16.5_temp/houdini.env",
+		"/C/ie/deadline/admin/checkSoftwareVersions.py",
+		"/C/ie/ark/tools/houdiniFileConvertor/houdiniFileConverter.py",
+		"/Q/Users/Shobhit_Stuff/programSetup.py",
+		"/C/Users/IE/Documents/maya/2016/Maya.env",
+		"/C/Users/IE/Documents/maya/2018/Maya.env",
+		"/C/ie/ark/programs/maya/scripts/arkMaya.py",
+		"/C/ie/shepherd/shepherd/computer/DefaultInit.py",
+		"/C/ie/ark/ui/baseWidget.py",
+		"/Q/Users/Shobhit_Stuff/programSetup_Maya2018VRay.py",
+		"/C/ie/ark/tools/arkToolbar/arkToolbar.py",
+		"/C/ie/ark/config/tools.json",
+		"/C/ie/translators/translators/Node_Maya.py",
+		"/N/MayaTools/fkParent.py",
+		"/C/Users/IE/Downloads/skinningWithNCloth/muscleRigLibrary/muscleRig.py",
+		"/N/MayaTools/Vehicle Auto-Rigger/Vehicle_Auto_Rigger.py",
+		"/N/MayaTools/IkFkBlender.py",
+		"/N/MayaTools/replaceShape.py",
+		"/N/MayaTools/fbxExport_3.py",
+		"/N/MayaTools/fbxExport_WIP..htaccess",
+		"/N/MayaTools/fbxExport_2.py",
+		"/N/MayaTools/armRigger.py",
+		"/Q/Users/Shobhit_Stuff/RigTasks.txt",
+		"/C/ie/ark/tools/IFDSubmitter/IFDSubmitter.py",
+		"/C/ie/ark/programs/houdini/houdini15.0/scripts/456.py",
+		"/C/ie/deadline/deadline/submission/Houdini/HoudiniDeadlineUtil.py",
+		"/C/ie/arkFTrack/arkFt/projectManager.py",
+		"/S/plugins/Houdini/Houdini.py",
+		"/Q/setPowerPlanHigh.bat",
+		"/Q/Users/Nellie/initMaya.py",
+		"/C/ie/deadline/deadline/jobTypes/DeadlineJob.py",
+		"/C/ie/ark/tools/deadlineSubmit/deadlineSubmit.py",
+		"/C/ie/deadline/deadline/arkDeadline.py",
+		"/C/ie/deadline/admin/postMantraJob.py",
+		"/C/ie/deadline/admin/postVrayJob.py",
+		"/C/ie/shepherd/shepherd/jobTypes/Houdini_Cache_Wedge.py",
+		"/C/ie/deadline/deadline/submission/Houdini/HoudiniWedgeSubmit.py",
+		"/S/submission/Houdini/Main/SubmitHoudiniToDeadline.py",
+		"/S/submission/Houdini/Main/SubmitHoudiniToDeadlineFunctions.py",
+		"/C/ie/ark/tools/animationPublisher/animationPublisher.py",
+		"/C/trash/myscript.py",
+		"/C/ie/deadline/bin/pythonDeadline.py",
+		"/C/ie/shepherd/shepherd/jobTypes/houdini/cacheWedge.py",
+		"/N/MayaTools/rigTester_2016.py",
+		"/N/MayaTools/testScreenshot.py",
+		"/C/ie/deadline/deadline/submission/Houdini/CallSubmitDeadlineRop.py",
+		"/C/ie/deadline/deadline/jobTypes/HoudiniJob.py",
+		"/C/ie/arkFTrack/arkFt/launchTask.py",
+		"/C/ie/ark/programs/nuke/python/arkNuke.py",
+		"/Q/Users/Nellie/temp",
+		"/C/ie_beta_v1.02.16/translators/translators/Maya.py",
+		"/C/ie/shepherd/shepherd/server/queue.js",
+		"/C/ie/shepherd/shepherd/server/shepherdPlugins/hierarchy.js",
+		"/C/ie/shepherd/test/test_sheep.py",
+		"/C/ie/shepherd/shepherd/jobTypes/Nuke_Comp.py",
+		"/C/ie/shepherd/shepherd/jobTypes/Mantra_IFD.py",
+		"/C/ie/shepherd/shepherd/jobTypes/MayaJob.py",
+		"/C/ie/shepherd/shepherd/jobTypes/NukeJob.py",
+		"/C/ie/shepherd/shepherd/helpers.py",
+		"/C/ie/shepherd/shepherd/jobTypes/Houdini_VRay.py",
+		"/C/ie/shepherd/shepherd/server/jobPlugins/jobPicker.js",
+		"/C/ie/shepherd/shepherd/server/jobPlugins/sheepLimiter.js",
+		"/C/ie/shepherd/shepherd/server/jobPlugins/licenseManager.js",
+		"/C/ie/shepherd/shepherd/jobTypes/HoudiniJob.py",
+		"/C/ie/shepherd/shepherd/jobTypes/Houdini_Mantra.py",
+		"/C/ie/caretaker/server/entityDefinitions/shepherdJob.entitydef"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 115.0,
+		"where_history":
+		[
+			"<project>,C:\\ie",
+			"<project>",
+			"C:\\ie\\shepherd",
+			"<project>",
+			"C:\\ie\\caretaker\\test,C:\\ie\\coren\\test",
+			"<open folders>",
+			"<project>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"v,",
+			"w ",
+			"w",
+			"vBase",
+			"v ",
+			"version",
+			"hou.hip",
+			"nelle",
+			"vrsceneInput",
+			"render_export_mode",
+			"vray_renderer",
+			"maya2016",
+			"Maya2016",
+			"animDir",
+			"	def getValue(self):",
+			"Maya_bact",
+			"startSubprocess",
+			"loadRenderer",
+			"FBX",
+			"Human",
+			"FBXExporter",
+			"Directory",
+			"self.blendedJoints",
+			"blendedJoints[0]",
+			"self.jointNames[0]",
+			"= joint",
+			"self.side",
+			"side",
+			"self.",
+			"legJoints[0]",
+			"computerSettings",
+			"AbcImport",
+			"plugin",
+			"HFS",
+			"Nellie",
+			"inputFile",
+			"nellie",
+			"self.fkControls",
+			"self.fkJoints",
+			"self.ikControlObject",
+			"self.poleVectorControl",
+			"self",
+			"self.ikJoints",
+			"legJointChain",
+			"			[ ] - ",
+			"FtrackDialogs",
+			"installMayaBeta",
+			"import shepherd",
+			"shepherd",
+			"Shepherd",
+			"\"maya\"",
+			"import sheep",
+			"import computer",
+			"DefaultInit",
+			"programSetup",
+			"installMayaBeta",
+			"psutil",
+			"import psutil",
+			"import Setup\nimport Setup",
+			"import programSetup",
+			"programSe",
+			" ",
+			"igNodes",
+			"setWedgePaths",
+			"mirrorNClothFromAttract",
+			"createMuscleFromAttractMesh",
+			"createnCloth",
+			"listRelatives",
+			"retShape",
+			"ikControlObject",
+			"self.",
+			"self.ikJoints",
+			"self.ikJoints[0]",
+			"wedging",
+			"setWedgePaths",
+			"root",
+			"wedgeDependantNodes",
+			"==",
+			"elif",
+			"node.type().name()",
+			"ignoreNodes",
+			"ropType",
+			"']",
+			"['",
+			"getInfo",
+			"['",
+			"getInfo",
+			"logname",
+			"translator.messageBox",
+			"start tracking",
+			"log",
+			"point2",
+			"point1",
+			"'B'",
+			"'A'",
+			"save",
+			"submitRenderJob",
+			"stickyProps",
+			"SaveStickyProp",
+			"stickyProps",
+			"return self.connection",
+			"installSubstance",
+			"print",
+			"createSequence",
+			"shotNames",
+			"getShotClips",
+			"getLatestConversion",
+			"MayaQWidgetDockableMixin",
+			"functo",
+			"\n\n",
+			";",
+			"isLicenseError",
+			"getresult",
+			"getResult",
+			"error with the frame",
+			"self.info =",
+			"self.info",
+			"computerName",
+			"self.computerName",
+			"computerInfo",
+			"sheepInfo =",
+			"computerInfo",
+			"self.info =",
+			"self.info",
+			"info",
+			"getResult",
+			"There was an error with the fram",
+			"islic"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 17,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "config/default.json",
+					"settings":
+					{
+						"buffer_size": 11992,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11496,
+								11496
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8035.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/S/custom/scripts/Jobs/postVrayJob.py",
+					"settings":
+					{
+						"buffer_size": 1181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								712,
+								712
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/S/custom/scripts/Jobs/postMantraJob.py",
+					"settings":
+					{
+						"buffer_size": 1887,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								702,
+								702
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/ie/deadline/deadline/jobTypes/DeadlineJob.py",
+					"settings":
+					{
+						"buffer_size": 13898,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/ie/deadline/deadline/jobTypes/MayaVRay.py",
+					"settings":
+					{
+						"buffer_size": 2958,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								774,
+								774
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 276.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/ie/deadline/deadline/submission/Houdini/HoudiniDeadlineUtil.py",
+					"settings":
+					{
+						"buffer_size": 8161,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								864,
+								864
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 552.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/ie/deadline/deadline/jobTypes/DeadlineJob.py",
+					"settings":
+					{
+						"buffer_size": 13898,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5606,
+								5606
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3864.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/ie/deadline/deadline/jobTypes/VrayJob.py",
+					"settings":
+					{
+						"buffer_size": 1262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/ie/deadline/__init__.py",
+					"settings":
+					{
+						"buffer_size": 23,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/ie/deadline/deadline/__init__.py",
+					"settings":
+					{
+						"buffer_size": 53,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/C/ie/deadline/deadline/jobTypes/__init__.py",
+					"settings":
+					{
+						"buffer_size": 524,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								383,
+								383
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "programs/nuke/python/arkNuke.py",
+					"settings":
+					{
+						"buffer_size": 69575,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								49844,
+								49852
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 37013.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "/C/ie/cOS/cOS/cOS.py",
+					"settings":
+					{
+						"buffer_size": 45236,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20243,
+								20243
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 17928.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "setup/programSetup.py",
+					"settings":
+					{
+						"buffer_size": 53631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								40441,
+								40441
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 24943.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "admin/releaseManager.py",
+					"settings":
+					{
+						"buffer_size": 2672,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								371,
+								371
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "/C/ie/deadline/bin/jobSubmit.py",
+					"settings":
+					{
+						"buffer_size": 583,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								583,
+								583
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "/S/plugins/Houdini/hrender_dl.py",
+					"settings":
+					{
+						"buffer_size": 19794,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3967,
+								3967
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2516.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "tools/fbxExporter/fbxExporter.py",
+					"settings":
+					{
+						"buffer_size": 6869,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2056,
+								2056
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"asi": true,
+								"bitwise": true,
+								"browser": true,
+								"evil": true,
+								"immed": true,
+								"latedef": true,
+								"multistr": true,
+								"noarg": true,
+								"node": true,
+								"noempty": true,
+								"plusplus": true,
+								"smarttabs": true,
+								"trailing": true,
+								"undef": true,
+								"unused": true
+							},
+							"pep8": false,
+							"pep8_ignore":
+							[
+								"W191"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1380.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 116.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"fbxe",
+				"ark/tools/fbxExporter/fbxExporter.py"
+			],
+			[
+				"hrender",
+				"deadline/admin/hrender_dl.py"
+			],
+			[
+				"jobs",
+				"deadline/bin/jobSubmit.py"
+			],
+			[
+				"release",
+				"ark/admin/releaseManager.py"
+			],
+			[
+				"pro",
+				"ark/setup/programSetup.py"
+			],
+			[
+				"houdinideadline",
+				"deadline/deadline/submission/Houdini/HoudiniDeadlineUtil.py"
+			],
+			[
+				"cos",
+				"cOS/cOS/cOS.py"
+			],
+			[
+				"arknuke",
+				"ark/programs/nuke/python/arkNuke.py"
+			],
+			[
+				"jobtypes/__i",
+				"deadline/deadline/jobTypes/__init__.py"
+			],
+			[
+				"deadline/__init",
+				"deadline/deadline/__init__.py"
+			],
+			[
+				"deadline__init__",
+				"deadline/__init__.py"
+			],
+			[
+				"vrayjo",
+				"deadline/deadline/jobTypes/VrayJob.py"
+			],
+			[
+				"deadlinejob",
+				"deadline/deadline/jobTypes/DeadlineJob.py"
+			],
+			[
+				"mayavray",
+				"deadline/deadline/jobTypes/MayaVRay.py"
+			],
+			[
+				"ie_sub",
+				"deadline/deadline/submission/Houdini/IE_SubmitDeadlineRop.py"
+			],
+			[
+				"defau",
+				"ark/config/default.json"
+			],
+			[
+				"submithoud",
+				"deadline/deadline/submission/Houdini/SubmitHoudiniToDeadlineFunctions.py"
+			],
+			[
+				"submithou",
+				"deadline/deadline/submission/Houdini/SubmitHoudiniToDeadline.py"
+			],
+			[
+				"default",
+				"ark/config/default.json"
+			],
+			[
+				"listkn",
+				"ark/ui/knobs/listKnobs.py"
+			],
+			[
+				"programse",
+				"ark/setup/programSetup.py"
+			],
+			[
+				"list",
+				"ark/ui/knobs/listKnobs.py"
+			],
+			[
+				"shotbui",
+				"ark/tools/shotBuilder/shotBuilder.py"
+			],
+			[
+				"sheepjob",
+				"shepherd/shepherd/jobTypes/ShepherdJob.py"
+			],
+			[
+				"sheep",
+				"shepherd/shepherd/sheep.py"
+			],
+			[
+				"defaultj",
+				"ark/config/default.json"
+			],
+			[
+				"houdininc",
+				"ark/tools/houdiniNCConverter/houdiniNCConverter.py"
+			],
+			[
+				"fbxexpo",
+				"ark/tools/fbxExporter/fbxExporter.py"
+			],
+			[
+				"maya.",
+				"translators/translators/Maya.py"
+			],
+			[
+				"",
+				"ark/tools/fbxExporter/prepAndExportFBX.py"
+			],
+			[
+				"jobsub",
+				"deadline/bin/jobSubmit.py"
+			],
+			[
+				"releas",
+				"ark/admin/releaseManager.py"
+			],
+			[
+				"initm",
+				"ark/programs/maya/scripts/initMaya.py"
+			],
+			[
+				"programs",
+				"ark/setup/programSetup.py"
+			],
+			[
+				"initmaya",
+				"ark/programs/maya/scripts/initMaya.py"
+			],
+			[
+				"maya",
+				"translators/translators/Maya.py"
+			],
+			[
+				"shot__init__",
+				"ark/tools/shotConverter/__init__.py"
+			],
+			[
+				"shotimport",
+				"ark/programs/hiero/Python/tools/shotImporter.py"
+			],
+			[
+				"filek",
+				"ark/ui/knobs/fileKnobs.py"
+			],
+			[
+				"houdinicon",
+				"ark/tools/houdiniNCConverter/houdiniNCConverter.py"
+			],
+			[
+				"progra",
+				"ark/setup/programSetup.py"
+			],
+			[
+				"job",
+				"deadline/bin/jobSubmit.py"
+			],
+			[
+				"runu",
+				"ark/tools/updateManager/runUpdateManager.bat"
+			],
+			[
+				"houdini.e",
+				"/C/ie/ark/programs/houdini/houdini16.5/houdini.env"
+			],
+			[
+				"initma",
+				"ark/programs/maya/scripts/initMaya.py"
+			],
+			[
+				"hou.env",
+				"ark/programs/houdini/houdini16.5/houdini.env"
+			],
+			[
+				"houdini.env",
+				"ark/programs/houdini/houdini16.5/houdini.env"
+			],
+			[
+				"hreder",
+				"deadline/admin/hrender_dl.py"
+			],
+			[
+				"sheep.ba",
+				"ark/tools/hub/sheepLoop.bat"
+			],
+			[
+				"updat",
+				"ark/tools/updateManager/updateManager.py"
+			],
+			[
+				"checks",
+				"deadline/admin/checkSoftwareVersions.py"
+			],
+			[
+				"houdini.py",
+				"translators/translators/Houdini.py"
+			],
+			[
+				"nuke.py",
+				"translators/translators/Nuke.py"
+			],
+			[
+				"trans",
+				"translators/translators/Translator.py"
+			],
+			[
+				"tools",
+				"ark/config/tools.json"
+			],
+			[
+				"ifd",
+				"ark/tools/IFDSubmitter/IFDSubmitter.py"
+			],
+			[
+				"python",
+				"ark/programs/houdini/ftrack/pythonrc.py"
+			],
+			[
+				"qt.py",
+				"translators/translators/qt.py"
+			],
+			[
+				"123",
+				"ark/programs/houdini/houdini16.5/scripts/123.py"
+			],
+			[
+				"456",
+				"ark/programs/houdini/houdini16.5/scripts/456.py"
+			],
+			[
+				"transla",
+				"translators/translators/Translator.py"
+			],
+			[
+				"mayavr",
+				"deadline/deadline/jobTypes/MayaVRay.py"
+			],
+			[
+				"mayajob",
+				"deadline/deadline/jobTypes/MayaJob.py"
+			],
+			[
+				"mayavra",
+				"deadline/deadline/jobTypes/MayaVRay.py"
+			],
+			[
+				"mayav",
+				"deadline/deadline/jobTypes/MayaVRay.py"
+			],
+			[
+				"default.js",
+				"ark/config/default.json"
+			],
+			[
+				"deadlineproce",
+				"deadline/custom/scripts/Jobs/deadlineProcessedAlembic.py"
+			],
+			[
+				"publishma",
+				"ark/tools/publishManager/publishManager.py"
+			],
+			[
+				"program",
+				"ark/setup/programSetup.py"
+			],
+			[
+				"arkmaya",
+				"ark/programs/maya/scripts/arkMaya.py"
+			],
+			[
+				"defaultini",
+				"shepherd/shepherd/computer/DefaultInit.py"
+			],
+			[
+				"base",
+				"ark/ui/baseWidget.py"
+			],
+			[
+				"maya.py",
+				"translators/translators/Maya.py"
+			],
+			[
+				"arktool",
+				"ark/tools/arkToolbar/arkToolbar.py"
+			],
+			[
+				"arktoo",
+				"ark/config/tools.json"
+			],
+			[
+				"node_maya",
+				"translators/translators/Node_Maya.py"
+			],
+			[
+				"rig",
+				"/Q/Users/Shobhit_Stuff/RigTasks.txt"
+			],
+			[
+				"houdinidead",
+				"deadline/deadline/submission/Houdini/HoudiniDeadlineUtil.py"
+			],
+			[
+				"projectm",
+				"arkFTrack/arkFt/projectManager.py"
+			],
+			[
+				"project",
+				"arkFTrack/arkFt/projectManager.py"
+			],
+			[
+				"launc",
+				"arkFTrack/arkFt/launchTask.py"
+			],
+			[
+				"proje",
+				"arkFTrack/arkFt/projectManager.py"
+			],
+			[
+				"tran",
+				"translators/translators/Translator.py"
+			],
+			[
+				"houdinide",
+				"deadline/deadline/submission/Houdini/HoudiniDeadlineUtil.py"
+			],
+			[
+				"launch",
+				"arkFTrack/arkFt/launchTask.py"
+			],
+			[
+				"maya_v",
+				"shepherd/shepherd/jobTypes/Maya_VRay.py"
+			],
+			[
+				"call",
+				"deadline/deadline/submission/Houdini/CallSubmitDeadlineRop.py"
+			],
+			[
+				"animation",
+				"ark/tools/animationPublisher/animationPublisher.py"
+			],
+			[
+				"hred",
+				"deadline/admin/hrender_dl.py"
+			],
+			[
+				"calld",
+				"deadline/deadline/submission/Houdini/CallSubmitDeadlineRop.py"
+			],
+			[
+				"houdinijob",
+				"deadline/deadline/jobTypes/HoudiniJob.py"
+			],
+			[
+				"houdinid",
+				"deadline/deadline/submission/Houdini/HoudiniDeadlineUtil.py"
+			],
+			[
+				"wedge",
+				"shepherd/shepherd/jobTypes/Houdini_Cache_Wedge.py"
+			],
+			[
+				"arkdead",
+				"deadline/deadline/arkDeadline.py"
+			],
+			[
+				"post",
+				"deadline/admin/postMantraJob.py"
+			],
+			[
+				"arkd",
+				"deadline/deadline/arkDeadline.py"
+			],
+			[
+				"dead",
+				"ark/tools/deadlineSubmit/deadlineSubmit.py"
+			],
+			[
+				"shotim",
+				"ark/programs/hiero/Python/tools/shotImporter.py"
+			],
+			[
+				"houdini",
+				"shepherd/shepherd/jobTypes/Houdini_VRay.py"
+			],
+			[
+				"helper",
+				"shepherd/shepherd/helpers.py"
+			],
+			[
+				"nukejo",
+				"shepherd/shepherd/jobTypes/NukeJob.py"
+			],
+			[
+				"sheep.p",
+				"shepherd/shepherd/sheep.py"
+			],
+			[
+				"shepherdjob",
+				"shepherd/shepherd/jobTypes/ShepherdJob.py"
+			],
+			[
+				"shepherdjo",
+				"caretaker/server/entityDefinitions/shepherdJob.entitydef"
+			],
+			[
+				"mayajo",
+				"shepherd/shepherd/jobTypes/MayaJob.py"
+			],
+			[
+				"maya_vrya",
+				"shepherd/shepherd/jobTypes/Maya_VRayStandalone.py"
+			],
+			[
+				"test_sh",
+				"shepherd/test/test_sheep.py"
+			],
+			[
+				"houdini_ma",
+				"shepherd/shepherd/jobTypes/Houdini_Mantra.py"
+			],
+			[
+				"houdinij",
+				"shepherd/shepherd/jobTypes/HoudiniJob.py"
+			],
+			[
+				"sheepma",
+				"ark/tools/hub/sheepManager.py"
+			],
+			[
+				"hu",
+				"ark/tools/hub/hub.py"
+			],
+			[
+				"config/def",
+				"coren/config/default.js"
+			],
+			[
+				"config/",
+				"coren/config/default.js"
+			],
+			[
+				"lice",
+				"shepherd/shepherd/server/jobPlugins/licenseManager.js"
+			],
+			[
+				"sheepli",
+				"shepherd/shepherd/server/jobPlugins/sheepLimiter.js"
+			],
+			[
+				"shepherd/config/de",
+				"shepherd/config/default.js"
+			],
+			[
+				"data",
+				"database/database/database.py"
+			],
+			[
+				"datab",
+				"database/database/database.js"
+			],
+			[
+				"farmst",
+				"caretaker/admin/farmStats.py"
+			],
+			[
+				"hub",
+				"ark/tools/hub/hub.py"
+			],
+			[
+				"ark/config/de",
+				"ark/config/default.json"
+			],
+			[
+				"caretaker/confi",
+				"caretaker/config/default.js"
+			],
+			[
+				"progr",
+				"ark/setup/programSetup.py"
+			],
+			[
+				"setup.py",
+				"ark/setup/Setup.py"
+			],
+			[
+				"setup",
+				"ark/setup/Setup.py"
+			],
+			[
+				"updatemo",
+				"ark/admin/updateModules.py"
+			],
+			[
+				"programset",
+				"ark/setup/programSetup.py"
+			],
+			[
+				"shepherd/config",
+				"shepherd/config/default.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 176.0,
+	"status_bar_visible": true
+}

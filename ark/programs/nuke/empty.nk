@@ -1,0 +1,63 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+version 10.0 v4
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-8" y="-8" w="1936" h="1176" maximized="1" screen="0">
+        <splitter orientation="2">
+            <split size="822"/>
+            <splitter orientation="1">
+                <split size="1102"/>
+                <dock id="" activePageId="Viewer.1" focus="true">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="814"/>
+                <dock id="" activePageId="uk.co.thefoundry.scripteditor.1">
+                    <page id="Viewer.2"/>
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="uk.co.thefoundry.vectorscope.1"/>
+                    <page id="uk.co.thefoundry.waveformscope.1"/>
+                    <page id="uk.co.thefoundry.histogram.1"/>
+                </dock>
+            </splitter>
+            <split size="288"/>
+            <dock id="" activePageId="Curve Editor.1">
+                <page id="Curve Editor.1"/>
+                <page id="DopeSheet.1"/>
+            </dock>
+        </splitter>
+    </window>
+    <window x="1920" y="0" w="1936" h="1212" maximized="1" screen="1">
+        <splitter orientation="1">
+            <split size="551"/>
+            <dock id="" hideTitles="1" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+            <split size="1365"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+                <page id="DAG.2"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name c:/ie/ark/programs/nuke/empty.nk
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ addUserKnob {20 studio l Studio}
+ addUserKnob {1 timeline_write_node}
+}
+Viewer {
+ inputs 0
+ frame 1
+ frame_range 1-100
+ frame_increment 8
+ far 1000000
+ name Viewer1
+ xpos -40
+ ypos -10
+}

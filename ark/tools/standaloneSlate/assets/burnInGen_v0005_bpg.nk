@@ -1,0 +1,206 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+#write_info Write1 file:"" format:"4096 2160 1" chans:":rgba.red:rgba.green:rgba.blue:" framerange:"1000 1160" fps:"0" colorspace:"sRGB" datatype:"unknown" transfer:"unknown" views:"main" colorManagement:"Nuke"
+version 10.0 v4
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-8" y="-8" w="1936" h="1176" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1257" stretch="1"/>
+            <splitter orientation="2">
+                <split size="652"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="459"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1" focus="true">
+                <page id="Properties.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name c:/ie/ark/tools/standaloneSlate/assets/burnInGen_v0005_bpg.nk
+ label "\{\"hasSlateOffset\": true\}"
+ frame 1000
+ first_frame 1000
+ last_frame 1160
+ lock_range true
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ onScriptLoad arkNuke.scriptLoad()
+ onScriptSave arkNuke.scriptSave()
+ onScriptClose arkNuke.scriptClose()
+ addUserKnob {20 studio l Studio}
+ addUserKnob {1 timeline_write_node}
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ label "Instructions:\n\nAspect Masking can be edited in the mask guide node.\nText content and opacity can be edited in the 'Text' tab of text nodes.\nText Size can be edited in the 'User' tab of text nodes."
+ xpos 231
+ ypos -236
+ bdwidth 471
+ bdheight 101
+}
+Read {
+ inputs 0
+ file c:/Users/IE/Desktop/titleAndEndCard/sequence/BW_103_07_010_Offline_v01.%04d.jpg
+ localizationPolicy on
+ format "4096 2160 0 0 4096 2160 1 4K_DCP"
+ first 1001
+ last 1159
+ origfirst 1001
+ origlast 1159
+ origset true
+ version 1
+ auto_alpha true
+ name reader
+ xpos -36
+ ypos -233
+ addUserKnob {20 User}
+}
+dGuides {
+ name maskGuide
+ label "\[knob this.aspect_selection]"
+ note_font Helvetica
+ xpos -36
+ ypos -113
+ draw_arguide Off
+ arguide_label ""
+ draw_aspectmask "Draw      "
+ aspectmask_mix 1
+ draw_actionsafe Off
+ actionsafe_label ""
+ draw_titlesafe Off
+ titlesafe_label ""
+ font "\[python nuke.defaultFontPathname()]"
+}
+Text {
+ message ""
+ font r:/Assets/Fonts/Standard/arial.ttf
+ size {{"height * (0.05 + (fontMult / 100))"}}
+ yjustify top
+ Transform 1
+ box {{"width * 0.025"} {"height * 0.975"} {"width * 0.35"} {"height * 0.65"}}
+ name topLeft
+ xpos -36
+ ypos -27
+ addUserKnob {20 User}
+ addUserKnob {7 fontMult R 0 10}
+ fontMult 1
+}
+Text {
+ message ""
+ font r:/Assets/Fonts/Standard/arial.ttf
+ size {{"height * (0.05 + (fontMult / 100))"}}
+ xjustify center
+ yjustify top
+ Transform 1
+ box {{"width * 0.35"} {"height * 0.975"} {"width * 0.7"} {"height * 0.65"}}
+ name topMid
+ xpos 109
+ ypos -37
+ addUserKnob {20 User}
+ addUserKnob {7 fontMult R 0 10}
+ fontMult 1
+}
+Text {
+ message ""
+ font r:/Assets/Fonts/Standard/arial.ttf
+ size {{"height * (0.05 + (fontMult / 100))"}}
+ xjustify right
+ yjustify top
+ Transform 1
+ box {{"width * 0.7"} {"height * 0.975"} {"width * 0.975"} {"height * 0.65"}}
+ name topRight
+ selected true
+ xpos 279
+ ypos -37
+ addUserKnob {20 User}
+ addUserKnob {7 fontMult R 0 10}
+ fontMult 1
+}
+Text {
+ message ""
+ font r:/Assets/Fonts/Standard/arial.ttf
+ size {{"height * (0.05 + (fontMult / 100))"}}
+ yjustify bottom
+ Transform 1
+ box {{"width * 0.025"} {"height * 0.02"} {"width * 0.35"} {"height * 0.375"}}
+ name bottomLeft
+ xpos -38
+ ypos 55
+ addUserKnob {20 User}
+ addUserKnob {7 fontMult R 0 10}
+ fontMult 1
+}
+Text {
+ message ""
+ font r:/Assets/Fonts/Standard/arial.ttf
+ size {{"height * (0.05 + (fontMult / 100))"}}
+ xjustify center
+ yjustify bottom
+ Transform 1
+ box {{"width * 0.35"} {"height * 0.02"} {"width * 0.7"} {"height * 0.375"}}
+ name bottomMid
+ xpos 102
+ ypos 55
+ addUserKnob {20 User}
+ addUserKnob {7 fontMult R 0 10}
+ fontMult 1
+}
+Text {
+ message ""
+ font r:/Assets/Fonts/Standard/arial.ttf
+ size {{"height * (0.05 + (fontMult / 100))"}}
+ xjustify right
+ yjustify bottom
+ Transform 1
+ box {{"width * 0.7"} {"height * 0.02"} {"width * 0.975"} {"height * 0.375"}}
+ name bottomRight
+ xpos 272
+ ypos 51
+ addUserKnob {20 User}
+ addUserKnob {7 fontMult R 0 10}
+ fontMult 1
+}
+set N1e2fa800 [stack 0]
+Write {
+ colorspace sRGB
+ reading true
+ checkHashOnRead false
+ on_error "read input"
+ version 2
+ beforeRender arkNuke.beforeRender()
+ name Write1
+ xpos 497
+ ypos 15
+ postage_stamp true
+}
+push $N1e2fa800
+Viewer {
+ frame_range 1000-1160
+ frame_increment 8
+ colour_sample_bbox {0.349609375 -0.1743164063 0.3500976563 -0.173828125}
+ samplepoints {{0.349609375 -0.1743164063}
+   }
+ far 1000000
+ name Viewer1
+ xpos 119
+ ypos 216
+}

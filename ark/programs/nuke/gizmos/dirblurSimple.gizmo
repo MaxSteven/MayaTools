@@ -1,0 +1,70 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+version 10.0 v4
+Gizmo {
+inputs 2
+tile_color 0xa89898ff
+addUserKnob {20 User}
+addUserKnob {41 BlurLength T DirBlurWrapper1.BlurLength}
+addUserKnob {41 BlurAngle T DirBlurWrapper1.BlurAngle}
+addUserKnob {41 Samples T DirBlurWrapper1.Samples}
+addUserKnob {26 "" +STARTLINE}
+addUserKnob {26 help_1 l "" +STARTLINE T "this is a fast and easy dirblur that blurs to both directions."}
+}
+Input {
+inputs 0
+name mask
+xpos -63
+ypos 602
+number 1
+}
+Input {
+inputs 0
+name SRC
+label "SRC\n"
+xpos -295
+ypos 396
+}
+Dot {
+name Dot1
+xpos -261
+ypos 490
+}
+set N9e1e3400 [stack 0]
+DirBlurWrapper {
+BlurType linear
+BlurLayer rgba
+BlurLength 100
+BlurAngle 144
+Samples 3
+pixeloffset 2
+name DirBlurWrapper1
+xpos -295
+ypos 518
+}
+Transform {
+translate {{-DirBlurWrapper1.BlurLength*.5*sin(parent.DirBlurWrapper1.BlurAngle/57.2957795130823193)} {-DirBlurWrapper1.BlurLength*.5*cos(parent.DirBlurWrapper1.BlurAngle/57.2957795130823193)}}
+center {960 540}
+name Transform2
+selected true
+xpos -295
+ypos 602
+}
+push $N9e1e3400
+Dot {
+name Dot2
+xpos -172
+ypos 490
+}
+Dissolve {
+inputs 2+1
+which 1
+name Dissolve1
+xpos -206
+ypos 596
+}
+Output {
+name Output1
+xpos -206
+ypos 684
+}
+end_group

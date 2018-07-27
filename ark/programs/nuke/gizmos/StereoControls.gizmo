@@ -1,0 +1,56 @@
+#! C:/Program Files/Nuke6.2v2/Nuke6.2.exe -nx
+version 6.2 v2
+Gizmo {
+ addUserKnob {20 StereoOptions}
+ addUserKnob {41 innerAngle T StereoControls.innerAngle}
+ addUserKnob {41 innerOcular T StereoControls.innerOcular}
+}
+ Input {
+  inputs 0
+  name cam_leftEye
+  xpos 358
+  ypos -650
+ }
+ Axis2 {
+  name camera_root
+  xpos 368
+  ypos -584
+ }
+ Axis2 {
+  translate {{StereoControls.innerOcular} 0 0}
+  rotate {0 {StereoControls.innerAngle} 0}
+  name cam_offset
+  xpos 460
+  ypos -584
+ }
+ NoOp {
+  name StereoControls
+  xpos 450
+  ypos -493
+  addUserKnob {20 StereoControls}
+  addUserKnob {7 innerAngle R -10 10}
+  addUserKnob {7 innerOcular R 0 4}
+  innerOcular 0.2
+ }
+ Camera2 {
+  focal {{parent.input0.focal}}
+  haperture {{parent.input0.haperture}}
+  vaperture {{parent.input0.vaperture}}
+  near {{parent.input0.near}}
+  far {{parent.input0.far}}
+  win_translate {{parent.input0.win_translate} {parent.input0.win_translate}}
+  win_scale {{parent.input0.win_scale} {parent.input0.win_scale}}
+  winroll {{parent.input0.winroll}}
+  focal_point {{parent.input0.focal_point}}
+  fstop {{parent.input0.fstop}}
+  name cam_rightEye
+  selected true
+  xpos 460
+  ypos -448
+ }
+ Output {
+  name rightEye
+  xpos 450
+  ypos -342
+ }
+end_group

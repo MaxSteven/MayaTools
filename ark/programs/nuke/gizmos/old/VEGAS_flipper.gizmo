@@ -1,0 +1,609 @@
+#! C:/Program Files/Nuke6.3v1/Nuke6.3.exe -nx
+version 6.3 v1
+Gizmo {
+ addUserKnob {20 FlipboardControls}
+ addUserKnob {41 flip_start T TimeOffset1.time_offset}
+ addUserKnob {4 flip_type M {first middle last}}
+ addUserKnob {41 translate T Transform1.translate}
+ addUserKnob {41 scale T scale_down.scale}
+ addUserKnob {41 shutter T Card3D_Front1.shutter}
+ addUserKnob {41 motionblur T Card3D_Front1.motionblur}
+ addUserKnob {41 text_size T Text_front.size}
+ addUserKnob {41 text_color T Text_front.color}
+ addUserKnob {41 front_font T Text_front.font}
+ addUserKnob {41 front_text T Text_front.message}
+ addUserKnob {41 back_font T Text_back.font}
+ addUserKnob {41 back_text T Text_back.message}
+}
+ Ramp {
+  inputs 0
+  p0 {799.0999756 539.5999756}
+  p1 {799.0999756 435}
+  name Ramp3
+  xpos -673
+  ypos 430
+ }
+ Transform {
+  inputs 0
+  center {960 540}
+  name Transform1
+  xpos -351
+  ypos -713
+ }
+ set C2046b8d0 [stack 0]
+ Input {
+  inputs 0
+  name bg
+  xpos -496
+  ypos -884
+ }
+ Shuffle {
+  alpha white
+  name Shuffle2
+  xpos -496
+  ypos -746
+ }
+ TranslateMix {
+  inputs 2
+  name TranslateMix1
+  xpos -496
+  ypos -713
+  tAmt 0
+ }
+ Dot {
+  name Dot1
+  xpos -462
+  ypos -626
+ }
+set N2046cf20 [stack 0]
+ Dot {
+  name Dot4
+  xpos 495
+  ypos -626
+ }
+ Read {
+  inputs 0
+  file Q:/SOUTHWEST/WORKSPACES/DEV_TICKETGRAPHIC/ASSETS/flipboard.tif
+  format "1920 300 0 0 1920 300 1 "
+  origset true
+  name Read1
+  xpos 287
+  ypos -584
+ }
+ Reformat {
+  name Reformat1
+  xpos 287
+  ypos -492
+ }
+ Grade {
+  gamma 0.6
+  name Grade1
+  xpos 287
+  ypos -468
+ }
+ Transform {
+  translate {0 3}
+  center {960 540}
+  name centerboard
+  xpos 287
+  ypos -427
+ }
+ Transform {
+  scale 0.433
+  center {960 540}
+  name scale_down
+  xpos 287
+  ypos -403
+ }
+ Dot {
+  name Dot9
+  xpos 321
+  ypos -354
+ }
+set N2046e570 [stack 0]
+ Merge2 {
+  inputs 2
+  operation in
+  name In3
+  xpos 461
+  ypos -357
+ }
+ Text {
+  inputs 0
+  message "NO BLACKOUT DATES"
+  font q:/SOUTHWEST/GLOBAL_ASSETS/Fonts/Interstate/INTBD__.ttf
+  size 60
+  xjustify center
+  yjustify center
+  Transform 1
+  box {70 270 1850 810}
+  center {960 540}
+  color {1 1 1 1}
+  name Text_front
+  xpos 68
+  ypos -302
+ }
+ Soften {
+  size 2
+  name Soften1
+  xpos 68
+  ypos -260
+ }
+ Roto {
+  inputs 0
+  output all
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 960 S 0 540 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Rectangle1" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 926.5 S 0 540 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 0 0 S 0 -3.33331 0 1 S 0 1917 S 0 541 0 1 S 0 -660.333 S 0 0 0 1 S 0 660.333 S 0 0 0 1 S 0 -64 S 0 541 0 1 S 0 0 S 0 -3.33331 0 1 S 0 0 S 0 3.33331 0 1 S 0 -64 S 0 539 0 1 S 0 660.333 S 0 0 0 1 S 0 -660.333 S 0 0 0 1 S 0 1917 S 0 539 0 1 S 0 0 S 0 3.33331 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 0 0 S 0 -3.33331 0 1 S 0 0 S 0 0 0 1 S 0 -660.333 S 0 0 0 1 S 0 660.333 S 0 0 0 1 S 0 0 S 0 0 0 1 S 0 0 S 0 -3.33331 0 1 S 0 0 S 0 3.33331 0 1 S 0 0 S 0 0 0 1 S 0 660.333 S 0 0 0 1 S 0 -660.333 S 0 0 0 1 S 0 0 S 0 0 0 1 S 0 0 S 0 3.33331 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 0.5 "ro" S 0 1 "go" S 0 1 "bo" S 0 1 "ao" S 0 1 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 4 "ltm" S 0 4 "ltt" S 0 0 "tt" S 0 7 "pt" S 0 0 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  color {1 1 1 0.5}
+  lifetime_type "all frames"
+  lifetime_start 4
+  lifetime_end 4
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name centerline
+  xpos -42
+  ypos -205
+ }
+set N2052f430 [stack 0]
+ Merge2 {
+  inputs 2
+  operation out
+  name Out
+  xpos 68
+  ypos -199
+ }
+push $N2046e570
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 287
+  ypos -199
+ }
+ Switch {
+  inputs 2
+  which {{parent.type1.which-1}}
+  name type_back
+  xpos 375
+  ypos -108
+ }
+ Dot {
+  name Dot6
+  xpos 409
+  ypos 15
+ }
+set N2052fdc0 [stack 0]
+ Dot {
+  name Dot3
+  xpos -91
+  ypos 15
+ }
+ Roto {
+  inputs 0
+  output alpha
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 960 S 0 150 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Rectangle1" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 948 S 0 437 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 0 0 S 0 190 0 1 S 0 2080 S 0 540 0 1 S 0 -734.667 S 0 0 0 1 S 0 734.667 S 0 0 0 1 S 0 -124 S 0 540 0 1 S 0 0 S 0 190 0 1 S 0 0 S 0 -190 0 1 S 0 -124 S 0 1112 0 1 S 0 734.667 S 0 0 0 1 S 0 -734.667 S 0 0 0 1 S 0 2080 S 0 1112 0 1 S 0 0 S 0 -190 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 0 0 S 0 190 0 1 S 0 0 S 0 0 0 1 S 0 -734.667 S 0 0 0 1 S 0 734.667 S 0 0 0 1 S 0 0 S 0 0 0 1 S 0 0 S 0 190 0 1 S 0 0 S 0 -190 0 1 S 0 0 S 0 0 0 1 S 0 734.667 S 0 0 0 1 S 0 -734.667 S 0 0 0 1 S 0 0 S 0 0 0 1 S 0 0 S 0 -190 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 150 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 1 "ltm" S 0 1 "ltt" S 0 0 "tt" S 0 7 "pt" S 0 0 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name Top_half
+  xpos 189
+  ypos 75
+ }
+set N20530420 [stack 0]
+ Invert {
+  name Invert1
+  xpos 29
+  ypos 75
+ }
+ Merge2 {
+  inputs 2
+  operation in
+  name In2
+  xpos -125
+  ypos 81
+ }
+set N20530a80 [stack 0]
+ Dot {
+  name Dot8
+  xpos -749
+  ypos 84
+ }
+ ColorCorrect {
+  inputs 1+1
+  gain 0
+  invert_mask true
+  mix {{min(abs(parent.Card3D_Front_Middle1.rotate.x-180)/90,parent.Card3D_Front_Middle1.rotate.x/90) i}}
+  name ColorCorrect3
+  xpos -783
+  ypos 430
+ }
+ Card3D {
+  rotate {{parent.Card3D_Front_Middle1.rotate-180 i} {parent.Card3D_Front_Middle1.rotate i} {parent.Card3D_Front_Middle1.rotate i}}
+  motionblur {{parent.Card3D_Front_Middle1.motionblur i}}
+  shutter {{parent.Card3D_Front_Middle1.shutter i}}
+  name Card3D_Back_Middle1
+  xpos -783
+  ypos 510
+ }
+ Ramp {
+  inputs 0
+  p0 {799.0999756 539.5999756}
+  p1 {799.0999756 591.4000244}
+  name Ramp4
+  xpos -1177
+  ypos 433
+ }
+ Text {
+  inputs 0
+  message "AWESOME FAIRS"
+  font q:/SOUTHWEST/GLOBAL_ASSETS/Fonts/Interstate/INTBD__.ttf
+  size {{parent.Text_front.size i}}
+  xjustify center
+  yjustify center
+  Transform 1
+  box {70 270 1850 810}
+  center {960 540}
+  color {{parent.Text_front.color i} {parent.Text_front.color i} {parent.Text_front.color i} {parent.Text_front.color i}}
+  name Text_back
+  xpos -152
+  ypos -302
+ }
+ Soften {
+  size 2
+  name Soften2
+  xpos -152
+  ypos -260
+ }
+push $N2052f430
+ Merge2 {
+  inputs 2
+  operation out
+  name Merge5
+  xpos -152
+  ypos -199
+ }
+push $N2046e570
+ Dot {
+  name Dot5
+  xpos -260
+  ypos -354
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos -294
+  ypos -199
+ }
+push $N2046cf20
+ FrameHold {
+  first_frame {{parent.TimeOffset1.time_offset i}}
+  name FrameHold2
+  xpos -496
+  ypos -205
+ }
+ Switch {
+  inputs 2
+  which {{flip_type}}
+  name type1
+  xpos -386
+  ypos -108
+ }
+push $N2052fdc0
+push $N20530420
+ Merge2 {
+  inputs 2
+  operation in
+  name In
+  xpos 375
+  ypos 154
+ }
+set N20532d90 [stack 0]
+ Merge2 {
+  inputs 2
+  operation in
+  name In1
+  xpos -386
+  ypos 154
+ }
+set N205330c0 [stack 0]
+ Dot {
+  name Dot7
+  xpos -1010
+  ypos 157
+ }
+ ColorCorrect {
+  inputs 1+1
+  gain 0
+  invert_mask true
+  mix {{min(abs(parent.Card3D_Front_Middle1.rotate.x-180)/90,parent.Card3D_Front_Middle1.rotate.x/90) i}}
+  name ColorCorrect4
+  xpos -1044
+  ypos 433
+ }
+ Card3D {
+  rotate {{curve i 0 s0 L x4 180 S x7 141.4147643 L 180 S x12 162.5950521 L 180 S x15 174.4164276 s0 180 s0} {curve i 0 s0} {curve i 0 s0}}
+  motionblur 1
+  shutter 0.25
+  name Card3D_Front_Middle1
+  xpos -1044
+  ypos 510
+ }
+ Switch {
+  inputs 2
+  which {{curve i x2 0 1}}
+  name front_back1
+  xpos -914
+  ypos 590
+ }
+ Ramp {
+  inputs 0
+  p0 {799.0999756 539.5999756}
+  p1 {799.0999756 435}
+  name Ramp2
+  xpos -15
+  ypos 426
+ }
+push $N20530a80
+ ColorCorrect {
+  inputs 1+1
+  gain 0
+  invert_mask true
+  mix {{min(abs(parent.Card3D_Front1.rotate.x-180)/90,parent.Card3D_Front1.rotate.x/90) i}}
+  name ColorCorrect1
+  xpos -125
+  ypos 426
+ }
+ Card3D {
+  rotate {{parent.Card3D_Front1.rotate-180 i} {parent.Card3D_Front1.rotate i} {parent.Card3D_Front1.rotate i}}
+  motionblur {{parent.Card3D_Front1.motionblur i}}
+  shutter {{parent.Card3D_Front1.shutter i}}
+  name Card3D_Back1
+  xpos -125
+  ypos 506
+ }
+ Ramp {
+  inputs 0
+  p0 {799.0999756 539.5999756}
+  p1 {799.0999756 591.4000244}
+  name Ramp1
+  xpos -519
+  ypos 429
+ }
+push $N205330c0
+ ColorCorrect {
+  inputs 1+1
+  gain 0
+  invert_mask true
+  mix {{min(abs(parent.Card3D_Front1.rotate.x-180)/90,parent.Card3D_Front1.rotate.x/90) i}}
+  name ColorCorrect2
+  xpos -386
+  ypos 429
+ }
+ Card3D {
+  rotate {{curve i 0 s0 x6 250 L x13 150 S x18 210 x24 170 x28 180 s0} {curve i 0 s0} {curve i 0 s0}}
+  motionblur 1
+  shutter 0.25
+  name Card3D_Front1
+  xpos -386
+  ypos 506
+ }
+ Switch {
+  inputs 2
+  which {{curve i x2 0 1}}
+  name front_back
+  xpos -256
+  ypos 586
+ }
+ Switch {
+  inputs 2
+  which {{flip_type!=0 i}}
+  name not_first
+  xpos -560
+  ypos 779
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos -560
+  ypos 843
+ }
+ Dot {
+  name Dot2
+  xpos -526
+  ypos 954
+ }
+push $N20532d90
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos 375
+  ypos 951
+ }
+clone $C2046b8d0 {
+  xpos -91
+  ypos 1230
+  selected false
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos -91
+  ypos 1273
+ }
+ TimeOffset {
+  time_offset 50
+  name TimeOffset1
+  xpos -91
+  ypos 1298
+ }
+set N20709a50 [stack 0]
+ Constant {
+  inputs 0
+  name Constant1
+  selected true
+  xpos -323
+  ypos 1448
+ }
+set N20709d80 [stack 0]
+ Switch {
+  inputs 2
+  which {{frame-parent.TimeOffset1.time_offset+1}}
+  name off_before
+  xpos -91
+  ypos 1655
+ }
+ Output {
+  name Output1
+  xpos -91
+  ypos 1789
+ }
+ Viewer {
+  frame_increment 8
+  input_process false
+  name Viewer1
+  xpos 375
+  ypos 1344
+ }
+ Switch {
+  inputs 0
+  which {{"flip_type != 1"}}
+  name no_top_type
+  xpos -413
+  ypos 1094
+ }
+ Switch {
+  inputs 0
+  which {{flip_type==2}}
+  name is_last
+  xpos -11
+  ypos 1556
+ }
+push $N20709a50
+push $N20709d80
+ Switch {
+  inputs 2
+  which {{(parent.TimeOffset1.time_offset+28)-frame}}
+  name off_after
+  xpos -182
+  ypos 1472
+ }
+end_group

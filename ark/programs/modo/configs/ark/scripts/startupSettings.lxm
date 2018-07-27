@@ -1,0 +1,40 @@
+#LXMacro#
+
+pref.select input/units set
+pref.value units.system metric
+pref.value units.default centimeters
+pref.value units.percent unitless
+
+pref.select input/selection set
+pref.value remapping.lassoSelectThrough true
+
+pref.select defaults/autosave set
+pref.value autosave.time 5.0
+pref.value autosave.versions 40
+pref.value autosave.directory "C:\Temp\"
+
+pref.select defaults/animation set
+pref.value animation.slopeType auto
+
+pref.select defaults/application set
+pref.value application.maxUndo 250
+pref.value application.indexStyle none
+
+pref.select defaults/meshitems set
+pref.value application.pasteDeSelection true
+pref.value application.pasteSelection true
+
+pref.select display/opengl set
+pref.value opengl.glOCIOcorrection true
+pref.value opengl.trackball false
+pref.value opengl.trackballForce true
+
+pref.select display/toolhandles set
+pref.value handles.lineHit 10.0
+
+pref.select defaults/sceneexport set
+pref.value export.absPath true
+pref.value export.copyright "Ingenuity Studios"
+
+pref.value handles.toolPlaneHandle 0.4
+tool.snapAngle 90.0

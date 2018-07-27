@@ -1,0 +1,1297 @@
+#! C:/Program Files/Nuke6.3v2/Nuke6.3.exe -nx
+version 6.3 v2
+Group { 
+ name OS_Generator
+ addUserKnob {20 Interface}
+ addUserKnob {41 Addwindow l "Add Window" T NoOp1.Addwindow}
+ addUserKnob {20 Customelements l "Custom Elements"}
+ addUserKnob {41 file l Background T BG.file}
+ addUserKnob {41 file_1 l "System Bar" T SYstem_Bar.file}
+ addUserKnob {20 Window1 l "Window 1"}
+ addUserKnob {41 translate T Windowmize.translate}
+ addUserKnob {41 translate_1 l translate T Windowmize.translate_1}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  label WIDGETS
+  note_font_size 41
+  xpos -1693
+  ypos -1263
+  bdwidth 577
+  bdheight 454
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  label "OS OBJECTS"
+  note_font_size 31
+  xpos -690
+  ypos -1653
+  bdwidth 415
+  bdheight 378
+ }
+ Group {
+  inputs 0
+  name Prime_Flare
+  tile_color 0x12ffff
+  gl_color 0x3fffff
+  note_font Verdana
+  xpos 912
+  ypos -897
+  addUserKnob {20 PrimeFlare -STARTLINE}
+  addUserKnob {20 about_1 l About -STARTLINE n 1}
+  addUserKnob {22 about l "<img src='Q:/USERS/Mario_Pece/Temp/1.png' height='80' width='300'/>" +STARTLINE}
+  addUserKnob {26 ""}
+  addUserKnob {20 endGroup_2 l endGroup n -1}
+  addUserKnob {41 position l Position T Flare1.position}
+  addUserKnob {41 white l Brightness T Grade1.white}
+  addUserKnob {41 global_scale l "Global Scale" T Transform2.global_scale}
+  addUserKnob {41 rotation_offset l "Global Rotation" T Transform2.rotation_offset}
+  addUserKnob {41 gain l Tint T ColorCorrect1.gain}
+  addUserKnob {41 motionblur l "Motion Blur" T Transform2.motionblur}
+  addUserKnob {41 shutter l Shutter T Transform2.shutter}
+  addUserKnob {20 elements l Elements}
+  addUserKnob {20 presets l Presets n 1}
+  presets 0
+  addUserKnob {22 beached_button l "<img src='Q:/USERS/Mario_Pece/Temp/beached.png' height='50' width='50'/><br>Beached" -STARTLINE T "nuke.thisNode()\['glow_button'].execute()\nnuke.thisNode()\['strac_button'].execute()\nnuke.thisNode()\['glint_button'].execute()\nnuke.thisNode()\['multi_iris_button'].execute()\nnuke.thisNode()\['gain'].setValue((2.37098, 1.10355, 0.419211, 0.857))"}
+  addUserKnob {22 beam_button l "<img src='Q:/USERS/Mario_Pece/Temp/beam.png' height='50' width='50'/><br>Beam" -STARTLINE}
+  addUserKnob {22 blue_spark_button l "<img src='Q:/USERS/Mario_Pece/Temp/blue_spark.png' height='50' width='50'/><br>Blues" -STARTLINE}
+  addUserKnob {22 crazy_button l "<img src='Q:/USERS/Mario_Pece/Temp/crazy_light.png' height='50' width='50'/><br>Crazy" -STARTLINE}
+  addUserKnob {22 evenin_button l "<img src='Q:/USERS/Mario_Pece/Temp/evening_sun.png' height='50' width='50'/><br>Evening" -STARTLINE}
+  addUserKnob {22 gold_button l "<img src='Q:/USERS/Mario_Pece/Temp/gold_spot.png' height='50' width='50'/><br>Gold" -STARTLINE}
+  addUserKnob {20 endGroup_3 l endGroup n -1}
+  addUserKnob {20 objects l "Lens Objects" n 1}
+  addUserKnob {22 glow_button l "<img src='Q:/USERS/Mario_Pece/Temp/glow.png' height='50' width='50'/><br>Glow" t "TabsDialog().showModalDialog() \n\n\nscript = \"\"\"\nclass TabsDialog(nukescripts.PythonPanel): \n\n\n    def __init__(self): \n        super( TabsDialog, self ).__init__( \"Tab Examples\" ) \n        \n        \n        # First Tab \n        \n        self.firstTab = nuke.Tab_Knob('First Tab') \n        self.outsideKnob = nuke.Int_Knob(\"outsideGroup\") \n        self.beginGroup = nuke.Tab_Knob(\"myGroup\", None, nuke.TABBEGINGROUP) # nuke.TABBEGINGROUP = 1 \n        self.k = nuke.Double_Knob(\"scale_\" + str(i),\"scale\")\n        self.beginNestedGroup = nuke.Tab_Knob(\"mySubGroup\", None, nuke.TABBEGINGROUP) \n        self.endNestedGroup = nuke.Tab_Knob(\"\", None, nuke.TABENDGROUP) \n        self.endGroup = nuke.Tab_Knob(\"\", None, nuke.TABENDGROUP) # nuke.TABENDGROUP = 1 \n        \n        \n        # Second Tab \n        \n        self.secondTab = nuke.Tab_Knob('Second Tab') \n        \n        self.addKnob(self.firstTab) \n        self.addKnob(self.outsideKnob) \n        self.addKnob(self.beginGroup) \n        self.addKnob(self.beginNestedGroup) \n        self.addKnob(self.endNestedGroup) \n        self.addKnob(self.endGroup) \n        \n        self.addKnob(self.secondTab) \n        self.addKnob(self.k)\n\nTabsDialog().showModalDialog()\n\n\"\"\"" -STARTLINE T "import random\nimport math\n\n\n\ndef glow():\n    b = nuke.nodes.Transform(name=\"transform_scale_\" + str(i))\n    b\['scale'].setExpression(\"((global_scale) - 1) + (scale_\" + str(i) + \")\")\n    b\['center'].setValue(1024)\n    b.setInput( 0, nuke.toNode('Read1') )\n    b = nuke.nodes.Transform()\n    b\['translate'].setExpression(\"((parent.Flare1.position - parent.Flare3.position)*(distance_\" + str(i) + \")) + (parent.Flare3.position)-1024\")\n    b\['rotate'].setExpression(\"rotation_offset\")\n    b\['center'].setValue(1024)\n    b\['motionblur'].setExpression(\"Transform2.motionblur\")\n    b\['shutter'].setExpression(\"Transform2.shutter\")\n    b.setName(\"transform_node_\" + str(i))\n    b.setInput( 0, nuke.toNode('transform_scale_' + str(i)) )\n    b = nuke.nodes.Grade(name=\"Grade_element_\" + str(i))\n    b\['white'].setExpression(\"brightness_\" + str(i))\n    b.setInput( 0, nuke.toNode('transform_node_' + str(i)) )\n    c = nuke.nodes.Crop()\n    c.setInput( 0, nuke.toNode('Grade_element_' + str(i)) )\n    nuke.toNode('Merge2').setInput( i, c )\n    c.setName(\"crop_node_\" + str(i))\n    stab = nuke.thisNode()\n    glowicon = nuke.Text_Knob (\"icon_\" + str(i),\"<img src='Q:/USERS/Mario_Pece/Temp/glow.png' height='40' width='40'><big><big><big> - GLOW -\")\n    stab.addKnob(glowicon)\n    brightness = nuke.Double_Knob (\"brightness_\" + str(i),\"brightness\")\n    stab.addKnob(brightness)\n    stab.knob(\"brightness_\" + str(i)).setValue(1)\n    scale = nuke.Double_Knob (\"scale_\" + str(i),\"Scale\")\n    stab.addKnob(scale)\n    stab.knob(\"scale_\" + str(i)).setValue(0.5)\n    delete = nuke.PyScript_Knob (\"delete_\" + str(i),\"delete\",\"\"\"\ni = \"\"\" + str(i) + \"\"\"\nstab = nuke.thisNode()\nstab.removeKnob(stab\[\"icon_\" + str(i)])\nstab.removeKnob(stab\[\"brightness_\" + str(i)])\nstab.removeKnob(stab\[\"scale_\" + str(i)])\nstab.removeKnob(stab\[\"delete_\" + str(i)])\nstab.removeKnob(stab\[\"distance_\" + str(i)])\ndeleteNode = nuke.toNode(\"transform_node_\" + str(i))\ndeleteNode.setInput(0, None)\nnuke.delete(deleteNode)\ndeleteNodecrop = nuke.toNode(\"crop_node_\" + str(i))\nnuke.delete(deleteNodecrop)\ndeleteNodenoop = nuke.toNode(\"noop_node_\" + str(i))\nnuke.delete(deleteNodenoop)\ndeleteNodesize = nuke.toNode(\"transform_scale_\" + str(i))\nnuke.delete(deleteNodesize)\ndeleteNodegrade = nuke.toNode(\"Grade_element_\" + str(i))\nnuke.delete(deleteNodegrade)\n\n\"\"\")\n    stab.addKnob(delete)\n    distance = nuke.Double_Knob (\"distance_\" + str(i),\"Distance\")\n    distance.setRange( -2, 2 )\n    distance.setValue(1)\n    stab.addKnob(distance)\n\ni = int(math.floor(random.random()*999))\nglow()"}
+  addUserKnob {22 multi_iris_button l "<img src='Q:/USERS/Mario_Pece/Temp/multi_iris.png' height='50' width='50'/><br>Multi Iris" t "stab = nuke.thisNode()\nstab.removeKnob(stab\[\"mult_size_367\"])\n\n\nb = nuke.nodes.Flare(name=\"multi_iris_\" + str(i))\n    b = nuke.toNode('multi_iris_' + str(i))\n    b\['position'].setExpression(\"(parent.Flare1.position)\")\n    b\['offset'].setValue(0)\n    b\['flattening'].setValue(1)\n    b\['sharpness'].setValue(0.87)\n    b\['radius'].setValue(0, 78.88, 82.53)\n    b\['size_mult'].setExpression(\"scale_\" + str(i))\n    b\['inner_color'].setValue(1)\n    b\['brightness'].setValue(0.089)\n    b\['mult_num'].setValue(25)\n    b\['mult_size'].setValue(1)\n    b\['mult_color'].setValue(0)\n    b\['mult_brightness'].setValue(-1)\n    b\['mult_visibility'].setValue(-0.295)\n    b\['mult_rotate'].setValue(0)\n    b\['mult_seed'].setValue(0)\n    b.setInput( 0, nuke.toNode('formatHD') )\n    nuke.toNode('Read3').setInput( 0, nuke.toNode('multi_iris_' + str(i)) )\n    b = nuke.nodes.Grade(name=\"Grade_element_\" + str(i))\n    b\['white'].setExpression(\"brightness_\" + str(i))\n    b.setInput( 0, nuke.toNode('Read3') )\n    nuke.toNode('Merge2').setInput( i, b )\n    stab = nuke.thisNode()\n    glowicon = nuke.Text_Knob (\"icon_\" + str(i),\"<img src='Q:/USERS/Mario_Pece/Temp/multi_iris.png' height='40' width='40'><big><big><big> - MULTI IRIS -\")\n    stab.addKnob(glowicon)\n    brightness = nuke.Double_Knob (\"brightness_\" + str(i),\"brightness\")\n    stab.addKnob(brightness)\n    stab.knob(\"brightness_\" + str(i)).setValue(1)\n    scale = nuke.Double_Knob (\"scale_\" + str(i),\"scale\")\n    stab.addKnob(scale)\n    stab.knob(\"scale_\" + str(i)).setValue(0.5)\n    delete = nuke.PyScript_Knob (\"delete_\" + str(i),\"delete\",\"\"\"\ni = \"\"\" + str(i) + \"\"\"\nstab = nuke.thisNode()\nstab.removeKnob(stab\[\"icon_\" + str(i)])\nstab.removeKnob(stab\[\"brightness_\" + str(i)])\nstab.removeKnob(stab\[\"scale_\" + str(i)])\nstab.removeKnob(stab\[\"delete_\" + str(i)])\nstab.removeKnob(stab\[\"offset_\" + str(i)])\nstab.removeKnob(stab\[\"flattening_\" + str(i)])\nstab.removeKnob(stab\[\"sharpness_\" + str(i)])\nstab.removeKnob(stab\[\"mult_num_\" + str(i)])\nstab.removeKnob(stab\[\"mult_size_\" + str(i)])\nstab.removeKnob(stab\[\"mult_color_\" + str(i)])\nstab.removeKnob(stab\[\"mult_brightness_\" + str(i)])\nstab.removeKnob(stab\[\"mult_visibility_\" + str(i)])\nstab.removeKnob(stab\[\"mult_rotate_\" + str(i)])\nstab.removeKnob(stab\[\"mult_seed_\" + str(i)])\ndeleteNode = nuke.toNode(\"Grade_element_\" + str(i))\ndeleteNode.setInput(0, None)\nnuke.delete(deleteNode)\ndeleteNodenoop = nuke.toNode(\"noop_node_\" + str(i))\nnuke.delete(deleteNodenoop)\ndeleteNodegrade = nuke.toNode(\"multi_iris_\" + str(i))\ndeleteNodegrade.setInput(0, None)\nnuke.delete(deleteNodegrade)\n\n\"\"\")\n    stab.addKnob(delete)\n    for k in \[\"offset\", \"flattening\", \"sharpness\", \"mult_num\", \"mult_size\", \"mult_color\", \"mult_brightness\", \"mult_visibility\", \"mult_rotate\", \"mult_seed\"]:\n        x = nuke.Link_Knob(str(k) + '_' + str(i), str(k))\n        x.setLink('multi_iris_' + str(i) + '.' + str(k))\n        stab.addKnob(x)\n" -STARTLINE T "import random\nimport math\ni = int(math.floor(random.random()*999))\n\nnuke.tcl('''\n\nConstant \{\n  inputs 0\n  channels none\n  format \"1920 1080 0 0 1920 1080 1 HD\"\n  name formatHD_''' + str(i) + '''\n  xpos 1227\n  ypos -1052\n\}\nFlare \{\n  position \{\{(parent.Flare1.position)\} \{(parent.Flare1.position)\}\}\n  offset 0\n  radius \{0 78.88 82.53\}\n  size_mult 1\n  inner_color 1\n  brightness 0.08\n  flattening 1\n  sharpness 0.87\n  mult_num 25\n  mult_seed 0\n  mult_offset 2\n  mult_size 1\n  mult_color 0\n  mult_brightness -1\n  mult_visibility -0.295\n  mult_flattening 0\n  mult_rotate 0\n  name multi_iris_''' + str(i) + '''\n  xpos 1227\n  ypos -970\n\}\nNoOp \{\n  name Read_''' + str(i) + '''\n  xpos 1227\n  ypos -946\n\}\nBlur \{\n  size 0\n  name Blur_element_''' + str(i) + '''\n  xpos 1227\n  ypos -922\n\}\nadd_layer \{rgb rgb.red rgb.green rgb.blue rgb.alpha\}\nGrade \{\n  white 1\n  name Grade_element_''' + str(i) + '''\n  xpos 1227\n  ypos -922\n\}\n addUserKnob \{26 icon_''' + str(i) + ''' l \"<img src='Q:/USERS/Mario_Pece/Temp/multi_iris.png' height='40' width='40'><big><big><big> - Multi Iris -\"\} \n addUserKnob \{41 brightness_''' + str(i) + ''' l Brightness T Grade_element_''' + str(i) + '''.white\}\n addUserKnob \{41 scale_''' + str(i) + ''' l \"Global Scale\" T multi_iris_''' + str(i) + '''.size_mult\}\n addUserKnob \{41 offset_''' + str(i) + ''' l \"Offset\" T multi_iris_''' + str(i) + '''.offset\}\n addUserKnob \{41 Blur_''' + str(i) + ''' l \"Blur\" T Blur_element_''' + str(i) + '''.size\}\n addUserKnob \{41 flattening_''' + str(i) + ''' l \"Edge Flattening\" T multi_iris_''' + str(i) + '''.flattening\}\n addUserKnob \{41 sharpness_''' + str(i) + ''' l \"Corner Sharpness\" T multi_iris_''' + str(i) + '''.sharpness\}\n addUserKnob \{41 corners_''' + str(i) + ''' l \"Corners\" T multi_iris_''' + str(i) + '''.corners\}\n addUserKnob \{41 mult_num_''' + str(i) + ''' l \"Elements Number\" T multi_iris_''' + str(i) + '''.mult_num\}\n addUserKnob \{41 mult_offset_''' + str(i) + ''' l \"Variation Offset\" T multi_iris_''' + str(i) + '''.mult_offset\}\n addUserKnob \{41 mult_size_''' + str(i) + ''' l \"Variation Size\" T multi_iris_''' + str(i) + '''.mult_size\}\n addUserKnob \{41 mult_color_''' + str(i) + ''' l \"Variation Hue\" T multi_iris_''' + str(i) + '''.mult_color\}\n addUserKnob \{41 mult_brightness_''' + str(i) + ''' l \"Variation Brightness\" T multi_iris_''' + str(i) + '''.mult_brightness\}\n addUserKnob \{41 mult_visibility_''' + str(i) + ''' l \"Variation Visibility\" T multi_iris_''' + str(i) + '''.mult_visibility\}\n addUserKnob \{41 mult_flattening_''' + str(i) + ''' l \"Variation Edge Flattening\" T multi_iris_''' + str(i) + '''.mult_flattening\}\n addUserKnob \{41 mult_rotate_''' + str(i) + ''' l \"Variation Rotation\" T multi_iris_''' + str(i) + '''.mult_rotate\}\n addUserKnob \{41 mult_seed_''' + str(i) + ''' l Seed T multi_iris_''' + str(i) + '''.mult_seed\}\n''')\n\nstab = nuke.thisNode()\ndelete = nuke.PyScript_Knob (\"delete_\" + str(i),\"delete\",\"\"\"\ni = \"\"\" + str(i) + \"\"\"\ndeleteNode = nuke.toNode(\"Grade_element_\" + str(i))\ndeleteNode.setInput(0, None)\nnuke.delete(deleteNode)\ndeleteNodenoop = nuke.toNode(\"Read_\" + str(i))\nnuke.delete(deleteNodenoop)\ndeleteNodeblur = nuke.toNode(\"Blur_element_\" + str(i))\nnuke.delete(deleteNodeblur)\ndeleteNodegrade = nuke.toNode(\"multi_iris_\" + str(i))\ndeleteNodegrade.setInput(0, None)\nnuke.delete(deleteNodegrade)\ndeleteNodeiris = nuke.toNode(\"formatHD_\" + str(i))\nnuke.delete(deleteNodeiris)\nstab = nuke.thisNode()\nstab.removeKnob(stab\[\"icon_\" + str(i)])\nstab.removeKnob(stab\[\"brightness_\" + str(i)])\nstab.removeKnob(stab\[\"scale_\" + str(i)])\nstab.removeKnob(stab\[\"delete_\" + str(i)])\nstab.removeKnob(stab\[\"offset_\" + str(i)])\nstab.removeKnob(stab\[\"Blur_\" + str(i)])\nstab.removeKnob(stab\[\"flattening_\" + str(i)])\nstab.removeKnob(stab\[\"sharpness_\" + str(i)])\nstab.removeKnob(stab\[\"corners_\" + str(i)])\nstab.removeKnob(stab\[\"mult_num_\" + str(i)])\nstab.removeKnob(stab\[\"mult_offset_\" + str(i)])\nstab.removeKnob(stab\[\"mult_size_\" + str(i)])\nstab.removeKnob(stab\[\"mult_color_\" + str(i)])\nstab.removeKnob(stab\[\"mult_brightness_\" + str(i)])\nstab.removeKnob(stab\[\"mult_visibility_\" + str(i)])\nstab.removeKnob(stab\[\"mult_flattening_\" + str(i)])\nstab.removeKnob(stab\[\"mult_rotate_\" + str(i)])\nstab.removeKnob(stab\[\"mult_seed_\" + str(i)])\n\"\"\")\nstab.addKnob(delete)\n\nx = nuke.toNode('Grade_element_' + str(i))\nnuke.toNode('Merge2').setInput( i, x )"}
+  addUserKnob {22 iris_button l "<img src='Q:/USERS/Mario_Pece/Temp/iris.png' height='50' width='50'/><br>Iris" -STARTLINE}
+  addUserKnob {22 strac_button l "<img src='Q:/USERS/Mario_Pece/Temp/streak.png' height='50' width='50'/><br>Streak" -STARTLINE T "import random\nimport math\n\ndef streak():\n    b = nuke.nodes.Transform(name=\"transform_scale_\" + str(i))\n    b\['scale'].setExpression(\"((global_scale) - 1) + (scale_\" + str(i) + \")\")\n    b\['center'].setValue(1024)\n    b.setInput( 0, nuke.toNode('Read1') )\n    b = nuke.nodes.Transform()\n    b\['translate'].setExpression(\"((parent.Flare1.position - parent.Flare3.position)*(distance_\" + str(i) + \")) + (parent.Flare3.position)-1024\")\n    b\['scale'].setExpression(\"Transform2.scale\")\n    b\['scale'].setSingleValue(False)\n    b\['rotate'].setExpression(\"rotation_offset\")\n    b\['center'].setValue(1024)\n    b\['motionblur'].setExpression(\"Transform2.motionblur\")\n    b\['shutter'].setExpression(\"Transform2.shutter\")\n    b.setName(\"transform_node_\" + str(i))\n    b.setInput( 0, nuke.toNode('transform_scale_' + str(i)) )\n    b = nuke.nodes.Grade(name=\"Grade_element_\" + str(i))\n    b\['white'].setExpression(\"brightness_\" + str(i))\n    b.setInput( 0, nuke.toNode('transform_node_' + str(i)) )\n    c = nuke.nodes.Crop()\n    c.setInput( 0, nuke.toNode('Grade_element_' + str(i)) )\n    nuke.toNode('Merge2').setInput( i, c )\n    c.setName(\"crop_node_\" + str(i))\n    stab = nuke.thisNode()\n    glowicon = nuke.Text_Knob (\"icon_\" + str(i),\"<img src='Q:/USERS/Mario_Pece/Temp/streak.png' height='40' width='40'><big><big><big> - STREAK -\")\n    stab.addKnob(glowicon)\n    brightness = nuke.Double_Knob (\"brightness_\" + str(i),\"brightness\")\n    stab.addKnob(brightness)\n    stab.knob(\"brightness_\" + str(i)).setValue(1)\n    scale = nuke.Double_Knob (\"scale_\" + str(i),\"scale\")\n    stab.addKnob(scale)\n    stab.knob(\"scale_\" + str(i)).setValue(1)\n    delete = nuke.PyScript_Knob (\"delete_\" + str(i),\"delete\",\"\"\"\ni = \"\"\" + str(i) + \"\"\"\nstab = nuke.thisNode()\nstab.removeKnob(stab\[\"icon_\" + str(i)])\nstab.removeKnob(stab\[\"brightness_\" + str(i)])\nstab.removeKnob(stab\[\"scale_\" + str(i)])\nstab.removeKnob(stab\[\"delete_\" + str(i)])\nstab.removeKnob(stab\[\"distance_\" + str(i)])\ndeleteNode = nuke.toNode(\"transform_node_\" + str(i))\ndeleteNode.setInput(0, None)\nnuke.delete(deleteNode)\ndeleteNodecrop = nuke.toNode(\"crop_node_\" + str(i))\nnuke.delete(deleteNodecrop)\ndeleteNodenoop = nuke.toNode(\"noop_node_\" + str(i))\nnuke.delete(deleteNodenoop)\ndeleteNodesize = nuke.toNode(\"transform_scale_\" + str(i))\nnuke.delete(deleteNodesize)\ndeleteNodegrade = nuke.toNode(\"Grade_element_\" + str(i))\nnuke.delete(deleteNodegrade)\n\n\"\"\")\n    stab.addKnob(delete)\n    distance = nuke.Double_Knob (\"distance_\" + str(i),\"Distance\")\n    distance.setRange( -2, 2 )\n    distance.setValue(1)\n    stab.addKnob(distance)\n\n    \n\ni = int(math.floor(random.random()*999))\nstreak()"}
+  addUserKnob {22 shimmer_button l "<img src='Q:/USERS/Mario_Pece/Temp/shimmer.png' height='50' width='50'/><br>Shimm" -STARTLINE}
+  addUserKnob {22 glint_button l "<img src='Q:/USERS/Mario_Pece/Temp/glint.png' height='50' width='50'/><br>Glint" -STARTLINE T "import random\nimport math\n\ndef glint():\n\n\n    nuke.tcl(''' \n\n\nset cut_paste_input \[stack 0]\nversion 6.3 v2\nGroup \{\ninputs 0\nname Glint_''' + str(i) + '''\nselected true\nxpos 1100\nypos -1500\naddUserKnob \{20 User\}\naddUserKnob \{26 \"\" l \"@b;Shape\"\}\naddUserKnob \{41 mode l \"Sparkle type\" T Sparkles1.mode\}\naddUserKnob \{41 triangle_thick l \"triangle shape\" T Sparkles1.triangle_thick\}\naddUserKnob \{41 position T Sparkles1.position\}\naddUserKnob \{41 size T Sparkles1.size\}\naddUserKnob \{41 anamorphic T Sparkles1.anamorphic\}\naddUserKnob \{41 rotation T Sparkles1.rotation\}\naddUserKnob \{41 relative_rotation l relative T Sparkles1.relative_rotation\}\naddUserKnob \{41 ray_nb l \"rays Nb\" T Sparkles1.ray_nb\}\naddUserKnob \{41 ray_thick l thickness T Sparkles1.ray_thick\}\naddUserKnob \{41 random_thick l random T Sparkles1.random_thick\}\naddUserKnob \{41 spark_falloff l \"sparkle falloff\" T Sparkles1.spark_falloff\}\naddUserKnob \{41 ray_falloff l \"ray Falloff\" T Sparkles1.ray_falloff\}\naddUserKnob \{41 seed T Sparkles1.seed\}\naddUserKnob \{26 \"\" l \"@b;Color\"\}\naddUserKnob \{41 brightness T Sparkles1.brightness\}\naddUserKnob \{41 color T Sparkles1.color\}\naddUserKnob \{41 chroma_shift l \"chroma shift\" T Sparkles1.chroma_shift\}\naddUserKnob \{41 chroma_spread l \"chroma spread\" T Sparkles1.chroma_spread\}\naddUserKnob \{26 \"\" l \"@b;Mask\"\}\naddUserKnob \{41 vismask l mask T Sparkles1.vismask\}\naddUserKnob \{41 vismask_size l \"mask blur\" T Sparkles1.vismask_size\}\n\}\nConstant \{\n inputs 0\n channels none\n format \"2048 2048 0 0 2048 2048 1 square_2K\"\n name constant\n selected true\n xpos 1237\n ypos -1244\n\}\nSparkles \{\n position \{1024 1024\}\n size 1000\n rotation 19\n ray_nb \{\{complexity_445\}\}\n ray_thick 0.1\n random_thick true\n spark_falloff 0\n ray_falloff 100\n seed \{\{seed_445\}\}\n vismask_size 15.2\n broken_affected 100\n broken_start 1\n random_broken_start true\n broken_holes 1\n random_broken_holes true\n name Sparkles1\n selected true\n xpos 360\n ypos -457\n\}\nset N88067c0 \[stack 0]\nGroup \{\nname Group1\ntile_color 0xc29b5300\nlabel \"Mar 20 2005\"\nnote_font Verdana\nxpos 600\nypos -471\nmapsize \{0.15 0.15\}\naddUserKnob \{20 \"\" l User\}\naddUserKnob \{4 style l \"Volumetric Creation\" t style M \{\"RGB Luminance\" \"Alpha Edges\" \"Alpha Solid\" \"Shadow Making\"\}\}\naddUserKnob \{26 \"\" l \"RGB Options\"\}\naddUserKnob \{7 luma_tol l \"Luma Tolerance\" t luma_tol\}\naddUserKnob \{26 \"\" l \"Alpha Options\"\}\naddUserKnob \{7 edge_size l \"Edge Size\" t \"Erode Size\" R -10 10\}\naddUserKnob \{14 blur_size l \"Edge Blur\" t \"Blur Size\" R 0 100\}\naddUserKnob \{26 \"\" l \"Volume Options\"\}\naddUserKnob \{12 vol_pos l \"Volumetrics Center\" t vol_pos\}\nvol_pos \{\{parent.Sparkles1.position\} \{parent.Sparkles1.position\}\}\naddUserKnob \{14 raylength l \"Ray Length\" R 0 100\}\nraylength 300\naddUserKnob \{7 pre_blur l \"Pre-Ray Blur\" R 0 100\}\naddUserKnob \{4 quality l Quality t quality M \{Low Medium High \"Very High\"\}\}\nquality Medium\naddUserKnob \{6 comp_me l \"Add on Top\" t comp_me -STARTLINE\}\naddUserKnob \{26 \"\" l \"Flicker Options\"\}\naddUserKnob \{6 chk_flicker l \"Use Flickering\" t chk_flicker -STARTLINE\}\nchk_flicker true\naddUserKnob \{7 flicker_speed l \"Flicker Speed\" t flicker_speed R 0 10\}\nflicker_speed 2\naddUserKnob \{7 flicker_size l \"Flicker Size\" t flicker_size R 0 100\}\nflicker_size 40\naddUserKnob \{6 xform_flicker l \"Transform noise with Volume Center\" t \"Use this if your flickering is too much due to the movement of the center of the volume.\\nThe noise will move with the point and then the only cause for flickering is the speed of the flicker.\" -STARTLINE\}\naddUserKnob \{26 \"\" l \"Color Options\"\}\naddUserKnob \{6 chk_desat l \"Desaturate before Coloring\" t chk_desat -STARTLINE\}\naddUserKnob \{18 CCorrect1_gamma l \"Volume Gamma\" t CCorrect1_gamma R 0.2 5\}\nCCorrect1_gamma 1\naddUserKnob \{18 CCorrect1_gain l \"Volume Gain\" t CCorrect1_gain R 0 4\}\nCCorrect1_gain 1\naddUserKnob \{19 initcolor l \"Initial Volume Color\" t initcolor R 0 5\}\ninitcolor 1\naddUserKnob \{19 volume_end_color l \"End Volume Color\"\}\nvolume_end_color \{0 0 0 0\}\naddUserKnob \{26 \"\" l \"Radial Falloff\"\}\naddUserKnob \{6 chk_radial l \"Enable Radial Falloff\" -STARTLINE\}\nchk_radial true\naddUserKnob \{7 radial_size l \"Radial Size\" R 100 1000\}\nradial_size 500\naddUserKnob \{7 rad_softness l \"Radial Falloff\"\}\nrad_softness 1\naddUserKnob \{26 \"\" l \"Mask Options\"\}\naddUserKnob \{6 chk_use_mask l \"Enable Mask\" -STARTLINE\}\naddUserKnob \{7 mask_blur l \"Mask Blur\" R 0 100\}\naddUserKnob \{6 chk_xform_mask l \"Transform Mask with Volume Center\" -STARTLINE\}\naddUserKnob \{26 \"\" l NOTE: T \"The alpha channel is what you need for the mask\"\}\n\}\nInput \{\ninputs 0\nname img\nxpos -382\nypos -462\n\}\nset N88d6b60 \[stack 0]\nDot \{\nname Dot5\ntile_color 0x9597bf00\nxpos -486\nypos -486\n\}\nBlur \{\nchannels rgba\nsize \{\{parent.raylength*1000 x1 48\}\}\nfilter box\nquality 1\nname Blur3\ntile_color 0xcc804e00\nxpos -520\nypos 411\n\}\npush \$N88d6b60\nDot \{\nname Dot1\nxpos -348\nypos -399\n\}\nset N622b990 \[stack 0]\nDot \{\nname Dot2\nxpos -348\nypos -69\n\}\nset N622bcc0 \[stack 0]\nDot \{\nname Dot3\ntile_color 0x9597bf00\nxpos -348\nypos 351\n\}\nInput \{\ninputs 0\nname mask\nxpos 218\nypos 53\nnumber 1\n\}\nShuffle \{\nred alpha\ngreen alpha\nblue alpha\nname Shuffle3\ntile_color 0x9e3c6300\nxpos 218\nypos 108\n\}\nBlur \{\nsize \{\{mask_blur\}\}\nname Blur2\ntile_color 0xcc804e00\nlabel (all)\nxpos 218\nypos 131\ndisable \{\{!mask_blur\}\}\n\}\nTransform \{\ntranslate \{\{vol_pos.x\} \{vol_pos.y\}\}\ncenter \{320 240\}\nname Transform1\nxpos 218\nypos 168\ndisable \{\{!chk_xform_mask\}\}\n\}\npush \$N622bcc0\nShuffle \{\nred black\ngreen black\nblue black\nalpha black\nname Shuffle2\ntile_color 0x9e3c6300\nxpos -202\nypos -72\n\}\nRadial \{\narea \{\{vol_pos.x-radial_size\} \{vol_pos.y-radial_size\} \{vol_pos.x+radial_size\} \{vol_pos.y+radial_size\}\}\nsoftness \{\{rad_softness\}\}\nname Radial1\ntile_color 0xc0c0c000\nxpos -202\nypos 48\ndisable \{\{!chk_radial\}\}\n\}\npush \$N622b990\nShuffle \{\nred alpha\ngreen alpha\nblue alpha\nname Shuffle5\ntile_color 0x9e3c6300\nxpos -202\nypos -222\n\}\nadd_layer \{rgb rgb.red rgb.green rgb.blue rgb.alpha\}\nInvert \{\nchannels rgb\nname Invert1\ntile_color 0x7aa9ff00\nxpos -202\nypos -192\n\}\npush \$N622b990\nShuffle \{\nred alpha\ngreen alpha\nblue alpha\nname Shuffle4\ntile_color 0x9e3c6300\nxpos -202\nypos -282\n\}\npush \$N622b990\nEdgeDetectWrapper \{\nchannels alpha\nerodesize \{\{parent.edge_size\}\}\nblursize \{\{parent.blur_size\}\}\nname EdgeDetectWrapper1\ntile_color 0xcc804e00\nlabel (alpha)\nxpos -202\nypos -409\n\}\nShuffle \{\nred alpha\ngreen alpha\nblue alpha\nname Shuffle1\ntile_color 0x9e3c6300\nxpos -202\nypos -342\n\}\npush \$N88d6b60\nKeyer \{\noperation \"luminance key\"\nrange \{\{luma_tol\} 1 1 1\}\nname Keyer1\ntile_color 0xff0000\nlabel (alpha)\nxpos -82\nypos -469\n\}\nPremult \{\nname Premult1\nxpos -82\nypos -416\n\}\nSwitch \{\ninputs 4\nwhich \{\{style\}\}\nname Switch1\nxpos -82\nypos -282\n\}\nset N52f7b40 \[stack 0]\nRectangle \{\narea \{0 0 \{input.width\} \{input.height\}\}\ncolor 0\nname Rectangle1\ntile_color 0xc0c0c000\nxpos 98\nypos -282\n\}\nNoise \{\nsize \{\{flicker_size i\}\}\nzoffset \{\{frame/(100/flicker_speed) i\}\}\ngamma 1\ntranslate \{\{xform_flicker?vol_pos.x:0 i\} \{xform_flicker?vol_pos.y:0\}\}\nname Noise1\nxpos 98\nypos -222\n\}\nClamp \{\nname Clamp1\ntile_color 0x7aa9ff00\nlabel (all)\nxpos 98\nypos -199\n\}\npush \$N52f7b40\nDot \{\nname Dot4\ntile_color 0x9597bf00\nxpos -48\nypos -9\n\}\nMerge \{\ninputs 2\noperation mult\nbbox B\nname Merge2\ntile_color 0x4b5ec600\nxpos 98\nypos -12\ndisable \{\{!chk_flicker\}\}\n\}\nSaturation \{\nsaturation 0\nname Saturation1\ntile_color 0x7aa9ff00\nxpos 98\nypos 18\ndisable \{\{!chk_desat\}\}\n\}\nMerge \{\ninputs 2\noperation mult\nname Merge3\ntile_color 0x4b5ec600\nxpos 98\nypos 48\ndisable \{\{!chk_radial\}\}\n\}\nBlur \{\nsize \{\{pre_blur\}\}\nname Blur1\ntile_color 0xcc804e00\nlabel (all)\nxpos 98\nypos 101\ndisable \{\{!pre_blur\}\}\n\}\nMerge \{\ninputs 2\noperation mult\nbbox B\nname Merge4\ntile_color 0x4b5ec600\nxpos 98\nypos 168\ndisable \{\{!chk_use_mask\}\}\n\}\nGodRays \{\nscale \{\{raylength.w i\} \{raylength.h i\}\}\ncenter \{\{vol_pos.x i\} \{vol_pos.y i\}\}\nfrom_color \{\{50*initcolor.r i\} \{50*initcolor.g i\} \{50*initcolor.b i\} \{50*initcolor.a i\}\}\nto_color \{\{volume_end_color.r i\} \{volume_end_color.g i\} \{volume_end_color.b i\} \{volume_end_color.a i\}\}\nsteps \{\{(quality+1)*3+1 i\}\}\nname GodRays2\nlabel (all)\nxpos 98\nypos 215\n\}\nColorCorrect \{\ngamma \{\{parent.CCorrect1_gamma.r i\} \{parent.CCorrect1_gamma.g i\} \{parent.CCorrect1_gamma.b i\} \{curve i\}\}\ngain \{\{parent.CCorrect1_gain.r i\} \{parent.CCorrect1_gain.g i\} \{parent.CCorrect1_gain.b i\} \{curve i\}\}\nname ColorCorrect1\nxpos 98\nypos 278\n\}\nMerge \{\ninputs 2\noperation plus\nbbox B\nname Merge1\ntile_color 0x4b5ec600\nxpos 98\nypos 321\ndisable \{\{!comp_me K x13 0\}\}\n\}\nCrop \{\nbox \{\{curve i\} \{curve i\} \{img.width i\} \{img.height\}\}\nname Crop1\nxpos 80\nypos 372\n\}\nOutput \{\nname Output1\nselected true\nxpos 80\nypos 421\n\}\nCopyBBox \{\ninputs 2\nname CopyBBox1\nxpos -173\nypos 411\n\}\nend_group\npush \$N88067c0\npush \$N88067c0\nBlur \{\nchannels rgb\nsize 4.6\nquality 200\nname Blur10\nlabel \"\\\[value size]\"\nxpos 808\nypos -319\n\}\npush \$N88067c0\nBlur \{\nchannels rgb\nsize 10.2\nquality 200\nname Blur11\nlabel \"\\\[value size]\"\nxpos 680\nypos -415\n\}\npush \$N88067c0\npush 0\npush \$N88067c0\nBlur \{\nsize 9.8\nquality 100\nname Blur13\nlabel \"\\\[value size]\"\nxpos 744\nypos -373\n\}\npush \$N88067c0\nMerge2 \{\ninputs 7+1\noperation plus\nname Merge3\nxpos 552\nypos -199\n\}\nOutput \{\nname Output1\nxpos 552\nypos -99\n\}\nend_group\npush \$cut_paste_input\n\n\n\n''')\n    glint_node = nuke.toNode('Glint_' + str(i))\n    glint_node\['ray_nb'].setExpression(\"complexity_\" + str(i))\n    glint_node\['seed'].setExpression(\"seed_\" + str(i))\n    nuke.toNode('Merge_glint').setInput( i,  glint_node)\n    b = nuke.nodes.Transform(name=\"transform_scale_\" + str(i))\n    b\['scale'].setExpression(\"((global_scale) - 1) + (scale_\" + str(i) + \")\")\n    b\['center'].setValue(1024)\n    b.setInput( 0, nuke.toNode('Read2') )\n    b = nuke.nodes.Transform()\n    b\['translate'].setExpression(\"((parent.Flare1.position - parent.Flare3.position)*(distance_\" + str(i) + \")) + (parent.Flare3.position)-1024\")\n    b\['rotate'].setExpression(\"rotation_offset\")\n    b\['center'].setValue(1024)\n    b\['motionblur'].setExpression(\"Transform2.motionblur\")\n    b\['shutter'].setExpression(\"Transform2.shutter\")\n    b.setName(\"transform_node_\" + str(i))\n    b.setInput( 0, nuke.toNode('transform_scale_' + str(i)) )\n    b = nuke.nodes.Grade(name=\"Grade_element_\" + str(i))\n    b\['white'].setExpression(\"brightness_\" + str(i))\n    b.setInput( 0, nuke.toNode('transform_node_' + str(i)) )\n    c = nuke.nodes.Crop()\n    c.setInput( 0, nuke.toNode('Grade_element_' + str(i)) )\n    nuke.toNode('Merge2').setInput( i, c )\n    c.setName(\"crop_node_\" + str(i))\n    stab = nuke.thisNode()\n    glowicon = nuke.Text_Knob (\"icon_\" + str(i),\"<img src='Q:/USERS/Mario_Pece/Temp/glint.png' height='40' width='40'><big><big><big> - GLINT -\")\n    stab.addKnob(glowicon)\n    brightness = nuke.Double_Knob (\"brightness_\" + str(i),\"brightness\")\n    stab.addKnob(brightness)\n    stab.knob(\"brightness_\" + str(i)).setValue(1)\n    scale = nuke.Double_Knob (\"scale_\" + str(i),\"scale\")\n    stab.addKnob(scale)\n    stab.knob(\"scale_\" + str(i)).setValue(1)\n    delete = nuke.PyScript_Knob (\"delete_\" + str(i),\"delete\",\"\"\"\ni = \"\"\" + str(i) + \"\"\"\nstab = nuke.thisNode()\nstab.removeKnob(stab\[\"icon_\" + str(i)])\nstab.removeKnob(stab\[\"brightness_\" + str(i)])\nstab.removeKnob(stab\[\"scale_\" + str(i)])\nstab.removeKnob(stab\[\"delete_\" + str(i)])\nstab.removeKnob(stab\[\"distance_\" + str(i)])\nstab.removeKnob(stab\[\"complexity_\" + str(i)])\nstab.removeKnob(stab\[\"seed_\" + str(i)])\ndeleteNode = nuke.toNode(\"transform_node_\" + str(i))\ndeleteNode.setInput(0, None)\nnuke.delete(deleteNode)\ndeleteNodecrop = nuke.toNode(\"crop_node_\" + str(i))\nnuke.delete(deleteNodecrop)\ndeleteNodenoop = nuke.toNode(\"noop_node_\" + str(i))\nnuke.delete(deleteNodenoop)\ndeleteNodesize = nuke.toNode(\"transform_scale_\" + str(i))\nnuke.delete(deleteNodesize)\ndeleteNodegrade = nuke.toNode(\"Grade_element_\" + str(i))\nnuke.delete(deleteNodegrade)\ndeleteNodeglint = nuke.toNode(\"Glint_\" + str(i))\nnuke.delete(deleteNodeglint)\n\n\"\"\")\n    stab.addKnob(delete)\n    distance = nuke.Double_Knob (\"distance_\" + str(i),\"Distance\")\n    distance.setRange( -2, 2 )\n    distance.setValue(1)\n    stab.addKnob(distance)\n    complexity = nuke.Double_Knob (\"complexity_\" + str(i),\"Complexity\")\n    complexity.setRange(0, 100 )\n    complexity.setValue(50)\n    stab.addKnob(complexity)\n    seed = nuke.Double_Knob (\"seed_\" + str(i),\"Seed\")\n    seed.setRange(0, 100 )\n    seed.setValue(50)\n    stab.addKnob(seed)\n\n    \n\ni = int(math.floor(random.random()*999))\nglint()"}
+  addUserKnob {22 spike_ball_button l "<img src='Q:/USERS/Mario_Pece/Temp/spike_ball.png' height='50' width='50'/><br>Spike" +STARTLINE}
+  addUserKnob {22 sparkle_button l "<img src='Q:/USERS/Mario_Pece/Temp/sparkle.png' height='50' width='50'/><br>Sparkle" -STARTLINE}
+  addUserKnob {22 ring_button l "<img src='Q:/USERS/Mario_Pece/Temp/ring.png' height='50' width='50'/><br>Ring" -STARTLINE}
+  addUserKnob {22 hoop_button l "<img src='Q:/USERS/Mario_Pece/Temp/hoop.png' height='50' width='50'/><br>Hoop" -STARTLINE}
+  addUserKnob {22 caustic_button l "<img src='Q:/USERS/Mario_Pece/Temp/caustic.png' height='50' width='50'/><br>Caustic" -STARTLINE}
+  addUserKnob {22 lens_orbs l "<img src='Q:/USERS/Mario_Pece/Temp/lens_orbs.png' height='50' width='50'/><br>Orbs" -STARTLINE}
+  addUserKnob {20 endGroup n -1}
+ }
+  Roto {
+   inputs 0
+   format "2048 1556 0 0 2048 1556 1 square_2K_1"
+   curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 960 S 0 540 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Ellipse1" {
+    Flag: 512
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 1 1 0 S 1 1 0 S 1 1 0 S 1 1 1 S 1 1 1 S 1 1 0 S 1 1 835 S 1 1 614 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      0 S 1 1 -19.8823 S 1 1 0 0 0 S 1 1 50.0001 S 1 1 14.15 0 0 S 1 1 19.8823 S 1 1 0 0 0 S 1 1 0 S 1 1 -19.8823 0 0 S 1 1 86.0001 S 1 1 50.15 0 0 S 1 1 0 S 1 1 19.8823 0 0 S 1 1 19.8823 S 1 1 0 0 0 S 1 1 50.0001 S 1 1 86.15 0 0 S 1 1 -19.8823 S 1 1 0 0 0 S 1 1 0 S 1 1 19.8823 0 0 S 1 1 14.0001 S 1 1 50.15 0 0 S 1 1 0 S 1 1 -19.8823 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      0 S 1 1 -19.8823 S 1 1 0 0 0 S 1 1 0 S 1 1 0 0 0 S 1 1 19.8823 S 1 1 0 0 0 S 1 1 0 S 1 1 -19.8823 0 0 S 1 1 0 S 1 1 0 0 0 S 1 1 0 S 1 1 19.8823 0 0 S 1 1 19.8823 S 1 1 0 0 0 S 1 1 0 S 1 1 0 0 0 S 1 1 -19.8823 S 1 1 0 0 0 S 1 1 0 S 1 1 19.8823 0 0 S 1 1 0 S 1 1 0 0 0 S 1 1 0 S 1 1 -19.8823 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 -0.1 "fy" S 0 -0.1 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 1 "ltm" S 0 1 "ltt" S 0 0 "tt" S 0 6 "pt" S 0 0 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+   toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+   toolbar_brush_hardness 0.200000003
+   toolbar_lifetime_type all
+   toolbar_source_transform_scale {1 1}
+   toolbar_source_transform_center {320 240}
+   colorOverlay 0
+   lifetime_type "all frames"
+   view {}
+   motionblur_on true
+   motionblur_shutter_offset_type centred
+   source_black_outside true
+   name Roto1
+   xpos 600
+   ypos -1407
+  }
+  Transform {
+   translate {330.7999878 331.3999939}
+   scale 0.212
+   center {51 49.5}
+   name Transform3
+   xpos 600
+   ypos -1383
+  }
+set N8e68ec70 [stack 0]
+add_layer {rgb rgb.red rgb.green rgb.blue rgb.alpha}
+  Blur {
+   channels rgb
+   size 300
+   quality 200
+   name Blur8
+   label "\[value size]"
+   xpos 600
+   ypos -1171
+  }
+push $N8e68ec70
+  Blur {
+   channels rgb
+   size 4.6
+   quality 200
+   name Blur5
+   label "\[value size]"
+   xpos 600
+   ypos -1245
+  }
+push $N8e68ec70
+  Blur {
+   channels rgb
+   size 67.5
+   quality 200
+   name Blur4
+   label "\[value size]"
+   xpos 600
+   ypos -1359
+  }
+push $N8e68ec70
+  Blur {
+   channels rgb
+   size 200
+   quality 200
+   name Blur3
+   label "\[value size]"
+   xpos 600
+   ypos -1325
+  }
+push 0
+push $N8e68ec70
+  Blur {
+   size 25
+   quality 100
+   name Blur2
+   label "\[value size]"
+   xpos 600
+   ypos -1291
+  }
+push $N8e68ec70
+  Blur {
+   channels rgb
+   size 34
+   quality 200
+   name Blur1
+   label "\[value size]"
+   xpos 600
+   ypos -1209
+  }
+  Merge2 {
+   inputs 6+1
+   operation plus
+   name Merge1
+   xpos 600
+   ypos -1137
+  }
+  Transform {
+   translate {-1 -0.5}
+   scale 2.95
+   center {50.84999847 50.25}
+   name Transform5
+   xpos 600
+   ypos -1113
+  }
+  Blur {
+   size 29
+   quality 100
+   name Blur6
+   label "\[value size]"
+   xpos 600
+   ypos -1089
+  }
+  Grade {
+   multiply {0.2059235573 0.39646101 1 1}
+   name Grade2
+   xpos 600
+   ypos -1043
+  }
+  Glow {
+   brightness 1.47
+   name Glow1
+   xpos 600
+   ypos -1009
+  }
+  ColorCorrect {
+   saturation 0
+   contrast 1.08
+   gamma 1.3
+   gain {1 1 1 4}
+   name ColorCorrect2
+   xpos 600
+   ypos -985
+  }
+  Clamp {
+   name Read1
+   xpos 600
+   ypos -951
+  }
+  Transform {
+   scale {{"((global_scale) - 1) + (scale_332)"}}
+   center {1024 1024}
+   name transform_scale_332
+   xpos 600
+   ypos -927
+  }
+  Transform {
+   translate {{"((parent.Flare1.position - parent.Flare3.position)*(distance_332)) + (parent.Flare3.position)-1024"} {"((parent.Flare1.position - parent.Flare3.position)*(distance_332)) + (parent.Flare3.position)-1024"}}
+   rotate {{rotation_offset}}
+   center {1024 1024}
+   motionblur {{Transform2.motionblur}}
+   shutter {{Transform2.shutter}}
+   name transform_node_332
+   xpos 600
+   ypos -903
+  }
+  Grade {
+   white {{brightness_332}}
+   name Grade_element_332
+   xpos 600
+   ypos -879
+  }
+  Crop {
+   name crop_node_332
+   xpos 600
+   ypos -855
+  }
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+push 0
+  Merge2 {
+   inputs 332+1
+   operation plus
+   name Merge2
+   xpos 1048
+   ypos -404
+  }
+  Grade {
+   name Grade1
+   xpos 1048
+   ypos -380
+  }
+  ColorCorrect {
+   contrast 1.26
+   gain {1.042913675 1.287913799 1.562913656 0.8569999933}
+   name ColorCorrect1
+   xpos 1048
+   ypos -346
+  }
+  Grade {
+   white {{1+NoOp1.pixelValues.r i x1 1.66}}
+   name Grade3
+   xpos 1048
+   ypos -310
+  }
+  Clamp {
+   name Clamp1
+   xpos 1048
+   ypos -278
+  }
+  Crop {
+   box {0 0 1920 1080}
+   reformat true
+   crop false
+   name Crop3
+   xpos 1048
+   ypos -244
+  }
+  Output {
+   name Output1
+   xpos 1048
+   ypos -153
+  }
+  Roto {
+   inputs 0
+   format "1920 1080 0 0 1920 1080 1 HD"
+   curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 960 S 0 540 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 2
+  Node: {
+   NodeName: "Rectangle2" {
+    Flag: 512
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 2 0 0 1 0 0 S 2 0 0 1 0 0 S 2 0 0 1 0 0 S 2 0 1 1 1 1 S 2 0 1 1 1 1 S 2 0 0 1 0 0 S 2 0 962 1 962 962 S 2 0 540 1 540 540 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 1 0 0 S 1 0 -180.024 0 1 S 1 0 352.863 S 1 0 803.235 0 1 S 1 0 405.559 S 1 0 0 0 1 S 1 0 -405.559 S 1 0 0 0 1 S 1 0 1569.54 S 1 0 803.235 0 1 S 1 0 0 S 1 0 -180.024 0 1 S 1 0 0 S 1 0 180.024 0 1 S 1 0 1569.54 S 1 0 263.165 0 1 S 1 0 -405.559 S 1 0 0 0 1 S 1 0 405.559 S 1 0 0 0 1 S 1 0 352.863 S 1 0 263.165 0 1 S 1 0 0 S 1 0 180.024 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 1 0 0 S 1 0 -180.024 0 1 S 1 0 0 S 1 0 0 0 1 S 1 0 405.559 S 1 0 0 0 1 S 1 0 -405.559 S 1 0 0 0 1 S 1 0 0 S 1 0 0 0 1 S 1 0 0 S 1 0 -180.024 0 1 S 1 0 0 S 1 0 180.024 0 1 S 1 0 0 S 1 0 0 0 1 S 1 0 -405.559 S 1 0 0 0 1 S 1 0 405.559 S 1 0 0 0 1 S 1 0 0 S 1 0 0 0 1 S 1 0 0 S 1 0 180.024 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 0 "g" S 0 0 "b" S 0 0 "a" S 0 0 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 10000 "fy" S 0 10000 "ff" S 0 1.72 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 0 "ltm" S 0 0 "ltt" S 0 0 "tt" S 0 7 "pt" S 0 0 
+    }
+   }
+   NumOfChildren: 0
+  }
+  Node: {
+   NodeName: "Rectangle1" {
+    Flag: 512
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 2 0 0 1 0 0 S 2 0 0 1 0 0 S 2 0 0 1 0 0 S 2 0 1 1 1 1 S 2 0 1 1 1 1 S 2 0 0 1 0 0 S 2 0 962 1 962 962 S 2 0 540 1 540 540 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -358.667 0 0 0 0 256 0 "" 1 -358.667 0 0 0 0 256 0 -358.667 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 4 0 0 0 0 256 0 "" 1 4 0 0 0 0 256 0 4 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 1078 0 0 0 0 256 0 "" 1 1078 0 0 0 0 256 0 1078 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 638.667 0 0 0 0 256 0 "" 1 638.667 0 0 0 0 256 0 638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -638.667 0 0 0 0 256 0 "" 1 -638.667 0 0 0 0 256 0 -638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 1920 0 0 0 0 256 0 "" 1 1920 0 0 0 0 256 0 1920 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 1078 0 0 0 0 256 0 "" 1 1078 0 0 0 0 256 0 1078 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -358.667 0 0 0 0 256 0 "" 1 -358.667 0 0 0 0 256 0 -358.667 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 358.667 0 0 0 0 256 0 "" 1 358.667 0 0 0 0 256 0 358.667 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 1920 0 0 0 0 256 0 "" 1 1920 0 0 0 0 256 0 1920 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 2 0 0 0 0 256 0 "" 1 2 0 0 0 0 256 0 2 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -638.667 0 0 0 0 256 0 "" 1 -638.667 0 0 0 0 256 0 -638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 638.667 0 0 0 0 256 0 "" 1 638.667 0 0 0 0 256 0 638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 4 0 0 0 0 256 0 "" 1 4 0 0 0 0 256 0 4 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 2 0 0 0 0 256 0 "" 1 2 0 0 0 0 256 0 2 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 358.667 0 0 0 0 256 0 "" 1 358.667 0 0 0 0 256 0 358.667 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -358.667 0 0 0 0 256 0 "" 1 -358.667 0 0 0 0 256 0 -358.667 0 1 S 2 0 0 1 95.9973 0 S 2 0 0 1 -96.0036 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 638.667 0 0 0 0 256 0 "" 1 638.667 0 0 0 0 256 0 638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -638.667 0 0 0 0 256 0 "" 1 -638.667 0 0 0 0 256 0 -638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 1 -85 1 256 0 "" 1 -99 -85 1 0 1 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 1 -85 1 256 0 "" 1 -99 -85 1 0 1 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -358.667 0 0 0 0 256 0 "" 1 -358.667 0 0 0 0 256 0 -358.667 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 358.667 0 0 0 0 256 0 "" 1 358.667 0 0 0 0 256 0 358.667 0 1 S 2 0 0 1 -94.0035 0 S 2 0 0 1 93.9973 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 -638.667 0 0 0 0 256 0 "" 1 -638.667 0 0 0 0 256 0 -638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 638.667 0 0 0 0 256 0 "" 1 638.667 0 0 0 0 256 0 638.667 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 0 1 S 2 0 0 1 92 0 S 2 0 0 1 92 0 0 1 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 0 0 0 0 0 256 0 "" 1 0 0 0 0 0 256 0 0 L 0 4096 0.5 2 0 0 "" 0 2 "" 0 358.667 0 0 0 0 256 0 "" 1 358.667 0 0 0 0 256 0 358.667 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 0 "ltm" S 0 0 "ltt" S 0 0 "tt" S 0 7 "pt" S 0 0 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+   toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+   toolbar_brush_hardness 0.200000003
+   toolbar_lifetime_type all
+   toolbar_source_transform_scale {1 1}
+   toolbar_source_transform_center {320 240}
+   colorOverlay 0
+   lifetime_type "all frames"
+   lifetime_start 0
+   lifetime_end 0
+   view {}
+   motionblur_on true
+   motionblur_shutter_offset_type centred
+   source_black_outside true
+   name Roto2
+   xpos -11
+   ypos -969
+  }
+  Transform {
+   scale 1.12
+   center {960 540}
+   name Transform1
+   xpos -11
+   ypos -892
+  }
+  Blur {
+   size 1.75
+   name Blur7
+   xpos -11
+   ypos -868
+  }
+  ColorCorrect {
+   contrast 1.19
+   gamma 0.955
+   gain 0.93
+   midtones.gamma 1.36
+   midtones.gain 4
+   highlights.gain 4
+   name ColorCorrect3
+   xpos -11
+   ypos -834
+   addUserKnob {20 User}
+   addUserKnob {12 positionlut}
+   positionlut {-212 144}
+  }
+  NoOp {
+   name NoOp1
+   xpos -11
+   ypos -792
+   addUserKnob {20 User}
+   addUserKnob {12 pixelCoordinate}
+   pixelCoordinate {{parent.Flare1.position i x1 376.5} {parent.Flare1.position i x1 789.5}}
+   addUserKnob {18 pixelValues}
+   pixelValues {{"\[sample this red pixelCoordinate.x pixelCoordinate.y] * 10" i} {"\[sample this green pixelCoordinate.x pixelCoordinate.y]" i} {"\[sample this blue pixelCoordinate.x pixelCoordinate.y]" i}}
+  }
+  NoOp {
+   inputs 0
+   name Flare3
+   xpos 152
+   ypos -897
+   addUserKnob {20 User}
+   addUserKnob {12 position}
+   position {960 540}
+  }
+  NoOp {
+   inputs 0
+   name Flare1
+   xpos 152
+   ypos -849
+   addUserKnob {20 User}
+   addUserKnob {12 position}
+   position {{curve i 947 x58 948} {curve i 293 x58 1132}}
+  }
+  NoOp {
+   inputs 0
+   name Transform2
+   xpos 152
+   ypos -801
+   addUserKnob {20 User}
+   addUserKnob {7 rotation_offset l "Global Rotation" R 0 360}
+   addUserKnob {7 global_scale l "Global Scale" R -2 2}
+   global_scale 0.72
+   addUserKnob {7 motionblur l "Motion Blur"}
+   addUserKnob {7 shutter l Shutter R 0 2}
+   addUserKnob {14 scale R 0 100}
+   scale {2.7 0.05055}
+  }
+  Merge2 {
+   inputs 0
+   operation plus
+   name Merge_glint
+   xpos 1048
+   ypos -1047
+  }
+  Grade {
+   whitepoint 10
+   multiply 3.2
+   name Grade4
+   xpos 1048
+   ypos -999
+  }
+  Clamp {
+   name Read2
+   xpos 1048
+   ypos -927
+  }
+  Viewer {
+   frame_increment 8
+   input_process false
+   name Viewer1
+   xpos 1128
+   ypos -384
+  }
+ end_group
+ Input {
+  inputs 0
+  name Input1
+  xpos -104
+  ypos -393
+ }
+ Group {
+  name Windowmize
+  xpos -104
+  ypos -289
+  addUserKnob {20 User}
+  addUserKnob {41 translate T Transform7.translate}
+  addUserKnob {41 translate_1 l translate T Transform4.translate}
+ }
+  NoOp {
+   inputs 0
+   name NoOp1
+   xpos 792
+   ypos -201
+   addUserKnob {20 User}
+   addUserKnob {12 position}
+   position {732 1910}
+   addUserKnob {12 size}
+   size {{1380+Transform7.translate.x i} {-260+Transform7.translate.y i}}
+  }
+  Text {
+   inputs 0
+   opacity 0.6
+   message Previewer
+   font C:/Windows/Fonts/arial.ttf
+   size 30
+   yjustify center
+   Transform 1
+   box {480 499 633 581}
+   translate {{(parent.Transform7.translate+342)/2 i} 365}
+   center {960 540}
+   name Text2
+   xpos -168
+   ypos -369
+  }
+  Text {
+   inputs 0
+   opacity 0.6
+   message "File    Edit     Layout    Viewer     Chache     Help"
+   font C:/Windows/Fonts/arial.ttf
+   size 22
+   yjustify center
+   box {480 270 1440 810}
+   translate {-372 327}
+   center {960 540}
+   name Text1
+   xpos -168
+   ypos -417
+  }
+  Input {
+   inputs 0
+   name Input1
+   xpos -40
+   ypos -441
+  }
+  CornerPin2D {
+   to1 {107 {Windowmize.CornerPin2D1.to2.y i x1 -12}}
+   to2 {{parent.Transform7.translate+1295 i} {parent.Transform7.translate-165 i}}
+   to3 {{Windowmize.CornerPin2D1.to2.x i x1 1938} 827}
+   to4 {114 821}
+   invert false
+   from1 {0 0}
+   from2 {1920 0}
+   from3 {1920 1080}
+   from4 {0 1080}
+   name CornerPin2D1
+   xpos -40
+   ypos -393
+  }
+  Transform {
+   translate {114 -259}
+   scale 0.6476
+   center {0 1084}
+   name Transform10
+   xpos -40
+   ypos -369
+   disable true
+  }
+  Transform {
+   inputs 0
+   center {572 902}
+   name Transform9
+   xpos 536
+   ypos -9
+  }
+  Transform {
+   inputs 0
+   translate {274 178}
+   rotate {{0 i x1 0 x20 0}}
+   scale {{1 i x1 1.1 x20 1.1}}
+   skew {{0 i x1 0 x20 0}}
+   center {1340 -205}
+   name Transform7
+   xpos 408
+   ypos -9
+  }
+  Read {
+   inputs 0
+   file Q:/TRUTH_FM/GLOBAL_ASSETS/Interface_Glopper/Assets/Interface/Basic_window.tga
+   format "1000 1000 0 0 1000 1000 1 "
+   origset true
+   version 2
+   name Read2
+   selected true
+   xpos 216
+   ypos -495
+  }
+  ColorCorrect {
+   contrast 1.65
+   gain 0.38
+   name ColorCorrect2
+   xpos 216
+   ypos -411
+  }
+set N8f85d510 [stack 0]
+  Crop {
+   box {500 500 0 1000}
+   name Crop8
+   xpos 216
+   ypos -313
+  }
+  Crop {
+   box {500 500 0 1000}
+   name Crop1
+   xpos 216
+   ypos -289
+  }
+push $N8f85d510
+  Crop {
+   box {500 0 1000 500}
+   crop false
+   name Crop5
+   xpos 600
+   ypos -313
+  }
+  Transform {
+   translate {{parent.NoOp1.size-1000 i} {parent.NoOp1.size i}}
+   center {1000 0}
+   black_outside false
+   name Transform1
+   xpos 600
+   ypos -289
+  }
+  Crop {
+   box {500 {NoOp1.size.y i x1 -394} {NoOp1.size.x i x1 1276} 500}
+   name Crop4
+   xpos 600
+   ypos -265
+  }
+push $N8f85d510
+  Crop {
+   box {0 0 500 500}
+   crop false
+   name Crop6
+   xpos 472
+   ypos -313
+  }
+  Transform {
+   translate {0 {NoOp1.size.y i}}
+   center {1000 1000}
+   black_outside false
+   name Transform3
+   xpos 472
+   ypos -289
+  }
+  Crop {
+   box {0 {Crop4.box.y} 500 500}
+   name Crop2
+   xpos 472
+   ypos -265
+  }
+push 0
+push $N8f85d510
+  Crop {
+   box {500 500 1000 1000}
+   crop false
+   name Crop7
+   xpos 344
+   ypos -313
+  }
+  Transform {
+   translate {{NoOp1.size.x-1000 i} 0}
+   center {1000 1000}
+   black_outside false
+   name Transform2
+   xpos 344
+   ypos -289
+  }
+  Crop {
+   box {500 500 {NoOp1.size.x i} 1000}
+   name Crop3
+   xpos 344
+   ypos -265
+  }
+  Constant {
+   inputs 0
+   channels {rgba.red rgba.green rgba.blue none}
+   format "2048 2048 0 0 2048 2048 1 square_2K"
+   name Constant1
+   xpos 88
+   ypos -241
+  }
+  Merge2 {
+   inputs 10+1
+   name Merge2
+   xpos 216
+   ypos -217
+  }
+  AdjBBox {
+   numpixels 2048
+   name AdjBBox1
+   xpos 216
+   ypos -105
+  }
+  Transform {
+   translate {-670 -1856}
+   center {1024 1024}
+   black_outside false
+   name Transform5
+   xpos 216
+   ypos -57
+  }
+  Transform {
+   translate {-74 1794}
+   center {-62 -946}
+   black_outside false
+   name Transform4
+   xpos 216
+   ypos -25
+  }
+  Transform {
+   translate {-35 960}
+   center {1024 1024}
+   name Transform6
+   xpos 216
+   ypos -1
+  }
+  Transform {
+   scale 0.44
+   center {1024 1024}
+   black_outside false
+   name Transform8
+   xpos 216
+   ypos 39
+  }
+  Reformat {
+   name Reformat1
+   xpos 216
+   ypos 87
+  }
+set N8d236520 [stack 0]
+  Output {
+   name Output1
+   xpos 216
+   ypos 135
+  }
+push $N8d236520
+  Viewer {
+   frame_increment 8
+   input_process false
+   name Viewer1
+   xpos 408
+   ypos 135
+  }
+ end_group
+set N8477e9d0 [stack 0]
+ Dot {
+  name Dot1
+  xpos -70
+  ypos -246
+ }
+ Read {
+  inputs 0
+  file "Q:/TRUTH_FM/GLOBAL_ASSETS/Interface_Glopper/Assets/Interface/Widgets/Music Player/Music Player_%05d.tga"
+  format "1050 430 0 0 1050 430 1 "
+  first 0
+  last 140
+  origfirst 0
+  origlast 140
+  origset true
+  name Read2
+  xpos -1512
+  ypos -1191
+ }
+ Transform {
+  translate {341 22}
+  scale 0.48
+  center {540 216}
+  name Transform2
+  xpos -1512
+  ypos -1107
+ }
+ ColorCorrect {
+  contrast 1.65
+  gain 0.3
+  name ColorCorrect3
+  xpos -1512
+  ypos -1083
+ }
+set N8ed7c0c0 [stack 0]
+push 0
+ Read {
+  inputs 0
+  file "Q:/TRUTH_FM/GLOBAL_ASSETS/Interface_Glopper/Assets/Interface/Widgets/Message Board/messageboard_%05d.tga"
+  format "548 2160 0 0 548 2160 1 "
+  first 0
+  last 140
+  origfirst 0
+  origlast 140
+  origset true
+  name Read1
+  xpos -1640
+  ypos -1191
+ }
+ Transform {
+  translate {1507 -531}
+  scale 0.48
+  center {274 1080}
+  name Transform1
+  xpos -1640
+  ypos -1107
+ }
+ ColorCorrect {
+  contrast 1.65
+  gain 0.3
+  name ColorCorrect2
+  xpos -1640
+  ypos -1083
+ }
+set N8ed7b0d0 [stack 0]
+ Read {
+  inputs 0
+  file Q:/TRUTH_FM/GLOBAL_ASSETS/Interface_Glopper/Assets/Interface/System_Bar/Sys_bar_%05d.tga
+  format "3840 2160 0 0 3840 2160 1 "
+  first 0
+  last 59
+  origfirst 0
+  origlast 59
+  origset true
+  name SYstem_Bar
+  xpos -483
+  ypos -1575
+ }
+ ColorCorrect {
+  contrast 1.65
+  gain 0.3
+  name ColorCorrect1
+  xpos -483
+  ypos -729
+ }
+ Reformat {
+  name Reformat1
+  xpos -483
+  ypos -705
+ }
+set N8db1ffb0 [stack 0]
+push $N8ed7c0c0
+push $N8ed7b0d0
+push 0
+push $N8477e9d0
+push $N8db1ffb0
+ Merge2 {
+  inputs 4+1
+  name blur
+  xpos -483
+  ypos -657
+ }
+ Dot {
+  name Dot2
+  xpos -449
+  ypos -750
+ }
+ Read {
+  inputs 0
+  file Q:/TRUTH_FM/GLOBAL_ASSETS/Interface_Glopper/Assets/Interface/BG.tga
+  format "1920 1080 0 0 1920 1080 1 HD"
+  origset true
+  name BG
+  xpos -616
+  ypos -1575
+ }
+ Blur {
+  inputs 1+1
+  size 17
+  name Blur1
+  label "\[value size]"
+  xpos -611
+  ypos -765
+ }
+ Merge2 {
+  inputs 2
+  sRGB true
+  name Merge1
+  xpos -611
+  ypos -705
+ }
+ Merge2 {
+  inputs 3+1
+  sRGB true
+  name Merge2
+  xpos -616
+  ypos -585
+ }
+ Merge2 {
+  inputs 2
+  sRGB true
+  name windows
+  xpos -616
+  ypos -249
+ }
+ Output {
+  name Output1
+  xpos -616
+  ypos -201
+ }
+ NoOp {
+  inputs 0
+  name NoOp1
+  selected true
+  xpos 1048
+  ypos -758
+  addUserKnob {20 User}
+  addUserKnob {22 Addwindow l "Add Window" T "import random\nimport math\ni = int(math.floor(random.random()*999))\n\n\n\nnuke.tcl('''\n\nset cut_paste_input \[stack 0]\nversion 6.3 v2\npush \$cut_paste_input\nInput \{\n inputs 0\n name Input_''' + str(i) + '''\n selected true\n xpos -360\n ypos -633\n\}\nGroup \{\n name Windowmize_''' + str(i) + '''\n selected true\n xpos -360\n ypos -489\n addUserKnob \{20 User\}\n addUserKnob \{41 translate_''' + str(i) + ''' T Transform7_''' + str(i) + '''.translate\}\n addUserKnob \{41 translate_1_''' + str(i) + ''' l translate T Transform4_''' + str(i) + '''.translate\}\n\}\n NoOp \{\n  inputs 0\n  name NoOp1_''' + str(i) + '''\n  xpos 792\n  ypos -201\n  addUserKnob \{20 User\}\n  addUserKnob \{12 position\}\n  position \{732 1910\}\n  addUserKnob \{12 size\}\n  size \{\{1380+Transform7_''' + str(i) + '''.translate.x i\} \{-260+Transform7_''' + str(i) + '''.translate_''' + str(i) + '''.y i\}\}\n \}\n Text \{\n  inputs 0\n  opacity 0.6\n  message Previewer\n  font C:/Windows/Fonts/arial.ttf\n  size 30\n  yjustify center\n  Transform 1\n  box \{480 499 633 581\}\n  translate \{\{(parent.Transform7_''' + str(i) + '''.translate+342)/2 i\} 365\}\n  center \{960 540\}\n  name Text2_''' + str(i) + '''\n  xpos -168\n  ypos -369\n \}\n Text \{\n  inputs 0\n  opacity 0.6\n  message \"File    Edit     Layout    Viewer     Chache     Help\"\n  font C:/Windows/Fonts/arial.ttf\n  size 22\n  yjustify center\n  box \{480 270 1440 810\}\n  translate \{-372 327\}\n  center \{960 540\}\n  name Text1_''' + str(i) + '''\n  xpos -168\n  ypos -417\n \}\n Input \{\n  inputs 0\n  name Input1_''' + str(i) + '''\n  xpos -40\n  ypos -441\n \}\n CornerPin2D \{\n  to1 \{107 \{Windowmize_''' + str(i) + '''.CornerPin2D1_''' + str(i) + '''.to2.y i x1 -12\}\}\n  to2 \{\{parent.Transform7_''' + str(i) + '''.translate+1295 i\} \{parent.Transform7_''' + str(i) + '''.translate-165 i\}\}\n  to3 \{\{Windowmize_''' + str(i) + '''.CornerPin2D1_''' + str(i) + '''.to2.x i x1 1938\} 827\}\n  to4 \{114 821\}\n  invert false\n  from1 \{0 0\}\n  from2 \{1920 0\}\n  from3 \{1920 1080\}\n  from4 \{0 1080\}\n  name CornerPin2D1_''' + str(i) + '''\n  xpos -40\n  ypos -393\n \}\n Transform \{\n  translate \{114 -259\}\n  scale 0.6476\n  center \{0 1084\}\n  name Transform10_''' + str(i) + '''\n  xpos -40\n  ypos -369\n  disable true\n \}\n Transform \{\n  inputs 0\n  center \{572 902\}\n  name Transform9_''' + str(i) + '''\n  xpos 536\n  ypos -9\n \}\n Transform \{\n  inputs 0\n  translate \{106 236\}\n  rotate \{\{0 i x1 0\}\}\n  scale \{\{1 i x1 1.1\}\}\n  skew \{\{0 i x1 0\}\}\n  center \{1340 -205\}\n  name Transform7_''' + str(i) + '''\n  xpos 408\n  ypos -9\n \}\n Read \{\n  inputs 0\n  file Q:/TRUTH_FM/GLOBAL_ASSETS/Interface_Glopper/Assets/Interface/Basic_window.tga\n  format \"1000 1000 0 0 1000 1000 1 \"\n  origset true\n  version 1\n  name Read2_''' + str(i) + '''\n  xpos 216\n  ypos -495\n \}\n ColorCorrect \{\n  contrast 1.65\n  gain 0.38\n  name ColorCorrect2_''' + str(i) + '''\n  xpos 216\n  ypos -411\n \}\nset N8f85d510 \[stack 0]\n Crop \{\n  box \{500 500 0 1000\}\n  name Crop8_''' + str(i) + '''\n  xpos 216\n  ypos -313\n \}\n Crop \{\n  box \{500 500 0 1000\}\n  name Crop1_''' + str(i) + '''\n  xpos 216\n  ypos -289\n \}\npush \$N8f85d510\n Crop \{\n  box \{500 0 1000 500\}\n  crop false\n  name Crop5_''' + str(i) + '''\n  xpos 600\n  ypos -313\n \}\n Transform \{\n  translate \{\{parent.NoOp1_''' + str(i) + '''.size-1000 i\} \{parent.NoOp1_''' + str(i) + '''.size i\}\}\n  center \{1000 0\}\n  black_outside false\n  name Transform1_''' + str(i) + '''\n  xpos 600\n  ypos -289\n \}\n Crop \{\n  box \{500 \{NoOp1_''' + str(i) + '''.size.y i x1 -394\} \{NoOp1_''' + str(i) + '''.size.x i x1 1276\} 500\}\n  name Crop4_''' + str(i) + '''\n  xpos 600\n  ypos -265\n \}\npush \$N8f85d510\n Crop \{\n  box \{0 0 500 500\}\n  crop false\n  name Crop6_''' + str(i) + '''\n  xpos 472\n  ypos -313\n \}\n Transform \{\n  translate \{0 \{NoOp1_''' + str(i) + '''.size.y i\}\}\n  center \{1000 1000\}\n  black_outside false\n  name Transform3_''' + str(i) + '''\n  xpos 472\n  ypos -289\n \}\n Crop \{\n  box \{0 \{Crop4_''' + str(i) + '''.box.y\} 500 500\}\n  name Crop2_''' + str(i) + '''\n  xpos 472\n  ypos -265\n \}\npush 0\npush \$N8f85d510\n Crop \{\n  box \{500 500 1000 1000\}\n  crop false\n  name Crop7_''' + str(i) + '''\n  xpos 344\n  ypos -313\n \}\n Transform \{\n  translate \{\{NoOp1_''' + str(i) + '''.size.x-1000 i\} 0\}\n  center \{1000 1000\}\n  black_outside false\n  name Transform2_''' + str(i) + '''\n  xpos 344\n  ypos -289\n \}\n Crop \{\n  box \{500 500 \{NoOp1_''' + str(i) + '''.size.x i\} 1000\}\n  name Crop3_''' + str(i) + '''\n  xpos 344\n  ypos -265\n \}\n Constant \{\n  inputs 0\n  channels rgb\n  format \"2048 2048 0 0 2048 2048 1 square_2K\"\n  name Constant1_''' + str(i) + '''\n  xpos 88\n  ypos -241\n \}\n Merge2 \{\n  inputs 10+1\n  name Merge2_''' + str(i) + '''\n  xpos 216\n  ypos -217\n \}\n AdjBBox \{\n  numpixels 2048\n  name AdjBBox1_''' + str(i) + '''\n  xpos 216\n  ypos -105\n \}\n Transform \{\n  translate \{-670 -1856\}\n  center \{1024 1024\}\n  black_outside false\n  name Transform5_''' + str(i) + '''\n  xpos 216\n  ypos -57\n \}\n Transform \{\n  translate \{72 1842\}\n  center \{-62 -946\}\n  black_outside false\n  name Transform4_''' + str(i) + '''\n  xpos 216\n  ypos -25\n \}\n Transform \{\n  translate \{-35 960\}\n  center \{1024 1024\}\n  name Transform6_''' + str(i) + '''\n  xpos 216\n  ypos -1\n \}\n Transform \{\n  scale 0.44\n  center \{1024 1024\}\n  black_outside false\n  name Transform8_''' + str(i) + '''\n  xpos 216\n  ypos 39\n \}\n Reformat \{\n  name Reformat1_''' + str(i) + '''\n  xpos 216\n  ypos 87\n \}\nset N8d236520 \[stack 0]\n Output \{\n  name Output1_''' + str(i) + '''\n  xpos 216\n  ypos 135\n \}\npush \$N8d236520\n Viewer \{\n  frame_increment 8\n  input_process false\n  name Viewer1_''' + str(i) + '''\n  xpos 408\n  ypos 135\n \}\nend_group\n\n addUserKnob \{20 Window_''' + str(i) + ''' l \"Window_''' + str(i) + '''\"\}\n addUserKnob \{41 translate T Windowmize_''' + str(i) + '''.translate_''' + str(i) + '''\}\n addUserKnob \{41 translate_1 l translate T Windowmize_''' + str(i) + '''.translate_1_''' + str(i) + '''\}\n\n''')\n\n\nx = nuke.toNode('Windowmize_' + str(i))\nnuke.toNode('windows').setInput( i, x )" +STARTLINE}
+ }
+end_group

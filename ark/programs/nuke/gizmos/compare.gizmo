@@ -1,0 +1,106 @@
+#! C:/Program Files/Nuke8.0v5/nuke-8.0.v5.dll -nx
+version 8.0 v5
+Gizmo {
+ inputs 2
+ addUserKnob {20 Compare}
+ addUserKnob {4 orientation t "Orientation of the comparison" M {vertical horizontal}}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 569
+  ypos 471
+ }
+set N3342d080 [stack 0]
+ Reformat {
+  type scale
+  scale {2 1}
+  resize none
+  name Reformat17
+  xpos 730
+  ypos 615
+ }
+ set C3342bbe0 [stack 0]
+ Transform {
+  translate {{-input.width*.25} 0}
+  center {800 225}
+  name Transform10
+  xpos 730
+  ypos 663
+ }
+ Input {
+  inputs 0
+  name Input2
+  xpos 679
+  ypos 471
+  number 1
+ }
+set N3342d3f0 [stack 0]
+clone $C3342bbe0 {
+  xpos 840
+  ypos 615
+  selected false
+ }
+ Transform {
+  translate {{input.width*.25} 0}
+  center {800 225}
+  name Transform11
+  xpos 840
+  ypos 663
+ }
+ Merge2 {
+  inputs 2
+  name Merge43
+  xpos 840
+  ypos 735
+ }
+push $N3342d080
+ Reformat {
+  type scale
+  scale {1 2}
+  resize none
+  name Reformat1
+  xpos 400
+  ypos 615
+ }
+ set C3342d760 [stack 0]
+ Transform {
+  translate {0 {input.height*.25}}
+  center {800 225}
+  name Transform1
+  xpos 400
+  ypos 663
+ }
+push $N3342d3f0
+clone $C3342d760 {
+  xpos 510
+  ypos 615
+  selected false
+ }
+ Transform {
+  translate {0 {-input.height*.25}}
+  center {800 225}
+  name Transform2
+  xpos 510
+  ypos 663
+ }
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos 510
+  ypos 735
+ }
+ Switch {
+  inputs 2
+  which {{orientation}}
+  name Switch1
+  selected true
+  xpos 620
+  ypos 807
+ }
+ Output {
+  name Output1
+  xpos 620
+  ypos 951
+ }
+end_group

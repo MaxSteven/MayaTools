@@ -1,0 +1,100 @@
+#! C:/Program Files/Nuke6.2v2/Nuke6.2.exe -nx
+version 6.2 v2
+Gizmo {
+ note_font Verdana
+ mapsize {0.15 0.15}
+ addUserKnob {20 CornerPin2D_ie}
+ addUserKnob {41 to1 T CornerPin_base.to1}
+ addUserKnob {41 to2 T CornerPin_base.to2}
+ addUserKnob {41 to3 T CornerPin_base.to3}
+ addUserKnob {41 to4 T CornerPin_base.to4}
+ addUserKnob {41 from1 T CornerPin_base.from1}
+ addUserKnob {41 from2 T CornerPin_base.from2}
+ addUserKnob {41 from3 T CornerPin_base.from3}
+ addUserKnob {41 from4 T CornerPin_base.from4}
+ addUserKnob {41 pinAmount l "pin amount" T CornerPin_base.pinAmount}
+ addUserKnob {6 invert +STARTLINE}
+ addUserKnob {41 filter T CornerPin_base.filter}
+ addUserKnob {41 clamp T CornerPin_base.clamp}
+ addUserKnob {41 motionblur T CornerPin_base.motionblur}
+ addUserKnob {41 black_outside l "black outside" T CornerPin_base.black_outside}
+ addUserKnob {41 shutter T CornerPin_base.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T CornerPin_base.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T CornerPin_base.shuttercustomoffset}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -304
+  ypos -553
+ }
+set N43e02b0 [stack 0]
+ CornerPin2D {
+  to1 {{parent.CornerPin_regular.from1} {parent.CornerPin_regular.from1}}
+  to2 {{parent.CornerPin_regular.from2} {parent.CornerPin_regular.from2}}
+  to3 {{parent.CornerPin_regular.from3} {parent.CornerPin_regular.from3}}
+  to4 {{parent.CornerPin_regular.from4} {parent.CornerPin_regular.from4}}
+  invert false
+  motionblur {{parent.CornerPin_base.motionblur}}
+  shutter {{parent.CornerPin_base.shutter}}
+  shuttercustomoffset {{parent.CornerPin_base.shuttercustomoffset}}
+  from1 {{parent.CornerPin_regular.to1} {parent.CornerPin_regular.to1}}
+  from2 {{parent.CornerPin_regular.to2} {parent.CornerPin_regular.to2}}
+  from3 {{parent.CornerPin_regular.to3} {parent.CornerPin_regular.to3}}
+  from4 {{parent.CornerPin_regular.to4} {parent.CornerPin_regular.to4}}
+  name CornerPin_inverted
+  selected true
+  xpos -234
+  ypos -472
+  addUserKnob {20 Controls}
+  addUserKnob {7 pinAmount l "pin amount" t "Amount of corner-pinning to apply"}
+ }
+push $N43e02b0
+ CornerPin2D {
+  to1 {{"CornerPin_base.to1*CornerPin_base.pinAmount + CornerPin_base.from1*(1-CornerPin_base.pinAmount)"} {"CornerPin_base.to1*CornerPin_base.pinAmount + CornerPin_base.from1*(1-CornerPin_base.pinAmount)"}}
+  to2 {{"CornerPin_base.to2*CornerPin_base.pinAmount + CornerPin_base.from2*(1-CornerPin_base.pinAmount)"} {"CornerPin_base.to2*CornerPin_base.pinAmount + CornerPin_base.from2*(1-CornerPin_base.pinAmount)"}}
+  to3 {{"CornerPin_base.to3*CornerPin_base.pinAmount + CornerPin_base.from3*(1-CornerPin_base.pinAmount)"} {"CornerPin_base.to3*CornerPin_base.pinAmount + CornerPin_base.from3*(1-CornerPin_base.pinAmount)"}}
+  to4 {{"CornerPin_base.to4*CornerPin_base.pinAmount + CornerPin_base.from4*(1-CornerPin_base.pinAmount)"} {"CornerPin_base.to4*CornerPin_base.pinAmount + CornerPin_base.from4*(1-CornerPin_base.pinAmount)"}}
+  invert false
+  motionblur {{parent.CornerPin_base.motionblur}}
+  shutter {{parent.CornerPin_base.shutter}}
+  shuttercustomoffset {{parent.CornerPin_base.shuttercustomoffset}}
+  from1 {{CornerPin_base.from1} {CornerPin_base.from1}}
+  from2 {{CornerPin_base.from2} {CornerPin_base.from2}}
+  from3 {{CornerPin_base.from3} {CornerPin_base.from3}}
+  from4 {{CornerPin_base.from4} {CornerPin_base.from4}}
+  name CornerPin_regular
+  xpos -371
+  ypos -471
+ }
+ Switch {
+  inputs 2
+  which {{"\[knob invert]" i}}
+  name invertSwitch
+  xpos -300
+  ypos -393
+ }
+ Output {
+  name Output1
+  xpos -300
+  ypos -339
+ }
+ CornerPin2D {
+  inputs 0
+  to1 {0 0}
+  to2 {1920 0}
+  to3 {1920 1080}
+  to4 {0 1080}
+  invert false
+  from1 {0 0}
+  from2 {1920 0}
+  from3 {1920 1080}
+  from4 {0 1080}
+  name CornerPin_base
+  xpos -490
+  ypos -472
+  addUserKnob {20 Controls}
+  addUserKnob {7 pinAmount l "pin amount" t "Amount of corner-pinning to apply"}
+  pinAmount 1
+ }
+end_group

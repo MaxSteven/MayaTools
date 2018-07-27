@@ -1,0 +1,333 @@
+#! C:/Program Files/Nuke7.0v6/Nuke7.0.exe -nx
+version 7.0 v6
+Gizmo {
+ inputs 3
+ addUserKnob {20 User}
+ addUserKnob {41 transition2 l Transition T NoOp1.transition2}
+}
+ Input {
+  inputs 0
+  name BG
+  xpos 132
+  ypos -1029
+  number 1
+ }
+set Na0adc3a0 [stack 0]
+ Input {
+  inputs 0
+  name FG
+  xpos -461
+  ypos -1044
+ }
+set Na0adc710 [stack 0]
+ Viewer {
+  inputs 2
+  frame_increment 8
+  input_process false
+  far 1000000
+  name Viewer1
+  xpos 795
+  ypos -481
+ }
+ CheckerBoard2 {
+  inputs 0
+  boxsize 300
+  color0 {0 0 0 1}
+  color1 {1 1 1 1}
+  color2 {0 0 0 1}
+  color3 {1 1 1 1}
+  name CheckerBoard3
+  xpos -630
+  ypos 32
+ }
+ Keyer {
+  operation "luminance key"
+  name Keyer2
+  xpos -630
+  ypos 132
+ }
+ Dissolve {
+  which {{"frame % 4"}}
+  name Dissolve1
+  xpos -630
+  ypos 168
+ }
+ Multiply {
+  value {{parent.NoOp1.Transition}}
+  name Multiply2
+  xpos -630
+  ypos 243
+ }
+ set C80ff8790 [stack 0]
+ Dot {
+  name Dot5
+  xpos -596
+  ypos 313
+ }
+ Noise {
+  inputs 0
+  zoffset {{frame}}
+  gain 1
+  gamma 0.555
+  center {960 540}
+  name Noise2
+  xpos -81
+  ypos 25
+ }
+ CheckerBoard2 {
+  inputs 0
+  boxsize 100
+  color0 {1 1 1 1}
+  color1 {1 1 1 1}
+  color2 {0 0 0 1}
+  color3 {1 1 1 1}
+  centerlinewidth 0
+  name CheckerBoard2
+  xpos -216
+  ypos -99
+ }
+ Keyer {
+  invert true
+  operation "luminance key"
+  name Keyer1
+  xpos -216
+  ypos -27
+ }
+ Blur {
+  size 79
+  name Blur1
+  label "\[value size]"
+  xpos -216
+  ypos 9
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Multiply1
+  xpos -216
+  ypos 76
+ }
+clone $C80ff8790 {
+  xpos -216
+  ypos 201
+  selected false
+ }
+ Noise {
+  inputs 0
+  zoffset {{frame}}
+  gain 1
+  gamma 0.555
+  center {960 540}
+  name Noise1
+  xpos -166
+  ypos -158
+ }
+ Expression {
+  inputs 0
+  expr3 sin(y/2)>0.8
+  name Expression1
+  xpos -296
+  ypos -235
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Multiply
+  xpos -296
+  ypos -158
+ }
+clone $C80ff8790 {
+  xpos -296
+  ypos -113
+  selected false
+ }
+ Dot {
+  name Dot2
+  xpos -263
+  ypos -59
+ }
+ Input {
+  inputs 0
+  name Mask
+  xpos -252
+  ypos -408
+  number 2
+ }
+ Dot {
+  name Dot4
+  xpos -223
+  ypos -284
+ }
+ Noise {
+  inputs 0
+  size 185
+  lacunarity 4.2
+  gain 1
+  gamma 1
+  center {960 540}
+  name Noise3
+  xpos -670
+  ypos -412
+ }
+clone $C80ff8790 {
+  xpos -670
+  ypos -381
+  selected false
+ }
+ Expression {
+  inputs 0
+  expr0 "sin((y/2)) > 0.8"
+  expr1 "sin((y/2)+2) > 0.8"
+  expr2 "sin((y/2)+4) > 0.8"
+  name Expression2
+  xpos -732
+  ypos -592
+ }
+ Dot {
+  name Dot6
+  xpos -698
+  ypos -484
+ }
+push $Na0adc710
+ Merge2 {
+  inputs 2
+  operation multiply
+  sRGB true
+  mix {{"frame % random(10)"}}
+  name Merge4
+  xpos -583
+  ypos -487
+ }
+push $Na0adc710
+ Dissolve {
+  inputs 2
+  which {{parent.NoOp1.Transition}}
+  name Dissolve2
+  xpos -472
+  ypos -487
+ }
+ Shuffle {
+  alpha white
+  name Shuffle1
+  label "\[value in]"
+  xpos -472
+  ypos -424
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge5
+  xpos -472
+  ypos -375
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge3
+  xpos -472
+  ypos -287
+ }
+ ITransform {
+  inputs 2
+  name ITransform1
+  xpos -472
+  ypos -62
+  translate {113 0}
+ }
+ ITransform {
+  inputs 2
+  name ITransform2
+  xpos -472
+  ypos 207
+  translate {-62 -14}
+ }
+ ITransform {
+  inputs 2
+  name ITransform3
+  xpos -472
+  ypos 310
+  disable true
+  translate {-34 38}
+  scale 0.94
+ }
+ Transform {
+  center {960 540}
+  name Transform1
+  xpos -472
+  ypos 483
+ }
+ Dot {
+  name Dot3
+  xpos -438
+  ypos 518
+ }
+set N813509a0 [stack 0]
+clone $C80ff8790 {
+  xpos -472
+  ypos 556
+  selected false
+ }
+ Invert {
+  name Invert1
+  xpos -472
+  ypos 611
+ }
+ Dot {
+  name Dot1
+  xpos -438
+  ypos 817
+ }
+push $N813509a0
+ HueShift {
+  color_saturation 2.85
+  hue_rotation -120
+  mix {{parent.NoOp1.Transition}}
+  name HueShift1
+  xpos -174
+  ypos 515
+ }
+push $Na0adc3a0
+ Merge2 {
+  inputs 2
+  mix {{-parent.NoOp1.Transition+3}}
+  name Merge2
+  xpos 132
+  ypos 515
+ }
+ Neon_Glow {
+  inputs 2
+  name Neon_Glow1
+  selected true
+  xpos 132
+  ypos 814
+  gamma {0.9983332753 0.8933332562 1.10833323 1}
+  Intensity {{curve*(-parent.NoOp1.Transition+3) x7 16}}
+  tttt 1
+  input rgb
+  Flickerammount 1
+  Flickerspeed 0.57
+ }
+push $Na0adc710
+ Dissolve {
+  inputs 2
+  which {{parent.NoOp1.Transition}}
+  name Dissolve3
+  xpos 132
+  ypos 1065
+ }
+ Output {
+  name Output1
+  xpos 132
+  ypos 1251
+ }
+ NoOp {
+  inputs 0
+  name NoOp1
+  xpos 416
+  ypos 223
+  addUserKnob {20 User}
+  addUserKnob {7 Transition R 0 3}
+  Transition {{transition2*3}}
+  addUserKnob {7 transition2 l Transition}
+ }
+end_group

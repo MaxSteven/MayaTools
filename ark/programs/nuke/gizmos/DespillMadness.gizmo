@@ -1,0 +1,551 @@
+#! C:/Program Files/Nuke9.0v7/nuke-9.0.7.dll -nx
+version 9.0 v7
+Gizmo {
+ inputs 2
+ addUserKnob {20 DespillMadness l "Despill Settings"}
+ addUserKnob {26 text l "" +STARTLINE T "DespillMadness by Andreas Frickinger\nUpdated by Han Cao"}
+ addUserKnob {26 ""}
+ addUserKnob {41 screenType l "screen type" T GizmoControl.screenType}
+ addUserKnob {41 algorithm l "despill algorithm" T GizmoControl.algorithm}
+ addUserKnob {41 LimitPercentage l "fine tune" T RedLimitsGreen.LimitPercentage}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_2 l "" +STARTLINE T "spill area correction"}
+ addUserKnob {41 saturation T CC_SpillMap.saturation}
+ addUserKnob {41 gamma T CC_SpillMap.gamma}
+ addUserKnob {41 offset T CC_SpillMap.offset}
+ addUserKnob {26 ""}
+ addUserKnob {41 spillMatteOut l "output spill matte in alpha" T GizmoControl.spillMatteOut}
+ addUserKnob {6 GrainFix l "Grain Fix" +STARTLINE}
+ GrainFix true
+ addUserKnob {6 ClampOutput l "Clamp Output" +STARTLINE}
+ addUserKnob {7 Mix}
+ Mix 1
+}
+ NoOp {
+  inputs 0
+  name GizmoControl
+  xpos 875
+  ypos 414
+  addUserKnob {20 User}
+  addUserKnob {26 version l v1.0}
+  addUserKnob {4 screenType l "screen type" M {green blue}}
+  addUserKnob {4 algorithm l "despill algorithm" M {average "red limit" "green/blue limit" ""}}
+  addUserKnob {6 spillMatteOut l "output spill matte in alpha" +STARTLINE}
+ }
+ Input {
+  inputs 0
+  name SRC
+  xpos 262
+  ypos -368
+ }
+ Dot {
+  name Dot14
+  xpos 296
+  ypos -256
+ }
+set N2c02f800 [stack 0]
+ Dot {
+  name Dot6
+  xpos 296
+  ypos -186
+ }
+set Nfa3f2800 [stack 0]
+ Dot {
+  name Dot2
+  xpos 296
+  ypos -71
+ }
+set Nfce3a800 [stack 0]
+ Dot {
+  name Dot3
+  xpos 426
+  ypos -71
+ }
+set N4335b400 [stack 0]
+ Expression {
+  expr2 b>g*LimitPercentage?g*LimitPercentage:b
+  expr3 b-g*LimitPercentage
+  name GreenLimitsBlue1
+  xpos 528
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N4335b400
+ Expression {
+  expr2 b>r*LimitPercentage?r*LimitPercentage:b
+  expr3 b-r*LimitPercentage
+  name RedLimitsBlue
+  xpos 392
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N4335b400
+ Expression {
+  expr2 b>(g+r)/2*LimitPercentage?(g+r)/2*LimitPercentage:b
+  expr3 b-(r+g)*LimitPercentage/2
+  name RedAndGreenLimitBlue
+  xpos 662
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+ Switch {
+  inputs 3
+  which {{GizmoControl.algorithm i}}
+  name SwitchBlue
+  xpos 528
+  ypos 190
+ }
+ Dot {
+  name Dot5
+  xpos 562
+  ypos 370
+ }
+push $Nfce3a800
+ Dot {
+  name Dot1
+  xpos 162
+  ypos -71
+ }
+set N8c754c00 [stack 0]
+ Expression {
+  expr1 g>b*LimitPercentage?b*LimitPercentage:g
+  expr3 g-b*LimitPercentage
+  name BlueLimitsGreen
+  xpos -15
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N8c754c00
+ Expression {
+  expr1 g>r*LimitPercentage?r*LimitPercentage:g
+  expr3 g-r*LimitPercentage
+  name RedLimitsGreen
+  xpos -160
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage 1
+ }
+push $N8c754c00
+ Expression {
+  expr1 g>(b+r)/2*LimitPercentage?(b+r)/2*LimitPercentage:g
+  expr3 g-(r+b)*LimitPercentage/2
+  name RedAveBlueLimitsGreen
+  xpos 119
+  ypos 42
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+ Switch {
+  inputs 3
+  which {{GizmoControl.algorithm}}
+  name SwitchGreen
+  xpos -15
+  ypos 199
+ }
+ Dot {
+  name Dot4
+  xpos 19
+  ypos 370
+ }
+ Switch {
+  inputs 2
+  which {{GizmoControl.screenType}}
+  name SwitchMain
+  xpos 257
+  ypos 366
+ }
+ Clamp {
+  mix {{ClampOutput}}
+  name Clamp1
+  xpos 257
+  ypos 399
+ }
+ ColorCorrect {
+  maskChannelInput rgba.alpha
+  name CC_SpillMap
+  note_font Verdana
+  xpos 257
+  ypos 468
+ }
+set N76ba0c00 [stack 0]
+ Dot {
+  name Dot9
+  xpos 439
+  ypos 477
+ }
+push $N2c02f800
+ Dot {
+  name Dot11
+  xpos -523
+  ypos -256
+ }
+set N7e8bb000 [stack 0]
+ Dot {
+  name Dot26
+  xpos -633
+  ypos -256
+ }
+ Dot {
+  name Dot25
+  xpos -633
+  ypos 1422
+ }
+set Nfaf10c00 [stack 0]
+ Dot {
+  name Dot27
+  xpos -633
+  ypos 1489
+ }
+ Input {
+  inputs 0
+  name Mask
+  label "Mask\n"
+  xpos 516
+  ypos 1412
+  number 1
+ }
+push $N7e8bb000
+ Dot {
+  name Dot20
+  xpos -523
+  ypos 751
+ }
+set N76b73800 [stack 0]
+ Dot {
+  name Dot21
+  xpos -400
+  ypos 751
+ }
+push $N76b73800
+ Denoise2 {
+  output Noise
+  amount 1.02
+  analysisRegion {632.5 375.5 732.5 475.5}
+  analysisFrame 1101
+  needsAnalyzing false
+  profileCurve {profile {curve x0.1000000015 0 x0.1333521456 0 x0.1778279394 0 x0.2371373773 0 x0.3162277639 0 x0.4216965139 0 x0.5623413324 0 x0.7498942018 0 x1 0}}
+  serializeKnob "1.11653 0.519707 0.539527
+0.00596241 0.00477147 0.00463276
+0.00596241 0.00477147 0.00463276
+0.00670715 0.0010764 0.000981617
+0 0 0
+0.00221699 0.00204494 0.0021912
+0.00221699 0.00204494 0.0021912
+0.0011737 0.00121964 0.00122185
+0 0 0
+0.00105936 0.00101712 0.00121153
+0.00105936 0.00101712 0.00121153
+0.000341738 0.000409165 0.000397614
+0 0 0
+0.000496985 0.000519784 0.000503613
+0.000496985 0.000519784 0.000503613
+6.93202e-005 8.8467e-005 9.68487e-005
+0 0 0 0 0 0 0 0 0 
+1468228319191125079"
+  name Denoise1
+  xpos -557
+  ypos 819
+ }
+set N7ec27c00 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge2
+  xpos -434
+  ypos 825
+ }
+ OFXuk.co.thefoundry.keylight.keylight_v201 {
+  show "Final Result"
+  unPreMultiply false
+  screenColour {0 {(GizmoControl.screenType-1)*-1 x1 1 x1025 1 x1056 1} {GizmoControl.screenType x1 0 x1025 0 x1056 0}}
+  screenGain 1
+  screenBalance 0.5
+  alphaBias {0.5 0.5 0.5}
+  despillBias {0.5 0.5 0.5}
+  gangBiases true
+  preBlur 0
+  "Screen Matte" 0
+  screenClipMin 0
+  screenClipMax 1
+  screenClipRollback 0
+  screenGrowShrink 0
+  screenSoftness 0
+  screenDespotBlack 0
+  screenDespotWhite 0
+  screenReplaceMethod "Soft Colour"
+  screenReplaceColour {0.5 0.5 0.5}
+  Tuning 0
+  midPoint 0.5
+  lowGain 1
+  midGain 1
+  highGain 1
+  "Inside Mask" 0
+  sourceAlphaHandling Ignore
+  insideReplaceMethod "Soft Colour"
+  insideReplaceColour {0.5 0.5 0.5}
+  Crops 0
+  SourceXMethod Colour
+  SourceYMethod Colour
+  SourceEdgeColour 0
+  SourceCropL 0
+  SourceCropR 1
+  SourceCropB 0
+  SourceCropT 1
+  balanceSet false
+  insideComponent None
+  outsideComponent None
+  cacheBreaker true
+  name Keylight1
+  xpos 472
+  ypos 825
+ }
+ ColorCorrect {
+  channels alpha
+  gamma 0.1
+  name ColorCorrect1
+  xpos 472
+  ypos 851
+ }
+ Invert {
+  name Invert2
+  xpos 472
+  ypos 889
+ }
+ Dot {
+  name Dot23
+  xpos 506
+  ypos 1251
+ }
+push $Nfa3f2800
+ Dot {
+  name Dot7
+  xpos -345
+  ypos -186
+ }
+ Dot {
+  name Dot8
+  xpos -345
+  ypos 551
+ }
+ Expression {
+  channel0 {-rgba.red -rgba.green -rgba.blue none}
+  expr0 0
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  expr1 0
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  expr2 0
+  channel3 {rgba.alpha none none rgba.alpha}
+  expr3 a==0?0:a
+  name AlphaError
+  label "To avid Gizmo being in state of\nerror without something plugged in input."
+  xpos -98
+  ypos 534
+ }
+push $N76ba0c00
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  from3 rgba.alpha
+  to3 rgba.alpha
+  name CopyAlpha
+  xpos 257
+  ypos 534
+ }
+set Nf7200400 [stack 0]
+ Dot {
+  name Dot16
+  xpos 291
+  ypos 727
+ }
+set N7ec26400 [stack 0]
+ Dot {
+  name Dot17
+  xpos 199
+  ypos 727
+ }
+ Dot {
+  name Dot18
+  xpos 199
+  ypos 1251
+ }
+set N2ae38400 [stack 0]
+push $N7ec27c00
+ Dot {
+  name Dot22
+  xpos -523
+  ypos 1019
+ }
+push $N7ec26400
+ Dot {
+  name Dot19
+  xpos 291
+  ypos 887
+ }
+set Nf7f16800 [stack 0]
+ Dot {
+  name Dot13
+  xpos 72
+  ypos 887
+ }
+ Denoise2 {
+  amount 1.02
+  analysisRegion {640 371 740 471}
+  analysisFrame 1004
+  needsAnalyzing false
+  profileCurve {profile {curve x0.1000000015 0 x0.1333521456 0 x0.1778279394 0 x0.2371373773 0 x0.3162277639 0 x0.4216965139 0 x0.5623413324 0 x0.7498942018 0 x1 0}}
+  serializeKnob "1.06458 0.507941 0.532473
+0.00664214 0.00486074 0.00466515
+0.00664214 0.00486074 0.00466515
+0.00633618 0.00104177 0.000987415
+0 0 0
+0.00231535 0.00190285 0.00194219
+0.00231535 0.00190285 0.00194219
+0.00142596 0.00114485 0.00110273
+0 0 0
+0.00134515 0.000823684 0.000999803
+0.00134515 0.000823684 0.000999803
+0.000422865 0.000348105 0.000404351
+0 0 0
+0.000253971 0.000204333 0.000331559
+0.000253971 0.000204333 0.000331559
+5.68235e-005 0.000104209 0.000106361
+0 0 0 0 0 0 0 0 0 
+3655600791829866828"
+  name Denoise2
+  xpos 38
+  ypos 960
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge1
+  xpos 38
+  ypos 1015
+ }
+ Dot {
+  name Dot15
+  xpos 72
+  ypos 1074
+ }
+set Ne6632400 [stack 0]
+push $Nf7f16800
+ Copy {
+  inputs 2
+  from0 rgba.blue
+  to0 rgba.blue
+  name Copy2
+  xpos 38
+  ypos 1142
+ }
+push $Ne6632400
+push $Nf7f16800
+ Copy {
+  inputs 2
+  from0 rgba.green
+  to0 rgba.green
+  name Copy1
+  xpos 257
+  ypos 1064
+ }
+ Switch {
+  inputs 2
+  which {{GizmoControl.screenType}}
+  name Switch1
+  xpos 257
+  ypos 1148
+ }
+ Dissolve {
+  inputs 2+1
+  which 1
+  name Dissolve1
+  xpos 257
+  ypos 1241
+ }
+push $N2ae38400
+ Dot {
+  name Dot12
+  xpos 199
+  ypos 1342
+ }
+ Switch {
+  inputs 2
+  which {{GrainFix}}
+  name Switch2
+  xpos 257
+  ypos 1338
+ }
+push $Nfaf10c00
+ Dissolve {
+  inputs 2+1
+  channels rgb
+  which 1
+  name Dissolve3
+  selected true
+  xpos 257
+  ypos 1413
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  mix {{1-Mix}}
+  name Merge3
+  xpos 257
+  ypos 1485
+ }
+ Dot {
+  name Dot24
+  xpos 291
+  ypos 1526
+ }
+set N191fc800 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy3
+  xpos 405
+  ypos 1516
+ }
+ Dot {
+  name Dot10
+  xpos 439
+  ypos 1668
+ }
+push $N191fc800
+ Switch {
+  inputs 2
+  which {{GizmoControl.spillMatteOut}}
+  name SwitchSpillMap
+  xpos 257
+  ypos 1664
+ }
+set N1bd7d400 [stack 0]
+push $Nf7200400
+ Viewer {
+  inputs 2
+  frame_range 100-100
+  frame_increment 8
+  fps 23.97602463
+  far 1000000
+  name Viewer1
+  xpos 345
+  ypos -292
+ }
+push $N1bd7d400
+ Output {
+  name Output1
+  xpos 257
+  ypos 1762
+ }
+end_group

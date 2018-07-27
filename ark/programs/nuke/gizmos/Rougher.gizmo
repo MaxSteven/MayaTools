@@ -1,0 +1,155 @@
+#! C:/Program Files/Nuke9.0v7/nuke-9.0.7.dll -nx
+version 9.0 v7
+Gizmo {
+inputs 2
+tile_color 0x5d0903ff
+addUserKnob {20 User}
+addUserKnob {41 value l Intensity T Multiply1.value}
+addUserKnob {41 size l Erode T Dilate1.size}
+addUserKnob {41 size_2 l Blur T Blur1.size}
+addUserKnob {20 Noise n 1}
+addUserKnob {26 ""}
+addUserKnob {41 type T Noise1.type}
+addUserKnob {41 size_1 l x/ysize T Noise1.size}
+addUserKnob {41 zoffset l z T Noise1.zoffset}
+addUserKnob {41 octaves T Noise1.octaves}
+addUserKnob {41 nyquist l "clip at Nyquist limit" T Noise1.nyquist}
+addUserKnob {41 lacunarity T Noise1.lacunarity}
+addUserKnob {41 gain T Noise1.gain}
+addUserKnob {41 gamma T Noise1.gamma}
+addUserKnob {20 endGroup n -1}
+addUserKnob {41 cropResult l "crop result" T ITransform1.cropResult}
+}
+Input {
+inputs 0
+name Mask
+xpos -34
+ypos -458
+number 1
+}
+Invert {
+name Invert1
+xpos -48
+ypos -221
+}
+Input {
+inputs 0
+name SRC
+xpos -408
+ypos -621
+}
+Dilate {
+name Dilate1
+xpos -408
+ypos -549
+}
+Blur {
+size 10.6
+crop {{parent.ITransform1.cropResult}}
+name Blur1
+label "\[value size]"
+xpos -408
+ypos -497
+}
+set N77080c00 [stack 0]
+Dot {
+name Dot1
+xpos -527
+ypos -435
+}
+Noise {
+replace true
+size 300
+zoffset 2.3
+lacunarity 1.62
+gain 1
+gamma 1
+center {960 540}
+name Noise1
+xpos -561
+ypos -395
+}
+Multiply {
+value 1.22
+name Multiply1
+xpos -561
+ypos -371
+}
+set N77080000 [stack 0]
+push $N77080c00
+ITransform {
+inputs 2
+name ITransform1
+selected true
+xpos -434
+ypos -365
+translate {10 10}
+cropResult false
+}
+push $N77080000
+push $N77080c00
+ITransform {
+inputs 2
+name ITransform2
+xpos -345
+ypos -335
+translate {-10 -10}
+cropResult {{parent.ITransform1.cropResult}}
+}
+push 0
+push $N77080000
+push $N77080c00
+ITransform {
+inputs 2
+name ITransform4
+xpos -205
+ypos -252
+translate {-10 10}
+cropResult {{parent.ITransform1.cropResult}}
+}
+push $N77080000
+push $N77080c00
+ITransform {
+inputs 2
+name ITransform3
+xpos -264
+ypos -293
+translate {10 -10}
+cropResult {{parent.ITransform1.cropResult}}
+}
+Merge2 {
+inputs 4+1
+name Merge1
+xpos -415
+ypos -205
+}
+Merge2 {
+inputs 2
+operation stencil
+name Merge2
+xpos -415
+ypos -155
+}
+push $N77080c00
+Dot {
+name Dot2
+xpos -668
+ypos -463
+}
+Dot {
+name Dot3
+xpos -563
+ypos -159
+}
+Merge2 {
+inputs 2
+name Merge3
+xpos -415
+ypos -107
+}
+Output {
+name Output1
+xpos -408
+ypos -47
+}
+end_group

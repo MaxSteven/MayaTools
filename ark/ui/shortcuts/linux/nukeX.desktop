@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=true
+Exec=nuke --nukex --nocrashprompt
+Name=Nuke X
+Icon=/usr/Nuke10.0v4/plugins/icons/NukeXApp48.png

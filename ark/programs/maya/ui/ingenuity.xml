@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Ingenuity>
+
+	<shelfItem
+		ann="Tools"
+		icon="caretaker.xpm"
+		cmds="import arkToolbar;arkToolbar.launch();print 'Using Arktoolbar'" />
+
+	<!--shelfItem
+		ann="Caretaker"
+		icon="caretaker.xpm"
+		cmds="import maya.cmds as cmds;cmds.launch(webPage='http://caretaker/')" /-->
+
+	<shelfItem
+		ann="Submit to Shepherd"
+		icon="submit.xpm"
+		cmds="import arkMaya;arkMaya.shepherdSubmit()" />
+
+	<shelfItem
+		ann="Snap Align Keyer"
+		icon="snapAlignKeyer.xpm"
+		cmds="import SnapAlignKeyer;SnapAlignKeyer.main()" />
+
+<!-- 	<shelfItem
+		ann="Assign Random Shaders"
+		icon="randomShaders.xpm"
+		cmds="import arkMaya;arkMaya.assignRandomShaders()" /> -->
+
+	<shelfItem
+		ann="Add Camera Focus Control"
+		icon="cameraFocus.xpm"
+		cmds="import arkMaya;arkMaya.addCameraFocusControl()" />
+
+</Ingenuity>
+
+

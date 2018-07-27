@@ -1,0 +1,2882 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+version 10.0 v4
+Gizmo {
+ inputs 3
+ addUserKnob {20 User}
+ addUserKnob {4 Sample M {0 10 20 30 40 50 60 70 80 90 100}}
+ Sample 100
+ addUserKnob {6 OnlyShowExtrude -STARTLINE}
+ addUserKnob {6 Outputbottomlayeralpha l "Output bottom layer alpha" -STARTLINE}
+ addUserKnob {20 target l Target n 1}
+ addUserKnob {41 matrix T TransformMain.matrix}
+ addUserKnob {41 translate T TransformMain.translate}
+ addUserKnob {41 rotate T TransformMain.rotate}
+ addUserKnob {41 scale T TransformMain.scale}
+ addUserKnob {41 center T TransformMain.center}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 extrudecc l ExtrudeCC n 1}
+ extrudecc 0
+ addUserKnob {41 which_1 l "Grayout Extrude" T Dissolve2.which}
+ addUserKnob {41 saturation T ColorCorrect25.saturation}
+ addUserKnob {41 contrast T ColorCorrect25.contrast}
+ addUserKnob {41 gamma T ColorCorrect25.gamma}
+ addUserKnob {41 gain T ColorCorrect25.gain}
+ addUserKnob {41 offset T ColorCorrect25.offset}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 Shading n 1}
+ Shading 0
+ addUserKnob {6 Light +STARTLINE}
+ Light true
+ addUserKnob {6 shading l "manual shading" t "if you want to use this, plug-in the shading to the node." -STARTLINE}
+ addUserKnob {41 light_angle T Extrude_control.light_angle}
+ addUserKnob {41 radius T Extrude_control.radius}
+ addUserKnob {41 lighting_blur_amount T Extrude_control.lighting_blur_amount}
+ addUserKnob {41 Shading_smooth T Extrude_control.Shading_smooth}
+ addUserKnob {41 gain_1 l "Light amount" T ColorCorrect1.gain}
+ addUserKnob {41 gain_2 l "Shadow anoumt" T ColorCorrect2.gain}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 which l Mix T Dissolve1.which}
+}
+ Input {
+  inputs 0
+  name Shading
+  xpos -1076
+  ypos 743
+  number 2
+ }
+ Dot {
+  name Dot56
+  xpos -1042
+  ypos 807
+ }
+ Input {
+  inputs 0
+  name Img
+  xpos -305
+  ypos 24
+ }
+ Dot {
+  name Dot24
+  xpos -271
+  ypos 142
+ }
+set Nad4be000 [stack 0]
+ Dot {
+  name Dot60
+  xpos -819
+  ypos 142
+ }
+set Nad4ffc00 [stack 0]
+ Constant {
+  inputs 0
+  channels rgb
+  color 0.5
+  name Constant1
+  xpos -606
+  ypos 161
+ }
+ Shuffle {
+  alpha white
+  name Shuffle1
+  label "\[value in]"
+  xpos -606
+  ypos 233
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge52
+  xpos -606
+  ypos 286
+ }
+push $Nad4ffc00
+ Dissolve {
+  inputs 2
+  name Dissolve2
+  xpos -853
+  ypos 261
+ }
+ ColorCorrect {
+  gain 0.23
+  name ColorCorrect25
+  xpos -853
+  ypos 299
+ }
+ Dot {
+  name Dot6
+  xpos -819
+  ypos 333
+ }
+set Nad4fe400 [stack 0]
+ Dot {
+  name Dot61
+  xpos -962
+  ypos 333
+ }
+set Nad4fe000 [stack 0]
+ Dot {
+  name Dot63
+  xpos -1224
+  ypos 333
+ }
+ Dot {
+  name Dot64
+  xpos -1224
+  ypos 395
+ }
+set Nb170f800 [stack 0]
+ Dot {
+  name Dot62
+  xpos -1224
+  ypos 544
+ }
+ Transform {
+  translate {{-parent.Transform50.translate} {-parent.Transform50.translate}}
+  center {960 540}
+  name Transform51
+  xpos -1134
+  ypos 540
+ }
+ Blur {
+  size {{parent.Extrude_control.lighting_blur_amount}}
+  name Blur1
+  label "\[value size]"
+  xpos -1134
+  ypos 566
+ }
+ set Cb170ec00 [stack 0]
+push $Nb170f800
+ Transform {
+  translate {{parent.Extrude_control.radius*cos(parent.Extrude_control.light_angle/57.2957795130823193)} {parent.Extrude_control.radius*sin(parent.Extrude_control.light_angle/57.2957795130823193)}}
+  center {960 540}
+  name Transform50
+  xpos -1129
+  ypos 391
+ }
+clone $Cb170ec00 {
+  xpos -1129
+  ypos 455
+  selected false
+ }
+push $Nad4fe000
+ ColorCorrect {
+  inputs 1+1
+  gain 8
+  name ColorCorrect1
+  xpos -996
+  ypos 467
+ }
+ ColorCorrect {
+  inputs 1+1
+  gain 0.01
+  name ColorCorrect2
+  xpos -996
+  ypos 578
+ }
+push $Nad4fe400
+ Switch {
+  inputs 2
+  which {{parent.Light}}
+  name Switch4
+  xpos -853
+  ypos 578
+ }
+ Dot {
+  name Dot25
+  xpos -819
+  ypos 765
+ }
+set Nb173f800 [stack 0]
+ Dot {
+  name Dot59
+  xpos -948
+  ypos 765
+ }
+ Unpremult {
+  name Unpremult2
+  xpos -982
+  ypos 783
+ }
+ Merge2 {
+  inputs 2
+  operation overlay
+  name Merge29
+  xpos -982
+  ypos 803
+ }
+ Premult {
+  name Premult3
+  xpos -982
+  ypos 829
+ }
+push $Nb173f800
+ Switch {
+  inputs 2
+  which {{parent.shading}}
+  name Switch3
+  xpos -853
+  ypos 829
+ }
+ Dot {
+  name Dot26
+  xpos -819
+  ypos 899
+ }
+set Nb173e400 [stack 0]
+ Transform {
+  translate {-37 19}
+  center {966 574.5}
+  name TransformMain
+  xpos -732
+  ypos 895
+ }
+set Nb173e000 [stack 0]
+ Dot {
+  name Dot57
+  xpos -504
+  ypos 899
+ }
+set Nb2b53c00 [stack 0]
+ Input {
+  inputs 0
+  name Mask
+  xpos 81
+  ypos 5864
+  number 1
+ }
+ Dot {
+  name Dot8
+  xpos 115
+  ypos 6004
+ }
+push $Nb173e400
+ Dot {
+  name Dot1
+  xpos -819
+  ypos 925
+ }
+set Nb2b53000 [stack 0]
+ Dot {
+  name Dot2
+  xpos -819
+  ypos 951
+ }
+set Nb2b52c00 [stack 0]
+ Dot {
+  name Dot3
+  xpos -819
+  ypos 977
+ }
+set Nb2b52800 [stack 0]
+ Dot {
+  name Dot4
+  xpos -819
+  ypos 1003
+ }
+set Nb2b52400 [stack 0]
+ Dot {
+  name Dot5
+  xpos -819
+  ypos 1061
+ }
+set Nb2b52000 [stack 0]
+ Dot {
+  name Dot9
+  xpos -819
+  ypos 1087
+ }
+set Nb2b6bc00 [stack 0]
+ Dot {
+  name Dot10
+  xpos -819
+  ypos 1113
+ }
+set Nb2b6b800 [stack 0]
+ Dot {
+  name Dot11
+  xpos -819
+  ypos 1139
+ }
+set Nb2b6b400 [stack 0]
+ Dot {
+  name Dot12
+  xpos -819
+  ypos 1165
+ }
+set Nb2b6b000 [stack 0]
+ Dot {
+  name Dot13
+  xpos -819
+  ypos 1319
+ }
+set Nb2b6ac00 [stack 0]
+ Dot {
+  name Dot14
+  xpos -819
+  ypos 1345
+ }
+set Nb2b6a800 [stack 0]
+ Dot {
+  name Dot15
+  xpos -819
+  ypos 1371
+ }
+set Nb2b6a400 [stack 0]
+ Dot {
+  name Dot16
+  xpos -819
+  ypos 1397
+ }
+set Nb2b6a000 [stack 0]
+ Dot {
+  name Dot17
+  xpos -819
+  ypos 1423
+ }
+set Nb2b89c00 [stack 0]
+ Dot {
+  name Dot18
+  xpos -819
+  ypos 1497
+ }
+set Nb2b89800 [stack 0]
+ Dot {
+  name Dot19
+  xpos -819
+  ypos 1523
+ }
+set Nb2b89400 [stack 0]
+ Dot {
+  name Dot20
+  xpos -819
+  ypos 1549
+ }
+set Nb2b89000 [stack 0]
+ Dot {
+  name Dot21
+  xpos -819
+  ypos 1575
+ }
+set Nb2b88c00 [stack 0]
+ Dot {
+  name Dot22
+  xpos -819
+  ypos 1601
+ }
+set Nb2b88800 [stack 0]
+ Dot {
+  name Dot23
+  xpos -819
+  ypos 1802
+ }
+set Nb2b88400 [stack 0]
+ Dot {
+  name Dot27
+  xpos -819
+  ypos 1828
+ }
+set Nb2b88000 [stack 0]
+ Dot {
+  name Dot28
+  xpos -819
+  ypos 1854
+ }
+set Nb2b9fc00 [stack 0]
+ Dot {
+  name Dot29
+  xpos -819
+  ypos 1880
+ }
+set Nb2b9f800 [stack 0]
+ Dot {
+  name Dot30
+  xpos -819
+  ypos 1906
+ }
+set Nb2b9f400 [stack 0]
+ Dot {
+  name Dot31
+  xpos -819
+  ypos 1980
+ }
+set Nb2b9f000 [stack 0]
+ Dot {
+  name Dot32
+  xpos -819
+  ypos 2006
+ }
+set Nb2b9ec00 [stack 0]
+ Dot {
+  name Dot33
+  xpos -819
+  ypos 2032
+ }
+set Nb2b9e800 [stack 0]
+ Dot {
+  name Dot34
+  xpos -819
+  ypos 2058
+ }
+set Nb2b9e400 [stack 0]
+ Dot {
+  name Dot35
+  xpos -819
+  ypos 2084
+ }
+set Nb2b9e000 [stack 0]
+ Dot {
+  name Dot36
+  xpos -819
+  ypos 2254
+ }
+set Nb2bbdc00 [stack 0]
+ Dot {
+  name Dot37
+  xpos -819
+  ypos 2280
+ }
+set Nb2bbd800 [stack 0]
+ Dot {
+  name Dot38
+  xpos -819
+  ypos 2306
+ }
+set Nb2bbd400 [stack 0]
+ Dot {
+  name Dot39
+  xpos -819
+  ypos 2332
+ }
+set Nb2bbd000 [stack 0]
+ Dot {
+  name Dot40
+  xpos -819
+  ypos 2358
+ }
+set Nb2bbcc00 [stack 0]
+ Dot {
+  name Dot41
+  xpos -819
+  ypos 2432
+ }
+set Nb2bbc800 [stack 0]
+ Dot {
+  name Dot42
+  xpos -819
+  ypos 2458
+ }
+set Nb2bbc400 [stack 0]
+ Dot {
+  name Dot43
+  xpos -819
+  ypos 2484
+ }
+set Nb2bbc000 [stack 0]
+ Dot {
+  name Dot44
+  xpos -819
+  ypos 2510
+ }
+set Nb2bd7c00 [stack 0]
+ Dot {
+  name Dot45
+  xpos -819
+  ypos 2536
+ }
+set Nb2bd7800 [stack 0]
+ Dot {
+  name Dot46
+  xpos -819
+  ypos 2760
+ }
+set Nb2bd7400 [stack 0]
+ Dot {
+  name Dot47
+  xpos -819
+  ypos 2786
+ }
+set Nb2bd7000 [stack 0]
+ Dot {
+  name Dot48
+  xpos -819
+  ypos 2812
+ }
+set Nb2bd6c00 [stack 0]
+ Dot {
+  name Dot49
+  xpos -819
+  ypos 2838
+ }
+set Nb2bd6800 [stack 0]
+ Dot {
+  name Dot50
+  xpos -819
+  ypos 2864
+ }
+set Nb2bd6400 [stack 0]
+ Dot {
+  name Dot51
+  xpos -819
+  ypos 2938
+ }
+set Nb2bd6000 [stack 0]
+ Dot {
+  name Dot52
+  xpos -819
+  ypos 2964
+ }
+set Nb2bf1c00 [stack 0]
+ Dot {
+  name Dot53
+  xpos -819
+  ypos 2990
+ }
+set Nb2bf1800 [stack 0]
+ Dot {
+  name Dot54
+  xpos -819
+  ypos 3016
+ }
+set Nb2bf1400 [stack 0]
+ Dot {
+  name Dot55
+  xpos -819
+  ypos 3042
+ }
+set Nb2bf1000 [stack 0]
+ Dot {
+  name Dot65
+  xpos -819
+  ypos 3161
+ }
+set Nb2bf0c00 [stack 0]
+ Dot {
+  name Dot66
+  xpos -819
+  ypos 3187
+ }
+set Nb2bf0800 [stack 0]
+ Dot {
+  name Dot67
+  xpos -819
+  ypos 3213
+ }
+set Nb2bf0400 [stack 0]
+ Dot {
+  name Dot68
+  xpos -819
+  ypos 3239
+ }
+set Nb2bf0000 [stack 0]
+ Dot {
+  name Dot69
+  xpos -819
+  ypos 3265
+ }
+set Nb2c0bc00 [stack 0]
+ Dot {
+  name Dot70
+  xpos -819
+  ypos 3339
+ }
+set Nb2c0b800 [stack 0]
+ Dot {
+  name Dot71
+  xpos -819
+  ypos 3365
+ }
+set Nb2c0b400 [stack 0]
+ Dot {
+  name Dot72
+  xpos -819
+  ypos 3391
+ }
+set Nb2c0b000 [stack 0]
+ Dot {
+  name Dot73
+  xpos -819
+  ypos 3417
+ }
+set Nb2c0ac00 [stack 0]
+ Dot {
+  name Dot74
+  xpos -819
+  ypos 3443
+ }
+set Nb2c0a800 [stack 0]
+ Dot {
+  name Dot75
+  xpos -819
+  ypos 3608
+ }
+set Nb2c0a400 [stack 0]
+ Dot {
+  name Dot76
+  xpos -819
+  ypos 3634
+ }
+set Nb2c0a000 [stack 0]
+ Dot {
+  name Dot77
+  xpos -819
+  ypos 3660
+ }
+set Nb2c25c00 [stack 0]
+ Dot {
+  name Dot78
+  xpos -819
+  ypos 3686
+ }
+set Nb2c25800 [stack 0]
+ Dot {
+  name Dot79
+  xpos -819
+  ypos 3712
+ }
+set Nb2c25400 [stack 0]
+ Dot {
+  name Dot80
+  xpos -819
+  ypos 3786
+ }
+set Nb2c25000 [stack 0]
+ Dot {
+  name Dot81
+  xpos -819
+  ypos 3812
+ }
+set Nb2c24c00 [stack 0]
+ Dot {
+  name Dot82
+  xpos -819
+  ypos 3838
+ }
+set Nb2c24800 [stack 0]
+ Dot {
+  name Dot83
+  xpos -819
+  ypos 3864
+ }
+set Nb2c24400 [stack 0]
+ Dot {
+  name Dot84
+  xpos -819
+  ypos 3890
+ }
+set Nb2c24000 [stack 0]
+ Dot {
+  name Dot85
+  xpos -819
+  ypos 4027
+ }
+set Nb2c3fc00 [stack 0]
+ Dot {
+  name Dot86
+  xpos -819
+  ypos 4053
+ }
+set Nb2c3f800 [stack 0]
+ Dot {
+  name Dot87
+  xpos -819
+  ypos 4079
+ }
+set Nb2c3f400 [stack 0]
+ Dot {
+  name Dot88
+  xpos -819
+  ypos 4105
+ }
+set Nb2c3f000 [stack 0]
+ Dot {
+  name Dot89
+  xpos -819
+  ypos 4131
+ }
+set Nb2c3ec00 [stack 0]
+ Dot {
+  name Dot90
+  xpos -819
+  ypos 4205
+ }
+set Nb2c3e800 [stack 0]
+ Dot {
+  name Dot91
+  xpos -819
+  ypos 4231
+ }
+set Nb2c3e400 [stack 0]
+ Dot {
+  name Dot92
+  xpos -819
+  ypos 4257
+ }
+set Nb2c3e000 [stack 0]
+ Dot {
+  name Dot93
+  xpos -819
+  ypos 4283
+ }
+set Nb2c57c00 [stack 0]
+ Dot {
+  name Dot94
+  xpos -819
+  ypos 4309
+ }
+set Nb2c57800 [stack 0]
+ Dot {
+  name Dot95
+  xpos -819
+  ypos 4479
+ }
+set Nb2c57400 [stack 0]
+ Dot {
+  name Dot96
+  xpos -819
+  ypos 4505
+ }
+set Nb2c57000 [stack 0]
+ Dot {
+  name Dot97
+  xpos -819
+  ypos 4531
+ }
+set Nb2c56c00 [stack 0]
+ Dot {
+  name Dot98
+  xpos -819
+  ypos 4557
+ }
+set Nb2c56800 [stack 0]
+ Dot {
+  name Dot99
+  xpos -819
+  ypos 4583
+ }
+set Nb2c56400 [stack 0]
+ Dot {
+  name Dot100
+  xpos -819
+  ypos 4657
+ }
+set Nb2c56000 [stack 0]
+ Dot {
+  name Dot101
+  xpos -819
+  ypos 4683
+ }
+set Nb2c73c00 [stack 0]
+ Dot {
+  name Dot102
+  xpos -819
+  ypos 4709
+ }
+set Nb2c73800 [stack 0]
+ Dot {
+  name Dot103
+  xpos -819
+  ypos 4735
+ }
+set Nb2c73400 [stack 0]
+ Dot {
+  name Dot104
+  xpos -819
+  ypos 4761
+ }
+set Nb2c73000 [stack 0]
+ Dot {
+  name Dot105
+  xpos -819
+  ypos 4897
+ }
+set Nb2c72c00 [stack 0]
+ Dot {
+  name Dot106
+  xpos -819
+  ypos 4923
+ }
+set Nb2c72800 [stack 0]
+ Dot {
+  name Dot107
+  xpos -819
+  ypos 4949
+ }
+set Nb2c72400 [stack 0]
+ Dot {
+  name Dot108
+  xpos -819
+  ypos 4975
+ }
+set Nb2c72000 [stack 0]
+ Dot {
+  name Dot109
+  xpos -819
+  ypos 5001
+ }
+set Nb2c8dc00 [stack 0]
+ Dot {
+  name Dot110
+  xpos -819
+  ypos 5075
+ }
+set Nb2c8d800 [stack 0]
+ Dot {
+  name Dot111
+  xpos -819
+  ypos 5101
+ }
+set Nb2c8d400 [stack 0]
+ Dot {
+  name Dot112
+  xpos -819
+  ypos 5127
+ }
+set Nb2c8d000 [stack 0]
+ Dot {
+  name Dot113
+  xpos -819
+  ypos 5153
+ }
+set Nb2c8cc00 [stack 0]
+ Dot {
+  name Dot114
+  xpos -819
+  ypos 5179
+ }
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform92
+  xpos -683
+  ypos 5175
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-99}}
+ }
+push $Nb2c8cc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform93
+  xpos -685
+  ypos 5149
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-98}}
+ }
+push $Nb2c8d000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform94
+  xpos -684
+  ypos 5123
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-97}}
+ }
+push $Nb2c8d400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform95
+  xpos -683
+  ypos 5097
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-96}}
+ }
+push $Nb2c8d800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform96
+  xpos -684
+  ypos 5071
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-95}}
+ }
+push $Nb2c8dc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform97
+  xpos -683
+  ypos 4997
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-94}}
+ }
+push $Nb2c72000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform98
+  xpos -684
+  ypos 4971
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-93}}
+ }
+push $Nb2c72400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform99
+  xpos -684
+  ypos 4945
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-92}}
+ }
+push $Nb2c72800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform100
+  xpos -683
+  ypos 4919
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-91}}
+ }
+push $Nb2c72c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform101
+  xpos -683
+  ypos 4893
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-90}}
+ }
+push $Nb2c73000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform82
+  xpos -683
+  ypos 4757
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-89}}
+ }
+push $Nb2c73400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform83
+  xpos -685
+  ypos 4731
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-88}}
+ }
+push $Nb2c73800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform84
+  xpos -684
+  ypos 4705
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-87}}
+ }
+push $Nb2c73c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform85
+  xpos -683
+  ypos 4679
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-86}}
+ }
+push $Nb2c56000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform86
+  xpos -684
+  ypos 4653
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-85}}
+ }
+push $Nb2c56400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform87
+  xpos -683
+  ypos 4579
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-84}}
+ }
+push $Nb2c56800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform88
+  xpos -684
+  ypos 4553
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-83}}
+ }
+push $Nb2c56c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform89
+  xpos -684
+  ypos 4527
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-82}}
+ }
+push $Nb2c57000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform90
+  xpos -684
+  ypos 4501
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-81}}
+ }
+push $Nb2c57400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform91
+  xpos -683
+  ypos 4475
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-80}}
+ }
+push $Nb2c57800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform72
+  xpos -683
+  ypos 4305
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-79}}
+ }
+push $Nb2c57c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform73
+  xpos -685
+  ypos 4279
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-78}}
+ }
+push $Nb2c3e000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform74
+  xpos -684
+  ypos 4253
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-77}}
+ }
+push $Nb2c3e400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform75
+  xpos -683
+  ypos 4227
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-76}}
+ }
+push $Nb2c3e800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform76
+  xpos -684
+  ypos 4201
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-75}}
+ }
+push $Nb2c3ec00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform77
+  xpos -683
+  ypos 4127
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-74}}
+ }
+push $Nb2c3f000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform78
+  xpos -684
+  ypos 4101
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-73}}
+ }
+push $Nb2c3f400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform79
+  xpos -684
+  ypos 4075
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-72}}
+ }
+push $Nb2c3f800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform80
+  xpos -684
+  ypos 4049
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-71}}
+ }
+push $Nb2c3fc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform81
+  xpos -683
+  ypos 4023
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-70}}
+ }
+push $Nb2c24000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform62
+  xpos -683
+  ypos 3886
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-69}}
+ }
+push $Nb2c24400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform63
+  xpos -685
+  ypos 3860
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-68}}
+ }
+push $Nb2c24800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform64
+  xpos -684
+  ypos 3834
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-67}}
+ }
+push $Nb2c24c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform65
+  xpos -683
+  ypos 3808
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-66}}
+ }
+push $Nb2c25000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform66
+  xpos -684
+  ypos 3782
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-65}}
+ }
+push $Nb2c25400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform67
+  xpos -683
+  ypos 3708
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-64}}
+ }
+push $Nb2c25800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform68
+  xpos -684
+  ypos 3682
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-63}}
+ }
+push $Nb2c25c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform69
+  xpos -684
+  ypos 3656
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-62}}
+ }
+push $Nb2c0a000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform70
+  xpos -683
+  ypos 3630
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-61}}
+ }
+push $Nb2c0a400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform71
+  xpos -683
+  ypos 3604
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-60}}
+ }
+push $Nb2c0a800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform52
+  xpos -683
+  ypos 3439
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-59}}
+ }
+push $Nb2c0ac00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform53
+  xpos -685
+  ypos 3413
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-58}}
+ }
+push $Nb2c0b000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform54
+  xpos -684
+  ypos 3387
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-57}}
+ }
+push $Nb2c0b400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform55
+  xpos -683
+  ypos 3361
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-56}}
+ }
+push $Nb2c0b800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform56
+  xpos -684
+  ypos 3335
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-55}}
+ }
+push $Nb2c0bc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform57
+  xpos -683
+  ypos 3261
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-54}}
+ }
+push $Nb2bf0000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform58
+  xpos -684
+  ypos 3235
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-53}}
+ }
+push $Nb2bf0400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform59
+  xpos -684
+  ypos 3209
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-52}}
+ }
+push $Nb2bf0800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform60
+  xpos -684
+  ypos 3183
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-51}}
+ }
+push $Nb2bf0c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform61
+  xpos -683
+  ypos 3157
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-50}}
+ }
+push $Nb2bf1000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform49
+  xpos -683
+  ypos 3038
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-49}}
+ }
+push $Nb2bf1400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform48
+  xpos -685
+  ypos 3012
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-48}}
+ }
+push $Nb2bf1800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform47
+  xpos -684
+  ypos 2986
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-47}}
+ }
+push $Nb2bf1c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform46
+  xpos -683
+  ypos 2960
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-46}}
+ }
+push $Nb2bd6000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform45
+  xpos -684
+  ypos 2934
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-45}}
+ }
+push $Nb2bd6400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform44
+  xpos -683
+  ypos 2860
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-44}}
+ }
+push $Nb2bd6800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform43
+  xpos -684
+  ypos 2834
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-43}}
+ }
+push $Nb2bd6c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform42
+  xpos -684
+  ypos 2808
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-42}}
+ }
+push $Nb2bd7000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform41
+  xpos -684
+  ypos 2782
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-41}}
+ }
+push $Nb2bd7400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform40
+  xpos -683
+  ypos 2756
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-40}}
+ }
+push $Nb2bd7800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform39
+  xpos -684
+  ypos 2532
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-39}}
+ }
+push $Nb2bd7c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform38
+  xpos -684
+  ypos 2506
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-38}}
+ }
+push $Nb2bbc000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform37
+  xpos -684
+  ypos 2480
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-37}}
+ }
+push $Nb2bbc400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform36
+  xpos -684
+  ypos 2454
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-36}}
+ }
+push $Nb2bbc800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform35
+  xpos -684
+  ypos 2428
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-35}}
+ }
+push $Nb2bbcc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform34
+  xpos -684
+  ypos 2354
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-34}}
+ }
+push $Nb2bbd000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform33
+  xpos -684
+  ypos 2328
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-33}}
+ }
+push $Nb2bbd400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform32
+  xpos -684
+  ypos 2302
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-32}}
+ }
+push $Nb2bbd800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform31
+  xpos -683
+  ypos 2276
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-31}}
+ }
+push $Nb2bbdc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform30
+  xpos -684
+  ypos 2250
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-30}}
+ }
+push $Nb2b9e000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform29
+  xpos -684
+  ypos 2080
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-29}}
+ }
+push $Nb2b9e400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform28
+  xpos -684
+  ypos 2054
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-28}}
+ }
+push $Nb2b9e800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform27
+  xpos -684
+  ypos 2028
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-27}}
+ }
+push $Nb2b9ec00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform26
+  xpos -683
+  ypos 2002
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-26}}
+ }
+push $Nb2b9f000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform25
+  xpos -684
+  ypos 1976
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-25}}
+ }
+push $Nb2b9f400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform24
+  xpos -683
+  ypos 1902
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-24}}
+ }
+push $Nb2b9f800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform23
+  xpos -684
+  ypos 1876
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-23}}
+ }
+push $Nb2b9fc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform22
+  xpos -684
+  ypos 1850
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-22}}
+ }
+push $Nb2b88000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform21
+  xpos -684
+  ypos 1824
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-21}}
+ }
+push $Nb2b88400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform20
+  xpos -684
+  ypos 1798
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-20}}
+ }
+push $Nb2b88800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform19
+  xpos -683
+  ypos 1597
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-19}}
+ }
+push $Nb2b88c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform18
+  xpos -684
+  ypos 1571
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-18}}
+ }
+push $Nb2b89000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform17
+  xpos -684
+  ypos 1545
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-17}}
+ }
+push $Nb2b89400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform16
+  xpos -684
+  ypos 1519
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-16}}
+ }
+push $Nb2b89800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform15
+  xpos -684
+  ypos 1493
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-15}}
+ }
+push $Nb2b89c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform14
+  xpos -683
+  ypos 1419
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-14}}
+ }
+push $Nb2b6a000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform13
+  xpos -684
+  ypos 1393
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-13}}
+ }
+push $Nb2b6a400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform12
+  xpos -684
+  ypos 1367
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-12}}
+ }
+push $Nb2b6a800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform11
+  xpos -684
+  ypos 1341
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-11}}
+ }
+push $Nb2b6ac00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform10
+  xpos -684
+  ypos 1315
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-10}}
+ }
+push $Nb2b6b000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform9
+  xpos -684
+  ypos 1161
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-9}}
+ }
+push $Nb2b6b400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform8
+  xpos -684
+  ypos 1135
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-8}}
+ }
+push $Nb2b6b800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform7
+  xpos -684
+  ypos 1109
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-7}}
+ }
+push $Nb2b6bc00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform6
+  xpos -684
+  ypos 1083
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-6}}
+ }
+push $Nb2b52000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform5
+  xpos -683
+  ypos 1057
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-5}}
+ }
+push $Nb2b52400
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform4
+  xpos -684
+  ypos 999
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-4}}
+ }
+push $Nb2b52800
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform3
+  xpos -685
+  ypos 973
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-3}}
+ }
+push $Nb2b52c00
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  name Transform2
+  xpos -684
+  ypos 947
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude_control.sample-2}}
+ }
+push $Nb2b53000
+ Transform {
+  translate {{parent.TransformMain.translate/Extrude_control.sample*number} {parent.TransformMain.translate/Extrude_control.sample*number}}
+  rotate {{parent.TransformMain.rotate/Extrude_control.sample*number}}
+  scale {{(parent.TransformMain.scale-1)/Extrude_control.sample*number+1}}
+  center {{parent.TransformMain.center.x} {parent.TransformMain.center.y}}
+  filter Impulse
+  name Transform1
+  xpos -684
+  ypos 921
+  addUserKnob {20 User}
+  addUserKnob {3 number}
+  number {{Extrude.Extrude_control.sample-1}}
+ }
+push $Nb2b53c00
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos -538
+  ypos 921
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos -538
+  ypos 947
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos -538
+  ypos 973
+ }
+ Merge2 {
+  inputs 2
+  name Merge4
+  xpos -538
+  ypos 999
+ }
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos -538
+  ypos 1057
+ }
+ Merge2 {
+  inputs 2
+  name Merge6
+  xpos -538
+  ypos 1083
+ }
+ Merge2 {
+  inputs 2
+  name Merge7
+  xpos -538
+  ypos 1109
+ }
+ Merge2 {
+  inputs 2
+  name Merge8
+  xpos -538
+  ypos 1135
+ }
+ Merge2 {
+  inputs 2
+  name Merge9
+  xpos -538
+  ypos 1161
+ }
+set Nb3045800 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge10
+  xpos -538
+  ypos 1315
+ }
+ Merge2 {
+  inputs 2
+  name Merge11
+  xpos -538
+  ypos 1341
+ }
+ Merge2 {
+  inputs 2
+  name Merge12
+  xpos -538
+  ypos 1367
+ }
+ Merge2 {
+  inputs 2
+  name Merge13
+  xpos -538
+  ypos 1393
+ }
+ Merge2 {
+  inputs 2
+  name Merge14
+  xpos -538
+  ypos 1419
+ }
+ Merge2 {
+  inputs 2
+  name Merge15
+  xpos -538
+  ypos 1493
+ }
+ Merge2 {
+  inputs 2
+  name Merge16
+  xpos -538
+  ypos 1519
+ }
+ Merge2 {
+  inputs 2
+  name Merge17
+  xpos -538
+  ypos 1545
+ }
+ Merge2 {
+  inputs 2
+  name Merge18
+  xpos -538
+  ypos 1571
+ }
+ Merge2 {
+  inputs 2
+  name Merge19
+  xpos -538
+  ypos 1597
+ }
+set Nb3093000 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge20
+  xpos -538
+  ypos 1798
+ }
+ Merge2 {
+  inputs 2
+  name Merge21
+  xpos -538
+  ypos 1824
+ }
+ Merge2 {
+  inputs 2
+  name Merge22
+  xpos -538
+  ypos 1850
+ }
+ Merge2 {
+  inputs 2
+  name Merge23
+  xpos -538
+  ypos 1876
+ }
+ Merge2 {
+  inputs 2
+  name Merge24
+  xpos -538
+  ypos 1902
+ }
+ Merge2 {
+  inputs 2
+  name Merge25
+  xpos -538
+  ypos 1976
+ }
+ Merge2 {
+  inputs 2
+  name Merge26
+  xpos -538
+  ypos 2002
+ }
+ Merge2 {
+  inputs 2
+  name Merge27
+  xpos -538
+  ypos 2028
+ }
+ Merge2 {
+  inputs 2
+  name Merge28
+  xpos -538
+  ypos 2054
+ }
+ Merge2 {
+  inputs 2
+  name Merge30
+  xpos -538
+  ypos 2080
+ }
+set Nb30da800 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge31
+  xpos -538
+  ypos 2250
+ }
+ Merge2 {
+  inputs 2
+  name Merge32
+  xpos -538
+  ypos 2276
+ }
+ Merge2 {
+  inputs 2
+  name Merge33
+  xpos -538
+  ypos 2302
+ }
+ Merge2 {
+  inputs 2
+  name Merge34
+  xpos -538
+  ypos 2328
+ }
+ Merge2 {
+  inputs 2
+  name Merge35
+  xpos -538
+  ypos 2354
+ }
+ Merge2 {
+  inputs 2
+  name Merge36
+  xpos -538
+  ypos 2428
+ }
+ Merge2 {
+  inputs 2
+  name Merge37
+  xpos -538
+  ypos 2454
+ }
+ Merge2 {
+  inputs 2
+  name Merge38
+  xpos -538
+  ypos 2480
+ }
+ Merge2 {
+  inputs 2
+  name Merge39
+  xpos -538
+  ypos 2506
+ }
+ Merge2 {
+  inputs 2
+  name Merge40
+  xpos -538
+  ypos 2532
+ }
+set Nb3124000 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge41
+  xpos -538
+  ypos 2756
+ }
+ Merge2 {
+  inputs 2
+  name Merge42
+  xpos -538
+  ypos 2782
+ }
+ Merge2 {
+  inputs 2
+  name Merge43
+  xpos -538
+  ypos 2808
+ }
+ Merge2 {
+  inputs 2
+  name Merge44
+  xpos -538
+  ypos 2834
+ }
+ Merge2 {
+  inputs 2
+  name Merge45
+  xpos -538
+  ypos 2860
+ }
+ Merge2 {
+  inputs 2
+  name Merge46
+  xpos -538
+  ypos 2934
+ }
+ Merge2 {
+  inputs 2
+  name Merge47
+  xpos -538
+  ypos 2960
+ }
+ Merge2 {
+  inputs 2
+  name Merge48
+  xpos -538
+  ypos 2986
+ }
+ Merge2 {
+  inputs 2
+  name Merge49
+  xpos -538
+  ypos 3012
+ }
+ Merge2 {
+  inputs 2
+  name Merge50
+  xpos -538
+  ypos 3038
+ }
+set Nb31bb800 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge53
+  xpos -538
+  ypos 3157
+ }
+ Merge2 {
+  inputs 2
+  name Merge54
+  xpos -538
+  ypos 3183
+ }
+ Merge2 {
+  inputs 2
+  name Merge55
+  xpos -538
+  ypos 3209
+ }
+ Merge2 {
+  inputs 2
+  name Merge56
+  xpos -538
+  ypos 3235
+ }
+ Merge2 {
+  inputs 2
+  name Merge57
+  xpos -538
+  ypos 3261
+ }
+ Merge2 {
+  inputs 2
+  name Merge58
+  xpos -538
+  ypos 3335
+ }
+ Merge2 {
+  inputs 2
+  name Merge59
+  xpos -538
+  ypos 3361
+ }
+ Merge2 {
+  inputs 2
+  name Merge60
+  xpos -538
+  ypos 3387
+ }
+ Merge2 {
+  inputs 2
+  name Merge61
+  xpos -538
+  ypos 3413
+ }
+ Merge2 {
+  inputs 2
+  name Merge62
+  xpos -538
+  ypos 3439
+ }
+set Nb3207000 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge63
+  xpos -538
+  ypos 3604
+ }
+ Merge2 {
+  inputs 2
+  name Merge64
+  xpos -538
+  ypos 3630
+ }
+ Merge2 {
+  inputs 2
+  name Merge65
+  xpos -538
+  ypos 3656
+ }
+ Merge2 {
+  inputs 2
+  name Merge66
+  xpos -538
+  ypos 3682
+ }
+ Merge2 {
+  inputs 2
+  name Merge67
+  xpos -538
+  ypos 3708
+ }
+ Merge2 {
+  inputs 2
+  name Merge68
+  xpos -538
+  ypos 3782
+ }
+ Merge2 {
+  inputs 2
+  name Merge69
+  xpos -538
+  ypos 3808
+ }
+ Merge2 {
+  inputs 2
+  name Merge70
+  xpos -538
+  ypos 3834
+ }
+ Merge2 {
+  inputs 2
+  name Merge71
+  xpos -538
+  ypos 3860
+ }
+ Merge2 {
+  inputs 2
+  name Merge72
+  xpos -538
+  ypos 3886
+ }
+set Nb3254800 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge73
+  xpos -538
+  ypos 4023
+ }
+ Merge2 {
+  inputs 2
+  name Merge74
+  xpos -538
+  ypos 4049
+ }
+ Merge2 {
+  inputs 2
+  name Merge75
+  xpos -538
+  ypos 4075
+ }
+ Merge2 {
+  inputs 2
+  name Merge76
+  xpos -538
+  ypos 4101
+ }
+ Merge2 {
+  inputs 2
+  name Merge77
+  xpos -538
+  ypos 4127
+ }
+ Merge2 {
+  inputs 2
+  name Merge78
+  xpos -538
+  ypos 4201
+ }
+ Merge2 {
+  inputs 2
+  name Merge79
+  xpos -538
+  ypos 4227
+ }
+ Merge2 {
+  inputs 2
+  name Merge80
+  xpos -538
+  ypos 4253
+ }
+ Merge2 {
+  inputs 2
+  name Merge81
+  xpos -538
+  ypos 4279
+ }
+ Merge2 {
+  inputs 2
+  name Merge82
+  xpos -538
+  ypos 4305
+ }
+set Nb329c000 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge83
+  xpos -538
+  ypos 4475
+ }
+ Merge2 {
+  inputs 2
+  name Merge84
+  xpos -538
+  ypos 4501
+ }
+ Merge2 {
+  inputs 2
+  name Merge85
+  xpos -538
+  ypos 4527
+ }
+ Merge2 {
+  inputs 2
+  name Merge86
+  xpos -538
+  ypos 4553
+ }
+ Merge2 {
+  inputs 2
+  name Merge87
+  xpos -538
+  ypos 4579
+ }
+ Merge2 {
+  inputs 2
+  name Merge88
+  xpos -538
+  ypos 4653
+ }
+ Merge2 {
+  inputs 2
+  name Merge89
+  xpos -538
+  ypos 4679
+ }
+ Merge2 {
+  inputs 2
+  name Merge90
+  xpos -538
+  ypos 4705
+ }
+ Merge2 {
+  inputs 2
+  name Merge91
+  xpos -538
+  ypos 4731
+ }
+ Merge2 {
+  inputs 2
+  name Merge92
+  xpos -538
+  ypos 4757
+ }
+set Nb3333800 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge93
+  xpos -538
+  ypos 4893
+ }
+ Merge2 {
+  inputs 2
+  name Merge94
+  xpos -538
+  ypos 4919
+ }
+ Merge2 {
+  inputs 2
+  name Merge95
+  xpos -538
+  ypos 4945
+ }
+ Merge2 {
+  inputs 2
+  name Merge96
+  xpos -538
+  ypos 4971
+ }
+ Merge2 {
+  inputs 2
+  name Merge97
+  xpos -538
+  ypos 4997
+ }
+ Merge2 {
+  inputs 2
+  name Merge98
+  xpos -538
+  ypos 5071
+ }
+ Merge2 {
+  inputs 2
+  name Merge99
+  xpos -538
+  ypos 5097
+ }
+ Merge2 {
+  inputs 2
+  name Merge100
+  xpos -538
+  ypos 5123
+ }
+ Merge2 {
+  inputs 2
+  name Merge101
+  xpos -538
+  ypos 5149
+ }
+ Merge2 {
+  inputs 2
+  name Merge102
+  xpos -538
+  ypos 5175
+ }
+push $Nb3333800
+push $Nb329c000
+push $Nb3254800
+push $Nb3207000
+push $Nb31bb800
+push $Nb3124000
+push $Nb30da800
+push $Nb3093000
+push $Nb3045800
+push 0
+ Switch {
+  inputs 11
+  which {{parent.Sample}}
+  name Switch2
+  xpos -347
+  ypos 5705
+ }
+set Nac44fa80 [stack 0]
+ Dot {
+  name Dot115
+  xpos -313
+  ypos 5810
+ }
+push $Nac44fa80
+ Blur {
+  channels rgba
+  size {{parent.Extrude_control.Shading_smooth}}
+  name Blur2
+  label "\[value size]"
+  xpos -598
+  ypos 5865
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -347
+  ypos 5903
+ }
+ Premult {
+  name Premult2
+  xpos -347
+  ypos 5941
+ }
+ Dot {
+  name Dot58
+  xpos -313
+  ypos 6004
+ }
+set Nb33c1c00 [stack 0]
+push $Nad4be000
+ Dot {
+  name Dot116
+  xpos -190
+  ypos 5735
+ }
+push $Nb33c1c00
+ Merge2 {
+  inputs 2
+  name Merge51
+  xpos -224
+  ypos 5896
+ }
+set Nb33c1400 [stack 0]
+ Switch {
+  inputs 2
+  which {{parent.OnlyShowExtrude}}
+  name Switch1
+  xpos -224
+  ypos 6000
+ }
+push $Nad4be000
+ Dot {
+  name Dot7
+  xpos -111
+  ypos 159
+ }
+ Dissolve {
+  inputs 2+1
+  which 1
+  name Dissolve1
+  xpos -64
+  ypos 5994
+ }
+set Nb33c0c00 [stack 0]
+ Switch {
+  inputs 2
+  which {{parent.Outputbottomlayeralpha}}
+  name Switch5
+  selected true
+  xpos -155
+  ypos 6076
+ }
+ Dot {
+  name Dot117
+  xpos -121
+  ypos 6114
+ }
+push $Nb33c0c00
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos -64
+  ypos 6104
+ }
+ Output {
+  name Output1
+  xpos -64
+  ypos 6165
+ }
+ NoOp {
+  inputs 0
+  name Extrude_control
+  xpos -1101
+  ypos 907
+  addUserKnob {20 User}
+  addUserKnob {3 sample}
+  sample {{parent.Switch2.which*10}}
+  addUserKnob {7 light_angle R 0 360}
+  light_angle 4
+  addUserKnob {7 radius R 0 10}
+  radius 1.85
+  addUserKnob {7 lighting_blur_amount R 0 10}
+  lighting_blur_amount 5
+  addUserKnob {7 Shading_smooth R 0 10}
+  Shading_smooth 3
+ }
+push $Nb33c1400
+push $Nb173e000
+ Viewer {
+  inputs 2
+  frame_range 1001-1001
+  frame_increment 8
+  fps 23.97602463
+  far 1000000
+  name Viewer1
+  xpos -395
+  ypos 54
+ }
+end_group

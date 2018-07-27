@@ -1,0 +1,590 @@
+#! C:/Program Files/Nuke9.0v6/nuke-9.0.6.dll -nx
+version 9.0 v6
+Gizmo {
+ addUserKnob {20 User}
+ addUserKnob {4 scopeCrosshair l "Crosshair Type" t "Choose which crosshair type you want.  " M {"Realistic 01" "Realistic 02" Minimal Circular "Video Game"}}
+ addUserKnob {26 ""}
+ addUserKnob {7 scopeEdges l "Edge Scale" t "Value of 1 is default scale.  Higher values push the edges out, lower values push the edges in." R 0 2}
+ scopeEdges 1
+ addUserKnob {7 scopeEdgeBlur l "Black Edge Blur" t "Softness of the black scope edges." R 0 200}
+ scopeEdgeBlur 100
+ addUserKnob {3 scopeBlur l "Plate Blur" t "Amount of blur on the footage as it approaches the black edges"}
+ scopeBlur 15
+ addUserKnob {26 ""}
+ addUserKnob {6 scopeDistortion l "Lens Distortion" t "Uncheck to turn lens distortion off." +STARTLINE}
+ scopeDistortion true
+ addUserKnob {7 scopeAbberation l Abberation t "0:  no abberation\n1:  full abberation"}
+ scopeAbberation 1
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x26090400
+  label "Distortion and Abberation"
+  note_font_size 42
+  xpos 327
+  ypos -1032
+  bdwidth 661
+  bdheight 573
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x1400e00
+  label "Black Edges"
+  note_font_size 42
+  xpos 53
+  ypos -429
+  bdwidth 795
+  bdheight 727
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x3f080d00
+  label Crosshairs
+  note_font_size 42
+  xpos -67
+  ypos 330
+  bdwidth 1002
+  bdheight 748
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  tile_color 0x12321600
+  label "No Alpha"
+  note_font_size 42
+  xpos 548
+  ypos -1281
+  bdwidth 300
+  bdheight 224
+ }
+ Read {
+  inputs 0
+  file Q:/Assets/STOCK_ELEMENTS/Weapons/Stills/Crosshairs/Crosshair05.png
+  format "575 576 0 0 575 576 1 "
+  origset true
+  name Read5
+  xpos 578
+  ypos 577
+ }
+ Transform {
+  translate {0 86}
+  center {691 268}
+  name Transform6
+  xpos 578
+  ypos 663
+ }
+ Dot {
+  name Dot12
+  xpos 612
+  ypos 801
+ }
+ Read {
+  inputs 0
+  file Q:/Assets/STOCK_ELEMENTS/Weapons/Stills/Crosshairs/Crosshair04.png
+  format "856 542 0 0 856 542 1 "
+  origset true
+  name Read4
+  xpos 449
+  ypos 571
+ }
+ Transform {
+  translate {0 86}
+  center {691 268}
+  name Transform5
+  xpos 449
+  ypos 657
+ }
+ Read {
+  inputs 0
+  file Q:/Assets/STOCK_ELEMENTS/Weapons/Stills/Crosshairs/Crosshair02.png
+  format "1382 696 0 0 1382 696 1 "
+  origset true
+  name Read7
+  xpos 336
+  ypos 565
+ }
+ Transform {
+  translate {0 7}
+  center {691 348}
+  name Transform3
+  xpos 336
+  ypos 695
+ }
+ Read {
+  inputs 0
+  file Q:/Assets/STOCK_ELEMENTS/Weapons/Stills/Crosshairs/Crosshair03.png
+  format "1382 536 0 0 1382 536 1 "
+  origset true
+  name Read2
+  xpos 169
+  ypos 569
+ }
+ Transform {
+  translate {0 86}
+  center {691 268}
+  name Transform4
+  xpos 169
+  ypos 655
+ }
+ Read {
+  inputs 0
+  file Q:/Assets/STOCK_ELEMENTS/Weapons/Stills/Crosshairs/Crosshair01.png
+  format "1382 708 0 0 1382 708 1 "
+  origset true
+  name Read6
+  xpos 37
+  ypos 576
+ }
+ Dot {
+  name Dot11
+  xpos 71
+  ypos 801
+ }
+ Switch {
+  inputs 5
+  which {{parent.scopeCrosshair}}
+  name Switch1
+  xpos 336
+  ypos 797
+ }
+ Reformat {
+  resize none
+  pbb true
+  name Reformat1
+  xpos 336
+  ypos 841
+ }
+ BlackOutside {
+  name BlackOutside1
+  xpos 336
+  ypos 885
+ }
+ Premult {
+  name Premult1
+  xpos 336
+  ypos 924
+ }
+ Transform {
+  translate {1 -86}
+  center {959 626}
+  name Transform1
+  xpos 336
+  ypos 964
+ }
+ Roto {
+  inputs 0
+  output alpha
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc3e2b67f}
+        {x447036ab xc396cccb}
+        {x43e2b680}
+        {0 xc3e2b67f}
+        {x44debb56 x4401d99a}
+        {0 x43e2b680}
+        {x43e2b680}
+        {x447036ab x44a78cce}
+        {xc3e2b67f}
+        {0 x43e2b680}
+        {x430bdaaf x4401d99a}
+        {0 xc3e2b67f}}}
+      {cc
+       {f 8192}
+       {p
+        {xc3e2b67f}
+        {}
+        {x43e2b680}
+        {0 xc3e2b67f}
+        {}
+        {0 x43e2b680}
+        {x43e2b680}
+        {}
+        {xc3e2b67f}
+        {0 x43e2b680}
+        {}
+        {0 xc3e2b67f}}}}
+     {t x44700000 x44070000
+      {{x447a4000 0}}     0 0
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}     0
+   {=parent.scopeEdges 1}
+   {=parent.scopeEdges 1} 
+      {{x447a4000 1}}     0 0
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x447a4000 ltm x447a4000 tt x40e00000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1001
+  lifetime_end 1001
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name EdgeRoto
+  xpos 163
+  ypos -164
+ }
+ Invert {
+  name Invert1
+  xpos 163
+  ypos -96
+ }
+ Constant {
+  inputs 0
+  color {0.0002300000342 0 0.001000000047 1}
+  name Constant1
+  xpos 292
+  ypos -195
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge2
+  xpos 292
+  ypos -90
+ }
+set N568dec00 [stack 0]
+ Blur {
+  size 11.7
+  name Blur2
+  label "\[value size]"
+  xpos 292
+  ypos 7
+ }
+ Defocus {
+  defocus {{parent.scopeEdgeBlur}}
+  name Defocus1
+  label "\[value defocus]"
+  xpos 292
+  ypos 111
+ }
+ Dot {
+  name Dot1
+  xpos 326
+  ypos 186
+ }
+push $N568dec00
+ Dot {
+  name Dot3
+  xpos 469
+  ypos -86
+ }
+ Defocus {
+  defocus 50
+  name Defocus2
+  label "\[value defocus]"
+  xpos 435
+  ypos 4
+ }
+ Dot {
+  name Dot2
+  xpos 469
+  ypos 136
+ }
+ Roto {
+  inputs 0
+  output alpha
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc3e2b67f}
+        {x447036ab xc396cccb}
+        {x43e2b680}
+        {0 xc3e2b67f}
+        {x44debb56 x4401d99a}
+        {0 x43e2b680}
+        {x43e2b680}
+        {x447036ab x44a78cce}
+        {xc3e2b67f}
+        {0 x43e2b680}
+        {x430bdaaf x4401d99a}
+        {0 xc3e2b67f}}}
+      {cc
+       {f 8192}
+       {p
+        {xc3e2b67f}
+        {}
+        {x43e2b680}
+        {0 xc3e2b67f}
+        {}
+        {0 x43e2b680}
+        {x43e2b680}
+        {}
+        {xc3e2b67f}
+        {0 x43e2b680}
+        {}
+        {0 xc3e2b67f}}}}
+     {t x44700000 x44070000
+      {{x447a4000 0}}     0 0
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}     0
+      {=parent.EdgeRoto.curves.Ellipse1.scale*.85 x3f59999a}
+      {=parent.EdgeRoto.curves.Ellipse1.scale*.85 x3f59999a}
+      {{x447a4000 1}}     0 0
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 0}}
+      {{x447a4000 1}}}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x447a4000 ltm x447a4000 tt x40e00000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1001
+  lifetime_end 1001
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name DistortionRoto
+  xpos 437
+  ypos -936
+ }
+ Invert {
+  name Invert2
+  xpos 437
+  ypos -876
+ }
+ Blur {
+  size 200
+  name Blur1
+  label "\[value size]"
+  xpos 437
+  ypos -798
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  label "\[value in]"
+  xpos 437
+  ypos -698
+ }
+set N2f9ac400 [stack 0]
+ Dot {
+  name Dot4
+  xpos 471
+  ypos -577
+ }
+push $N2f9ac400
+ Input {
+  inputs 0
+  name Input1
+  xpos 658
+  ypos -1226
+ }
+ Shuffle {
+  alpha black
+  name Shuffle2
+  label "\[value in]"
+  xpos 658
+  ypos -1185
+ }
+ Dot {
+  name Dot6
+  xpos 692
+  ypos -907
+ }
+set N2f9fb400 [stack 0]
+ LensDistortion {
+  serializeKnob ""
+  serialiseKnob "22 serialization::archive 9 0 0 0 0 0 0 0 0 0 0 0 0"
+  distortion1 0.01
+  distortion2 0.046
+  cardScale {1.072320104 1.072320104 1}
+  a -0.2161009461
+  b 0.1009692326
+  c 0.09975472838
+  name LensDistortion1
+  xpos 780
+  ypos -911
+ }
+ Dot {
+  name Dot7
+  xpos 814
+  ypos -814
+ }
+push $N2f9fb400
+ Switch {
+  inputs 2
+  which {{parent.scopeDistortion}}
+  name Switch2
+  xpos 658
+  ypos -818
+ }
+ OFXcom.frischluft.openfx.depthoffield_v1 {
+  inputs 2
+  show "normal blur"
+  radius {{parent.scopeBlur}}
+  focal_distance 0
+  focal_point {1098 624}
+  highlight_intensity 0
+  gamma_correction true
+  "-> Depth Buffer..." 1
+  depth_invert false
+  depth_curve 1
+  black_point 0
+  white_point 1
+  "-> Iris..." 1
+  iris_rounded 1
+  iris_facets 3
+  iris_angle 0
+  iris_border_thickness 0.3
+  iris_border_brightness 0
+  iris_aspect 0
+  "-> Highlight Selection..." 1
+  lightness_start 0.8
+  lightness_end 1
+  lightness_soften 0
+  "-> Outside Image..." 1
+  outside_horizontal "border color"
+  outside_vertical "border color"
+  outside_color 0
+  name "FL Depth Of Field1"
+  xpos 658
+  ypos -692
+ }
+set N2f9fa400 [stack 0]
+ Dot {
+  name Dot13
+  xpos 830
+  ypos -688
+ }
+ IE_Abberation_v3 {
+  name IE_Abberation_v3_1
+  note_font Verdana
+  selected true
+  xpos 796
+  ypos -580
+  red_scale 1.0175
+  green_scale 1.011
+ }
+push $N2f9fa400
+ Dissolve {
+  inputs 2+1
+  which {{parent.scopeAbberation}}
+  name Dissolve1
+  xpos 658
+  ypos -587
+ }
+ ColorCorrect {
+  inputs 1+1
+  gain {0.4219710529 0.2906999886 0.5699999928 1}
+  name ColorCorrect1
+  xpos 658
+  ypos 132
+ }
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos 658
+  ypos 182
+ }
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos 658
+  ypos 956
+ }
+ Output {
+  name Output1
+  xpos 658
+  ypos 1119
+ }
+end_group

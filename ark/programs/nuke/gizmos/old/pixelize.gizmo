@@ -1,0 +1,258 @@
+#! C:/Program Files/Nuke9.0v8/nuke-9.0.8.dll -nx
+version 9.0 v8
+Gizmo {
+note_font Verdana
+mapsize {0.15 0.15}
+addUserKnob {20 User}
+addUserKnob {4 Resolution M {96 120 160 240 480 "" "" "" ""}}
+Resolution 480
+addUserKnob {26 ""}
+addUserKnob {41 which l Mix T Dissolve1.which}
+addUserKnob {41 scale l "Size Tune" T Transform2.scale}
+}
+Constant {
+inputs 0
+channels none
+format "4 4 0 0 4 4 1 "
+name Constant1
+xpos 88
+ypos -1009
+}
+Expression {
+expr0 "(x == 0) - (y == 0)"
+expr1 "(x == 1) - (y == 0)"
+expr2 "(x == 2) - (y == 0)"
+name Expression1
+xpos 88
+ypos -925
+}
+Reformat {
+type "to box"
+format "1920 1920 0 0 1920 1920 1 HD Square"
+box_width {{Input1.width}}
+box_height 3840
+box_fixed true
+resize distort
+filter Impulse
+name Reformat2
+xpos 88
+ypos -854
+}
+Tile {
+rows {{"\[value Resolution]"}}
+columns {{"\[value Resolution]"}}
+filter Impulse
+name Tile4
+xpos 88
+ypos -686
+}
+Transform {
+center {{"Input1.width * .5"} {"Input1.width * .5"}}
+black_outside false
+name Transform2
+selected true
+xpos 88
+ypos -662
+disable true
+}
+Reformat {
+type "to box"
+box_width 3840
+box_height {{Input1.height}}
+box_fixed true
+name Reformat1
+xpos 88
+ypos -615
+}
+set Nc83a0400 [stack 0]
+Blur {
+name Blur1
+label "\[value size]"
+xpos 88
+ypos -467
+}
+Dot {
+name Dot44
+xpos 122
+ypos -240
+}
+set N9aed3800 [stack 0]
+Dot {
+name Dot45
+xpos 250
+ypos -240
+}
+Shuffle {
+red blue
+green blue
+name Shuffle19
+xpos 216
+ypos -179
+}
+Dot {
+name Dot46
+xpos 250
+ypos 16
+}
+Input {
+inputs 0
+name Input1
+xpos -296
+ypos -396
+}
+set N9aed2800 [stack 0]
+Dot {
+name Dot47
+tile_color 0xff
+xpos -262
+ypos -240
+}
+set N9aed2400 [stack 0]
+Dot {
+name Dot48
+xpos -390
+ypos -240
+}
+Shuffle {
+in2 rgb
+red black
+green black
+name Shuffle20
+xpos -424
+ypos -179
+}
+Merge2 {
+inputs 2
+operation geometric
+name Merge15
+xpos -424
+ypos 13
+}
+Dot {
+name Dot49
+xpos -390
+ypos 208
+}
+push 0
+push $N9aed3800
+Dot {
+name Dot50
+xpos 121
+ypos -145
+}
+Shuffle {
+red green
+blue green
+name Shuffle21
+xpos 88
+ypos -51
+}
+push $N9aed2400
+Shuffle {
+in2 rgb
+green black
+blue black
+name Shuffle22
+xpos -296
+ypos -179
+}
+Merge2 {
+inputs 2
+operation geometric
+name Merge16
+xpos -296
+ypos -51
+}
+push $N9aed3800
+Dot {
+name Dot51
+xpos 58
+ypos -240
+}
+Shuffle {
+green red
+blue red
+name Shuffle23
+xpos 24
+ypos -176
+}
+Dot {
+name Dot52
+xpos 58
+ypos -112
+}
+push $N9aed2400
+Dot {
+name Dot53
+xpos -134
+ypos -240
+}
+Shuffle {
+in2 rgb
+red black
+blue black
+name Shuffle24
+xpos -168
+ypos -179
+}
+Merge2 {
+inputs 2
+operation geometric
+name Merge17
+xpos -168
+ypos -115
+}
+Dot {
+name Dot54
+xpos -134
+ypos 208
+}
+Merge2 {
+inputs 3+1
+name Merge18
+xpos -296
+ypos 205
+}
+Grade {
+white 1.5
+gamma 0.95
+name Grade4
+xpos -296
+ypos 262
+}
+Blur {
+size 0.8
+name Blur2
+label "\[value size]"
+xpos -296
+ypos 298
+}
+push $N9aed2800
+Dot {
+name Dot1
+xpos -545
+ypos -393
+}
+Dissolve {
+inputs 2
+which 1
+name Dissolve1
+xpos -579
+ypos 304
+}
+Output {
+name Output1
+xpos -579
+ypos 623
+}
+push $Nc83a0400
+Viewer {
+frame_range 1000-1078
+frame_increment 8
+fps 23.97602463
+input_process false
+name Viewer1
+xpos 886
+ypos -486
+}
+end_group

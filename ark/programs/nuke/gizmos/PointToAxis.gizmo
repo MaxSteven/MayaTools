@@ -1,0 +1,33 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+add_layer {Point Point.red Point.green Point.blue}
+Gizmo {
+ help "Remember to place this AFTER the cg prep gizmo.\n\nUsing the point pass from a cg render, you define a point in 2d and this gizmo will generate an axis at that point"
+ addUserKnob {20 PointToAxis}
+ addUserKnob {41 points l "point channel" T Shuffle.in}
+ addUserKnob {12 refpoint l "ref point" t "Point in 2d that you'd like to create an axis for"}
+ refpoint {897 246}
+ addUserKnob {13 pointpos l "point position" t "Actual 3d point position of the 2d ref point.  This is only filled in after you press Make Point."}
+ pointpos {27589.79688 10447.54102 -27178.0957}
+ addUserKnob {22 make_point l "Make Point" T "pt = nuke.thisNode()\n\nrefx = pt\['refpoint'].getValue()\[0]\nrefy = pt\['refpoint'].getValue()\[1]\n\nshuf = pt.node('Shuffle')\nx = shuf.sample('rgba.red',refx,refy)\ny = shuf.sample('rgba.green',refx,refy)\nz = shuf.sample('rgba.blue',refx,refy)\n\npt\['pointpos'].setValue(\[x,y,z])\n\nnuke.root().begin()\n#nuke.createNode('Axis','translate \"%f %f %f\"' % (x,y,z))\nnuke.nodes.Axis(translate=('%f %f %f' % (x,y,z)))" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -150
+  ypos -201
+ }
+set N1c662c00 [stack 0]
+ Shuffle {
+  in Point
+  name Shuffle
+  xpos -150
+  ypos -105
+ }
+push $N1c662c00
+ Output {
+  name Output1
+  xpos -40
+  ypos -81
+ }
+end_group

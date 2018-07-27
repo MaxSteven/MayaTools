@@ -1,0 +1,67 @@
+#! C:/Program Files/Nuke10.0v1/nuke-10.0.1.dll -nx
+version 10.0 v1
+Gizmo {
+ addUserKnob {20 User}
+ addUserKnob {41 hours t "Starting time hours" T Timer.hours}
+ addUserKnob {41 minutes t "Starting time minutes" T Timer.minutes}
+ addUserKnob {41 seconds t "Starting time seconds" T Timer.seconds}
+ addUserKnob {41 frames t "Starting time frames" T Timer.frames}
+ addUserKnob {41 startframe l "Start Frame" T Timer.startframe}
+ addUserKnob {41 setstart l "Set Start Frame" -STARTLINE T Timer.setstart}
+ addUserKnob {41 countDirection l "Count Direction" T Timer.countDirection}
+ addUserKnob {41 timeBase l "Time Base" T Timer.timeBase}
+ addUserKnob {20 Font n 1}
+ addUserKnob {41 font T Timer.font}
+ addUserKnob {41 index l "" -STARTLINE T Timer.index}
+ addUserKnob {41 size T Timer.size}
+ addUserKnob {41 kerning T Timer.kerning}
+ addUserKnob {41 leading T Timer.leading}
+ addUserKnob {41 xjustify l justify T Timer.xjustify}
+ addUserKnob {41 yjustify l "" -STARTLINE T Timer.yjustify}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -266
+  ypos 105
+ }
+ Text {
+  message "\[python arkNuke.timer()]"
+  font "\[getenv ARK_ROOT]ark/programs/nuke/gizmos/ie/font/DS-DIGI.TTF"
+  size 150
+  yjustify center
+  box {480 270 1440 810}
+  center {960 540}
+  name Timer
+  selected true
+  xpos -266
+  ypos 146
+  addUserKnob {20 User}
+  addUserKnob {3 hours}
+  addUserKnob {3 minutes}
+  minutes 24
+  addUserKnob {3 seconds}
+  seconds 24
+  addUserKnob {3 frames}
+  addUserKnob {3 startframe l "Start Frame" t "Offset timer to start on this frame"}
+  startframe 1001
+  addUserKnob {22 setstart l "Set Start Frame" -STARTLINE T nuke.thisNode().knob('startframe').setValue(nuke.frame())}
+  addUserKnob {4 countDirection l "Count Direction" t "Whether the clock counts up or down" M {"Count down" "Count up" ""}}
+  addUserKnob {4 timeBase l "Time Base" M {:24 :60}}
+ }
+set N5d44dc00 [stack 0]
+ Output {
+  name Output1
+  xpos -266
+  ypos 245
+ }
+push $N5d44dc00
+ Viewer {
+  frame_range 1-100
+  frame_increment 8
+  far 1000000
+  name Viewer1
+  xpos -420
+  ypos 186
+ }
+end_group

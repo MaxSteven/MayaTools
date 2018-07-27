@@ -1,0 +1,145 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+version 10.0 v4
+Gizmo {
+ inputs 2
+ addUserKnob {20 geostormOfflineCheck l "Geostorm Offline Check"}
+ addUserKnob {3 timeOffset}
+ addUserKnob {7 compare}
+ compare 0.42
+ addUserKnob {7 opacity}
+ opacity 1
+ addUserKnob {7 difference}
+}
+ Input {
+  inputs 0
+  name comp
+  xpos 510
+  ypos 350
+ }
+ Crop {
+  box {205 0 2253 1152}
+  reformat true
+  crop false
+  name working_area
+  xpos 510
+  ypos 422
+ }
+ Crop {
+  box {0 294 2048 1152}
+  reformat true
+  crop false
+  name top_extract
+  xpos 510
+  ypos 470
+ }
+ Reformat {
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  black_outside true
+  name hd1
+  xpos 510
+  ypos 536
+ }
+set Nda326000 [stack 0]
+ Dot {
+  name Dot4
+  xpos 874
+  ypos 546
+ }
+ Ramp {
+  replace true
+  opacity {{parent.opacity}}
+  p0 {{input.width*compare} 100}
+  p1 {{"input.width*compare +1"} 100}
+  name Ramp1
+  xpos 840
+  ypos 638
+ }
+set N9a2d2000 [stack 0]
+ Input {
+  inputs 0
+  name offline
+  xpos 290
+  ypos 350
+  number 1
+ }
+ TimeOffset {
+  time_offset {{timeOffset}}
+  time ""
+  name TimeOffset1
+  label "\[value time_offset]"
+  selected true
+  xpos 290
+  ypos 376
+ }
+ Reformat {
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  black_outside true
+  name Reformat2
+  xpos 290
+  ypos 440
+ }
+ Dot {
+  name Dot16
+  xpos 324
+  ypos 642
+ }
+set N9ea30400 [stack 0]
+push $Nda326000
+ Merge2 {
+  inputs 2+1
+  name Merge11
+  xpos 510
+  ypos 638
+ }
+set N9ea30000 [stack 0]
+ Dot {
+  name Dot1
+  xpos 434
+  ypos 738
+ }
+ Dot {
+  name Dot2
+  xpos 434
+  ypos 858
+ }
+push $N9a2d2000
+ Invert {
+  name Invert1
+  xpos 840
+  ypos 704
+ }
+ Dot {
+  name Dot3
+  xpos 874
+  ypos 786
+ }
+push $N9ea30400
+push $Nda326000
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge1
+  xpos 624
+  ypos 706
+ }
+push $N9ea30000
+ Dissolve {
+  inputs 2+1
+  which 1
+  name Dissolve1
+  xpos 510
+  ypos 776
+ }
+ Dissolve {
+  inputs 2
+  which {{1-difference}}
+  name Dissolve2
+  xpos 510
+  ypos 848
+ }
+ Output {
+  name Output1
+  xpos 510
+  ypos 974
+ }
+end_group

@@ -1,0 +1,68 @@
+#! C:/Program Files/Nuke10.0v1/nuke-10.0.1.dll -nx
+version 10.0 v1
+Gizmo {
+addUserKnob {20 User}
+addUserKnob {41 reset_hlpr l "Reset Input Range" t "Click this if you get error \"No range on input clip\"" T Krono_Helper.reset_hlpr}
+addUserKnob {41 hlprFrame l Frame T Krono_Helper.hlprFrame}
+addUserKnob {26 ""}
+addUserKnob {20 endGroup n -1}
+addUserKnob {41 hlprVectDetail l "Vector Detail" T Krono_Helper.hlprVectDetail}
+addUserKnob {41 hlprStrength l Strength T Krono_Helper.hlprStrength}
+addUserKnob {26 ""}
+addUserKnob {20 Shutter n 1}
+addUserKnob {41 hlprSamples l "Shutter Samples" T Krono_Helper.hlprSamples}
+addUserKnob {41 hlprShuttrTime l "Shutter Time" T Krono_Helper.hlprShuttrTime}
+}
+Input {
+inputs 0
+name Source
+xpos -244
+ypos 467
+}
+Kronos {
+input.first 1000
+input.last 1048
+retimedChannels all
+timing2 Frame
+timingFrame2 {{parent.Krono_Helper.hlprFrame}}
+showLegacyMode false
+motionEstimation Regularized
+vectorDetailReg {{parent.Krono_Helper.hlprVectDetail}}
+strengthReg {{parent.Krono_Helper.hlprStrength}}
+Shutter 1
+shutterSamples {{parent.Krono_Helper.hlprSamples}}
+shutterTime {{parent.Krono_Helper.hlprShuttrTime}}
+legacyModeNuke9 false
+name Kronos
+xpos -244
+ypos 600
+addUserKnob {20 User}
+addUserKnob {41 resetInputRange_1 l Reset T Kronos.resetInputRange}
+}
+Output {
+name Output1
+xpos -256
+ypos 710
+}
+NoOp {
+inputs 0
+name Krono_Helper
+xpos -455
+ypos 602
+addUserKnob {20 User}
+addUserKnob {22 reset_hlpr l "Reset Input Range" t "Click this if you get error \"No range on input clip\"" T "r = nuke.toNode('Kronos').knob('resetInputRange')\nr.execute()" +STARTLINE}
+addUserKnob {7 hlprFrame l Frame R 0 1000}
+hlprFrame 1
+addUserKnob {26 ""}
+addUserKnob {20 endGroup n -1}
+addUserKnob {7 hlprVectDetail l "Vector Detail" R 0.01 1}
+hlprVectDetail 0.3
+addUserKnob {7 hlprStrength l Strength R 0 1.5}
+hlprStrength 1.5
+addUserKnob {26 ""}
+addUserKnob {20 Shutter n 1}
+addUserKnob {3 hlprSamples l "Shutter Samples"}
+hlprSamples 1
+addUserKnob {7 hlprShuttrTime l "Shutter Time" R 0 10}
+}
+end_group

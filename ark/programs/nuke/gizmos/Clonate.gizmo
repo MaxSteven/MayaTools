@@ -1,0 +1,158 @@
+#! /Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/Nuke6.2v3 -nx
+version 6.2 v3
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="7" y="22" w="2543" h="1405" screen="0">
+        <splitter orientation="2">
+            <split size="888"/>
+            <splitter orientation="1">
+                <split size="980"/>
+                <splitter orientation="2">
+                    <split size="120"/>
+                    <dock id="" hideTitles="1" activePageId="Progress.1">
+                        <page id="Progress.1"/>
+                    </dock>
+                    <split size="764"/>
+                    <dock id="" activePageId="Script Editor.1">
+                        <page id="Script Editor.1"/>
+                    </dock>
+                </splitter>
+                <split size="890"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Curve Editor.1"/>
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="665"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="491"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Volumes/ohufx/consulting/Foundry/PythonDevGuide/nuke_scripts/pathAnimation.nk
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ views "L #007f00
+R #7f0000
+M #7f7f00"
+ addUserKnob {20 mariTab l Mari}
+ addUserKnob {3 socketPort l "command port" t "Port to listen on. Make sure this matches the command port set in Mari's \"Nuke\" Palette." -STARTLINE}
+ socketPort 50007
+ addUserKnob {6 enableSocket l enable -STARTLINE}
+ addUserKnob {1 hostName l "Mari host/port" t "Set machine name or ip address that Mari is running on.\nLeave empty if both Mari and Nuke are running on the same machine."}
+ addUserKnob {3 socketPortSend l "" t "Port that Mari is listening to. Make sure this matches the command port set in Mari's Preferences." -STARTLINE}
+ socketPortSend 6100
+ addUserKnob {2 mariDataDir l "mari data dir" t "Path to directory that will hold data to be sent to Mari (exrs, objs and fbx files). If this is left empty a \"mari\" directory will be created in the nk file's location"}
+ mariDataDir "\[file dirname \[value root.name]]/mariData"
+}
+Radial {
+ inputs 0
+ output {rgba.red -rgba.green -rgba.blue rgba.alpha}
+ cliptype none
+ area {-34 -42 42 44}
+ softness 0
+ name Radial1
+ xpos -638
+ ypos -96
+}
+Transform {
+ translate {{"\[python -execlocal try:\\n\\ \\ \\ shape\\ =\\ nuke.toNode(\\ 'RotoPaint1'\\ )\\\['curves'\\].toElement(\\ 'Brush1'\\ ).evaluate(\\ nuke.frame()\\ )\\nexcept:\\n\\ \\ \\ pass\\nret\\ =\\ shape.getPoint(\\ nuke.thisNode()\\\['path'\\].value()\\ ).x]"} {"\[python -execlocal try:\\n\\ \\ \\ shape\\ =\\ nuke.toNode(\\ 'RotoPaint1'\\ )\\\['curves'\\].toElement(\\ 'Brush1'\\ ).evaluate(\\ nuke.frame()\\ )\\nexcept:\\n\\ \\ \\ pass\\nret\\ =\\ shape.getPoint(\\ nuke.thisNode()\\\['path'\\].value()\\ ).y]"}}
+ name Transform1
+ xpos -638
+ ypos -47
+ addUserKnob {20 User}
+ addUserKnob {7 path}
+ path 0.1
+}
+RotoPaint {
+ inputs 0
+ curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 1024 S 0 778 
+   NumOfAttributes: 10
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Brush1" {
+    Flag: 576
+    NodeType: 5
+    CubicCurve: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 1137.61 S 0 773.091 
+     Type: 3 Flag: 2080 Dim: 3
+     NumOfPoints: 77
+     0 S 0 734 S 0 1030 S 0 0.00392157 0 0 S 0 734 S 0 1034 S 0 0.0862745 0 0 S 0 720 S 0 1038 S 0 0.180392 0 0 S 0 682 S 0 1038 S 0 0.294118 0 0 S 0 668 S 0 1038 S 0 0.305882 0 0 S 0 588 S 0 1006 S 0 0.352941 0 0 S 0 494 S 0 912 S 0 0.439216 0 0 S 0 470 S 0 874 S 0 0.454902 0 0 S 0 452 S 0 836 S 0 0.462745 0 0 S 0 438 S 0 700 S 0 0.462745 0 0 S 0 438 S 0 644 S 0 0.466667 0 0 S 0 512 S 0 330 S 0 0.494118 0 0 S 0 592 S 0 244 S 0 0.513726 0 0 S 0 644 S 0 212 S 0 0.517647 0 0 S 0 930 S 0 146 S 0 0.552941 0 0 S 0 988 S 0 146 S 0 0.552941 0 0 S 0 1044 S 0 146 S 0 0.560784 0 0 S 0 1452 S 0 320 S 0 0.576471 0 0 S 0 1508 S 0 358 S 0 0.576471 0 0 S 0 1556 S 0 400 S 0 0.576471 0 0 S 0 1688 S 0 582 S 0 0.576471 0 0 S 0 1720 S 0 668 S 0 0.580392 0 0 S 0 1734 S 0 714 S 0 0.580392 0 0 S 0 1744 S 0 752 S 0 0.576471 0 0 S 0 1768 S 0 908 S 0 0.580392 0 0 S 0 1740 S 0 1052 S 0 0.580392 0 0 S 0 1678 S 0 1132 S 0 0.576471 0 0 S 0 1654 S 0 1156 S 0 0.576471 0 0 S 0 1626 S 0 1176 S 0 0.572549 0 0 S 0 1542 S 0 1226 S 0 0.572549 0 0 S 0 1486 S 0 1246 S 0 0.568627 0 0 S 0 1458 S 0 1254 S 0 0.568627 0 0 S 0 1424 S 0 1260 S 0 0.568627 0 0 S 0 1316 S 0 1260 S 0 0.568627 0 0 S 0 1274 S 0 1250 S 0 0.568627 0 0 S 0 1128 S 0 1176 S 0 0.568627 0 0 S 0 1096 S 0 1152 S 0 0.568627 0 0 S 0 968 S 0 1024 S 0 0.572549 0 0 S 0 926 S 0 954 S 0 0.580392 0 0 S 0 916 S 0 916 S 0 0.580392 0 0 S 0 908 S 0 874 S 0 0.576471 0 0 S 0 894 S 0 700 S 0 0.576471 0 0 S 0 908 S 0 596 S 0 0.576471 0 0 S 0 922 S 0 564 S 0 0.572549 0 0 S 0 978 S 0 488 S 0 0.568627 0 0 S 0 1002 S 0 480 S 0 0.568627 0 0 S 0 1072 S 0 484 S 0 0.568627 0 0 S 0 1100 S 0 498 S 0 0.568627 0 0 S 0 1204 S 0 560 S 0 0.560784 0 0 S 0 1260 S 0 592 S 0 0.560784 0 0 S 0 1284 S 0 612 S 0 0.560784 0 0 S 0 1306 S 0 630 S 0 0.560784 0 0 S 0 1368 S 0 696 S 0 0.556863 0 0 S 0 1386 S 0 776 S 0 0.556863 0 0 S 0 1382 S 0 794 S 0 0.556863 0 0 S 0 1348 S 0 836 S 0 0.560784 0 0 S 0 1334 S 0 846 S 0 0.560784 0 0 S 0 1264 S 0 860 S 0 0.560784 0 0 S 0 1226 S 0 860 S 0 0.560784 0 0 S 0 1194 S 0 850 S 0 0.564706 0 0 S 0 1184 S 0 846 S 0 0.564706 0 0 S 0 1152 S 0 808 S 0 0.564706 0 0 S 0 1142 S 0 790 S 0 0.564706 0 0 S 0 1142 S 0 776 S 0 0.564706 0 0 S 0 1138 S 0 762 S 0 0.560784 0 0 S 0 1132 S 0 720 S 0 0.560784 0 0 S 0 1138 S 0 706 S 0 0.560784 0 0 S 0 1152 S 0 700 S 0 0.552941 0 0 S 0 1156 S 0 700 S 0 0.552941 0 0 S 0 1170 S 0 706 S 0 0.552941 0 0 S 0 1170 S 0 710 S 0 0.552941 0 0 S 0 1170 S 0 714 S 0 0.552941 0 0 S 0 1170 S 0 728 S 0 0.556863 0 0 S 0 1170 S 0 738 S 0 0.560784 0 0 S 0 1176 S 0 738 S 0 0.552941 0 0 S 0 1180 S 0 738 S 0 0.556863 0 0 S 0 1184 S 0 742 S 0 0.423529 0 
+     NumOfAttributes: 48
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 1 "go" S 0 1 "bo" S 0 1 "ao" S 0 1 "opc" S 0 1 "bs" S 0 25 "bsp" S 0 0.05 "h" S 0 0.2 "bm" S 0 0 "dt" S 0 1 "ds" S 0 0 "dh" S 0 0 "bt" S 0 0 "bu" S 0 1 "inv" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 1024 "spy" S 0 778 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "ltn" S 0 1 "ltm" S 0 1 "ltt" S 0 2 "ws" S 0 0 "we" S 0 1 "ep1" S 0 0 "ep2" S 0 0 "ep3" S 0 0 "tt" S 0 14 "nv" S 0 3 "view1" S 0 1 "view2" S 0 2 "view3" S 0 3 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+ toolbox {brush {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 tt 14 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_show_paint_selection true
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1024 778}
+ motionblur_on true
+ brush_spacing 0.05000000075
+ brush_hardness 0.200000003
+ source_black_outside true
+ name RotoPaint1
+ label "Transform1 will travel along \"Brush1\"\nbased on it's \"path\" knob"
+ xpos -393
+ ypos -72
+}
+Merge2 {
+ inputs 2
+ name Merge1
+ xpos -550
+ ypos 28
+}
+Viewer {
+ input_process false
+ gl_lighting true
+ name Viewer1
+ xpos -550
+ ypos 80
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "delete \"Brush1\" and draw a new, single stroke.\nTransfrom1 will snap to it."
+ note_font_size 30
+ xpos -308
+ ypos -101
+}

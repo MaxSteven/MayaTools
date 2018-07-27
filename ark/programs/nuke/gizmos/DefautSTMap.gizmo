@@ -1,0 +1,44 @@
+#! C:/Program Files/Nuke8.0v5/nuke-8.0.v5.dll -nx
+version 8.0 v5
+Gizmo {
+ inputs 0
+ addUserKnob {20 DefaultSTMap}
+ addUserKnob {41 format T Constant1.format}
+}
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos -234
+  ypos -489
+ }
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  p0 {0 100}
+  p1 {{input.width} 100}
+  name Ramp1
+  xpos -234
+  ypos -383
+ }
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  p0 {100 0}
+  p1 {100 {input.height}}
+  name Ramp2
+  selected true
+  xpos -234
+  ypos -347
+ }
+ Shuffle {
+  alpha black
+  name Shuffle1
+  label "\[value in]"
+  xpos -234
+  ypos -311
+ }
+ Output {
+  name Output1
+  xpos -234
+  ypos -211
+ }
+end_group

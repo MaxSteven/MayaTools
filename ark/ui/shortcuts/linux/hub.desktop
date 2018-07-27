@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=2.0
+Type=Application
+Terminal=false
+Exec=python /var/ie/ark/tools/hub/hub.pyc
+Path=/var/ie/ark/tools/hub/
+Name=Hub
+Comment=The start of your journey
+Icon=/var/ie/ark/ui/icons/hub.png

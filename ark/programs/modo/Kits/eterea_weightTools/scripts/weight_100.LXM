@@ -1,0 +1,8 @@
+#LXMacro#
+tool.set vertMap.setWeight on
+tool.attr vertMap.setWeight additive false
+tool.attr vertMap.setWeight weight 1.0
+tool.setAttr vertMap.setWeight weight 1.0
+tool.noChange
+tool.doApply
+tool.set vertMap.setWeight off 0

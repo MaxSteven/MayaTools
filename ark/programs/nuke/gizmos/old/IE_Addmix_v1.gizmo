@@ -1,0 +1,343 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+Gizmo {
+ inputs 4
+ help staybe.
+ note_font Verdana
+ mapsize {0.15 0.15}
+ addUserKnob {20 gFuse}
+ addUserKnob {26 ""}
+ addUserKnob {6 enableAddmix2 l "Enable Addmix 2" t "click to enable the addmix 2 curves, use mask1 input to control where it is shown" +STARTLINE}
+ enableAddmix2 true
+ addUserKnob {7 addmix2dissolve l "Addmix 2 Dissolve"}
+ addmix2dissolve 1
+ addUserKnob {6 enableaddmix3 l "Enable Addmix 3" +STARTLINE}
+ addUserKnob {7 addmix3dissolve l "Addmix 3 Dissolve"}
+ addmix3dissolve 1
+ addUserKnob {26 ""}
+ addUserKnob {26 edgeblurtext l "<b><u>Edge Blur</u></b>"}
+ addUserKnob {7 EdgeBlurAmount l Amount R 0 10}
+ addUserKnob {26 ""}
+ addUserKnob {7 overallMix l "Overall mix"}
+ overallMix 1
+ addUserKnob {6 cropFormat l "Crop to Format" t "crop to root format" +STARTLINE}
+ cropFormat true
+ addUserKnob {41 premultiplied l A_Premultiplied T AddMix1.premultiplied}
+ addUserKnob {26 ""}
+ addUserKnob {6 regularOver l "Regular Over" t "disables addmix blending curves and uses an over" +STARTLINE}
+ addUserKnob {20 Addmix1}
+ addUserKnob {41 lut l "" +STARTLINE T AddMix1.lut}
+ addUserKnob {20 Addmix2}
+ addUserKnob {41 lut_1 l "" -STARTLINE T AddMix2.lut}
+ addUserKnob {20 Addmix3}
+ addUserKnob {41 lut_2 l "" -STARTLINE T AddMix3.lut}
+}
+ Input {
+  inputs 0
+  name InputFG
+  xpos 1613
+  ypos 1945
+ }
+ Dot {
+  name Dot26
+  xpos 1647
+  ypos 2048
+ }
+ Dot {
+  name Dot27
+  xpos 1647
+  ypos 2564
+ }
+set Nada2f030 [stack 0]
+ Input {
+  inputs 0
+  name InputBG
+  xpos 2481
+  ypos 1828
+  number 1
+ }
+ Dot {
+  name Dot35
+  xpos 2515
+  ypos 1883
+ }
+set Nada2f690 [stack 0]
+add_layer {rgba redguard1.glow rgba.warper rgba.Z}
+add_layer {19}
+ Shuffle {
+  alpha black
+  name Shuffle1
+  label "\[value in] \[value red] \[value green] \[value blue]"
+  xpos 2481
+  ypos 2326
+ }
+ Dot {
+  name Dot17
+  xpos 2515
+  ypos 2502
+ }
+set Na92ea7e0 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge7
+  label "bbox \[value bbox]"
+  xpos 2481
+  ypos 2555
+ }
+ Input {
+  inputs 0
+  name InputMask2
+  xpos 2165
+  ypos 2986
+  number 3
+ }
+ Dot {
+  name Dot11
+  xpos 2199
+  ypos 3061
+ }
+push $Nada2f030
+ Dot {
+  name Dot28
+  xpos 1647
+  ypos 2652
+ }
+set Na92eb4a0 [stack 0]
+ Dot {
+  name Dot4
+  xpos 1647
+  ypos 2829
+ }
+set Na92eb7d0 [stack 0]
+ Dot {
+  name Dot5
+  xpos 1647
+  ypos 3061
+ }
+push $Na92ea7e0
+ Dot {
+  name Dot9
+  xpos 2069
+  ypos 2502
+ }
+set Na92ebe30 [stack 0]
+ Dot {
+  name Dot2
+  xpos 1955
+  ypos 2502
+ }
+set Na92ec160 [stack 0]
+ Dot {
+  name Dot1
+  xpos 1875
+  ypos 2502
+ }
+ AddMix {
+  inputs 2
+  name AddMix3
+  xpos 1841
+  ypos 3058
+ }
+ Input {
+  inputs 0
+  name InputMask1
+  xpos 2187
+  ypos 2746
+  number 2
+ }
+ Dot {
+  name Dot8
+  xpos 2221
+  ypos 2829
+ }
+push $Na92eb7d0
+push $Na92ec160
+ AddMix {
+  inputs 2
+  name AddMix2
+  xpos 1921
+  ypos 2826
+ }
+push $Na92eb4a0
+push $Na92ebe30
+ AddMix {
+  inputs 2
+  premultiplied true
+  name AddMix1
+  xpos 2035
+  ypos 2649
+ }
+ Keymix {
+  inputs 3
+  mix {{parent.addmix2dissolve i}}
+  name Keymix1
+  xpos 2035
+  ypos 2820
+  disable {{"abs(\[value parent.enableAddmix2]-1)" i x15 0}}
+ }
+ Keymix {
+  inputs 3
+  mix {{"\[value parent.addmix3dissolve]" i}}
+  name Keymix2
+  xpos 2035
+  ypos 3052
+  disable {{"abs(\[value parent.enableaddmix3]-1)" i}}
+ }
+ Dot {
+  name Dot10
+  xpos 2069
+  ypos 3128
+ }
+ Switch {
+  inputs 2
+  which {{parent.regularOver i}}
+  name Switch3
+  selected true
+  xpos 2481
+  ypos 3125
+ }
+ Dot {
+  name Dot29
+  xpos 2515
+  ypos 3570
+ }
+set Na92ee140 [stack 0]
+push $Na92ee140
+ Dot {
+  name Dot16
+  xpos 2408
+  ypos 3570
+ }
+set Nac125c50 [stack 0]
+ Dot {
+  name Dot31
+  xpos 2305
+  ypos 3570
+ }
+ Blur {
+  channels rgba
+  size 3
+  name Blur11
+  label "\[value size]"
+  xpos 2271
+  ypos 3678
+ }
+set Nac1262b0 [stack 0]
+push $Nac1262b0
+ Merge2 {
+  inputs 2
+  operation xor
+  name Merge13
+  xpos 2271
+  ypos 3725
+ }
+ Grade {
+  channels rgba
+  whitepoint 0.9
+  white_clamp true
+  name Grade1
+  xpos 2271
+  ypos 3755
+ }
+ Dot {
+  name Dot7
+  xpos 2305
+  ypos 3802
+ }
+push $Nac125c50
+ Blur {
+  inputs 1+1
+  size {{parent.EdgeBlurAmount i}}
+  name EdgeBlur
+  label "\[value size]"
+  xpos 2374
+  ypos 3787
+ }
+ Dot {
+  name Dot30
+  xpos 2408
+  ypos 3858
+ }
+ Switch {
+  inputs 2
+  name Switch2
+  xpos 2481
+  ypos 3855
+ }
+ Dot {
+  name Dot23
+  xpos 2515
+  ypos 3907
+ }
+set Nac1275d0 [stack 0]
+push $Nada2f690
+ Dot {
+  name Dot38
+  xpos 2622
+  ypos 1883
+ }
+ Merge2 {
+  inputs 2
+  name Merge16
+  label "bbox \[value bbox]"
+  xpos 2588
+  ypos 3898
+ }
+ Dot {
+  name Dot32
+  xpos 2622
+  ypos 3969
+ }
+push $Nac1275d0
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos 2481
+  ypos 3960
+ }
+push $Na92ea7e0
+ Dot {
+  name Dot3
+  xpos 2745
+  ypos 2502
+ }
+ Dot {
+  name Dot18
+  xpos 3146
+  ypos 2502
+ }
+ Dot {
+  name Dot19
+  xpos 3146
+  ypos 4100
+ }
+ Dissolve {
+  inputs 2
+  which {{overallMix i}}
+  name overallMix
+  xpos 2481
+  ypos 4091
+ }
+set Nac128f50 [stack 0]
+ Reformat {
+  resize none
+  name Reformat1
+  xpos 2481
+  ypos 4181
+  disable {{1-cropFormat i}}
+ }
+ Output {
+  name Output1
+  xpos 2481
+  ypos 4313
+ }
+push $Nac128f50
+ Viewer {
+  input_process false
+  name Viewer1
+  xpos 2326
+  ypos 4064
+ }
+end_group

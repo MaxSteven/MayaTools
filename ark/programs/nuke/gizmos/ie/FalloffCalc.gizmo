@@ -1,0 +1,126 @@
+#! C:/Program Files/Nuke6.3v1/Nuke6.3.exe -nx
+version 6.3 v1
+add_layer {Normal Normal.X Normal.Y Normal.Z}
+Gizmo {
+ inputs 2
+ addUserKnob {20 FalloffControls l "Falloff Controls"}
+ addUserKnob {7 xFalloff l "x falloff" R -1 1}
+ addUserKnob {7 yFalloff l "y falloff" R -1 1}
+ yFalloff 1
+ addUserKnob {7 zFalloff l "z falloff" R -1 1}
+ addUserKnob {6 cameraFacing l "camera facing" t "Disables X,Y,Z falloff and renders towards / away from Camera" +STARTLINE}
+ cameraFacing true
+ addUserKnob {41 format l "output format" T Reformat1.format}
+ addUserKnob {41 normals T Normals.in}
+}
+ Input {
+  inputs 0
+  name Camera
+  xpos 416
+  ypos -759
+  number 1
+ }
+ Axis2 {
+  name cam_axis
+  xpos 426
+  ypos -687
+ }
+ Expression {
+  inputs 0
+  temp_name0 R
+  temp_expr0 cam_axis.world_matrix.2
+  temp_name1 G
+  temp_expr1 cam_axis.world_matrix.6
+  temp_name2 B
+  temp_expr2 cam_axis.world_matrix.10
+  expr0 R
+  expr1 G
+  expr2 B
+  name Expression7
+  label "Camera Facing"
+  xpos 416
+  ypos -580
+ }
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue}
+  value -1
+  name Multiply1
+  selected true
+  xpos 416
+  ypos -544
+ }
+ Expression {
+  inputs 0
+  expr0 -xFalloff
+  expr1 -yFalloff
+  expr2 -zFalloff
+  name Expression4
+  label "X,Y,Z Falloff"
+  xpos 210
+  ypos -578
+ }
+ Switch {
+  inputs 2
+  which {{cameraFacing i}}
+  name Switch1
+  xpos 312
+  ypos -478
+ }
+ Expression {
+  temp_name0 length
+  temp_expr0 sqrt((r*r)+(g*g)+(b*b))
+  expr0 r/length
+  expr1 g/length
+  expr2 b/length
+  name normalize2
+  xpos 312
+  ypos -420
+ }
+ Reformat {
+  name Reformat1
+  xpos 312
+  ypos -375
+ }
+ Dot {
+  name Dot47
+  xpos 346
+  ypos -318
+ }
+ Input {
+  inputs 0
+  name CG
+  xpos 79
+  ypos -759
+ }
+ Shuffle {
+  in Normal
+  name Normals
+  xpos 79
+  ypos -437
+ }
+ MergeExpression {
+  inputs 2
+  channel0 rgb
+  expr0 (Ar*Br)+(Ag*-Bb)+(Ab*Bg)
+  channel1 {-rgba.red -rgba.green -rgba.blue}
+  channel2 {-rgba.red -rgba.green -rgba.blue}
+  channel3 {none none none -rgba.alpha}
+  maskChannelMask -rgba.alpha
+  name Dot45
+  xpos 79
+  ypos -321
+ }
+ Expression {
+  expr0 (r+1)*.5
+  expr1 (g+1)*.5
+  expr2 (b+1)*.5
+  name positive_space4
+  xpos 79
+  ypos -233
+ }
+ Output {
+  name Output1
+  xpos 79
+  ypos -123
+ }
+end_group

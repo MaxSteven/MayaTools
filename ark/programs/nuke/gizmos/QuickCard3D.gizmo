@@ -1,0 +1,144 @@
+set cut_paste_input [stack 0]
+version 6.2 v1
+push 0
+push 0
+push 0
+push $cut_paste_input
+Group {
+ inputs 4
+ name QuickCard3D
+ tile_color 0x7e0000ff
+ selected true
+ xpos -266
+ ypos 1059
+ addUserKnob {20 User}
+ addUserKnob {7 syncframe l "Frame to match image" R 0 100}
+ syncframe 20
+ addUserKnob {7 size l "Distance from camera" R 0 10}
+ size 2.35
+ addUserKnob {41 rot_order l "rotation order" T projectioncam.rot_order}
+ addUserKnob {41 rot_order_1 l "rotation order" T rendercam.rot_order}
+ addUserKnob {41 rot_order_2 l "rotation order" T TransformGeo1.rot_order}
+ addUserKnob {26 threedmb l "3d MB"}
+ addUserKnob {41 shutter T ScanlineRender2.shutter}
+ addUserKnob {41 samples -STARTLINE T ScanlineRender2.samples}
+ addUserKnob {26 twodMB l "2d MB"}
+ addUserKnob {41 disable_1 l Disable T VectorBlur1.disable}
+ addUserKnob {41 scale l multiply T VectorBlur1.scale}
+}
+ Camera2 {
+  inputs 0
+  translate {{parent.camera_input.translate.main.x i} {parent.camera_input.translate.main.y i} {parent.camera_input.translate.main.z i}}
+  rotate {{parent.camera_input.rotate.main.x i} {parent.camera_input.rotate.main.y i} {parent.camera_input.rotate.main.z i}}
+  focal {{parent.camera_input.uniform_scale.main i}}
+  haperture {{parent.camera_input.scaling.main.x i}}
+  vaperture {{parent.camera_input.scaling.main.y i}}
+  far 1000000
+  name rendercam
+  xpos 621
+  ypos -316
+ }
+ Camera2 {
+  inputs 0
+  translate {{parent.camera_input.translate.main.x(parent.syncframe.main)} {parent.camera_input.translate.main.y(parent.syncframe.main)} {parent.camera_input.translate.main.z(parent.syncframe.main)}}
+  rotate {{parent.camera_input.rotate.main.x(parent.syncframe.main)} {parent.camera_input.rotate.main.y(parent.syncframe.main)} {parent.camera_input.rotate.main.z(parent.syncframe.main)}}
+  focal {{parent.camera_input.uniform_scale.main(parent.syncframe.main)}}
+  haperture {{parent.camera_input.scaling.main.x(parent.syncframe.main)}}
+  vaperture {{parent.camera_input.scaling.main.y(parent.syncframe.main)}}
+  near 0.0001
+  far 10000000
+  name projectioncam
+  xpos 467
+  ypos -419
+ }
+ Input {
+  inputs 0
+  name InputImage
+  xpos 306
+  ypos -483
+  number 3
+ }
+ Project3D {
+  inputs 2
+  crop false
+  name Project3D1
+  xpos 457
+  ypos -483
+ }
+ Card2 {
+  display textured+lines
+  rows 16
+  columns 16
+  rot_order XYZ
+  translate {{parent.projectioncam.translate.main.x i} {parent.projectioncam.translate.main.y i} {parent.projectioncam.translate.main.z-39 i}}
+  uniform_scale 240
+  control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.166667 0 0} 0 {0 0 0} 0 {0 0.166667 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.166667 0 0} 0 {-0.166667 0 0} 0 {0 0.166667 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.166667 0 0} 0 {0 0.166667 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.166667 0 0} 0 {0 0 0} 0 {0 0.166667 0} 0 {0 -0.166667 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.166667 0 0} 0 {-0.166667 0 0} 0 {0 0.166667 0} 0 {0 -0.166667 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.166667 0 0} 0 {0 0.166667 0} 0 {0 -0.166667 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.166667 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.166667 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.166667 0 0} 0 {-0.166667 0 0} 0 {0 0 0} 0 {0 -0.166667 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.166667 0 0} 0 {0 0 0} 0 {0 -0.166667 0} 0 {1 1 0} }
+  name Card3
+  xpos 723
+  ypos -483
+ }
+ TransformGeo {
+  translate {0 0 0.01999999955}
+  rotate {{parent.projectioncam.rotate.main.x} {parent.projectioncam.rotate.main.y} {parent.projectioncam.rotate.main.z}}
+  uniform_scale {{parent.size.main*.1}}
+  pivot {{parent.projectioncam.translate.main.x} {parent.projectioncam.translate.main.y} {parent.projectioncam.translate.main.z}}
+  name TransformGeo1
+  selected true
+  xpos 723
+  ypos -398
+ }
+push 0
+ ScanlineRender {
+  inputs 3
+  ambient 1
+  samples 0
+  name ScanlineRender2
+  xpos 723
+  ypos -296
+ }
+set Nb3c230b0 [stack 0]
+ VectorBlur {
+  uv motion
+  scale 2
+  name VectorBlur1
+  xpos 723
+  ypos -270
+  disable true
+ }
+ Output {
+  name Output1
+  xpos 723
+  ypos -196
+ }
+push $Nb3c230b0
+ Viewer {
+  name Viewer1
+  xpos 386
+  ypos -164
+ }
+ Input {
+  inputs 0
+  name InputCam
+  xpos 314
+  ypos -296
+ }
+ Axis2 {
+  translate {{parent.input.translate.main.x i} {parent.input.translate.main.y i} {parent.input.translate.main.z i}}
+  rotate {{parent.input.rotate.main.x i} {parent.input.rotate.main.y i} {parent.input.rotate.main.z i}}
+  scaling {{parent.input.haperture.main i} {parent.input.vaperture.main i} 1}
+  uniform_scale {{parent.input.focal.main i}}
+  name camera_input
+  xpos 471
+  ypos -316
+ }
+end_group

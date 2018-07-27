@@ -1,0 +1,587 @@
+{
+	"tools": [
+		{
+			"name": "Stencil",
+			"python": "nuke.createNode(\"Merge2\",\"operation stencil\")",
+			"imports": "nuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Overlay",
+			"python": "nuke.createNode(\"Merge2\",\"operation overlay\")",
+			"imports": "nuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Mask",
+			"python": "nuke.createNode(\"Merge2\",\"operation mask\")",
+			"imports": "nuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Split Channels",
+			"python": "arkNuke.splitChannels()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Red Masks",
+			"python": "arkNuke.createRedMasks()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Red Mask Channel",
+			"python": "arkNuke.maskWithRedChannel()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+m",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Auto Crop",
+			"python": "arkNuke.autoCrop()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "ApplyShotColor",
+			"python": "arkNuke.applyShotColor()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+
+		//CG
+		{
+			"name": "Camera from EXR",
+			"python": "arkNuke.cameraFromEXR()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Export Camera",
+			"python": "arkNuke.exportCamera()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Export Tracker",
+			"python": "arkNuke.exportTracker()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Falloff Calc",
+			"python": "nuke.createNode(\"FalloffCalc\")",
+			"imports": "nuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "PositionToPoints",
+			"python": "nuke.createNode(\"PositionToPoints\")",
+			"imports": "nuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "ZDepth Calc",
+			"python": "nuke.createNode(\"ZDepthCalc\")",
+			"imports": "nuke",
+			"software" : ["nuke"]
+		},
+
+		//KeyRoto
+		{
+			"name": "Bezier",
+			"python": "nuke.createNode(\"Bezier\")",
+			"imports": "nuke",
+			"shortcut": "shift+p",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Faded RotoPaint",
+			"python": "arkNuke.fadedRotopaint()",
+			"imports": "arkNuke",
+			"shortcut": "alt+shift+p",
+			"software" : ["nuke"]
+		},
+
+		//Projects/HK3
+		{
+			"name": "HK 3D Posting",
+			"python": "arkNuke.hk3dPosting()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+
+		//Render
+		{
+			"name": "IE Slate",
+			"python": "arkNuke.ieSlate()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Force Render",
+			"python": "arkNuke.forceRender()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Read From Write",
+			"python": "arkNuke.readFromWrite()",
+			"imports": "arkNuke",
+			"shortcut": "Alt+Shift+r",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write DPX",
+			"python": "arkNuke.writeDPX()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write Final Render",
+			"python": "arkNuke.writeFinal()",
+			"imports": "arkNuke",
+			"shortcut": "Ctrl+Shift+F",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write Final Stereo",
+			"python": "arkNuke.writeFinalStereo()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write Plates",
+			"python": "arkNuke.writePlates()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write PreComp",
+			"python": "arkNuke.writePreComp()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write Mattes",
+			"python": "arkNuke.writeMattes()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write Posting",
+			"python": "arkNuke.writePosting()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Write Keyed Plates",
+			"python": "arkNuke.writeKeyedPlates()",
+			"imports": "arkNuke",
+			"software": ["nuke"]
+		},
+		{
+			"name": "Write PR",
+			"python": "arkNuke.writePRPass()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Multiple Write",
+			"python": "arkNuke.multiplewrite()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Render Movie",
+			"python": "arkNuke.makeMovie()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "IE Render",
+			"python": "arkNuke.ieRender()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+
+		//Studio
+		{
+			"name": "Increment and Save",
+			"python": "arkNuke.incrementAndSave()",
+			"imports": "arkNuke",
+			"shortcut": "Alt+Shift+s",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Shot Builder",
+			"python": "shotBuilder.launch()",
+			"shortcut": "Ctrl+Shift+O",
+			"imports": "shotBuilder",
+			"iconPath": "/ui/icons/shotbuilder.png",
+			"order": 4
+		},
+		{
+			"name": "Localize Tool",
+			"python": "localizeTool.launch()",
+			"imports": "localizeTool"
+		},
+		{
+			"name": "Proxy Manager",
+			"python": "proxyManager.launch()",
+			"imports": "proxyManager",
+			"software" : ["nuke", "maya"]
+		},
+		{
+			"name": "Super Render",
+			"python": "arkNuke.runSuperRender()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Path Converter",
+			"python": "pathConverter.launch()",
+			"imports": "pathConverter",
+			"software" : ["standalone"]
+		},
+		//Tracking
+		{
+			"name": "Grab Tracker Frame",
+			"python": "arkNuke.grabTrackerFrame()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+shift+r",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Track Next Frame",
+			"python": "arkNuke.trackNextFrame()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+shift+e",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Track Previous Frame",
+			"python": "arkNuke.trackPreviousFrame()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+shift+w",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Transform From Tracker",
+			"python": "arkNuke.transformFromTracker()",
+			"imports": "arkNuke",
+			"shortcut": "Ctrl+Shift+T",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Mocha Clear Front Anim",
+			"python": "arkNuke.cornerpin_clearFromAnimation()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "PFBarrel",
+			"python": "nuke.tcl(\"PFBarrel\")",
+			"imports": "nuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Send to Mocha",
+			"python": "arkNuke.sendToMocha()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+shift+m",
+			"software" : ["nuke"]
+		},
+
+		//Utility
+		{
+			"name": "Align Nodes",
+			"python": "arkNuke.alignNodes()",
+			"imports": "arkNuke",
+			"shortcut": "alt+q",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Check Script",
+			"python": "arkNuke.checkScript()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Mirror Nodes",
+			"python": "arkNuke.mirrorNodes()",
+			"imports": "arkNuke",
+			"shortcut": "alt+m",
+			"software" : ["nuke"]
+		},
+
+		{
+			"name": "Normalize Frame Range",
+			"python": "arkNuke.normalizeFrameRange()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "R3D Timecode",
+			"python": "arkNuke.r3dTimecode()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Select Up",
+			"python": "arkNuke.moveNodesUp()",
+			"imports": "arkNuke",
+			"shortcut" : "ctrl+alt+up",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Select Down",
+			"python": "arkNuke.moveNodesDown()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+alt+down",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Select Left",
+			"python": "arkNuke.moveNodesLeft()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+alt+left",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Select Right",
+			"python": "arkNuke.moveNodesRight()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+alt+right",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Set Text Names",
+			"python": "arkNuke.setTextNames()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Set BBox to B",
+			"python": "arkNuke.setBoundingBoxB()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+alt+b",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Postage Stamp Off",
+			"python": "arkNuke.disablePostage()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+alt+p",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "backdropPro",
+			"python": "arkNuke.createBackdrop()",
+			"imports": "arkNuke",
+			"shortcut" : "shift+b",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "frameholdCurrent",
+			"python": "arkNuke.frameholdCurrent()",
+			"imports": "arkNuke",
+			"shortcut": "shift+f",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "frameholdPro",
+			"python": "arkNuke.frameholdPro()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Clear Animation",
+			"python": "arkNuke.clearAnimation()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Bypass NukeX",
+			"python": "arkNuke.bypassNukeX()",
+			"imports": "arkNuke",
+			"shortcut": "alt+shift+b",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Unlock Knobs",
+			"python": "arkNuke.unlockKnobs()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Scale Up",
+			"python": "arkNuke.scaleNodes(1.1)",
+			"imports": "arkNuke",
+			"shortcut": "]",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Scale Down",
+			"python": "arkNuke.scaleNodes(.9)",
+			"imports": "arkNuke",
+			"shortcut": "[",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Bake Camera",
+			"python": "arkNuke.bakeCamera()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Bake Gizmos",
+			"python": "arkNuke.bakeGizmos()",
+			"imports": "arkNuke",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Load Read Geo Selection",
+			"python": "arkNuke.loadReadGeoSelection()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+shift+l",
+			"software" : ["nuke"]
+		},
+
+		// Mocha Stuff
+		{
+			"name": "Rotopaint to SplineWarp",
+			"python": "arkNuke.rotoToWarpSpline()",
+			"imports": "arkNuke",
+			"shortcut": "F8",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Freeze Warp",
+			"python": "arkNuke.freezeWarp()",
+			"imports": "arkNuke",
+			"shortcut": "shift+F8",
+			"software" : ["nuke"]
+		},
+		{
+			"name": "Tracker to SplineWarp",
+			"python": "arkNuke.trackerToSplineWarp()",
+			"imports": "arkNuke",
+			"shortcut": "ctrl+F8",
+			"software" : ["nuke"]
+		},
+
+		// Maya
+		// ############################################################################
+		{
+			"name": "Deadline Submit",
+			"python": "deadlineSubmit.launch()",
+			"imports": "deadlineSubmit",
+			"software": ["maya", "nuke"],
+			"iconPath": "/ui/icons/deadline.png",
+			"order": 5
+		},
+		{
+			"name": "Texture Importer",
+			"python": "textureImporter.launch()",
+			"imports": "textureImporter",
+			"software": ["maya", "houdini"],
+			"iconPath": "/ui/icons/textureImporter.png"
+		},
+		{
+			"name": "UDim Manager",
+			"python": "uDimManager.launch()",
+			"imports": "uDimManager",
+			"software":["maya"],
+			"iconPath":"/ui/icons/uDim.png"
+		},
+		{
+			"name": "Publish Manager",
+			"python": "publishManager.launch()",
+			"shortcut": "ctrl+shift+p",
+			"imports": "publishManager",
+			"software": ["maya", "houdini"],
+			"iconPath": "/ui/icons/publish.png",
+			"order": 3
+		},
+		{
+			"name": "VRay Scene Randomizer",
+			"python": "vraySceneRandomizer.launch()",
+			"imports": "vraySceneRandomizer",
+			"software": ["maya"]
+		},
+		{
+			"name": "Playblast Tool",
+			"python": "playblastTool.launch()",
+			"imports": "playblastTool",
+			"software": ["maya", "houdini"],
+			"iconPath": "/ui/icons/playblast.png"
+		},
+		{
+			"name": "Version Up",
+			"python": "t = translators.getCurrent(); f = os.path.split(t.getFilename()); t.saveFile(cOS.join(f[0], cOS.incrementVersion(f[1])))",
+			"imports": ["translators", "cOS"],
+			"software": ["maya", "houdini"],
+			"iconPath": "/ui/icons/versionUp.png",
+			"order": 2
+		},
+		{
+			"name": "Convert NC File",
+			"python": "houdiniNCConverter.launch()",
+			"imports": "houdiniNCConverter",
+			"software":["houdini"],
+			"iconPath":"/ui/icons/convertNC.png"
+		},
+		{
+			"name": "Object Painter",
+			"python": "spPaint3dwin=spPaint3dGui.spPaint3dWin()",
+			"imports": "spPaint3dGui",
+			"software": ["maya"]
+		},
+		{
+			"name": "Render Utilities",
+			"python": "renderUtilities.launch()",
+			"imports": "renderUtilities",
+			"software": ["maya"],
+			"iconPath": "/ui/icons/renderUtilities.png"
+		},
+		{
+			"name": "Script-O-Farm",
+			"python": "farmScript.launch()",
+			"imports": "farmScript",
+			"software": ["maya"]
+		},
+		{
+			"name": "Key Transfer",
+			"python": "keyTransfer.launch()",
+			"imports": "keyTransfer",
+			"software": ["maya"]
+		},
+		{
+			"name": "Camera Focus",
+			"python": "arkMaya.addCameraFocusControl()",
+			"imports": "arkMaya",
+			"software": ["maya"]
+		},
+		{
+			"name": "Wacom Settings",
+			"python": "wacomSettings.launch()",
+			"imports": "wacomSettings",
+			"software": ["standalone"]
+		},
+		{
+			"name": "FBX Exporter",
+			"python": "fbxExporter.launch()",
+			"imports": "fbxExporter",
+			"software": ["standalone"]
+		},
+		{
+			"name": "Animation Publisher",
+			"python": "animationPublisher.launch()",
+			"imports": "animationPublisher",
+			"software": ["maya"]
+		}
+	]
+}
+

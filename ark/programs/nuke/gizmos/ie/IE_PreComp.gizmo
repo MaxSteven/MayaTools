@@ -1,0 +1,48 @@
+#! C:/Program Files/Nuke10.0v4/nuke-10.0.4.dll -nx
+#write_info write file:"r:/Alex_Inc_s01/Workspaces/ALEX_108/ALEX_108_001_010/Assets/ALEX_108_001_010_explosion_v0012/ALEX_108_001_010_explosion_v0012.%04d.exr" format:"1920 1080 1" chans:":rgba.alpha:" framerange:"1 100" fps:"0" colorspace:"linear" datatype:"16 bit half" transfer:"unknown" views:"main" colorManagement:"Nuke"
+version 10.0 v4
+Gizmo {
+ label "\[value file]"
+ addUserKnob {20 PreComp}
+ addUserKnob {41 file l INVISIBLE +INVISIBLE T write.file}
+ addUserKnob {41 channels T write.channels}
+ addUserKnob {1 passName l "pass name" t "Pass name for the precomp, ex: background, key, roto_front, etc"}
+ passName denoised
+ addUserKnob {22 render l Render T "import arkNuke\narkNuke.writePreCompRender(nuke.thisGroup(), nuke.thisNode())\n" +STARTLINE}
+ addUserKnob {22 renderRange l "Render Range" -STARTLINE T "import arkNuke\narkNuke.writePreCompRenderRange(nuke.thisGroup(), nuke.thisNode())"}
+ addUserKnob {22 submitToFarm l "Submit To Farm" t "Submit this precomp to the farm" -STARTLINE T "import arkNuke\narkNuke.farmSubmit(nuke.thisNode())"}
+ addUserKnob {22 flipbook l Flipbook T "import arkNuke\narkNuke.flipbook(nuke.thisNode())" +STARTLINE}
+ addUserKnob {22 readFromWrite l "Read From Write" -STARTLINE T "import arkNuke\narkNuke.readFromWritePrecomp(nuke.thisNode(), nuke.toNode('write'))"}
+ addUserKnob {26 ""}
+ addUserKnob {41 reading l "read file" T write.reading}
+ addUserKnob {41 reload l Reload -STARTLINE T write.reload}
+ addUserKnob {41 on_error l "missing frames" T write.on_error}
+ addUserKnob {41 file_type l "file type" T write.file_type}
+ addUserKnob {41 colorspace l "<p style=\"background-color:yellow; color: black;\">colorspace</p>" T write.colorspace}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 127
+  ypos 507
+ }
+ Write {
+  channels rgba
+  file r:/Alex_Inc_s01/Workspaces/ALEX_108/ALEX_108_001_010/Assets/ALEX_108_001_010_explosion_v0012/ALEX_108_001_010_explosion_v0012.%04d.exr
+  colorspace linear
+  file_type exr
+  checkHashOnRead false
+  version 4
+  beforeRender arkNuke.beforeRender()
+  name write
+  selected true
+  xpos 127
+  ypos 576
+  postage_stamp true
+ }
+ Output {
+  name Output1
+  xpos 127
+  ypos 731
+ }
+end_group
